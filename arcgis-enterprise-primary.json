@@ -23,20 +23,20 @@
         },
         "server": {
             "install_dir": "/",
-            "private_url": "https://domain.com:6443/arcgis",
-            "web_context_url": "https://domain.com/server",
-            "admin_username": "siteadmin",
-            "admin_password": "change.it",
-            "authorization_file": "/opt/software/authorization_files/10.9/server.prvc",
-            "directories_root": "/net/FILESERVER/gisdata/arcgisserver",
+            "private_url": "https://foretclimat.ca:6443/arcgis",
+            "web_context_url": "https://foretclimat.ca/server",
+            "admin_username": "jfaurel",
+            "admin_password": "passforclim",
+            "authorization_file": "/opt/software/authorization_files/10.9/EducationSiteArcGISServerEnterprise_ArcGISServer_1066756.prvc",
+            "directories_root": "/gisdata/arcgisserver",
             "log_dir": "/arcgis/server/usr/logs",
             "log_level": "WARNING",
             "config_store_type": "FILESYSTEM",
-            "config_store_connection_string": "/net/FILESERVER/gisdata/arcgisserver/config-store",
+            "config_store_connection_string": "/gisdata/arcgisserver/config-store",
             "install_system_requirements": true,
             "wa_name": "server",
             "system_properties": {
-                "WebContextURL": "https://domain.com/server"
+                "WebContextURL": "https://foretclimat.ca/server"
             }
         },
         "data_store": {
@@ -47,19 +47,19 @@
             "types": "tileCache,relational",
             "tilecache": {
                 "backup_type": "fs",
-                "backup_location": "/net/FILESERVER/gisdata/arcgisbackup/tilecache"
+                "backup_location": "/gisdata/arcgisbackup/tilecache"
             },
             "relational": {
                 "backup_type": "fs",
-                "backup_location": "/net/FILESERVER/gisdata/arcgisbackup/relational"
+                "backup_location": "/gisdata/arcgisbackup/relational"
             }
         },
         "portal": {
             "install_dir": "/",
-            "admin_username": "siteadmin",
-            "admin_password": "change.it",
+            "admin_username": "jfaurel2",
+            "admin_password": "passforclim",
             "admin_email": "julie.faure-lacroix@calculquebec.ca",
-            "admin_full_name": "Administrator",
+            "admin_full_name": "Julie Faure-Lacroix",
             "admin_description": "Initial account administrator",
             "security_question": "Your favorite ice cream flavor?",
             "security_question_answer": "chocmint",
@@ -67,15 +67,15 @@
             "log_level": "WARNING",
             "content_store_type": "fileStore",
             "content_store_provider": "FileSystem",
-            "content_store_connection_string": "/net/FILESERVER/gisdata/arcgisportal/content",
+            "content_store_connection_string": "/gisdata/arcgisportal/content",
             "object_store": "",
-            "authorization_file": "/opt/software/authorization_files/10.9/portal.json",
+            "authorization_file": "/opt/software/authorization_files/10.9/ArcGIS_Enterprise_Portal_109_356891_20210727.json",
             "user_license_type_id": "",
             "install_system_requirements": true,
             "wa_name": "portal",
             "system_properties": {
-                "privatePortalURL": "https://domain.com:7443/arcgis",
-                "WebContextURL": "https://domain.com/portal"
+                "privatePortalURL": "https://foretclimat.ca:7443/arcgis",
+                "WebContextURL": "https://foretclimat.ca/portal"
             }
         },
         "web_adaptor": {
