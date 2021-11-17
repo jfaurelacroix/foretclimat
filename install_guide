@@ -8,7 +8,8 @@
 
 # install chef: type password when prompted
 #curl -L https://omnitruck.chef.io/install.sh | sudo bash
- curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P chefdk -c stable -v 4.13.3
+ curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P chefdk -c stable -v 4.13.3 # make sure the version is the latest
+
 # install git if not already installed
 # https://git-scm.com/download/linux
 
@@ -53,6 +54,8 @@ git clone https://github.com/sous-chefs/line.git
 # ArcGIS software repository directory is specified by arcgis.repository.archives attribute. By default it is set to local directory 
 # /opt/software/archives on Linux. However, it is recommended to create an ArcGIS software repository 
 # located on a separate file server that is accessible from all the machines in the deployment for the user account used to run Chef client.
+mkdir /gisdata/arcgisserver/config-store
+mkdir /home/centos/gisdata/arcgisportal/content
 mkdir arcgis_data/archives
 mv <files> arcgis_data/archives
 # if needed, transfer files from valerias globus endpoint
@@ -75,3 +78,34 @@ chef-client -z -j arcgis-enterprise-primary.json
 # If you don't plan adding standby machine in the future, don't configure the file server 
 # and use local paths instead of shared directories for ArcGIS Server server directories, 
 # Portal for ArcGIS content directory, and ArcGIS Data Store backup directories in arcgis-enterprise-primary.json.
+
+
+# Install certbot
+# https://certbot.eff.org/
+# first install snapd
+# https://snapcraft.io/docs/installing-snapd
+sudo yum install epel-release
+sudo yum install snapd
+
+sudo yum install mod_ssl
+sudo yum install firewalld
+sudo systemctl enable --now snapd.socket
+#reboot
+sudo snap install core; sudo snap refresh core
+sudo snap install --classic certbot
+sudo snap install dmidecode-tool
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
+
+
+# make sure that your DNS is set correctly with the right IP address
+
+sudo certbot certonly --standalone
+
+cp /etc/letsencrypt/live/foretclimat.ca/fullchain.pem /tomcat_arcgis/
+# /etc/letsencrypt/live/foretclimat.ca/privkey.pem
+
+sudo systemctl enable firewalld
+# reboot
+
+cd /opt/cinc
+sudo sudo cinc-client -z -j arcgis-enterprise-primary.json
