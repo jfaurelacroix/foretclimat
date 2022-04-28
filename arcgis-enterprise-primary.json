@@ -1,13 +1,13 @@
 {
     "java": {
         "version": "11",
-        "tarball_path": "$HOME/arcgis_data/archives/openjdk-11_linux-x64_bin.tar.gz"
+        "tarball_path": "/media/data/bkp_ArcGIS_files/openjdk-11_linux-x64_bin.tar.gz"
     },
     "tomcat": {
-        "version": "8.5.63",
-        "tarball_path": "$HOME/arcgis_data/archives/apache-tomcat-8.5.63.tar.gz",
-        "install_path": "/tomcat_arcgis",
-        "keystore_file": "/etc/tomcat7/pkcs12_cert.pfx",
+        "version": "9.0.48",
+        "tarball_path": "/media/data/bkp_ArcGIS_files/apache-tomcat-9.0.48.tar.gz",
+        "install_path": "/opt/tomcat_arcgis_9.0.48",
+        "keystore_file": "/opt/tomcat_arcgis_9.0.48/conf/ssl_certificate_file.pfx",
         "keystore_type": "pkcs12",
         "keystore_password": "change.it"
     },
@@ -15,7 +15,7 @@
         "version": "10.9",
         "run_as_user": "arcgis",
         "repository": {
-            "archives": "$HOME/arcgis_data/archives",
+            "archives": "/media/data/bkp_ArcGIS_files",
             "setups": "/opt/software/setups"
         },
         "web_server": {
@@ -27,7 +27,8 @@
             "web_context_url": "https://foretclimat.ca/server",
             "admin_username": "jfaurel",
             "admin_password": "***REMOVED***",
-            "authorization_file": "/opt/software/authorization_files/10.9/EducationSiteArcGISServerEnterprise_ArcGISServer_1066756.prvc",
+            "authorization_file": "/opt/software/authorization_files/10.9.1/EducationSiteArcGISServerEnterprise_ArcGISServer_1164245.prvc",
+            "authorization_file_version": "10.9.1",
             "directories_root": "/gisdata/arcgisserver",
             "log_dir": "/arcgis/server/usr/logs",
             "log_level": "WARNING",
@@ -69,7 +70,8 @@
             "content_store_provider": "FileSystem",
             "content_store_connection_string": "/gisdata/arcgisportal/content",
             "object_store": "",
-            "authorization_file": "/opt/software/authorization_files/10.9/ArcGIS_Enterprise_Portal_109_356891_20210727.json",
+            "authorization_file": "/opt/software/authorization_files/10.9.1/ArcGIS_Enterprise_Portal_1091_381536_20220414.json",
+            "authorization_file_version": "10.9.1",
             "user_license_type_id": "",
             "install_system_requirements": true,
             "wa_name": "portal",
