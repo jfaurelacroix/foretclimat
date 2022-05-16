@@ -6,8 +6,8 @@
     "tomcat": {
         "version": "9.0.48",
         "tarball_path": "/media/data/bkp_ArcGIS_files/apache-tomcat-9.0.48.tar.gz",
-        "install_path": "/opt/tomcat_arcgis_9.0.48",
-        "keystore_file": "/opt/tomcat_arcgis_9.0.48/conf/ssl_certificate_file.pfx",
+        "install_path": "/opt/tomcat_arcgis",
+        "keystore_file": "~/cert.pfx",
         "keystore_type": "pkcs12",
         "keystore_password": "change.it"
     },
@@ -16,13 +16,13 @@
         "run_as_user": "arcgis",
         "repository": {
             "archives": "/media/data/bkp_ArcGIS_files",
-            "setups": "/opt/software/setups"
+            "setups": "/media/data/setups"
         },
         "web_server": {
             "webapp_dir": "/opt/tomcat_arcgis/webapps"
         },
         "server": {
-            "install_dir": "/",
+            "install_dir": "/media/data",
             "private_url": "https://foretclimat.ca:6443/arcgis",
             "web_context_url": "https://foretclimat.ca/server",
             "admin_username": "jfaurel",
@@ -36,12 +36,13 @@
             "config_store_connection_string": "/gisdata/arcgisserver/config-store",
             "install_system_requirements": true,
             "wa_name": "server",
+			"wa_url": "https://passerelleubuntu.arbutus/server",
             "system_properties": {
                 "WebContextURL": "https://foretclimat.ca/server"
             }
         },
         "data_store": {
-            "install_dir": "/",
+            "install_dir": "/media/data",
             "data_dir": "/gisdata/arcgisdatastore",
             "preferredidentifier": "hostname",
             "install_system_requirements": true,
@@ -56,7 +57,7 @@
             }
         },
         "portal": {
-            "install_dir": "/",
+            "install_dir": "/media/data",
             "admin_username": "jfaurel2",
             "admin_password": "***REMOVED***",
             "admin_email": "julie.faure-lacroix@calculquebec.ca",
@@ -75,6 +76,7 @@
             "user_license_type_id": "",
             "install_system_requirements": true,
             "wa_name": "portal",
+			"wa_url": "https://passerelleubuntu.arbutus/portal",
             "system_properties": {
                 "privatePortalURL": "https://foretclimat.ca:7443/arcgis",
                 "WebContextURL": "https://foretclimat.ca/portal"
