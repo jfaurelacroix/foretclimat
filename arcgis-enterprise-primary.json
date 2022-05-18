@@ -7,9 +7,9 @@
         "version": "9.0.48",
         "tarball_path": "/media/data/bkp_ArcGIS_files/apache-tomcat-9.0.48.tar.gz",
         "install_path": "/opt/tomcat_arcgis",
-        "keystore_file": "~/cert.pfx",
+        "keystore_file": "/opt/tomcat_arcgis/cert.pfx",
         "keystore_type": "pkcs12",
-        "keystore_password": "change.it"
+        "keystore_password": "***REMOVED***"
     },
     "arcgis": {
         "version": "10.9",
@@ -37,6 +37,8 @@
             "install_system_requirements": true,
             "wa_name": "server",
 			"wa_url": "https://passerelleubuntu.arbutus/server",
+			"keystore_file": "/opt/tomcat_arcgis/cert.pfx",
+			"keystore_password": "***REMOVED***",
             "system_properties": {
                 "WebContextURL": "https://foretclimat.ca/server"
             }
@@ -71,19 +73,21 @@
             "content_store_provider": "FileSystem",
             "content_store_connection_string": "/gisdata/arcgisportal/content",
             "object_store": "",
-            "authorization_file": "/opt/software/authorization_files/10.9.1/ArcGIS_Enterprise_Portal_1091_381536_20220414.json",
-            "authorization_file_version": "10.9.1",
+            "authorization_file": "/opt/software/authorization_files/10.9/ArcGIS_Enterprise_Portal_109_383944_20220513.json",
+            "authorization_file_version": "10.9",
             "user_license_type_id": "",
             "install_system_requirements": true,
             "wa_name": "portal",
 			"wa_url": "https://passerelleubuntu.arbutus/portal",
+			"keystore_file": "/opt/tomcat_arcgis/cert.pfx",
+			"keystore_password": "***REMOVED***",
             "system_properties": {
                 "privatePortalURL": "https://foretclimat.ca:7443/arcgis",
                 "WebContextURL": "https://foretclimat.ca/portal"
             }
         },
         "web_adaptor": {
-            "install_dir": "/",
+            "install_dir": "/media/data",
             "admin_access": true,
             "reindex_portal_content": false
         }
