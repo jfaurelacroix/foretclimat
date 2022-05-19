@@ -22,7 +22,7 @@
             "webapp_dir": "/opt/tomcat_arcgis/webapps"
         },
         "server": {
-            "install_dir": "/media/data",
+            "install_dir": "/",
             "private_url": "https://foretclimat.ca:6443/arcgis",
             "web_context_url": "https://foretclimat.ca/server",
             "admin_username": "jfaurel",
@@ -44,7 +44,7 @@
             }
         },
         "data_store": {
-            "install_dir": "/media/data",
+            "install_dir": "/",
             "data_dir": "/gisdata/arcgisdatastore",
             "preferredidentifier": "hostname",
             "install_system_requirements": true,
@@ -59,7 +59,7 @@
             }
         },
         "portal": {
-            "install_dir": "/media/data",
+            "install_dir": "/",
             "admin_username": "jfaurel2",
             "admin_password": "***REMOVED***",
             "admin_email": "julie.faure-lacroix@calculquebec.ca",
@@ -87,7 +87,7 @@
             }
         },
         "web_adaptor": {
-            "install_dir": "/media/data",
+            "install_dir": "/",
             "admin_access": true,
             "reindex_portal_content": false
         }
