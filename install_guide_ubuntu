@@ -105,18 +105,17 @@ sudo cp /etc/letsencrypt/live/www.foretclimat.ca/fullchain.pem /opt/tomcat_arcgi
 sudo cp /etc/letsencrypt/live/www.foretclimat.ca/privkey.pem /opt/tomcat_arcgis
 cd /opt/tomcat_arcgis
 sudo apt-get install openssl
-sudo openssl pkcs12 -inkey privkey.pem -in fullchain.pem -export -out cert.pfx
-# Enter passwd corresponding to the one in the JSON
+sudo openssl pkcs12 -inkey privkey.pem -in fullchain.pem -export -out cert.pfx -password pass:"***REMOVED***"
+
 # Give rights to the user
 sudo chown arcgis /opt/tomcat_arcgis/cert.pfx
-sudo chmod 700 /opt/tomcat_arcgis/cert.pfx
+sudo chmod 755 /opt/tomcat_arcgis/cert.pfx
 
-# setup autorenewing https://github.com/StormWindStudios/OpenSSL-Notes/blob/master/letsencrypt_autopfx.md
+# setup autorenewing
+# prepare script to convert cert to pkcs12 https://github.com/StormWindStudios/OpenSSL-Notes/blob/master/letsencrypt_autopfx.md
 sudo mkdir -p /etc/letsencrypt/renewal-hooks/deploy
 sudo cp ~/repos/foretclimat/auto_pfx.sh /etc/letsencrypt/renewal-hooks/deploy
-sudo chmod 755 /etc/letsencrypt/renewal-hooks/deploy/auto_pfx.sh
-
-
+sudo chmod +x /etc/letsencrypt/renewal-hooks/deploy/auto_pfx.sh
 # locate the chef script you will need to use
 
 # move the chef script to ~/repos

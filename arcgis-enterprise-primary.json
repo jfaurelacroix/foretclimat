@@ -9,7 +9,8 @@
         "install_path": "/opt/tomcat_arcgis",
         "keystore_file": "/opt/tomcat_arcgis/cert.pfx",
         "keystore_type": "pkcs12",
-        "keystore_password": "***REMOVED***"
+        "keystore_password": "***REMOVED***",
+		"cert_alias": "cert",
     },
     "arcgis": {
         "version": "10.9",
@@ -39,6 +40,7 @@
 			"wa_url": "https://passerelleubuntu.arbutus/server",
 			"keystore_file": "/opt/tomcat_arcgis/cert.pfx",
 			"keystore_password": "***REMOVED***",
+			"cert_alias": "cert",
             "system_properties": {
                 "WebContextURL": "https://foretclimat.ca/server"
             }
@@ -81,6 +83,7 @@
 			"wa_url": "https://passerelleubuntu.arbutus/portal",
 			"keystore_file": "/opt/tomcat_arcgis/cert.pfx",
 			"keystore_password": "***REMOVED***",
+			"cert_alias": "cert",
             "system_properties": {
                 "privatePortalURL": "https://foretclimat.ca:7443/arcgis",
                 "WebContextURL": "https://foretclimat.ca/portal"

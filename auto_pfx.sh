@@ -1,4 +1,5 @@
 #!/bin/bash
+# Taken from https://github.com/StormWindStudios/OpenSSL-Notes/blob/master/letsencrypt_autopfx.md
 # Adjust these variables as necessary
 
 # Where you want to final PKCS12 file to be stored.
@@ -19,7 +20,7 @@ if [[ -f "$CERT_PATH" ]]; then
 fi
 
 # Le Conversion
-sudo openssl pkcs12 -export -out $CERT_PATH -inkey $PRIV_KEY_PEM -in $CERT_PEM -certfile $CHAIN_PEM -password pass:$CERT_PW
+openssl pkcs12 -export -out $CERT_PATH -inkey $PRIV_KEY_PEM -in $CERT_PEM -certfile $CHAIN_PEM -password pass:$CERT_PW
 
 sudo chown arcgis /opt/tomcat_arcgis/cert.pfx
-sudo chmod 700 /opt/tomcat_arcgis/cert.pfx
+sudo chmod 755 /opt/tomcat_arcgis/cert.pfx
