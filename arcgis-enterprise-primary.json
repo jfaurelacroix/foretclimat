@@ -24,8 +24,8 @@
         },
         "server": {
             "install_dir": "/",
-            "private_url": "https://foretclimat.ca:6443/arcgis",
-            "web_context_url": "https://foretclimat.ca/server",
+            "private_url": "https://www.foretclimat.ca:6443/arcgis",
+            "web_context_url": "https://www.foretclimat.ca/server",
             "admin_username": "jfaurel",
             "admin_password": "***REMOVED***",
             "authorization_file": "/opt/software/authorization_files/10.9.1/EducationSiteArcGISServerEnterprise_ArcGISServer_1164245.prvc",
@@ -37,12 +37,12 @@
             "config_store_connection_string": "/gisdata/arcgisserver/config-store",
             "install_system_requirements": true,
             "wa_name": "server",
-			"wa_url": "https://passerelleubuntu.arbutus/server",
+			"wa_url": "https://192.168.159.134/server",
 			"keystore_file": "/opt/tomcat_arcgis/cert.pfx",
 			"keystore_password": "***REMOVED***",
 			"cert_alias": "cert",
             "system_properties": {
-                "WebContextURL": "https://foretclimat.ca/server"
+                "WebContextURL": "https://www.foretclimat.ca/server"
             }
         },
         "data_store": {
@@ -80,13 +80,13 @@
             "user_license_type_id": "",
             "install_system_requirements": true,
             "wa_name": "portal",
-			"wa_url": "https://passerelleubuntu.arbutus/portal",
+			"wa_url": "https://192.168.159.134/portal",
 			"keystore_file": "/opt/tomcat_arcgis/cert.pfx",
 			"keystore_password": "***REMOVED***",
 			"cert_alias": "cert",
             "system_properties": {
-                "privatePortalURL": "https://foretclimat.ca:7443/arcgis",
-                "WebContextURL": "https://foretclimat.ca/portal"
+                "privatePortalURL": "https://www.foretclimat.ca:7443/arcgis",
+                "WebContextURL": "https://www.foretclimat.ca/portal"
             }
         },
         "web_adaptor": {

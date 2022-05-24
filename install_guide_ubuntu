@@ -80,21 +80,20 @@ sudo cp EducationSiteArcGISServerEnterprise_ArcGISServer_1164245.prvc /opt/softw
 # /opt/software/archives on Linux. However, it is recommended to create an ArcGIS software repository 
 # located on a separate file server that is accessible from all the machines in the deployment for the user account used to run Chef client.
 
-# if needed, transfer files from valerias globus endpoint
-scp -r idul@login.valeria.science:projects/ul-val-prj-foret-climat_at_valeria.science/incoming/ .
-
 # Enable running sudo without password for the user running the Chef client.
 
-# Give rights to user
+
 sudo mkdir -p /gisdata/arcgisserver
 sudo mkdir -p /gisdata/arcgisportal
+# Give rights to user
 sudo chown arcgis -R /gisdata
-sudo chmod 755 -R /gisdata
+sudo chmod 700 -R /gisdata
 
 #
 sudo mkdir /opt/tomcat_arcgis
-sudo chown arcgis -R /gisdata
-sudo chmod 755 -R /opt/tomcat_arcgis
+# Give rights to user
+sudo chown arcgis -R /opt/tomcat_arcgis
+sudo chmod 700 -R /opt/tomcat_arcgis
 
 # installing certbot
 sudo apt-get install snapd
@@ -109,7 +108,7 @@ sudo openssl pkcs12 -inkey privkey.pem -in fullchain.pem -export -out cert.pfx -
 
 # Give rights to the user
 sudo chown arcgis /opt/tomcat_arcgis/cert.pfx
-sudo chmod 755 /opt/tomcat_arcgis/cert.pfx
+sudo chmod 700 /opt/tomcat_arcgis/cert.pfx
 
 # setup autorenewing
 # prepare script to convert cert to pkcs12 https://github.com/StormWindStudios/OpenSSL-Notes/blob/master/letsencrypt_autopfx.md

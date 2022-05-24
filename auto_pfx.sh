@@ -16,11 +16,13 @@ CHAIN_PEM="$RENEWED_LINEAGE/chain.pem"
 # If there's already a .pfx file, back it up
 if [[ -f "$CERT_PATH" ]]; then
     now=`date +%Y-%m-%d-%T`
-    mv $CERT_PATH $CERT_PATH.bak.$now
+    sudo mv $CERT_PATH $CERT_PATH.bak.$now
 fi
 
 # Le Conversion
-openssl pkcs12 -export -out $CERT_PATH -inkey $PRIV_KEY_PEM -in $CERT_PEM -certfile $CHAIN_PEM -password pass:$CERT_PW
+sudo openssl pkcs12 -export -out $CERT_PATH -inkey $PRIV_KEY_PEM -in $CERT_PEM -certfile $CHAIN_PEM -password pass:$CERT_PW
 
 sudo chown arcgis /opt/tomcat_arcgis/cert.pfx
 sudo chmod 755 /opt/tomcat_arcgis/cert.pfx
+echo 'ssl certificate updated at /opt/tomcat_arcgis/cert.pfx'
+echo 'It needs to be updated by running the chef script'
