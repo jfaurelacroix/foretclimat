@@ -71,9 +71,8 @@ mv esri-tomcat-* esri-tomcat
 # make sure to have the authorization_files located at the right place
 cd /media/data/bkp_ArcGIS_files
 sudo mkdir -p /opt/software/authorization_files/10.9
-sudo mkdir -p /opt/software/authorization_files/10.9.1
 sudo cp ArcGIS_Enterprise_Portal_109_383944_20220513.json /opt/software/authorization_files/10.9
-sudo cp EducationSiteArcGISServerEnterprise_ArcGISServer_1164245.prvc /opt/software/authorization_files/10.9.1
+sudo cp EducationSiteArcGISServerEnterprise_ArcGISServer_1164245.prvc /opt/software/authorization_files/10.9
 # make sure the arcgis-enterprise-primary.json auth file match these files.
 
 # ArcGIS software repository directory is specified by arcgis.repository.archives attribute. By default it is set to local directory 
@@ -87,13 +86,13 @@ sudo mkdir -p /gisdata/arcgisserver
 sudo mkdir -p /gisdata/arcgisportal
 # Give rights to user
 sudo chown arcgis -R /gisdata
-sudo chmod 700 -R /gisdata
+sudo chmod 755 -R /gisdata
 
 #
 sudo mkdir /opt/tomcat_arcgis
 # Give rights to user
 sudo chown arcgis -R /opt/tomcat_arcgis
-sudo chmod 700 -R /opt/tomcat_arcgis
+sudo chmod 755 -R /opt/tomcat_arcgis
 
 # installing certbot
 sudo apt-get install snapd
