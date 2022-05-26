@@ -103,7 +103,7 @@ sudo cp /etc/letsencrypt/live/www.foretclimat.ca/fullchain.pem /opt/tomcat_arcgi
 sudo cp /etc/letsencrypt/live/www.foretclimat.ca/privkey.pem /opt/tomcat_arcgis
 cd /opt/tomcat_arcgis
 sudo apt-get install openssl
-sudo openssl pkcs12 -inkey privkey.pem -in fullchain.pem -export -out cert.pfx -password pass:"***REMOVED***"
+sudo openssl pkcs12 -inkey privkey.pem -in fullchain.pem -export -out cert.pfx -password pass:"PassForetClimatCert435"
 
 # Give rights to the user
 sudo chown arcgis /opt/tomcat_arcgis/cert.pfx
@@ -114,12 +114,18 @@ sudo chmod 700 /opt/tomcat_arcgis/cert.pfx
 sudo mkdir -p /etc/letsencrypt/renewal-hooks/deploy
 sudo cp ~/repos/foretclimat/auto_pfx.sh /etc/letsencrypt/renewal-hooks/deploy
 sudo chmod +x /etc/letsencrypt/renewal-hooks/deploy/auto_pfx.sh
-# locate the chef script you will need to use
 
+# change the CERT_PW
+sudo vi /etc/letsencrypt/renewal-hooks/deploy/auto_pfx.sh
+
+# locate the chef script you will need to use
 # move the chef script to ~/repos
 cp ~/repos/foretclimat/arcgis-enterprise-primary.json ~/repos/arcgis_cookbook
+# change the credential fields
+vi ~/repos/arcgis_cookbook/arcgis-enterprise-primary.json
 
 # run the chef script
+cd ~/repos/arcgis-cookbook
 sudo chef-client -z -j arcgis-enterprise-primary.json
 #####################################################################
 # your first run of chef will request that you accept 2

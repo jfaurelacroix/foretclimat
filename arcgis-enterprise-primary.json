@@ -9,7 +9,7 @@
         "install_path": "/opt/tomcat_arcgis",
         "keystore_file": "/opt/tomcat_arcgis/cert.pfx",
         "keystore_type": "pkcs12",
-        "keystore_password": "***REMOVED***",
+        "keystore_password": "change.it",
 		"cert_alias": "cert",
     },
     "arcgis": {
@@ -27,7 +27,7 @@
             "private_url": "https://www.foretclimat.ca:6443/arcgis",
             "web_context_url": "https://www.foretclimat.ca/server",
             "admin_username": "jfaurel",
-            "admin_password": "***REMOVED***",
+            "admin_password": "change.it",
             "authorization_file": "/opt/software/authorization_files/10.9/EducationSiteArcGISServerEnterprise_ArcGISServer_1164245.prvc",
             "authorization_file_version": "10.9",
             "directories_root": "/gisdata/arcgisserver",
@@ -39,7 +39,7 @@
             "wa_name": "server",
 			"wa_url": "https://***REMOVED***/server",
 			"keystore_file": "/opt/tomcat_arcgis/cert.pfx",
-			"keystore_password": "***REMOVED***",
+			"keystore_password": "change.it",
 			"cert_alias": "cert",
             "system_properties": {
                 "WebContextURL": "https://www.foretclimat.ca/server"
@@ -63,7 +63,7 @@
         "portal": {
             "install_dir": "/",
             "admin_username": "jfaurel2",
-            "admin_password": "***REMOVED***",
+            "admin_password": "change.it",
             "admin_email": "julie.faure-lacroix@calculquebec.ca",
             "admin_full_name": "Julie Faure-Lacroix",
             "admin_description": "Initial account administrator",
@@ -82,7 +82,7 @@
             "wa_name": "portal",
 			"wa_url": "https://***REMOVED***/portal",
 			"keystore_file": "/opt/tomcat_arcgis/cert.pfx",
-			"keystore_password": "***REMOVED***",
+			"keystore_password": "change.it",
 			"cert_alias": "cert",
             "system_properties": {
                 "privatePortalURL": "https://www.foretclimat.ca:7443/arcgis",
