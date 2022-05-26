@@ -6,7 +6,7 @@
 CERT_PATH="/opt/tomcat_arcgis/cert.pfx"
 
 # Password to encrypt the PKCS12 file.
-CERT_PW="change.it"
+CERT_PW=""
 
 # Path to LE files, RENEWED_LINEAGE provided by CertBot
 PRIV_KEY_PEM="$RENEWED_LINEAGE/privkey.pem"

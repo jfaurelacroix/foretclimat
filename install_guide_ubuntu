@@ -112,17 +112,21 @@ sudo chmod 700 /opt/tomcat_arcgis/cert.pfx
 # setup autorenewing
 # prepare script to convert cert to pkcs12 https://github.com/StormWindStudios/OpenSSL-Notes/blob/master/letsencrypt_autopfx.md
 sudo mkdir -p /etc/letsencrypt/renewal-hooks/deploy
-sudo cp ~/repos/foretclimat/auto_pfx.sh /etc/letsencrypt/renewal-hooks/deploy
+sudo cp ~/repos/foretclimat/scripts/auto_pfx.sh /etc/letsencrypt/renewal-hooks/deploy
 sudo chmod +x /etc/letsencrypt/renewal-hooks/deploy/auto_pfx.sh
-
-# change the CERT_PW
-sudo vi /etc/letsencrypt/renewal-hooks/deploy/auto_pfx.sh
 
 # locate the chef script you will need to use
 # move the chef script to ~/repos
 cp ~/repos/foretclimat/arcgis-enterprise-primary.json ~/repos/arcgis_cookbook
-# change the credential fields
-vi ~/repos/arcgis_cookbook/arcgis-enterprise-primary.json
+
+# change the credentials using the script
+cd ~/repos/foretclimat
+sudo chmod +x scripts/credentials.sh
+# modify passwords.txt to choose the certificate password
+# and the admin account password
+# for the script to edit the json
+sudo apt-get install jq
+./scripts/credentials.sh
 
 # run the chef script
 cd ~/repos/arcgis-cookbook

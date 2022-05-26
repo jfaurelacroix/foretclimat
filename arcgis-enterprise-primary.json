@@ -10,7 +10,7 @@
         "keystore_file": "/opt/tomcat_arcgis/cert.pfx",
         "keystore_type": "pkcs12",
         "keystore_password": "change.it",
-		"cert_alias": "cert",
+		"cert_alias": "cert"
     },
     "arcgis": {
         "version": "10.9",
