@@ -59,10 +59,6 @@ mv esri-tomcat-* esri-tomcat
 
 
 # make sure that you have all the required tar files available (in /media/data/bkp_ArcGIS_files/)
-## ArcGIS_Notebook_Docker_Advanced_109_177823.tar.gz
-## ArcGIS_Notebook_Docker_Standard_109_177822.tar.gz
-## ArcGIS_Notebook_Server_Linux_109_177908.tar.gz
-## ArcGIS_Notebook_Server_Samples_Data_Linux_109_177914.tar.gz
 ## ArcGIS_Server_Linux_109_177864.tar.gz
 ## ArcGIS_Web_Adaptor_Java_Linux_109_177888.tar.gz
 ## apache-tomcat-8.5.63.tar.gz (will be downloaded from the internet if not present in the local ArcGIS software repository)
@@ -124,7 +120,8 @@ cd ~/repos/foretclimat
 sudo chmod +x scripts/credentials.sh
 # modify passwords.txt to choose the certificate password
 # and the admin account password
-# for the script to edit the json
+
+# jq to edit the json
 sudo apt-get install jq
 ./scripts/credentials.sh
 
@@ -138,3 +135,21 @@ sudo chef-client -z -j arcgis-enterprise-primary.json
 # If you don't plan adding standby machine in the future, don't configure the file server 
 # and use local paths instead of shared directories for ArcGIS Server server directories, 
 # Portal for ArcGIS content directory, and ArcGIS Data Store backup directories in arcgis-enterprise-primary.json.
+
+##################################
+
+# Notebook server installation
+
+# Needed? Chef didn't find it
+sudo mkdir /media/data/setups/10.9
+tar -xf ArcGIS_Notebook_Server_Linux_1091_180226.tar.gz -C /media/data/setups/10.9
+
+# make sure that you have all the required tar files available (in /media/data/bkp_ArcGIS_files/)
+## ArcGIS_Notebook_Docker_Advanced_109_177823.tar.gz
+## ArcGIS_Notebook_Docker_Standard_109_177822.tar.gz
+## ArcGIS_Notebook_Server_Linux_109_177908.tar.gz
+## ArcGIS_Notebook_Server_Samples_Data_Linux_109_177914.tar.gz
+
+# Change docker dir if needed https://enterprise.arcgis.com/en/notebook/latest/install/linux/install-docker-for-arcgis-notebook-server.htm
+
+sudo chef-client -z -j notebook-server.json
