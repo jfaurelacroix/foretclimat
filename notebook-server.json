@@ -1,0 +1,38 @@
+{
+    "arcgis": {
+        "version": "10.9",
+        "run_as_user": "arcgis",
+	"run_as_password": "arcgisforclim",
+        "repository": {
+            "archives": "/media/data/bkp_ArcGIS_files",
+	    "setups": "/media/data/setups"
+        },
+        "notebook_server": {
+            "install_dir": "/media/data",
+            "install_system_requirements": true,
+            "install_samples_data": true,
+            "authorization_file": "/opt/software/authorization_files/10.9/notebook_server.prvc",
+			"setup_archive": "/media/data/bkp_ArcGIS_files/ArcGIS_Notebook_Server_Linux_1091_180226.tar.gz",
+			"data_setup_archive": "/media/data/bkp_ArcGIS_files/ArcGIS_Notebook_Server_Samples_Data_Linux_109_177914.tar.gz",
+            "admin_username": "jfaurel",
+            "admin_password": "change.it",
+            "directories_root": "/gisdata/notebookserver/directories",
+            "workspace": "/gisdata/notebookserver/directories/arcgisworkspace",
+            "config_store_type": "FILESYSTEM",
+            "config_store_connection_string": "/gisdata/notebookserver/config-store",      
+            "log_level": "WARNING",
+            "log_dir": "/arcgis/notebookserver/usr/logs",
+            "configure_autostart": true,
+            "system_properties": { }
+        }
+    },
+    "server": {
+	    "primary_server_url": "https://www.foretclimat.ca/server"
+    },
+    "run_list": [
+        "recipe[arcgis-enterprise::system]",
+        "recipe[arcgis-notebooks::docker]",
+        "recipe[arcgis-notebooks::iptables]",
+        "recipe[arcgis-notebooks::server]"
+    ]
+}
