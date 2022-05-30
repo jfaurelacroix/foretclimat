@@ -1,0 +1,42 @@
+{
+    "java": {
+        "version": "11",
+        "tarball_path": "media/data/bkp_ArcGIS_files/openjdk-11_linux-x64_bin.tar.gz"
+    },
+    "tomcat": {
+        "version": "9.0.48",
+        "tarball_path": "media/data/bkp_ArcGIS_files/apache-tomcat-9.0.48.tar.gz",
+        "install_path": "/opt/tomcat_arcgis",
+        "keystore_file": "/opt/tomcat_arcgis/cert.pfx",
+        "keystore_type": "pkcs12",
+        "keystore_password": "change.it"
+    },
+    "arcgis": {
+        "version": "10.9",
+        "run_as_user": "arcgis",
+		"run_as_password": "arcgisforclim",
+        "repository": {
+            "archives": "media/data/bkp_ArcGIS_files",
+            "setups": "media/data/setups"
+        },
+        "web_server": {
+            "webapp_dir": "/opt/tomcat_arcgis/webapps"
+        },
+        "notebook_server": {
+            "wa_name": "notebooks",
+            "url": "https://www.foretclimat.ca:11443/arcgis",
+            "wa_url": "https://192.168.159.134/notebooks",
+            "admin_username": "jfaurel",
+            "admin_password": "change.it"
+        },
+        "web_adaptor": {
+            "install_dir": "/"
+        }
+    },
+    "run_list": [
+        "recipe[arcgis-enterprise::system]",
+        "recipe[esri-tomcat::openjdk]",
+        "recipe[esri-tomcat]",
+        "recipe[arcgis-notebooks::server_wa]"
+    ]
+}
