@@ -88,7 +88,7 @@ sudo chmod 755 -R /gisdata
 sudo mkdir /opt/tomcat_arcgis
 # Give rights to user
 sudo chown arcgis -R /opt/tomcat_arcgis
-sudo chmod 755 -R /opt/tomcat_arcgis
+sudo chmod 777 -R /opt/tomcat_arcgis
 
 # installing certbot
 sudo apt-get install snapd
@@ -103,7 +103,7 @@ sudo openssl pkcs12 -inkey privkey.pem -in fullchain.pem -export -out cert.pfx -
 
 # Give rights to the user
 sudo chown arcgis /opt/tomcat_arcgis/cert.pfx
-sudo chmod 700 /opt/tomcat_arcgis/cert.pfx
+sudo chmod 755 /opt/tomcat_arcgis/cert.pfx
 
 # setup autorenewing
 # prepare script to convert cert to pkcs12 https://github.com/StormWindStudios/OpenSSL-Notes/blob/master/letsencrypt_autopfx.md
@@ -134,8 +134,7 @@ cd /opt/tomcat_arcgis/webapps
 sudo mkdir ROOT
 echo '<% response.sendRedirect("https://www.foretclimat.ca/portal/home"); %>' > ROOT/index.jsp
 sudo chown -R arcgis ROOT
-sudo chmod 700 -R ROOT
-
+sudo chmod 755 -R ROOT
 
 
 # If you don't plan adding standby machine in the future, don't configure the file server 
@@ -165,3 +164,4 @@ tar -xf ArcGIS_Notebook_Server_Linux_1091_180226.tar.gz -C /media/data/setups/10
 # Change docker dir if needed https://enterprise.arcgis.com/en/notebook/latest/install/linux/install-docker-for-arcgis-notebook-server.htm
 
 sudo chef-client -z -j notebook-server.json
+sudo chef-client -z -j arcgis-notebook-server-webadaptor.json
