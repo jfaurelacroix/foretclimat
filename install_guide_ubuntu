@@ -117,8 +117,8 @@ cp ~/repos/foretclimat/arcgis-enterprise-primary.json ~/repos/arcgis_cookbook
 
 # change the credentials using the script
 cd ~/repos/foretclimat
-sudo chmod +x scripts/credentials.sh
-# modify passwords.txt to choose the certificate password
+sudo chmod 755 scripts/credentials.sh
+# modify scripts/credentials.sh to choose the certificate password
 # and the admin account password
 
 # jq to edit the json
@@ -128,9 +128,15 @@ sudo apt-get install jq
 # run the chef script
 cd ~/repos/arcgis-cookbook
 sudo chef-client -z -j arcgis-enterprise-primary.json
-#####################################################################
-# your first run of chef will request that you accept 2
-# product licenses
+
+# Create redirect to /portal/home
+cd /opt/tomcat_arcgis/webapps
+sudo mkdir ROOT
+echo '<% response.sendRedirect("https://www.foretclimat.ca/portal/home"); %>' > ROOT/index.jsp
+sudo chown -R arcgis ROOT
+sudo chmod 700 -R ROOT
+
+
 
 # If you don't plan adding standby machine in the future, don't configure the file server 
 # and use local paths instead of shared directories for ArcGIS Server server directories, 
@@ -138,6 +144,12 @@ sudo chef-client -z -j arcgis-enterprise-primary.json
 
 ##################################
 
+# File Server Machine install
+sudo apt-get update
+sudo apt-get upgrade
+sudo reboot
+
+##################################
 # Notebook server installation
 
 # Needed? Chef didn't find it
