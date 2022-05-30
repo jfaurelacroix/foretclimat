@@ -1,5 +1,4 @@
 #!/bin/bash
-# Grep password values
 CERT_PW="change.it"
 ADMIN_PW="change.it"
 # change the passwords above
