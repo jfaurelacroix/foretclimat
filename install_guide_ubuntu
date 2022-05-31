@@ -167,5 +167,5 @@ tar -xf ArcGIS_Notebook_Server_Linux_1091_180226.tar.gz -C /media/data/setups/10
 sudo chef-client -z -j notebook-server.json
 # Installs Web Adaptor if not already installed, registers notebook with the WA
 sudo chef-client -z -j arcgis-notebook-server-webadaptor.json
-# Federates Notebook with Enteprise Portal
-sudo chef-client -z -j notebook-server.json
+# Federates Notebook with Enteprise Portal (PORT 7443 MUST BE OPEN)
+sudo chef-client -z -j notebook-server-federation.json
