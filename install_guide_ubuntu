@@ -163,5 +163,9 @@ tar -xf ArcGIS_Notebook_Server_Linux_1091_180226.tar.gz -C /media/data/setups/10
 
 # Change docker dir if needed https://enterprise.arcgis.com/en/notebook/latest/install/linux/install-docker-for-arcgis-notebook-server.htm
 
+# Installs Notebook Server, autorizes and creates site
 sudo chef-client -z -j notebook-server.json
+# Installs Web Adaptor if not already installed, registers notebook with the WA
 sudo chef-client -z -j arcgis-notebook-server-webadaptor.json
+# Federates Notebook with Enteprise Portal
+sudo chef-client -z -j notebook-server.json
