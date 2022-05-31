@@ -24,7 +24,7 @@
         },
         "notebook_server": {
             "wa_name": "notebooks",
-            "url": "https://www.foretclimat.ca:11443",
+            "url": "https://www.foretclimat.ca:11443/arcgis",
             "wa_url": "https://***REMOVED***/notebooks",
             "admin_username": "jfaurel",
             "admin_password": "change.it"
