@@ -160,10 +160,14 @@ tar -xf ArcGIS_Notebook_Server_Linux_1091_180226.tar.gz -C /media/data/setups/10
 ## ArcGIS_Notebook_Docker_Standard_109_177822.tar.gz
 ## ArcGIS_Notebook_Server_Linux_109_177908.tar.gz
 ## ArcGIS_Notebook_Server_Samples_Data_Linux_109_177914.tar.gz
+## ArcGISNotebookServerAdvanced_ArcGISServer_1178969.prvc (authorization file)
 
 # Change docker dir if needed https://enterprise.arcgis.com/en/notebook/latest/install/linux/install-docker-for-arcgis-notebook-server.htm
 
+# Grab the authorization file
+sudo cp ArcGISNotebookServerAdvanced_ArcGISServer_1178969.prvc /opt/software/authorization_files/10.9
 # Installs Notebook Server, autorizes and creates site
+# Manually tar -xf /media/data/bkp_ArcGIS_files -C /media/data/setups/10.9 ?
 sudo chef-client -z -j notebook-server.json
 # Installs Web Adaptor if not already installed, registers notebook with the WA
 sudo chef-client -z -j arcgis-notebook-server-webadaptor.json
