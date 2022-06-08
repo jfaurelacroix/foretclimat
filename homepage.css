@@ -4,21 +4,18 @@ html, body, #viewDiv {
     height: 100%;
 }
 
-#partLogoDiv {
-    padding: 5px;
-    position: fixed;
-    bottom: 30px;
-    left: 150px;
-    border-style: groove;
-}
+/* Textbox to the right of the Foret-Climat Logo */
 
 #textBoxDiv {
+    background-color: rgb(245, 245, 245);
     position: fixed;
     top: 20px;
     left: 20px;
     font-size: 16px;
     border-style: groove;
 }
+
+/* Search bar */
 
 .esri-search {
     position: fixed;
@@ -30,13 +27,9 @@ html, body, #viewDiv {
     border-style: groove;
 }
 
-.columnLogo {
-    float: left;
-    width: 50%;
-    padding: 5px;
-}
+/* Profile icon*/
 
-.btn-primary {
+#account {
     position: fixed;
     top: 20px;
     right: 75px;
@@ -45,7 +38,30 @@ html, body, #viewDiv {
     border-radius: 50%;
 }
 
-.btn-secondary {
+/* Container for sign in */
+
+#sign-in-menu {
+    position: fixed;
+    top: 80px;
+    width: 300px;
+    height: 200px;
+    right: 20px;
+    background-color: rgb(245, 245, 245);
+    padding: 15px;
+    border-style: ridge;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.textConnection {
+    text-align: center;
+    text-decoration: underline 0.15em;
+    text-decoration-color: rgba(200, 200, 200, 1);
+}
+
+/* Login Button in the account submenu */
+
+#login {
     position: absolute;
     width: 75px;
     padding: 5px;
@@ -53,18 +69,6 @@ html, body, #viewDiv {
     bottom: 10%;
     -ms-transform: translate(-50%, 0);
     transform: translate(-50%, 0);
-}
-
-#sign-in-menu {
-    position: fixed;
-    top: 80px;
-    width: 300px;
-    height: 100px;
-    right: 20px;
-    background-color: white;
-    padding: 15px;
-    border-style: ridge;
-    align-items: center;
 }
 
 .container {
@@ -103,6 +107,25 @@ html, body, #viewDiv {
     transform: rotate(45deg) translate(-8px, -8px);
 }
 
+/* Div of partner logos */
+
+#partLogoDiv {
+    padding: 5px;
+    position: fixed;
+    bottom: 30px;
+    left: 150px;
+    border-style: groove;
+}
+
+/* Split of partner logos */
+
+.columnLogo {
+    float: left;
+    /* change width according to number of logos */
+    width: 50%;
+    padding: 5px;
+}
+
 /* The side navigation menu */
 
 .sidenav {
@@ -138,27 +161,26 @@ html, body, #viewDiv {
     transition: 0.3s;
 }
 
+.sidenav a.SidenavElement {
+    text-decoration: underline;
+    text-decoration-color: rgba(200, 200, 200, 0);
+    transition: text-decoration-color 250ms;
+}
+
 /* When you mouse over the navigation links, change their color */
 
-.sidenav a:hover {
-    color: #f1f1f1;
+.sidenav a.SidenavElement:hover {
+    text-decoration-color: rgba(200, 200, 200, 1);
 }
 
 /* Position and style the close button (top right corner) */
 
 .sidenav .closebtn {
     position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
+    top: 6px;
+    right: 13px;
+    font-size: 48px;
     margin-left: 50px;
-}
-
-/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-
-#main {
-    transition: margin-left .5s;
-    padding: 20px;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
