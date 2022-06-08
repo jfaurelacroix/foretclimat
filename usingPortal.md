@@ -1,4 +1,4 @@
-1.  [Setup ArcGIS Pro with the Portal]{.ul}
+1.  Setup ArcGIS Pro with the Portal
 
 ![](media/image1.png)
 
@@ -17,7 +17,7 @@ You can then sign in by clicking "..." and then "Sign in".
 
 Finally, "Set as Active Portal".
 
-2.  [How to share with the Portal]{.ul}
+2.  How to share with the Portal
 
 ![](media/image4.png)
 
