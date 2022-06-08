@@ -167,7 +167,7 @@ tar -xf ArcGIS_Notebook_Server_Linux_1091_180226.tar.gz -C /media/data/setups/10
 # Grab the authorization file
 sudo cp ArcGISNotebookServerAdvanced_ArcGISServer_1178969.prvc /opt/software/authorization_files/10.9
 # Installs Notebook Server, autorizes and creates site
-# Manually tar -xf /media/data/bkp_ArcGIS_files -C /media/data/setups/10.9 ?
+# Manually tar -xf /media/data/bkp_ArcGIS_files/X.tar -C /media/data/setups/10.9 ?
 sudo chef-client -z -j notebook-server.json
 # Installs Web Adaptor if not already installed, registers notebook with the WA
 sudo chef-client -z -j arcgis-notebook-server-webadaptor.json
