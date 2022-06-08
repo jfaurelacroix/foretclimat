@@ -48,4 +48,6 @@ require([
     var strInstitution = e.value;
     window.location.href = "https://www.foretclimat.ca/portal/home/signin.html";
   });
+
+
 });

@@ -1,45 +1,99 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="robots" content="noindex, follow" />
-    <link rel="stylesheet" href="https://js.arcgis.com/4.23/esri/themes/light/main.css" />
-    <link rel="stylesheet" href="./homepage.css"/>
+    <link
+      rel="stylesheet"
+      href="https://js.arcgis.com/4.23/esri/themes/light/main.css"
+    />
+    <link rel="stylesheet" href="./homepage.css" />
     <script src="https://js.arcgis.com/4.23/"></script>
-    <script src="homepage.js"></script>
-</head>
-<body>
+    <script src="./homepage.js"></script>
+  </head>
+  <body>
     <div id="viewDiv"></div>
     <div id="textBoxDiv" class="esri-widget">
-        <div style="width: 30%;float:left;padding: 5px;">
-            <img id="image" src="./media/logofc.png" width="180" alt="Logo de la Passerelle" />
-        </div>
-        <div style="width: 70%;float: left;padding: 20px;">
-            Utilisez le menu de gauche pour sélectionner les données disponibles<br>
-            publiquement et avoir accès aux storymaps.<br>
-            Utilisez le menu de droite pour vous connecter ou changer la langue.<br>
-            Cliquez sur les données dans la carte pour les explorer plus en détail.
-        </div>
+      <div style="width: 30%;float:left;padding: 5px;">
+        <img
+          id="image"
+          src="./media/logofc.png"
+          width="180"
+          alt="Logo de la Passerelle"
+        />
+      </div>
+      <div style="width: 70%;float: left;padding: 20px;">
+        Utilisez le menu de gauche pour sélectionner les données disponibles<br />
+        publiquement et avoir accès aux storymaps.<br />
+        Utilisez le menu de droite pour vous connecter ou changer la langue.<br />
+        Cliquez sur les données dans la carte pour les explorer plus en détail.
+      </div>
     </div>
-        <div id="partLogoDiv" class="esri-widget">
-            <div class="columnLogo">
-                <img src="./media/UL_FFGG_C_d.png" width="175" alt="Logo de la FFGG">
-            </div>
-            <div class="columnLogo">
-                <img src="./media/cfi-fci_couleur.png" width="175" alt="Logo de la FCI">
-            </div>
-        </div>
+    <div id="partLogoDiv" class="esri-widget">
+      <div class="columnLogo">
+        <img src="./media/UL_FFGG_C_d.png" width="175" alt="Logo de la FFGG" />
+      </div>
+      <div class="columnLogo">
+        <img
+          src="./media/cfi-fci_couleur.png"
+          width="175"
+          alt="Logo de la FCI"
+        />
+      </div>
+    </div>
     <div id="sign-in-menu" style="visibility: hidden;">
-        <div class="input-group">
-            <span class="input-group-addon">Organisation</span>
-            <select class="form-control input-lg" id="ddlInstitution" name="Institutions.SelectedValue" style="width:100%"><option selected="selected" value="NEW_EMPTY"></option>
-                <option value="ulaval">Université Laval</option>
-                <option value="mcgill">Université McGill</option>
-            </select>
-
-        </div>
-      <button id="login" class="btn btn-secondary esri-button" href="https://www.foretclimat.ca/portal/home/signin.html">Login</button>
+      <div class="input-group">
+        <span class="input-group-addon">Organisation</span>
+        <select
+          class="form-control input-lg"
+          id="ddlInstitution"
+          name="Institutions.SelectedValue"
+          style="width:100%"
+        >
+          <option selected="selected" value="ulaval">Université Laval</option>
+          <option value="mcgill">Université McGill</option>
+        </select>
+      </div>
+      <button
+        id="login"
+        class="btn btn-secondary esri-button"
+        href="https://www.foretclimat.ca/portal/home/signin.html"
+      >
+        Login
+      </button>
     </div>
-    <button id="menu" class="btn btn-primary esri-button"><img style="width:50px;border-radius:50%;" alt="" src="https://www.foretclimat.ca/portal/home/10.9.0/js/arcgisonline/css/images/no-user-thumb.jpg" class="esri-header-account-image"></img></button>
-</body>
+    <button id="menu" class="btn btn-primary esri-button">
+      <img
+        style="width:50px;border-radius:50%;"
+        alt=""
+        src="https://www.foretclimat.ca/portal/home/10.9.0/js/arcgisonline/css/images/no-user-thumb.jpg"
+        class="esri-header-account-image"
+      />
+    </button>
+    <div
+      class="container"
+      onclick="this.classList.toggle('change');changeNav()"
+    >
+      <div class="bar1"></div>
+      <div class="bar2"></div>
+      <div class="bar3"></div>
+    </div>
+    <div id="Sidenav" class="sidenav" style="width: 0px;">
+      <a
+        href="javascript:void(0)"
+        class="closebtn"
+        onclick="document.getElementsByClassName('container')[0].classList.toggle('change');closeNav();"
+        >&times;</a
+      >
+      <a href="./index.html">Index</a>
+      <a href="./Gallery.html">Gallery</a>
+      <a href="./webmap/viewer.html">Map</a>
+      <a href="./webscene/viewer.html">Scene</a>
+      <a href="./notebook/notebookhome.html">Notebook</a>
+      <a href="./groups.html">Groups</a>
+      <a href="./content.html">Content</a>
+      <a href="./organization.html">Organization</a>
+    </div>
+    <script type="text/javascript" src="utils.js"></script>
+  </body>
 </html>
