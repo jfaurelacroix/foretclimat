@@ -34,12 +34,14 @@ require([
   view.ui.add(search, "manual");
   view.ui.add(toggle, "bottom-left");
   view.ui.move(["zoom", view], "bottom-right");
-  document.getElementById("menu").addEventListener("click", function() {
+  document.getElementById("account").addEventListener("click", function() {
     var e = document.getElementById("sign-in-menu");
     if (e.style.visibility == "hidden") {
       e.style.visibility = "visible";
+      e.style.opacity = "1";
     } else {
-      e.style.visibility = "hidden";
+      e.style.opacity = "0";
+      setTimeout(() => {  e.style.visibility = "hidden"; }, 500);
     }
   });
 

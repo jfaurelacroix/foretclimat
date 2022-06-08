@@ -41,9 +41,18 @@
         />
       </div>
     </div>
+    <button id="account" class="btn btn-primary esri-button">
+      <img
+        style="width:50px;border-radius:50%;"
+        alt=""
+        src="https://www.foretclimat.ca/portal/home/10.9.0/js/arcgisonline/css/images/no-user-thumb.jpg"
+        class="esri-header-account-image"
+      />
+    </button>
     <div id="sign-in-menu" style="visibility: hidden;">
       <div class="input-group">
-        <span class="input-group-addon">Organisation</span>
+        <p class="textConnection">Connection au portail</p>
+        <span class="textOrg">Organisation:</span>
         <select
           class="form-control input-lg"
           id="ddlInstitution"
@@ -62,14 +71,6 @@
         Login
       </button>
     </div>
-    <button id="menu" class="btn btn-primary esri-button">
-      <img
-        style="width:50px;border-radius:50%;"
-        alt=""
-        src="https://www.foretclimat.ca/portal/home/10.9.0/js/arcgisonline/css/images/no-user-thumb.jpg"
-        class="esri-header-account-image"
-      />
-    </button>
     <div
       class="container"
       onclick="this.classList.toggle('change');changeNav()"
@@ -85,14 +86,14 @@
         onclick="document.getElementsByClassName('container')[0].classList.toggle('change');closeNav();"
         >&times;</a
       >
-      <a href="./index.html">Index</a>
-      <a href="./Gallery.html">Gallery</a>
-      <a href="./webmap/viewer.html">Map</a>
-      <a href="./webscene/viewer.html">Scene</a>
-      <a href="./notebook/notebookhome.html">Notebook</a>
-      <a href="./groups.html">Groups</a>
-      <a href="./content.html">Content</a>
-      <a href="./organization.html">Organization</a>
+      <a class="SidenavElement" href="./index.html">Index</a>
+      <a class="SidenavElement" href="./Gallery.html">Gallery</a>
+      <a class="SidenavElement" href="./webmap/viewer.html">Map</a>
+      <a class="SidenavElement" href="./webscene/viewer.html">Scene</a>
+      <a class="SidenavElement" href="./notebook/notebookhome.html">Notebook</a>
+      <a class="SidenavElement" href="./groups.html">Groups</a>
+      <a class="SidenavElement" href="./content.html">Content</a>
+      <a class="SidenavElement" href="./organization.html">Organization</a>
     </div>
     <script type="text/javascript" src="utils.js"></script>
   </body>
