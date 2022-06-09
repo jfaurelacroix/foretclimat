@@ -47,6 +47,7 @@
         id="accountThumbnail"
         style="width:50px;border-radius:50%;"
         alt=""
+        src="https://www.foretclimat.ca/portal/home/10.9.0/js/arcgisonline/css/images/no-user-thumb.jpg";
         class="esri-header-account-image"
       />
     </button>
@@ -87,15 +88,16 @@
         onclick="document.getElementsByClassName('container')[0].classList.toggle('change');closeNav();"
         >&times;</a
       >
-      <a id="greeter"></a>
-      <a class="SidenavElement" href="./index.html">Index</a>
-      <a class="SidenavElement" href="./Gallery.html">Gallery</a>
-      <a class="SidenavElement" href="./webmap/viewer.html">Map</a>
-      <a class="SidenavElement" href="./webscene/viewer.html">Scene</a>
-      <a class="SidenavElement" href="./notebook/notebookhome.html">Notebook</a>
-      <a class="SidenavElement" href="./groups.html">Groups</a>
-      <a class="SidenavElement" href="./content.html">Content</a>
-      <a class="SidenavElement" href="./organization.html">Organization</a>
+      <a id="greeter">Welcome!</a>
+      <a class="SidenavElement anonymous" href="./storymaps.html">StoryMaps</a>
+      <a class="SidenavElement user" href="./index.html" style="display:none;">Index</a>
+      <a class="SidenavElement user" href="./Gallery.html" style="display:none;">Gallery</a>
+      <a class="SidenavElement user" href="./webmap/viewer.html" style="display:none;">Map</a>
+      <a class="SidenavElement user" href="./webscene/viewer.html" style="display:none;">Scene</a>
+      <a class="SidenavElement user" href="./notebook/notebookhome.html" style="display:none;">Notebook</a>
+      <a class="SidenavElement user" href="./groups.html" style="display:none;">Groups</a>
+      <a class="SidenavElement user" href="./content.html" style="display:none;">Content</a>
+      <a class="SidenavElement user" href="./organization.html" style="display:none;">Organization</a>
     </div>
     <script type="text/javascript" src="./utils.js"></script>
   </body>
