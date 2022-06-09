@@ -8,6 +8,7 @@
       href="https://js.arcgis.com/4.23/esri/themes/light/main.css"
     />
     <link rel="stylesheet" href="./homepage.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://js.arcgis.com/4.23/"></script>
     <script src="./homepage.js"></script>
   </head>
@@ -43,9 +44,9 @@
     </div>
     <button id="account" class="btn btn-primary esri-button">
       <img
+        id="accountThumbnail"
         style="width:50px;border-radius:50%;"
         alt=""
-        src="https://www.foretclimat.ca/portal/home/10.9.0/js/arcgisonline/css/images/no-user-thumb.jpg"
         class="esri-header-account-image"
       />
     </button>
@@ -86,6 +87,7 @@
         onclick="document.getElementsByClassName('container')[0].classList.toggle('change');closeNav();"
         >&times;</a
       >
+      <a id="greeter"></a>
       <a class="SidenavElement" href="./index.html">Index</a>
       <a class="SidenavElement" href="./Gallery.html">Gallery</a>
       <a class="SidenavElement" href="./webmap/viewer.html">Map</a>
@@ -95,6 +97,6 @@
       <a class="SidenavElement" href="./content.html">Content</a>
       <a class="SidenavElement" href="./organization.html">Organization</a>
     </div>
-    <script type="text/javascript" src="utils.js"></script>
+    <script type="text/javascript" src="./utils.js"></script>
   </body>
 </html>
