@@ -36,7 +36,9 @@ html, body, #viewDiv {
     padding: 0px;
     width: 50px;
     border-radius: 50%;
+    background-color : rgba(245, 245, 245, 1);
 }
+
 
 /* Container for sign in */
 
@@ -159,6 +161,11 @@ html, body, #viewDiv {
     color: #ffffff;
     display: block;
     transition: 0.3s;
+}
+
+.sidenav a#greeter{
+    font-size: 18px;
+    text-align: right;
 }
 
 .sidenav a.SidenavElement {
