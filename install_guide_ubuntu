@@ -139,6 +139,10 @@ sudo chown -R arcgis ROOT
 sudo chmod 755 -R ROOT
 
 # Copy the files into /arcgis/portal/framework/webapps/arcgis#home/
+# change index to home
+sudo mv /arcgis/portal/framework/webapps/arcgis#home/index.html /arcgis/portal/framework/webapps/arcgis#home/home.html
+sudo cp ~/repos/foretclimat/pages/* /arcgis/portal/framework/webapps/arcgis#home/
+sudo cp ~/repos/foretclimat/media /arcgis/portal/framework/webapps/arcgis#home/
 
 
 # If you don't plan adding standby machine in the future, don't configure the file server 
