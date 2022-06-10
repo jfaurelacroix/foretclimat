@@ -72,3 +72,8 @@ function setUpNavMenu(){
         anonymousEl[i].style = "display:none;"
     }
 }
+
+/* Changes from signin.html to homepage */
+function changeAccountHREF(){
+  document.getElementById('login').href = "./home.html";
+}

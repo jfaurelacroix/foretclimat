@@ -1,8 +1,12 @@
+:root {
+    --blue: rgb(25, 115, 199);
+}
+
 html, body, #viewDiv {
     padding: 0;
     margin: 0;
     height: 100%;
-    border-color:  rgb(25, 115, 199);
+    border-color:  var(--blue);
 }
 
 /* Textbox to the right of the Foret-Climat Logo */
@@ -15,7 +19,6 @@ html, body, #viewDiv {
     font-size: 16px;
     width: 550px;
     height: 160px;
-    border-style: groove;
 }
 
 #logoPasserelle {
@@ -31,7 +34,14 @@ html, body, #viewDiv {
     left: 20px;
     width: 350px;
     height: 40px;
-    border-style: groove;
+}
+
+/* locate button */
+.esri-locate{
+    position: fixed;
+    padding: 5px;
+    bottom: 105px;
+    right: 15px;
 }
 
 /* Profile icon*/
@@ -65,7 +75,7 @@ html, body, #viewDiv {
 .textConnection {
     text-align: center;
     text-decoration: underline 0.15em;
-    text-decoration-color: rgba(200, 200, 200, 1);
+    text-decoration-color: rgba(245, 245, 245, 1);
 }
 
 /* Login Button in the account submenu */
@@ -91,9 +101,11 @@ html, body, #viewDiv {
 .bar1, .bar2, .bar3 {
     width: 35px;
     height: 5px;
-    background-color: rgb(25, 115, 199);
-    margin: 6px 0;
+    background-color: var(--blue);
+    margin: 4px 0;
+    border: 1px solid rgba(200, 200, 200, 1);
     transition: 0.4s;
+    border-radius:10%;
 }
 
 /* Rotate first bar */
@@ -123,7 +135,6 @@ html, body, #viewDiv {
     position: fixed;
     bottom: 30px;
     left: 150px;
-    border-style: groove;
 }
 
 /* Split of partner logos */
@@ -149,7 +160,7 @@ html, body, #viewDiv {
     top: 0;
     /* Stay at the top */
     right: 0;
-    background-color: rgb(34, 138, 235);
+    background-color: var(--blue);
     /* Black*/
     overflow-x: hidden;
     /* Disable horizontal scroll */
