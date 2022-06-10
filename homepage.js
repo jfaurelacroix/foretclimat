@@ -1,16 +1,11 @@
 require([
-  "esri/identity/OAuthInfo",
   "esri/config",
   "esri/WebMap",
   "esri/views/MapView",
   "esri/widgets/Search",
   "esri/widgets/BasemapToggle"
-], (OAuthInfo, esriConfig, WebMap, MapView, Search, BasemapToggle) => {
+], (esriConfig, WebMap, MapView, Search, BasemapToggle) => {
   esriConfig.portalUrl = "https://www.foretclimat.ca/portal";
-
-  let auth = new OAuthInfo({
-    portalUrl: esriConfig.portalUrl
-  });
 
   const map = new WebMap({
     portalItem: {
@@ -41,7 +36,7 @@ require([
   view.ui.add(toggle, "bottom-left");
   view.ui.move(["zoom", view], "bottom-right");
   document.getElementById("account").addEventListener("click", function() {
-    var e = document.getElementById("sign-in-menu");
+    /*var e = document.getElementById("sign-in-menu");
     if (e.style.visibility == "hidden") {
       e.style.visibility = "visible";
       e.style.opacity = "1";
@@ -49,8 +44,10 @@ require([
       e.style.opacity = "0";
       setTimeout(() => {
         e.style.visibility = "hidden";
-      }, 500);
-    }
+      }, 500);*/
+
+    /* The code above is used to display Login menu */
+    document.getElementById("login").click(); 
   });
 
   //document.cookie = "esri_auth=cookiecontent"; for testing
