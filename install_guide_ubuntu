@@ -129,12 +129,16 @@ sudo apt-get install jq
 cd ~/repos/arcgis-cookbook
 sudo chef-client -z -j arcgis-enterprise-primary.json
 
+##################################
+# SETUP WEBSITE
 # Create redirect to /portal/home
 cd /opt/tomcat_arcgis/webapps
 sudo mkdir ROOT
-echo '<% response.sendRedirect("https://www.foretclimat.ca/portal/home"); %>' > ROOT/index.jsp
+echo '<% response.sendRedirect("https://www.foretclimat.ca/portal/home/index.html"); %>' > ROOT/index.jsp
 sudo chown -R arcgis ROOT
 sudo chmod 755 -R ROOT
+
+# Copy the files into /arcgis/portal/framework/webapps/arcgis#home/
 
 
 # If you don't plan adding standby machine in the future, don't configure the file server 
