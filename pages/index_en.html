@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="robots" content="noindex, follow" />
+    <link
+      rel="stylesheet"
+      href="https://js.arcgis.com/4.23/esri/themes/light/main.css"
+    />
+    <link rel="stylesheet" href="./indexpage.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://js.arcgis.com/4.23/"></script>
+    <script src="./index_en.js"></script>
+  </head>
+  <body>
+    <div id="viewDiv"></div>
+    <div id="textBoxDiv" class="esri-widget">
+      <div style="width: 30%;float:left;">
+        <img
+          id="logoPasserelle"
+          src="./media/logofc.png"
+          alt="Logo de la Passerelle"
+        />
+      </div>
+      <div style="width: 70%;float: right;padding:5px;">
+        Use the menu on the left to select available data
+        publicly and have access to storymaps.<br>
+        Use the menu on the right to sign in or change the language.<br>
+        Click on the data in the map to explore it in more detail.
+      </div>
+    </div>
+    <div id="partLogoDiv" class="esri-widget">
+      <div class="columnLogo">
+        <img src="./media/UL_FFGG_C_d.png" width="175" alt="Logo de la FFGG" />
+      </div>
+      <div class="columnLogo">
+        <img
+          src="./media/cfi-fci_couleur.png"
+          width="175"
+          alt="Logo de la FCI"
+        />
+      </div>
+    </div>
+    <button id="account" class="btn btn-primary esri-button">
+      <img
+        id="accountThumbnail"
+        style="width:100%;border-radius:100%;"
+        alt=""
+        src="https://www.foretclimat.ca/portal/home/10.9.0/js/arcgisonline/css/images/no-user-thumb.jpg";
+        class="esri-header-account-image"
+      />
+    </button>
+    <div id="sign-in-menu" style="visibility: hidden;">
+      <div class="input-group">
+        <p class="textConnection">Connexion to portal</p>
+        <span class="textOrg">Organization:</span>
+        <select
+          class="form-control input-lg"
+          id="ddlInstitution"
+          name="Institutions.SelectedValue"
+          style="width:100%"
+        >
+          <option selected="selected" value="ulaval">Université Laval</option>
+        </select>
+      </div>
+      <button
+        id="login"
+        class="btn btn-secondary esri-button"
+        href="https://www.foretclimat.ca/portal/home/signin.html"
+      >
+        Login
+      </button>
+    </div>
+    <div
+      id="sideburger"
+      class="container"
+      onclick="this.classList.toggle('change');changeNav()"
+    >
+      <div class="bar1"></div>
+      <div class="bar2"></div>
+      <div class="bar3"></div>
+    </div>
+    <div id="Sidenav" class="sidenav" style="width: 0px;">
+      <a
+        href="javascript:void(0)"
+        class="closebtn"
+        onclick="document.getElementsByClassName('container')[0].classList.toggle('change');closeNav();"
+        >&times;</a
+      >
+      <a id="greeter">Welcome!</a>
+      <a class="SidenavElement anonymous" href="./storymaps.html">StoryMaps</a>
+      <a class="SidenavElement user" href="./home.html" style="display:none;">Home</a>
+      <a class="SidenavElement user" href="./Gallery.html" style="display:none;">Gallery</a>
+      <a class="SidenavElement user" href="./webmap/viewer.html" style="display:none;">Map</a>
+      <a class="SidenavElement user" href="./webscene/viewer.html" style="display:none;">Scene</a>
+      <a class="SidenavElement user" href="./notebook/notebookhome.html" style="display:none;">Notebook</a>
+      <a class="SidenavElement user" href="./groups.html" style="display:none;">Groups</a>
+      <a class="SidenavElement user" href="./content.html" style="display:none;">Content</a>
+      <a class="SidenavElement user" href="./organization.html" style="display:none;">Organization</a>
+      <a class="SidenavElement anonymous user lang" href="./index_fr.html">Français</a>
+    </div>
+    <script type="text/javascript" src="./utils.js"></script>
+  </body>
+</html>

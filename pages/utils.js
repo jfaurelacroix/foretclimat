@@ -50,13 +50,16 @@ function getCookieEmail(){
 function changeUserInfoHTML(email){
     let url = 'https://www.foretclimat.ca/portal/sharing/rest/community/users/' + email + '?f=pjson';
     jQuery.getJSON(url, function(data){
-        console.log(data);
         if(data.thumbnail != null){
             thumbnailVar = "https://www.foretclimat.ca/portal/sharing/rest/community/users/" +
             getCookieEmail() + "/info/" + data.thumbnail;
             document.getElementById("accountThumbnail").src = thumbnailVar;
         }
-        document.getElementById("greeter").innerHTML = "Hello, " + data.fullName + "!";
+        if(document.documentElement.lang == "fr"){
+          document.getElementById("greeter").innerHTML = "Hello, " + data.fullName + "!";
+        }else{
+          document.getElementById("greeter").innerHTML = "Bonjour, " + data.fullName + "!";
+        }
     });
     
 }
@@ -75,5 +78,17 @@ function setUpNavMenu(){
 
 /* Changes from signin.html to homepage */
 function changeAccountHREF(){
-  document.getElementById('login').href = "./home.html";
+  document.getElementById('account').removeEventListener();
+  document.getElementById('account').addEventListener("click", function() {
+    window.location = "./home.html";
+  });
+}
+
+function setLangUser(){
+  var userLang = navigator.language || navigator.userLanguage;
+  if (userLang.includes('fr')){
+    window.location.href = "./index_fr.html";
+  }else if(userLang.includes('en')){
+    window.location.href = "./index_en.html";
+  }
 }

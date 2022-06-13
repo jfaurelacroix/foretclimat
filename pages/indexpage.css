@@ -16,9 +16,9 @@ html, body, #viewDiv {
     position: fixed;
     top: 20px;
     left: 20px;
-    font-size: 16px;
+    font-size: var(--calcite-font-size-0);
     width: 550px;
-    height: 160px;
+    height: 150px;
 }
 
 #logoPasserelle {
@@ -191,6 +191,13 @@ html, body, #viewDiv {
     text-decoration: underline;
     text-decoration-color: rgba(200, 200, 200, 0);
     transition: text-decoration-color 250ms;
+}
+
+.sidenav a.SidenavElement.lang {
+    font-size: var(--calcite-font-size-0);
+    position: fixed;
+    bottom: 20px;
+    margin-right: 20px;
 }
 
 /* When you mouse over the navigation links, change their color */
