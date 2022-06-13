@@ -77,8 +77,13 @@ function setUpNavMenu(){
 }
 
 /* Changes from signin.html to homepage */
-function changeAccountHREF(){
-  document.getElementById('account').removeEventListener();
+function addAccountEventListenerSignIn(){
+  document.getElementById('account').addEventListener("click", function() {
+    window.location = "./signin.html";
+  });
+}
+
+function addAccountEventListenerHome(){
   document.getElementById('account').addEventListener("click", function() {
     window.location = "./home.html";
   });
@@ -92,3 +97,4 @@ function setLangUser(){
     window.location.href = "./index_en.html";
   }
 }
+

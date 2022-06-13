@@ -71,6 +71,7 @@ require([
     view.ui.move(["zoom"], "bottom-right");
     view.ui.add(locateWidget, "bottom-right");
   
+    /*
     document.getElementById("account").addEventListener("click", function() {
       var e = document.getElementById("sign-in-menu");
       if (e.style.visibility == "hidden") {
@@ -83,18 +84,17 @@ require([
         }, 500);
       }
     });
-  
-    document.getElementById("account").addEventListener("click", function() {
-      window.location = "./signin.html";
-    });
+    */
+   
+    document.getElementById("account").addEventListener("click", redirectSignIn());
   
     /* if user is logged in (esri_auth cookie is present) */
     if (getCookie("esri_auth") != "") {
-      changeUserInfoHTML(getCookieEmail());
-      setUpNavMenu();
-      changeAccountHREF();
+        changeUserInfoHTML(getCookieEmail());
+        setUpNavMenu();
+        addAccountEventListenerHome();
+      }else{
+        addAccountEventListenerSignIn();
     }
-    
-    
 });
   
