@@ -9,8 +9,7 @@ require([
     "esri/layers/FeatureLayer",
     "esri/intl"
   ], (esriConfig, WebMap, MapView, Search, BasemapToggle, Locate, Portal, FeatureLayer, intl) => {
-    //esriConfig.portalUrl = "https://www.foretclimat.ca/portal";
-    esriConfig.portalUrl = "https://ulaval.maps.arcgis.com/";
+    esriConfig.portalUrl = "https://www.foretclimat.ca/portal";
     intl.setLocale("en-CA");
   
     const myPortal = new Portal({
@@ -20,7 +19,7 @@ require([
     const map = new WebMap({
       portalItem: {
         // autocasts as new PortalItem()
-        id: "111d03a57a604f18a46b85eecb634f30", // id is in the content page url
+        id: "b74d05881ff84f45a1ecb1c7eb17e5b1", // id is in the content page url
         portal: myPortal
       }
     });
@@ -36,7 +35,7 @@ require([
     }
 
     const featureQualRebois = new FeatureLayer({
-      url: "https://services2.arcgis.com/RkhyeW7cqOfSjlQG/arcgis/rest/services/myMap_WFL1/FeatureServer/0",
+      url: "https://www.foretclimat.ca/server/rest/services/Index_MIL1/MapServer/0",
       outFields: ["OBJECTID", "REALISE", "ANNEE"],
       popupTemplate: popupQualRebois
     });
@@ -47,7 +46,7 @@ require([
     }
 
     const featureRegen = new FeatureLayer({
-      url: "https://services2.arcgis.com/RkhyeW7cqOfSjlQG/arcgis/rest/services/myMap_WFL1/FeatureServer/1",
+      url: "https://www.foretclimat.ca/server/rest/services/Index_MIL1/MapServer/1",
       outFields: ["OBJECTID", "COMMENT", "DATE"],
       popupTemplate: popupRegen
     });
