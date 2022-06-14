@@ -44,6 +44,12 @@ html, body, #viewDiv {
     right: 15px;
 }
 
+.esri-layer-list{
+    position: fixed;
+    bottom: 200px;
+    left: 15px;
+}
+
 /* Profile icon*/
 
 #account {
