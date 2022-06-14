@@ -7,9 +7,9 @@ require([
   "esri/widgets/Locate",
   "esri/portal/Portal",
   "esri/layers/FeatureLayer",
-  "esri/PopupTemplate",
-  "esri/intl"
-], (esriConfig, WebMap, MapView, Search, BasemapToggle, Locate, Portal, FeatureLayer, PopupTemplate, intl) => {
+  "esri/intl",
+  "esri/widgets/LayerList"
+], (esriConfig, WebMap, MapView, Search, BasemapToggle, Locate, Portal, FeatureLayer, intl, LayerList) => {
   //esriConfig.portalUrl = "https://www.foretclimat.ca/portal";
   esriConfig.portalUrl = "https://ulaval.maps.arcgis.com/";
   intl.setLocale("fr-FR");
@@ -29,6 +29,10 @@ require([
   const view = new MapView({
     map: map,
     container: "viewDiv"
+  });
+
+  const layerList = new LayerList({
+    view: view
   });
 
   const search = new Search({
@@ -67,10 +71,10 @@ require([
   view.ui.add(["textBoxDiv", search], "top-left");
   // places the search widget in the top right corner of the view
   view.ui.add(["account"], "top-right");
-  view.ui.add([toggle, "partLogoDiv"], "bottom-left");
+  view.ui.add([toggle, "partLogoDiv", layerList], "bottom-left");
+  view.ui.add([locateWidget], "bottom-right");
   view.ui.move(["zoom"], "bottom-right");
-  view.ui.add(locateWidget, "bottom-right");
-
+  
   /*
   document.getElementById("account").addEventListener("click", function() {
     var e = document.getElementById("sign-in-menu");

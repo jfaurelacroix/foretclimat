@@ -55,7 +55,7 @@ function changeUserInfoHTML(email){
             getCookieEmail() + "/info/" + data.thumbnail;
             document.getElementById("accountThumbnail").src = thumbnailVar;
         }
-        if(document.documentElement.lang == "fr"){
+        if(document.documentElement.lang == "en"){
           document.getElementById("greeter").innerHTML = "Hello, " + data.fullName + "!";
         }else{
           document.getElementById("greeter").innerHTML = "Bonjour, " + data.fullName + "!";
