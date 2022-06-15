@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="robots" content="noindex, follow" />
+    <link
+      rel="stylesheet"
+      href="https://js.arcgis.com/4.23/esri/themes/light/main.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://js.arcgis.com/4.23/"></script>
+    <script>
+    
+    </script>
+    <style>
+      body{
+        background-image: url("https://www.foretmontmorency.ca/assets/documents/cms/background/belvedere-crop.jpg");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        background-position: left -250px top;
+      }
+      #language-box{
+        width: 400px;
+        height: 300px;
+        border-radius: 5%;
+        margin: auto;
+        text-align: center;
+        border-style: solid;
+        background-color: rgba(245,245,245,0.55)
+      }
+      .langButton{
+        border-radius: 5%;
+        background-color: rgb(25, 115, 199);
+        color: rgb(245,245,245);
+        width: 20%;
+      }
+      #logoPasserelle{
+        width:200px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="language-box">
+      <img
+        id="logoPasserelle"
+        src="./media/logofc.png"
+        alt="Logo de la Passerelle"
+      />
+      <div>
+        <span>Choisissez votre langue</span>
+        <span>|</span>
+        <span>Choose your language    </span>
+      </div>
+      <br>
+      <button class="langButton" onclick="window.location.href='./index_fr.html'">Français</button>
+      <button  class="langButton" onclick="window.location.href='./index_en.html'">English</button>
+    </div>
+    <div id="footer">
+
+    </div>
+    <script type="text/javascript" src="./utils.js"></script>
+  </body>
+</html>
