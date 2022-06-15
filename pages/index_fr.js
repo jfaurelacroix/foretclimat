@@ -7,11 +7,9 @@ require([
   "esri/widgets/Locate",
   "esri/portal/Portal",
   "esri/layers/FeatureLayer",
-  "esri/intl",
-  "esri/widgets/LayerList"
-], (esriConfig, WebMap, MapView, Search, BasemapToggle, Locate, Portal, FeatureLayer, intl, LayerList) => {
-  //esriConfig.portalUrl = "https://www.foretclimat.ca/portal";
-  esriConfig.portalUrl = "https://ulaval.maps.arcgis.com/";
+  "esri/intl"
+], (esriConfig, WebMap, MapView, Search, BasemapToggle, Locate, Portal, FeatureLayer, intl) => {
+  esriConfig.portalUrl = "https://www.foretclimat.ca/portal";
   intl.setLocale("fr-FR");
 
   const myPortal = new Portal({
@@ -21,7 +19,7 @@ require([
   const map = new WebMap({
     portalItem: {
       // autocasts as new PortalItem()
-      id: "111d03a57a604f18a46b85eecb634f30", // id is in the content page url
+      id: "b74d05881ff84f45a1ecb1c7eb17e5b1", // id is in the content page url
       portal: myPortal
     }
   });
@@ -31,26 +29,49 @@ require([
     container: "viewDiv"
   });
 
-  const layerList = new LayerList({
-    view: view
+  const popupQualRebois = {
+    "title": "Reboisement",
+    "content": "<b>ID:</b> {OBJECTID}<br><b>Realise:</b> {REALISE}<br><b>ANNEE:</b> {ANNEE}<br>"
+  }
+
+  const featureQualRebois = new FeatureLayer({
+    url: "https://www.foretclimat.ca/server/rest/services/Index_MIL1/MapServer/0",
+    outFields: ["OBJECTID", "REALISE", "ANNEE"],
+    popupTemplate: popupQualRebois
   });
+
+  const popupRegen = {
+    "title": "Regeneration",
+    "content": "<b>ID:</b> {OBJECTID}<br><b>COMMENT:</b> {COMMENT}<br><b>DATE:</b> {DATE}<br>"
+  }
+
+  const featureRegen = new FeatureLayer({
+    url: "https://www.foretclimat.ca/server/rest/services/Index_MIL1/MapServer/1",
+    outFields: ["OBJECTID", "COMMENT", "DATE"],
+    popupTemplate: popupRegen
+  });
+
+  map.add(featureQualRebois);
+  map.add(featureRegen);
+
 
   const search = new Search({
     view: view,
     portal: myPortal, // https://enterprise.arcgis.com/fr/portal/latest/administer/windows/configure-portal-to-geocode-addresses.htm
-    sources: [ //https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Search.html#sources
+    sources: [ //https://developers.arcgis.com/javascript/latest/sample-code/widgets-search-multiplesource/
       {
-        layer: new FeatureLayer({
-          url: "https://services2.arcgis.com/RkhyeW7cqOfSjlQG/arcgis/rest/services/myMap_WFL1/FeatureServer",
-          outFields: ["*"]
-        }),
-        popupTemplate: {
-          
-        },
+        layer: featureQualRebois,
         exactMatch: false,
         outFields: ["*"],
-        name: "Données Forêt Montmorency",
-        placeholder: "Chercher des couches ou des données",
+        maxResults: 6,
+        maxSuggestions: 6,
+        suggestionsEnabled: true,
+        minSuggestCharacters: 0
+      },
+      {
+        layer: featureRegen,
+        exactMatch: false,
+        outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
         suggestionsEnabled: true,
@@ -71,7 +92,7 @@ require([
   view.ui.add(["textBoxDiv", search], "top-left");
   // places the search widget in the top right corner of the view
   view.ui.add(["account"], "top-right");
-  view.ui.add([toggle, "partLogoDiv", layerList], "bottom-left");
+  view.ui.add([toggle, "partLogoDiv"], "bottom-left");
   view.ui.add([locateWidget], "bottom-right");
   view.ui.move(["zoom"], "bottom-right");
   
