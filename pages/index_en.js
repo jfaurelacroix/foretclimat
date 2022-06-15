@@ -36,7 +36,7 @@ require([
 
     const featureQualRebois = new FeatureLayer({
       url: "https://www.foretclimat.ca/server/rest/services/Index_MIL1/MapServer/0",
-      outFields: ["OBJECTID", "REALISE", "ANNEE"],
+      outFields: ["OBJECTID", "REALISE", "YEAR"],
       popupTemplate: popupQualRebois
     });
 
