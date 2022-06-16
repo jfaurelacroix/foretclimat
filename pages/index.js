@@ -1,3 +1,9 @@
+if(document.documentElement.lang="fr"){
+  var locale = "fr-FR";
+}else{
+  var locale = "en-CA";
+}
+
 require([
   "esri/config",
   "esri/WebMap",
@@ -10,7 +16,7 @@ require([
   "esri/intl"
 ], (esriConfig, WebMap, MapView, Search, BasemapToggle, Locate, Portal, FeatureLayer, intl) => {
   esriConfig.portalUrl = "https://www.foretclimat.ca/portal";
-  intl.setLocale("fr-FR");
+  intl.setLocale(locale);
 
   const myPortal = new Portal({
     url: esriConfig.portalUrl
@@ -119,10 +125,4 @@ require([
   }else{
     addAccountEventListenerSignIn();
   }
-
-  /*Adds signout*/
-  document.getElementById("signout").addEventListener("click", function(){
-    signOut();
-  });
-
 });
