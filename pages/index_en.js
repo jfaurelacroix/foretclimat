@@ -31,12 +31,12 @@ require([
   
     const popupQualRebois = {
       "title": "Reboisement",
-      "content": "<b>ID:</b> {OBJECTID}<br><b>Realise:</b> {REALISE}<br><b>ANNEE:</b> {ANNEE}<br>"
+      "content": "<b>ID:</b> {OBJECTID}<br><b>Realise:</b> {REALISE}<br><b>YEAR:</b> {ANNEE}<br>"
     }
 
     const featureQualRebois = new FeatureLayer({
       url: "https://www.foretclimat.ca/server/rest/services/Index_MIL1/MapServer/0",
-      outFields: ["OBJECTID", "REALISE", "YEAR"],
+      outFields: ["OBJECTID", "REALISE", "ANNEE"],
       popupTemplate: popupQualRebois
     });
 
@@ -118,5 +118,12 @@ require([
       }else{
         addAccountEventListenerSignIn();
     }
+
+    /*Adds signout*/
+    document.getElementById("signout").addEventListener("click", function(){
+      signOut();
+      window.location.href="./index.html";
+    });
+
 });
   
