@@ -98,8 +98,3 @@ function setLangUser(){
     window.location.href = "./index_en.html";
   }
 }
-
-function signOut(){
-  document.cookie = esri_auth + '=; Max-Age=0';
-  window.location.href = "./index.html";
-}
