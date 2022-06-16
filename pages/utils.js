@@ -42,7 +42,7 @@ function getCookieJSON(){
 
 /* fetches email from esri_auth */
 function getCookieEmail(){
-    let username = getCookieJSON().email;
+    let username = getCookieJSON().username;
     return username;
 }
 
@@ -89,6 +89,7 @@ function addAccountEventListenerHome(){
   });
 }
 
+/* not used, sets language according to navigator settings */
 function setLangUser(){
   var userLang = navigator.language || navigator.userLanguage;
   if (userLang.includes('fr')){
@@ -98,3 +99,7 @@ function setLangUser(){
   }
 }
 
+function signOut(){
+  document.cookie = esri_auth + '=; Max-Age=0';
+  window.location.href = "./index.html";
+}

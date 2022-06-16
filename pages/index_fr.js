@@ -120,4 +120,9 @@ require([
     addAccountEventListenerSignIn();
   }
 
+  /*Adds signout*/
+  document.getElementById("signout").addEventListener("click", function(){
+    signOut();
+  });
+
 });
