@@ -42,8 +42,12 @@ function getCookieJSON(){
 
 /* fetches email from esri_auth */
 function getCookieEmail(){
-    let username = getCookieJSON().username;
-    return username;
+    let json = getCookieJSON();
+    if(typeof json.username !== 'undefined'){
+      return json.username;
+    }else{
+      return json.email;
+    }
 }
 
 /* Changes THUMBNAIL and greeting by fetching user's "data" as json */
