@@ -113,7 +113,7 @@ sudo chmod +x /etc/letsencrypt/renewal-hooks/deploy/auto_pfx.sh
 
 # locate the chef script you will need to use
 # move the chef script to ~/repos
-cp ~/repos/foretclimat/arcgis-enterprise-primary.json ~/repos/arcgis_cookbook
+cp ~/repos/foretclimat/chef-json/* ~/repos/arcgis_cookbook/
 
 # change the credentials using the script
 cd ~/repos/foretclimat
