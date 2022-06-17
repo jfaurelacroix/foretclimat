@@ -1,4 +1,4 @@
-if(document.documentElement.lang="fr"){
+if(document.documentElement.lang=="fr"){
   var locale = "fr-FR";
 }else{
   var locale = "en-CA";
