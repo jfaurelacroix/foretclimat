@@ -46,8 +46,9 @@ html, body, #viewDiv {
 
 .esri-layer-list{
     position: fixed;
-    bottom: 200px;
-    left: 15px;
+    bottom: 30px;
+    right: 50px;
+    height: 300px;
 }
 
 /* Profile icon*/
