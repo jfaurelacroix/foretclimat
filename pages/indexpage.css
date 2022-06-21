@@ -46,9 +46,22 @@ html, body, #viewDiv {
 
 .esri-layer-list{
     position: fixed;
-    bottom: 30px;
-    right: 50px;
-    height: 300px;
+    bottom: 120px;
+    left: 15px;
+    height: 200px;
+}
+
+.esri-legend{
+    position: fixed;
+    top: 100px;
+    right: 20px;
+}
+
+/* docked popup window */
+.esri-popup--shadow{
+    position: fixed;
+    top: 100px;
+    right: 20px;
 }
 
 /* Profile icon*/
