@@ -60,7 +60,7 @@ html, body, #viewDiv {
 /* docked popup window */
 .esri-popup--shadow{
     position: fixed;
-    top: 100px;
+    top: 510px;
     right: 20px;
 }
 

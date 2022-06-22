@@ -83,15 +83,21 @@ require([
     popupTemplate: new PopupTemplate({
       title: "IMLNU",
       content: [{
-        type: "media", //https://developers.arcgis.com/javascript/latest/api-reference/esri-popup-content-MediaContent.html
-        // Autocasts as array of MediaInfo objects
+        type: "media", //https://developers.arcgis.com/javascript/latest/api-reference/esri-popup-content-MediaContent.html 
+        activeMediaInfoIndex: 1,
         mediaInfos: [{
-          title: "<b>test</b>",
+          title: "<b>title</b>",
           type: "image", // Autocasts as new ImageMediaInfo object
-          // Autocasts as new ImageMediaInfoValue object
-          caption: "test",
+          caption: "summary",
           value: {
-            sourceUrl: "https://www.foretclimat.ca/portal/sharing/rest/content/items/130af69915c24157900dbc915a8963d3/data"
+            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/130af69915c24157900dbc915a8963d3/data"
+          }
+        },{
+          title: "<b>title</b>",
+          type: "image", // Autocasts as new ImageMediaInfo object
+          caption: "summary",
+          value: {
+            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/41874b9b00f5407ebfba40c706e0f5aa/data"
           }
         }]
       }]
@@ -143,13 +149,19 @@ require([
       content: [{
         type: "media", //https://developers.arcgis.com/javascript/latest/api-reference/esri-popup-content-MediaContent.html
         activeMediaInfoIndex: 1,
-        // Autocasts as array of MediaInfo objects
-        mediaInfos: [
-        {
+        mediaInfos: [{
+          title: "<b>title</b>",
           type: "image", // Autocasts as new ImageMediaInfo object
-          // Autocasts as new ImageMediaInfoValue object
+          caption: "summary",
           value: {
-            sourceUrl: "https://www.foretclimat.ca/portal/sharing/rest/content/items/130af69915c24157900dbc915a8963d3/data"
+            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/130af69915c24157900dbc915a8963d3/data"
+          }
+        },{
+          title: "<b>title</b>",
+          type: "image", // Autocasts as new ImageMediaInfo object
+          caption: "summary",
+          value: {
+            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/d96cf3c2ec7c40d9b25666c70a491a71/data"
           }
         }]
       }]
@@ -201,13 +213,19 @@ require([
       content: [{
         type: "media", //https://developers.arcgis.com/javascript/latest/api-reference/esri-popup-content-MediaContent.html
         activeMediaInfoIndex: 1,
-        // Autocasts as array of MediaInfo objects
-        mediaInfos: [
-        {
+        mediaInfos: [{
+          title: "<b>title</b>",
           type: "image", // Autocasts as new ImageMediaInfo object
-          // Autocasts as new ImageMediaInfoValue object
+          caption: "summary",
           value: {
-            sourceUrl: "https://www.foretclimat.ca/portal/sharing/rest/content/items/130af69915c24157900dbc915a8963d3/data"
+            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/130af69915c24157900dbc915a8963d3/data"
+          }
+        },{
+          title: "<b>title</b>",
+          type: "image", // Autocasts as new ImageMediaInfo object
+          caption: "summary",
+          value: {
+            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/5508a5629129483c8f09302503452289/data"
           }
         }]
       }]
@@ -259,13 +277,19 @@ require([
       content: [{
         type: "media", //https://developers.arcgis.com/javascript/latest/api-reference/esri-popup-content-MediaContent.html
         activeMediaInfoIndex: 1,
-        // Autocasts as array of MediaInfo objects
-        mediaInfos: [
-        {
+        mediaInfos: [{
+          title: "<b>title</b>",
           type: "image", // Autocasts as new ImageMediaInfo object
-          // Autocasts as new ImageMediaInfoValue object
+          caption: "summary",
           value: {
-            sourceUrl: "https://www.foretclimat.ca/portal/sharing/rest/content/items/130af69915c24157900dbc915a8963d3/data"
+            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/130af69915c24157900dbc915a8963d3/data"
+          }
+        },{
+          title: "<b>title</b>",
+          type: "image", // Autocasts as new ImageMediaInfo object
+          caption: "summary",
+          value: {
+            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/fb3c1a5f9ce24685892f75e4f65587bf/data"
           }
         }]
       }]
@@ -317,13 +341,19 @@ require([
       content: [{
         type: "media", //https://developers.arcgis.com/javascript/latest/api-reference/esri-popup-content-MediaContent.html
         activeMediaInfoIndex: 1,
-        // Autocasts as array of MediaInfo objects
-        mediaInfos: [
-        {
+        mediaInfos: [{
+          title: "<b>title</b>",
           type: "image", // Autocasts as new ImageMediaInfo object
-          // Autocasts as new ImageMediaInfoValue object
+          caption: "summary",
           value: {
-            sourceUrl: "https://www.foretclimat.ca/portal/sharing/rest/content/items/130af69915c24157900dbc915a8963d3/data"
+            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/130af69915c24157900dbc915a8963d3/data"
+          }
+        },{
+          title: "<b>title</b>",
+          type: "image", // Autocasts as new ImageMediaInfo object
+          caption: "summary",
+          value: {
+            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/c11d08aa28484d3ba2097211b652ee4d/data"
           }
         }]
       }]
@@ -375,13 +405,19 @@ require([
       content: [{
         type: "media", //https://developers.arcgis.com/javascript/latest/api-reference/esri-popup-content-MediaContent.html
         activeMediaInfoIndex: 1,
-        // Autocasts as array of MediaInfo objects
-        mediaInfos: [
-        {
+        mediaInfos: [{
+          title: "<b>title</b>",
           type: "image", // Autocasts as new ImageMediaInfo object
-          // Autocasts as new ImageMediaInfoValue object
+          caption: "summary",
           value: {
-            sourceUrl: "https://www.foretclimat.ca/portal/sharing/rest/content/items/130af69915c24157900dbc915a8963d3/data"
+            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/130af69915c24157900dbc915a8963d3/data"
+          }
+        },{
+          title: "<b>title</b>",
+          type: "image", // Autocasts as new ImageMediaInfo object
+          caption: "summary",
+          value: {
+            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/ec918180d71449b9bd067b9c796b6906/data"
           }
         }]
       }]
@@ -519,6 +555,7 @@ require([
   const legend = new Legend({
     view: view
   })
+  
   map.addMany([PLANT_BLOC, REGEN_BLOC,  RECOLTE_BLOC, REGEN_BLOC, INTER_BLOC,  IMLNU_BLOC, PLANT_PS, REGEN_PS, RECOLTE_PS, REGEN_PS, INTER_PS, IMLNU_PS]);
   view.ui.add(["textBoxDiv", search], "top-left");
   // places the search widget in the top right corner of the view
