@@ -143,6 +143,7 @@ sudo chmod 755 -R ROOT
 sudo mv /arcgis/portal/framework/webapps/arcgis#home/index.html /arcgis/portal/framework/webapps/arcgis#home/home.html
 sudo cp ~/repos/foretclimat/pages/* /arcgis/portal/framework/webapps/arcgis#home/
 sudo cp ~/repos/foretclimat/media /arcgis/portal/framework/webapps/arcgis#home/
+# Move main.js???
 
 
 # If you don't plan adding standby machine in the future, don't configure the file server 
