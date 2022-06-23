@@ -15,10 +15,10 @@ require([
   "esri/layers/FeatureLayer",
   "esri/intl",
   "esri/widgets/LayerList",
-  "esri/widgets/Legend",
   "esri/Color",
-  "esri/PopupTemplate"
-], (esriConfig, WebMap, MapView, Search, BasemapToggle, Locate, Portal, FeatureLayer, intl, LayerList, Legend, Color, PopupTemplate) => {
+  "esri/PopupTemplate",
+  "esri/symbols/support/symbolUtils"
+], (esriConfig, WebMap, MapView, Search, BasemapToggle, Locate, Portal, FeatureLayer, intl, LayerList, Color, PopupTemplate, symbolUtils) => {
   esriConfig.portalUrl = "https://www.foretclimat.ca/portal";
   intl.setLocale(locale);
 
@@ -90,7 +90,7 @@ require([
           type: "image", // Autocasts as new ImageMediaInfo object
           caption: "summary",
           value: {
-            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/130af69915c24157900dbc915a8963d3/data"
+            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/ea177e77f06e41608eb0eab7887902d7/data"
           }
         },{
           title: "<b>title</b>",
@@ -154,7 +154,7 @@ require([
           type: "image", // Autocasts as new ImageMediaInfo object
           caption: "summary",
           value: {
-            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/130af69915c24157900dbc915a8963d3/data"
+            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/ea177e77f06e41608eb0eab7887902d7/data"
           }
         },{
           title: "<b>title</b>",
@@ -218,7 +218,7 @@ require([
           type: "image", // Autocasts as new ImageMediaInfo object
           caption: "summary",
           value: {
-            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/130af69915c24157900dbc915a8963d3/data"
+            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/ea177e77f06e41608eb0eab7887902d7/data"
           }
         },{
           title: "<b>title</b>",
@@ -282,7 +282,7 @@ require([
           type: "image", // Autocasts as new ImageMediaInfo object
           caption: "summary",
           value: {
-            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/130af69915c24157900dbc915a8963d3/data"
+            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/ea177e77f06e41608eb0eab7887902d7/data"
           }
         },{
           title: "<b>title</b>",
@@ -346,7 +346,7 @@ require([
           type: "image", // Autocasts as new ImageMediaInfo object
           caption: "summary",
           value: {
-            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/130af69915c24157900dbc915a8963d3/data"
+            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/ea177e77f06e41608eb0eab7887902d7/data"
           }
         },{
           title: "<b>title</b>",
@@ -410,7 +410,7 @@ require([
           type: "image", // Autocasts as new ImageMediaInfo object
           caption: "summary",
           value: {
-            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/130af69915c24157900dbc915a8963d3/data"
+            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/ea177e77f06e41608eb0eab7887902d7/data"
           }
         },{
           title: "<b>title</b>",
@@ -431,6 +431,8 @@ require([
       {
         layer: IMLNU_PS,
         exactMatch: false,
+        name: "Points IMLNU",
+        searchFields: ["objectid", "annee", "secteur"],
         outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
@@ -440,7 +442,9 @@ require([
       {
         layer: IMLNU_BLOC,
         exactMatch: false,
+        name: "Polygones IMLNU",
         outFields: ["*"],
+        searchFields: ["objectid", "annee", "secteur"],
         maxResults: 6,
         maxSuggestions: 6,
         suggestionsEnabled: true,
@@ -449,6 +453,8 @@ require([
       {
         layer: INTER_PS,
         exactMatch: false,
+        name: "Points Intervention",
+        searchFields: ["objectid", "annee", "secteur"],
         outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
@@ -458,6 +464,8 @@ require([
       {
         layer: INTER_BLOC,
         exactMatch: false,
+        name: "Polygones Intervention",
+        searchFields: ["objectid", "annee", "secteur"],
         outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
@@ -467,6 +475,8 @@ require([
       {
         layer: REBOIS_PS,
         exactMatch: false,
+        name: "Points Qualité du reboisement",
+        searchFields: ["objectid", "annee", "secteur"],
         outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
@@ -476,6 +486,8 @@ require([
       {
         layer: REBOIS_BLOC,
         exactMatch: false,
+        name: "Polygones Qualité du reboisement",
+        searchFields: ["objectid", "annee", "secteur"],
         outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
@@ -485,6 +497,8 @@ require([
       {
         layer: RECOLTE_PS,
         exactMatch: false,
+        name: "Points Récolte",
+        searchFields: ["objectid", "annee", "secteur"],
         outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
@@ -494,6 +508,8 @@ require([
       {
         layer: RECOLTE_BLOC,
         exactMatch: false,
+        name: "Polygones Récolte",
+        searchFields: ["objectid", "annee", "secteur"],
         outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
@@ -503,6 +519,8 @@ require([
       {
         layer: REGEN_PS,
         exactMatch: false,
+        name: "Points Régénération",
+        searchFields: ["objectid", "annee", "secteur"],
         outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
@@ -512,6 +530,8 @@ require([
       {
         layer: REGEN_BLOC,
         exactMatch: false,
+        name: "Polygones Régénération",
+        searchFields: ["objectid", "annee", "secteur"],
         outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
@@ -521,6 +541,8 @@ require([
       {
         layer: PLANT_PS,
         exactMatch: false,
+        name: "Points Suivi plantation",
+        searchFields: ["objectid", "annee", "secteur"],
         outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
@@ -530,6 +552,8 @@ require([
       {
         layer: PLANT_BLOC,
         exactMatch: false,
+        name: "Polygones Suivi plantation",
+        searchFields: ["objectid", "annee", "secteur"],
         outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
@@ -550,18 +574,31 @@ require([
 
   const layerList = new LayerList({
     view: view,
+    listItemCreatedFunction: function (event) {
+
+      // The event object contains properties of the
+      // layer in the LayerList widget.
+  
+      let item = event.item;
+      console.log(item)
+      let mySymbol = item.layer.renderer.symbol.clone();
+      item.panel = {
+        content: "",
+        open: true
+      }
+      symbolUtils.renderPreviewHTML(mySymbol).then(renderedSymbol=>{
+        item.panel.content = renderedSymbol;
+      });
+    }
   });
 
-  const legend = new Legend({
-    view: view
-  })
   
   map.addMany([PLANT_BLOC, REGEN_BLOC,  RECOLTE_BLOC, REGEN_BLOC, INTER_BLOC,  IMLNU_BLOC, PLANT_PS, REGEN_PS, RECOLTE_PS, REGEN_PS, INTER_PS, IMLNU_PS]);
   view.ui.add(["textBoxDiv", search], "top-left");
   // places the search widget in the top right corner of the view
   view.ui.add(["account"], "top-right");
   view.ui.add([toggle, "partLogoDiv", layerList], "bottom-left");
-  view.ui.add([locateWidget, legend], "bottom-right");
+  view.ui.add([locateWidget], "bottom-right");
   view.ui.move(["zoom"], "bottom-right");
   
   /*

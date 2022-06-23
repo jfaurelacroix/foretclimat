@@ -51,11 +51,6 @@ html, body, #viewDiv {
     height: 200px;
 }
 
-.esri-legend{
-    position: fixed;
-    top: 100px;
-    right: 20px;
-}
 
 /* docked popup window */
 .esri-popup--shadow{
