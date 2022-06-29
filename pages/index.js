@@ -43,7 +43,7 @@ require([
   const IMLNU_PS = new FeatureLayer({
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/BD_Inventaires_Secteur_gdb/FeatureServer/0",
     outFields: ["*"],
-    title: "ILMNU_POINTS",
+    title: "Points de matière ligneuse non utilisée",
     renderer: {
       type: "simple", 
       symbol: {
@@ -53,7 +53,7 @@ require([
       },
     },
     popupTemplate: new PopupTemplate({
-      title: "IMLNU",
+      title: "Inventaire de matière ligneuse non utilisée {annee}",
       content: [{
         // Pass in the fields to display
         type: "fields",
@@ -71,7 +71,7 @@ require([
   const IMLNU_BLOC = new FeatureLayer({
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/BD_Inventaires_Secteur_gdb/FeatureServer/1",
     outFields: ["*"],
-    title: "ILMNU_POLYGONES",
+    title: "Polygones de matière ligneuse non utilisée",
     legendEnabled: false,
     renderer: {
       type: "simple", 
@@ -81,7 +81,7 @@ require([
       },  // autocasts as new SimpleFillSymbol()
     },
     popupTemplate: new PopupTemplate({
-      title: "IMLNU",
+      title: "Inventaire de matière ligneuse non utilisée {annee}",
       content: [{
         type: "media", //https://developers.arcgis.com/javascript/latest/api-reference/esri-popup-content-MediaContent.html 
         activeMediaInfoIndex: 1,
@@ -107,7 +107,7 @@ require([
   const INTER_PS =  new FeatureLayer({
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/BD_Inventaires_Secteur_gdb/FeatureServer/2",
     outFields: ["*"],
-    title: "INTER_POINTS",
+    title: "Points intervention",
     renderer: {
       type: "simple", 
       symbol: {
@@ -117,7 +117,7 @@ require([
       },
     },
     popupTemplate: new PopupTemplate({
-      title: "Intervention",
+      title: "Intervention {annee}",
       content: [{
         // Pass in the fields to display
         type: "fields",
@@ -135,7 +135,7 @@ require([
   const INTER_BLOC = new FeatureLayer({
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/BD_Inventaires_Secteur_gdb/FeatureServer/3",
     outFields: ["*"],
-    title: "INTER_POLYGONES",
+    title: "Polygones intervention",
     legendEnabled: false,
     renderer: {
       type: "simple", 
@@ -145,7 +145,7 @@ require([
       },  // autocasts as new SimpleFillSymbol()
     },
     popupTemplate: new PopupTemplate({
-      title: "INTER",
+      title: "Intervention {annee}",
       content: [{
         type: "media", //https://developers.arcgis.com/javascript/latest/api-reference/esri-popup-content-MediaContent.html
         activeMediaInfoIndex: 1,
@@ -171,7 +171,7 @@ require([
   const REBOIS_PS = new FeatureLayer({
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/BD_Inventaires_Secteur_gdb/FeatureServer/4",
     outFields: ["*"],
-    title: "REBOIS_POINTS",
+    title: "Points de reboisement",
     renderer: {
       type: "simple", 
       symbol: {
@@ -181,10 +181,10 @@ require([
       },
     },
     popupTemplate: new PopupTemplate({
-      title: "Reboisement",
+      title: "Reboisement {annee}",
       content: [{
         // Pass in the fields to display
-        type: "fields",
+        type: "fields {annee}",
         fieldInfos: [{
           fieldName: "objectid",
           label: "ID"
@@ -199,7 +199,7 @@ require([
   const REBOIS_BLOC = new FeatureLayer({
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/BD_Inventaires_Secteur_gdb/FeatureServer/5",
     outFields: ["*"],
-    title: "REBOIS_POLYGONES",
+    title: "Polygones de reboisement",
     legendEnabled: false,
     renderer: {
       type: "simple", 
@@ -209,7 +209,7 @@ require([
       },  // autocasts as new SimpleFillSymbol()
     },
     popupTemplate: new PopupTemplate({
-      title: "REBOIS",
+      title: "Reboisement {annee}",
       content: [{
         type: "media", //https://developers.arcgis.com/javascript/latest/api-reference/esri-popup-content-MediaContent.html
         activeMediaInfoIndex: 1,
@@ -235,7 +235,7 @@ require([
   const RECOLTE_PS =  new FeatureLayer({
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/BD_Inventaires_Secteur_gdb/FeatureServer/6",
     outFields: ["*"],
-    title: "RECOLTE_POINTS",
+    title: "Points de récolte",
     renderer: {
       type: "simple", 
       symbol: {
@@ -245,17 +245,14 @@ require([
       },
     },
     popupTemplate: new PopupTemplate({
-      title: "Récolte",
+      title: "Récolte {annee}",
       content: [{
         // Pass in the fields to display
         type: "fields",
         fieldInfos: [{
           fieldName: "objectid",
           label: "ID"
-        }, {
-          fieldName: "annee",
-          label: "Année"
-       }]
+        }]
       }]
     })
   });
@@ -263,7 +260,7 @@ require([
   const RECOLTE_BLOC = new FeatureLayer({
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/BD_Inventaires_Secteur_gdb/FeatureServer/8",
     outFields: ["*"],
-    title: "RECOLTE_POLYGONES",
+    title: "Polygones de récolte",
     legendEnabled: false,
     renderer: {
       type: "simple", 
@@ -273,7 +270,7 @@ require([
       },  // autocasts as new SimpleFillSymbol()
     },
     popupTemplate: new PopupTemplate({
-      title: "RECOLTE",
+      title: "Récolte {annee}",
       content: [{
         type: "media", //https://developers.arcgis.com/javascript/latest/api-reference/esri-popup-content-MediaContent.html
         activeMediaInfoIndex: 1,
@@ -299,7 +296,7 @@ require([
   const REGEN_PS = new FeatureLayer({
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/BD_Inventaires_Secteur_gdb/FeatureServer/7",
     outFields: ["*"],
-    title: "REGEN_POINTS",
+    title: "Points de régénération",
     renderer: {
       type: "simple", 
       symbol: {
@@ -309,7 +306,7 @@ require([
       },
     },
     popupTemplate: new PopupTemplate({
-      title: "Régénération",
+      title: "Régénération {annee}",
       content: [{
         // Pass in the fields to display
         type: "fields",
@@ -327,7 +324,7 @@ require([
   const REGEN_BLOC = new FeatureLayer({
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/BD_Inventaires_Secteur_gdb/FeatureServer/9",
     outFields: ["*"],
-    title: "REGEN_POLYGONES",
+    title: "Polygones de régénération",
     legendEnabled: false,
     renderer: {
       type: "simple", 
@@ -337,7 +334,7 @@ require([
       },  // autocasts as new SimpleFillSymbol()
     },
     popupTemplate: new PopupTemplate({
-      title: "REGEN",
+      title: "Régénération {annee}",
       content: [{
         type: "media", //https://developers.arcgis.com/javascript/latest/api-reference/esri-popup-content-MediaContent.html
         activeMediaInfoIndex: 1,
@@ -363,7 +360,7 @@ require([
   const PLANT_PS = new FeatureLayer({
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/BD_Inventaires_Secteur_gdb/FeatureServer/10",
     outFields: ["*"],
-    title: "PLANT_POINTS",
+    title: "Points de plantation",
     renderer: {
       type: "simple", 
       symbol: {
@@ -373,7 +370,7 @@ require([
       },
     },
     popupTemplate: new PopupTemplate({
-      title: "Suivi plantation",
+      title: "Suivi plantation {annee}",
       content: [{
         // Pass in the fields to display
         type: "fields",
@@ -391,7 +388,7 @@ require([
   const PLANT_BLOC = new FeatureLayer({
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/BD_Inventaires_Secteur_gdb/FeatureServer/12",
     outFields: ["*"],
-    title: "PLANT_POLYGONES",
+    title: "Polygones de plantation",
     legendEnabled: false,
     renderer: {
       type: "simple", 
@@ -401,7 +398,7 @@ require([
       },  // autocasts as new SimpleFillSymbol()
     },
     popupTemplate: new PopupTemplate({
-      title: "PLANT",
+      title: "Plantation {annee}",
       content: [{
         type: "media", //https://developers.arcgis.com/javascript/latest/api-reference/esri-popup-content-MediaContent.html
         activeMediaInfoIndex: 1,
@@ -424,15 +421,17 @@ require([
     })
   });
 
-  const search = new Search({
+  const search = new Search ({
     view: view,
+    allPlaceholder: "<= Rechercher une couche ou un lieu",
     portal: myPortal, // https://enterprise.arcgis.com/fr/portal/latest/administer/windows/configure-portal-to-geocode-addresses.htm
-    sources: [ //https://developers.arcgis.com/javascript/latest/sample-code/widgets-search-multiplesource/
+    sources: [ //https://developers.arcgis.com/javascript/latest/sample-code/widgets--multiplesource/
       {
         layer: IMLNU_PS,
         exactMatch: false,
-        name: "Points IMLNU",
-        searchFields: ["objectid", "annee", "secteur"],
+        name: "Points matière ligneuse non utilisée",
+        placeholder: "Rechercher un point",
+        Fields: ["objectid", "annee", "secteur"],
         outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
@@ -442,9 +441,10 @@ require([
       {
         layer: IMLNU_BLOC,
         exactMatch: false,
-        name: "Polygones IMLNU",
+        name: "Polygones matière ligneuse non utilisée",
+        placeholder: "Rechercher un polygone",
         outFields: ["*"],
-        searchFields: ["objectid", "annee", "secteur"],
+        Fields: ["objectid", "annee", "secteur"],
         maxResults: 6,
         maxSuggestions: 6,
         suggestionsEnabled: true,
@@ -453,8 +453,9 @@ require([
       {
         layer: INTER_PS,
         exactMatch: false,
-        name: "Points Intervention",
-        searchFields: ["objectid", "annee", "secteur"],
+        name: "Points intervention",
+        placeholder: "Rechercher un point",
+        Fields: ["objectid", "annee", "secteur"],
         outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
@@ -464,8 +465,9 @@ require([
       {
         layer: INTER_BLOC,
         exactMatch: false,
-        name: "Polygones Intervention",
-        searchFields: ["objectid", "annee", "secteur"],
+        name: "Polygones intervention",
+        placeholder: "Rechercher un polygone",
+        Fields: ["objectid", "annee", "secteur"],
         outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
@@ -475,8 +477,9 @@ require([
       {
         layer: REBOIS_PS,
         exactMatch: false,
-        name: "Points Qualité du reboisement",
-        searchFields: ["objectid", "annee", "secteur"],
+        name: "Points qualité du reboisement",
+        placeholder: "Rechercher un point",
+        Fields: ["objectid", "annee", "secteur"],
         outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
@@ -486,8 +489,9 @@ require([
       {
         layer: REBOIS_BLOC,
         exactMatch: false,
-        name: "Polygones Qualité du reboisement",
-        searchFields: ["objectid", "annee", "secteur"],
+        name: "Polygones qualité du reboisement",
+        placeholder: "Rechercher un polygone",
+        Fields: ["objectid", "annee", "secteur"],
         outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
@@ -497,8 +501,9 @@ require([
       {
         layer: RECOLTE_PS,
         exactMatch: false,
-        name: "Points Récolte",
-        searchFields: ["objectid", "annee", "secteur"],
+        name: "Points récolte",
+        placeholder: "Rechercher un point",
+        Fields: ["objectid", "annee", "secteur"],
         outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
@@ -508,8 +513,9 @@ require([
       {
         layer: RECOLTE_BLOC,
         exactMatch: false,
-        name: "Polygones Récolte",
-        searchFields: ["objectid", "annee", "secteur"],
+        name: "Polygones récolte",
+        placeholder: "Rechercher un polygone",
+        Fields: ["objectid", "annee", "secteur"],
         outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
@@ -520,7 +526,8 @@ require([
         layer: REGEN_PS,
         exactMatch: false,
         name: "Points Régénération",
-        searchFields: ["objectid", "annee", "secteur"],
+        placeholder: "Rechercher un point",
+        Fields: ["objectid", "annee", "secteur"],
         outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
@@ -530,8 +537,9 @@ require([
       {
         layer: REGEN_BLOC,
         exactMatch: false,
-        name: "Polygones Régénération",
-        searchFields: ["objectid", "annee", "secteur"],
+        name: "Polygones régénération",
+        placeholder: "Rechercher un polygone",
+        Fields: ["objectid", "annee", "secteur"],
         outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
@@ -541,8 +549,9 @@ require([
       {
         layer: PLANT_PS,
         exactMatch: false,
-        name: "Points Suivi plantation",
-        searchFields: ["objectid", "annee", "secteur"],
+        name: "Points suivi de plantation",
+        placeholder: "Rechercher un point",
+        Fields: ["objectid", "annee", "secteur"],
         outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
@@ -552,8 +561,9 @@ require([
       {
         layer: PLANT_BLOC,
         exactMatch: false,
-        name: "Polygones Suivi plantation",
-        searchFields: ["objectid", "annee", "secteur"],
+        name: "Polygones suivi de plantation",
+        placeholder: "Rechercher un polygone",
+        Fields: ["objectid", "annee", "secteur"],
         outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
@@ -580,7 +590,6 @@ require([
       // layer in the LayerList widget.
   
       let item = event.item;
-      console.log(item)
       let mySymbol = item.layer.renderer.symbol.clone();
       item.panel = {
         content: "",
@@ -595,26 +604,11 @@ require([
   
   map.addMany([PLANT_BLOC, REGEN_BLOC,  RECOLTE_BLOC, REGEN_BLOC, INTER_BLOC,  IMLNU_BLOC, PLANT_PS, REGEN_PS, RECOLTE_PS, REGEN_PS, INTER_PS, IMLNU_PS]);
   view.ui.add(["textBoxDiv", search], "top-left");
-  // places the search widget in the top right corner of the view
+  // places the  widget in the top right corner of the view
   view.ui.add(["account"], "top-right");
   view.ui.add([toggle, "partLogoDiv", layerList], "bottom-left");
   view.ui.add([locateWidget], "bottom-right");
   view.ui.move(["zoom"], "bottom-right");
-  
-  /*
-  document.getElementById("account").addEventListener("click", function() {
-    var e = document.getElementById("sign-in-menu");
-    if (e.style.visibility == "hidden") {
-      e.style.visibility = "visible";
-      e.style.opacity = "1";
-    } else {
-      e.style.opacity = "0";
-      setTimeout(() => {
-        e.style.visibility = "hidden";
-      }, 500);
-    }
-  });
-  */
 
   /* if user is logged in (esri_auth cookie is present) */
   if (getCookie("esri_auth") != "") {
