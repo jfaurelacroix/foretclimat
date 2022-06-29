@@ -55,7 +55,7 @@ html, body, #viewDiv {
 /* docked popup window */
 .esri-popup--shadow{
     position: fixed;
-    top: 510px;
+    top: 100px;
     right: 20px;
 }
 
@@ -69,6 +69,7 @@ html, body, #viewDiv {
     width: 50px;
     border-radius: 50%;
     background-color : rgba(245, 245, 245, 1);
+    border-color: var(--blue);
 }
 
 
