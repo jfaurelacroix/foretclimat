@@ -17,8 +17,9 @@ require([
   "esri/widgets/LayerList",
   "esri/Color",
   "esri/PopupTemplate",
-  "esri/symbols/support/symbolUtils"
-], (esriConfig, WebMap, MapView, Search, BasemapToggle, Locate, Portal, FeatureLayer, intl, LayerList, Color, PopupTemplate, symbolUtils) => {
+  "esri/symbols/support/symbolUtils",
+  "esri/widgets/Compass"
+], (esriConfig, WebMap, MapView, Search, BasemapToggle, Locate, Portal, FeatureLayer, intl, LayerList, Color, PopupTemplate, symbolUtils, Compass) => {
   esriConfig.portalUrl = "https://www.foretclimat.ca/portal";
   intl.setLocale(locale);
 
@@ -54,17 +55,7 @@ require([
     },
     popupTemplate: new PopupTemplate({
       title: "Inventaire de matière ligneuse non utilisée {annee}",
-      content: [{
-        // Pass in the fields to display
-        type: "fields",
-        fieldInfos: [{
-          fieldName: "objectid",
-          label: "ID"
-        }, {
-          fieldName: "annee",
-          label: "Année"
-       }]
-      }]
+      content: setContent
     })
   });
 
@@ -184,7 +175,7 @@ require([
       title: "Reboisement {annee}",
       content: [{
         // Pass in the fields to display
-        type: "fields {annee}",
+        type: "fields",
         fieldInfos: [{
           fieldName: "objectid",
           label: "ID"
@@ -570,7 +561,7 @@ require([
         suggestionsEnabled: true,
         minSuggestCharacters: 0
       }
-    ],
+    ]
   });
 
   const toggle = new BasemapToggle({
@@ -579,6 +570,10 @@ require([
   });
 
   const locateWidget = new Locate({
+    view: view
+  });
+
+  const compass = new Compass({
     view: view
   });
 
@@ -607,8 +602,41 @@ require([
   // places the  widget in the top right corner of the view
   view.ui.add(["account"], "top-right");
   view.ui.add([toggle, "partLogoDiv", layerList], "bottom-left");
-  view.ui.add([locateWidget], "bottom-right");
+  view.ui.add([locateWidget, compass], "bottom-right");
   view.ui.move(["zoom"], "bottom-right");
+
+  // auto-dock https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Popup.html#dockOptions
+  view.popup.dockOptions = {
+    breakpoint: {
+      width: 999999,
+      height: 999999
+    }
+  }
+
+  function setContent(feature){
+    let graphic, attributes, content;
+    graphic = feature.graphic;
+    attributes = graphic.attributes;
+    let relatedFeature = new FeatureLayer({
+      url: "https://www.foretclimat.ca/server/rest/services/Hosted/BD_Inventaires_Secteur_gdb/FeatureServer/13"
+    });
+    let query = relatedFeature.createQuery();
+    query.where = "id_pe = '" + attributes.id_pe + "'";
+    query.outFields = ["mlnu_tot", "evaor_tot"];
+    content = relatedFeature.queryFeatures(query).then(function(response){
+      let fieldList = [response.fields[0].clone(), response.fields[1].clone()];
+      let value = "";
+      console.log(fieldList);
+      for (let field of fieldList){
+        if (field.length == -1){
+          field.length = null;
+        }
+        value += field.name + " = " + field.length + "<br>";
+      }
+      return(value)
+    });
+    return content
+  }
 
   /* if user is logged in (esri_auth cookie is present) */
   if (getCookie("esri_auth") != "") {
