@@ -1,5 +1,5 @@
 :root {
-    --blue: rgb(25, 115, 199);
+    --blue: #6C756B;
 }
 
 html, body, #viewDiv {
@@ -26,7 +26,6 @@ html, body, #viewDiv {
 }
 
 /* Search bar */
-
 .esri-search {
     position: fixed;
     padding: 5px;
@@ -34,6 +33,14 @@ html, body, #viewDiv {
     left: 20px;
     width: 350px;
     height: 40px;
+}
+
+/* compass */
+.esri-compass{
+    position: fixed;
+    padding: 5px;
+    bottom: 148px;
+    right: 15px;
 }
 
 /* locate button */
@@ -53,10 +60,10 @@ html, body, #viewDiv {
 
 
 /* docked popup window */
-.esri-popup--shadow{
+.esri-popup--is-docked{
     position: fixed;
-    top: 100px;
-    right: 20px;
+    top: 90px;
+    right: 10px;
 }
 
 /* Profile icon*/
@@ -70,40 +77,6 @@ html, body, #viewDiv {
     border-radius: 50%;
     background-color : rgba(245, 245, 245, 1);
     border-color: var(--blue);
-}
-
-
-/* Container for sign in */
-
-#sign-in-menu {
-    position: fixed;
-    top: 80px;
-    width: 300px;
-    height: 200px;
-    right: 20px;
-    background-color: rgb(245, 245, 245);
-    padding: 15px;
-    border-style: ridge;
-    opacity: 0;
-    transition: opacity 0.5s;
-}
-
-.textConnection {
-    text-align: center;
-    text-decoration: underline 0.15em;
-    text-decoration-color: rgba(245, 245, 245, 1);
-}
-
-/* Login Button in the account submenu */
-
-#login {
-    position: absolute;
-    width: 75px;
-    padding: 5px;
-    left: 50%;
-    bottom: 10%;
-    -ms-transform: translate(-50%, 0);
-    transform: translate(-50%, 0);
 }
 
 .container {
