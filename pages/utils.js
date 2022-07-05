@@ -97,7 +97,7 @@ function addAccountEventListenerHome(){
 function setLangUser(){
   var userLang = navigator.language || navigator.userLanguage;
   if (userLang.includes('fr')){
-    window.location.href = "./index_fr.html";
+    window.location.href = "./index.html";
   }else if(userLang.includes('en')){
     window.location.href = "./index_en.html";
   }

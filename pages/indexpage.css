@@ -25,6 +25,7 @@ html, body, #viewDiv {
     width: 165px;
 }
 
+
 /* Search bar */
 .esri-search {
     position: fixed;
@@ -53,9 +54,9 @@ html, body, #viewDiv {
 
 .esri-layer-list{
     position: fixed;
-    bottom: 120px;
-    left: 15px;
-    height: 200px;
+    bottom: 30px;
+    right: 60px;
+    height: 150px;
 }
 
 
@@ -119,20 +120,11 @@ html, body, #viewDiv {
 
 /* Div of partner logos */
 
-#partLogoDiv {
-    padding: 5px;
+.sidenav #partLogoDiv {
     position: fixed;
-    bottom: 30px;
-    left: 150px;
-}
-
-/* Split of partner logos */
-
-.columnLogo {
-    float: left;
-    /* change width according to number of logos */
-    width: 50%;
-    padding: 5px;
+    bottom: 25px;
+    margin-left: 120px;
+    display: block;
 }
 
 /* The side navigation menu */
