@@ -55,7 +55,25 @@ require([
     },
     popupTemplate: new PopupTemplate({
       title: "Inventaire de matière ligneuse non utilisée {annee}",
-      content: setContent
+      content: [{
+        type: "fields", // Autocasts as new FieldsContent()
+        // Autocasts as new FieldInfo[]
+        fieldInfos: [{
+          fieldName: "relationships/0/mlnu_tot",
+          label: "Matière ligneuse non utilisée totale",
+          format: {
+            places: 2,
+            digitSeparator: true
+          }
+        },{
+          fieldName: "relationships/0/evaor_tot",
+          label: "Volume affectés par des opérations de récolte",
+          format: {
+            places: 2,
+            digitSeparator: true
+          }
+        }]
+      }]
     })
   });
 
@@ -81,14 +99,14 @@ require([
           type: "image", // Autocasts as new ImageMediaInfo object
           caption: "summary",
           value: {
-            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/ea177e77f06e41608eb0eab7887902d7/data"
+            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/a58f1ad9d8434ed9856573e560481514/data"
           }
         },{
           title: "<b>title</b>",
           type: "image", // Autocasts as new ImageMediaInfo object
           caption: "summary",
           value: {
-            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/41874b9b00f5407ebfba40c706e0f5aa/data"
+            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/f3bcceeda8374061b621c35fb9d9e09e/data"
           }
         }]
       }]
@@ -110,15 +128,18 @@ require([
     popupTemplate: new PopupTemplate({
       title: "Intervention {annee}",
       content: [{
-        // Pass in the fields to display
-        type: "fields",
+        type: "fields", // Autocasts as new FieldsContent()
+        // Autocasts as new FieldInfo[]
         fieldInfos: [{
-          fieldName: "objectid",
-          label: "ID"
-        }, {
-          fieldName: "annee",
-          label: "Année"
-       }]
+          fieldName: "relationships/4/traitement",
+          label: "Traitement",
+        },{
+          fieldName: "relationships/5/essence",
+          label: "Essence",
+        },{
+          fieldName: "relationships/7/haut_m",
+          label: "Hauteur (m)"
+        }]
       }]
     })
   });
@@ -145,14 +166,14 @@ require([
           type: "image", // Autocasts as new ImageMediaInfo object
           caption: "summary",
           value: {
-            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/ea177e77f06e41608eb0eab7887902d7/data"
+            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/ee57708918ba4f1db1e84996e89e632c/data"
           }
         },{
           title: "<b>title</b>",
           type: "image", // Autocasts as new ImageMediaInfo object
           caption: "summary",
           value: {
-            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/d96cf3c2ec7c40d9b25666c70a491a71/data"
+            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/eacb6b50cdd3443ca1e01bd0b4c58f4c/data"
           }
         }]
       }]
@@ -168,21 +189,18 @@ require([
       symbol: {
         type: "simple-marker",
         size: 4,
-        color: new Color("rgb(106, 90, 205)")
+        color: new Color("rgb(150, 255, 210)")
       },
     },
     popupTemplate: new PopupTemplate({
       title: "Reboisement {annee}",
       content: [{
-        // Pass in the fields to display
-        type: "fields",
+        type: "fields", // Autocasts as new FieldsContent()
+        // Autocasts as new FieldInfo[]
         fieldInfos: [{
-          fieldName: "objectid",
-          label: "ID"
-        }, {
-          fieldName: "annee",
-          label: "Année"
-       }]
+          fieldName: "relationships/11/plants_rebois_c",
+          label: "plant",
+        }]
       }]
     })
   });
@@ -196,7 +214,7 @@ require([
       type: "simple", 
       symbol: {
         type: "simple-fill",
-        color: new Color("rgba(106, 90, 205, 0.8)")
+        color: new Color("rgba(150, 255, 210, 0.8)")
       },  // autocasts as new SimpleFillSymbol()
     },
     popupTemplate: new PopupTemplate({
@@ -209,14 +227,14 @@ require([
           type: "image", // Autocasts as new ImageMediaInfo object
           caption: "summary",
           value: {
-            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/ea177e77f06e41608eb0eab7887902d7/data"
+            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/281517611b064b8496dd57ee3e00ddf9/data"
           }
         },{
           title: "<b>title</b>",
           type: "image", // Autocasts as new ImageMediaInfo object
           caption: "summary",
           value: {
-            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/5508a5629129483c8f09302503452289/data"
+            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/485fbb1c6c3a4b359214a917904e7614/data"
           }
         }]
       }]
@@ -238,12 +256,9 @@ require([
     popupTemplate: new PopupTemplate({
       title: "Récolte {annee}",
       content: [{
-        // Pass in the fields to display
-        type: "fields",
-        fieldInfos: [{
-          fieldName: "objectid",
-          label: "ID"
-        }]
+        type: "fields", // Autocasts as new FieldsContent()
+        // Autocasts as new FieldInfo[]
+        fieldInfos: [{}]
       }]
     })
   });
@@ -270,14 +285,14 @@ require([
           type: "image", // Autocasts as new ImageMediaInfo object
           caption: "summary",
           value: {
-            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/ea177e77f06e41608eb0eab7887902d7/data"
+            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/b8f4e9a778a542d2924d4d157fdb7af4/data"
           }
         },{
           title: "<b>title</b>",
           type: "image", // Autocasts as new ImageMediaInfo object
           caption: "summary",
           value: {
-            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/fb3c1a5f9ce24685892f75e4f65587bf/data"
+            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/28040139f18045e3a24778674b3ac9fe/data"
           }
         }]
       }]
@@ -299,16 +314,23 @@ require([
     popupTemplate: new PopupTemplate({
       title: "Régénération {annee}",
       content: [{
-        // Pass in the fields to display
-        type: "fields",
+        type: "fields", // Autocasts as new FieldsContent()
+        // Autocasts as new FieldInfo[]
         fieldInfos: [{
-          fieldName: "objectid",
-          label: "ID"
-        }, {
-          fieldName: "annee",
-          label: "Année"
-       }]
-      }]
+          fieldName: "relationships/18/nb_sab_2",
+          label: "Nombre de sapins baumiers",
+        },{
+          fieldName: "relationships/18/nb_epb_23",
+          label: "Nombre d''épinettes blanches",
+        },{
+          fieldName: "relationships/18/nb_bop_2",
+          label: "Nombre de bouleaux à papier",
+        },{
+          fieldName: "relationships/18/nb_pet_2",
+          label: "Nombre de peupliers",
+        }]
+        //Add fields from Regen_Table1_CD ???
+      }],
     })
   });
 
@@ -334,14 +356,14 @@ require([
           type: "image", // Autocasts as new ImageMediaInfo object
           caption: "summary",
           value: {
-            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/ea177e77f06e41608eb0eab7887902d7/data"
+            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/5d658e17095e439ea7f796f21cb8cd4a/data"
           }
         },{
           title: "<b>title</b>",
           type: "image", // Autocasts as new ImageMediaInfo object
           caption: "summary",
           value: {
-            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/c11d08aa28484d3ba2097211b652ee4d/data"
+            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/957537c4d69f48b0aa8ce33bf8360195/data"
           }
         }]
       }]
@@ -363,16 +385,17 @@ require([
     popupTemplate: new PopupTemplate({
       title: "Suivi plantation {annee}",
       content: [{
-        // Pass in the fields to display
-        type: "fields",
+        type: "fields", // Autocasts as new FieldsContent()
+        // Autocasts as new FieldInfo[]
         fieldInfos: [{
-          fieldName: "objectid",
-          label: "ID"
-        }, {
-          fieldName: "annee",
-          label: "Année"
-       }]
+          fieldName: "relationships/23/h_couv_cm",
+          label: "Hauteur couv (cm)",
+        },{
+          fieldName: "relationships/23/h_res_cm",
+          label: "Hauteur res (cm)",
+        }]
       }]
+      //Need to decide the fields
     })
   });
 
@@ -398,14 +421,14 @@ require([
           type: "image", // Autocasts as new ImageMediaInfo object
           caption: "summary",
           value: {
-            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/ea177e77f06e41608eb0eab7887902d7/data"
+            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/957537c4d69f48b0aa8ce33bf8360195/data"
           }
         },{
           title: "<b>title</b>",
           type: "image", // Autocasts as new ImageMediaInfo object
           caption: "summary",
           value: {
-            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/ec918180d71449b9bd067b9c796b6906/data"
+            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/56725eed416b4e26b3359786e602e31d/data"
           }
         }]
       }]
@@ -597,11 +620,11 @@ require([
   });
 
   
-  map.addMany([PLANT_BLOC, REGEN_BLOC,  RECOLTE_BLOC, REGEN_BLOC, INTER_BLOC,  IMLNU_BLOC, PLANT_PS, REGEN_PS, RECOLTE_PS, REGEN_PS, INTER_PS, IMLNU_PS]);
+  map.addMany([PLANT_BLOC, REGEN_BLOC,  RECOLTE_BLOC, REGEN_BLOC, REBOIS_BLOC, INTER_BLOC,  IMLNU_BLOC, PLANT_PS, REGEN_PS, RECOLTE_PS, REGEN_PS, REBOIS_PS, INTER_PS, IMLNU_PS]);
   view.ui.add(["textBoxDiv", search], "top-left");
   // places the  widget in the top right corner of the view
   view.ui.add(["account"], "top-right");
-  view.ui.add([toggle, "partLogoDiv", layerList], "bottom-left");
+  view.ui.add([toggle, layerList], "bottom-left");
   view.ui.add([locateWidget, compass], "bottom-right");
   view.ui.move(["zoom"], "bottom-right");
 
@@ -611,31 +634,6 @@ require([
       width: 999999,
       height: 999999
     }
-  }
-
-  function setContent(feature){
-    let graphic, attributes, content;
-    graphic = feature.graphic;
-    attributes = graphic.attributes;
-    let relatedFeature = new FeatureLayer({
-      url: "https://www.foretclimat.ca/server/rest/services/Hosted/BD_Inventaires_Secteur_gdb/FeatureServer/13"
-    });
-    let query = relatedFeature.createQuery();
-    query.where = "id_pe = '" + attributes.id_pe + "'";
-    query.outFields = ["mlnu_tot", "evaor_tot"];
-    content = relatedFeature.queryFeatures(query).then(function(response){
-      let fieldList = [response.fields[0].clone(), response.fields[1].clone()];
-      let value = "";
-      console.log(fieldList);
-      for (let field of fieldList){
-        if (field.length == -1){
-          field.length = null;
-        }
-        value += field.name + " = " + field.length + "<br>";
-      }
-      return(value)
-    });
-    return content
   }
 
   /* if user is logged in (esri_auth cookie is present) */
