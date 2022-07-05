@@ -17,14 +17,23 @@ html, body, #viewDiv {
     top: 20px;
     left: 20px;
     font-size: var(--calcite-font-size-0);
-    width: 550px;
-    height: 150px;
+    width: 165px;
+    height: 165px;
 }
 
 #logoPasserelle {
     width: 165px;
 }
 
+#tutorialHelp {
+    position: fixed;
+    bottom: 195px;
+    right: 15px;
+    background-color : rgba(245, 245, 245, 1);
+    border-radius: 50%;
+    border: 1px;
+    font-family: monospace;
+}
 
 /* Search bar */
 .esri-search {
@@ -56,7 +65,7 @@ html, body, #viewDiv {
     position: fixed;
     bottom: 30px;
     right: 60px;
-    height: 150px;
+    height: 198px;
 }
 
 
@@ -65,6 +74,42 @@ html, body, #viewDiv {
     position: fixed;
     top: 90px;
     right: 10px;
+}
+
+/* opacity when showing the tutorial */
+
+#blackBG{
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    background: black;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    opacity: 0.5;
+    display:none
+}
+
+.tutorialButton{
+    border-radius: 2px;
+    color: rgb(20,20,20);
+    width: 20%;
+    cursor:pointer;
+}
+
+#tutorialBox {
+    z-index: 1001;
+    border-radius: 10px;
+    text-align: center;
+    border: 3px solid rgb(0, 0, 0);
+    position:absolute;
+    height: auto;
+    width: auto;
+    padding: 10px;
+    background-color: rgb(245, 245, 245, 0.8);
+    transition: top 0.3s, bottom 0.3s, left 0.3s, right 0.3s, display 0.5s;
+    transform: translate(50%, -50%);
+    display: none;
 }
 
 /* Profile icon*/
@@ -123,7 +168,7 @@ html, body, #viewDiv {
 .sidenav #partLogoDiv {
     position: fixed;
     bottom: 25px;
-    margin-left: 120px;
+    margin-left: 100px;
     display: block;
 }
 

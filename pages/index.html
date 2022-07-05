@@ -15,18 +15,11 @@
   <body>
     <div id="viewDiv"></div>
     <div id="textBoxDiv" class="esri-widget">
-      <div style="width: 30%;float:left;">
         <img
           id="logoPasserelle"
           src="./media/logofc.png"
           alt="Logo de la Passerelle"
-        />
-      </div>
-      <div style="width: 70%;float: right;padding:5px;">
-            Utilisez le menu de gauche pour sélectionner les données disponibles publiquement et avoir accès aux storymaps.<br>
-            Utilisez le menu de droite pour vous connecter ou changer la langue.<br>
-            Cliquez sur les données dans la carte pour les explorer plus en détail.
-      </div>
+        />    
     </div>
     <button id="account" class="btn btn-primary esri-button">
       <img
@@ -74,6 +67,15 @@
         />
       </div>
     </div>
+    <div id="blackBG"></div>
+    <div id="tutorialBox">
+      <div>
+        <a id="tutorialInfo"></a><br><br>
+        <button id="tutorialNext" class="tutorialButton" style="float:left">Suivant</button>
+        <button id="tutorialSkip" class="tutorialButton" onclick="skipTutorial()"style="float:right">Passer</button>
+      </div>
+    </div>
+    <button id="tutorialHelp" class="esri-component esri-widget--button esri-widget esri-interactive" onclick="startTutorial()">i</button>
     <script type="text/javascript" src="./utils.js"></script>
   </body>
 </html>
