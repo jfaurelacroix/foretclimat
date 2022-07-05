@@ -37,7 +37,14 @@ require([
 
   const view = new MapView({
     map: map,
-    container: "viewDiv"
+    container: "viewDiv",
+    extent:{
+      xmin: '-7935173.813346129',
+      ymin: '5967391.847883448',
+      xmax: '-7896652.048618149',
+      ymax: '6032429.818627685',
+      spatialReference:  {wkid:3857}
+    }
   });
 
 
@@ -435,6 +442,12 @@ require([
     })
   });
 
+  const BATIMENTS_SENTIERS = new FeatureLayer({
+    url: "https://www.foretclimat.ca/server/rest/services/Hosted/passerelle_home_gdb/FeatureServer",
+    outFields: ["*"],
+    title: "Batiments et sentiers",
+  })
+
   const search = new Search ({
     view: view,
     allPlaceholder: "<= Rechercher une couche ou un lieu",
@@ -620,12 +633,11 @@ require([
   });
 
   
-  map.addMany([PLANT_BLOC, REGEN_BLOC,  RECOLTE_BLOC, REGEN_BLOC, REBOIS_BLOC, INTER_BLOC,  IMLNU_BLOC, PLANT_PS, REGEN_PS, RECOLTE_PS, REGEN_PS, REBOIS_PS, INTER_PS, IMLNU_PS]);
+  map.addMany([BATIMENTS_SENTIERS, PLANT_BLOC, REGEN_BLOC,  RECOLTE_BLOC, REGEN_BLOC, REBOIS_BLOC, INTER_BLOC,  IMLNU_BLOC, PLANT_PS, REGEN_PS, RECOLTE_PS, REGEN_PS, REBOIS_PS, INTER_PS, IMLNU_PS]);
   view.ui.add(["textBoxDiv", search], "top-left");
-  // places the  widget in the top right corner of the view
   view.ui.add(["account"], "top-right");
-  view.ui.add([toggle, layerList], "bottom-left");
-  view.ui.add([locateWidget, compass], "bottom-right");
+  view.ui.add([toggle], "bottom-left");
+  view.ui.add([locateWidget, compass, layerList, "tutorialHelp"], "bottom-right");
   view.ui.move(["zoom"], "bottom-right");
 
   // auto-dock https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Popup.html#dockOptions
@@ -644,4 +656,6 @@ require([
   }else{
     addAccountEventListenerSignIn();
   }
+
+  startTutorial();
 });

@@ -1,6 +1,6 @@
 /* Opens the rightside Nav menu */
 function openNav() {
-  document.getElementById("Sidenav").style.width = "250px";
+  document.getElementById("Sidenav").style.width = "300px";
 }
 
 /* Closes the rightside Nav menu */
@@ -101,4 +101,73 @@ function setLangUser(){
   }else if(userLang.includes('en')){
     window.location.href = "./index_en.html";
   }
+}
+
+function showBlackBG(){
+  const background = document.getElementById("blackBG");
+  background.style.display = 'inline';
+
+}
+
+function hideBlackBG(){
+  const background = document.getElementById("blackBG");
+  background.style.display = 'none';
+}
+
+function showElementInFront(id){
+  const element = document.getElementById(id);
+  element.style.zIndex = '1000';
+}
+
+function hideElementInFront(id){
+  const element = document.getElementById(id);
+  element.style.zIndex = '1';
+}
+
+function setPositionAndText(tutBox, text, top, bottom, left, right){
+  if(typeof top != 'undefined'){
+    tutBox.style.bottom = "";
+    tutBox.style.top = top;
+  }
+  if(typeof bottom != 'undefined'){
+    tutBox.style.top = "";
+    tutBox.style.bottom = bottom;
+  }
+  if(typeof left != 'undefined'){
+    tutBox.style.right = "";
+    tutBox.style.left = left;
+  }
+  if(typeof right != 'undefined'){
+    tutBox.style.left = "";
+    tutBox.style.right = right;
+  }
+  document.getElementById("tutorialInfo").innerHTML = text;
+}
+
+function startTutorial(){
+  const tutBox = document.getElementById('tutorialBox');
+  tutBox.style.display = 'inline';
+  showBlackBG();
+  setPositionAndText(tutBox, "Bienvenue sur le site de la passerelle Forêt-Climat.<br><br>Cliquez sur « Suivant » pour suivre le tutoriel.<br> Vous pouvez aussi « Passer » à tout moment.", '50%', undefined, undefined,'50%');
+  waitForNext().then(() => {
+    accountTutorial();
+  });
+
+}
+
+function skipTutorial(){
+  const tutBox = document.getElementById('tutorialBox');
+  tutBox.style.display = 'none';
+  hideBlackBG();
+}
+
+function waitForNext(){
+  var myButton = document.getElementById('tutorialNext');
+  return new Promise(resolve => {
+    myButton.addEventListener('click',
+        async function handler(event) {
+            myButton.removeEventListener('click', handler);
+            resolve(true)
+        });
+      })
 }

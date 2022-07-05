@@ -130,37 +130,8 @@ cd ~/repos/arcgis-cookbook
 sudo chef-client -z -j arcgis-enterprise-primary.json
 
 ##################################
-# SETUP WEBSITE
-# Create redirect to /portal/home
-cd /opt/tomcat_arcgis/webapps
-sudo mkdir ROOT
-echo '<% response.sendRedirect("https://www.foretclimat.ca/portal/home/index.html"); %>' > ROOT/index.jsp
-sudo chown -R arcgis ROOT
-sudo chmod 755 -R ROOT
-
-# Copy the files into /arcgis/portal/framework/webapps/arcgis#home/
-# change index to home
-sudo mv /arcgis/portal/framework/webapps/arcgis#home/index.html /arcgis/portal/framework/webapps/arcgis#home/home.html
-sudo cp ~/repos/foretclimat/pages/* /arcgis/portal/framework/webapps/arcgis#home/
-sudo cp ~/repos/foretclimat/media /arcgis/portal/framework/webapps/arcgis#home/
-# Move main.js???
-
-
-# If you don't plan adding standby machine in the future, don't configure the file server 
-# and use local paths instead of shared directories for ArcGIS Server server directories, 
-# Portal for ArcGIS content directory, and ArcGIS Data Store backup directories in arcgis-enterprise-primary.json.
-
-##################################
-
-# File Server Machine install
-sudo apt-get update
-sudo apt-get upgrade
-sudo reboot
-
-##################################
 # Notebook server installation
 
-# Needed? Chef didn't find it
 sudo mkdir /media/data/setups/10.9
 tar -xf ArcGIS_Notebook_Server_Linux_1091_180226.tar.gz -C /media/data/setups/10.9
 
@@ -181,4 +152,32 @@ sudo chef-client -z -j notebook-server.json
 # Installs Web Adaptor if not already installed, registers notebook with the WA
 sudo chef-client -z -j arcgis-notebook-server-webadaptor.json
 # Federates Notebook with Enteprise Portal (PORT 7443 MUST BE OPEN)
+
 sudo chef-client -z -j notebook-server-federation.json
+
+##################################
+# SETUP WEBSITE
+# Create redirect to /portal/home
+cd /opt/tomcat_arcgis/webapps
+sudo mkdir ROOT
+echo '<% response.sendRedirect("https://www.foretclimat.ca/portal/home/index.html"); %>' > ROOT/index.jsp
+sudo chown -R arcgis ROOT
+sudo chmod 755 -R ROOT
+
+# Copy the files into /arcgis/portal/framework/webapps/arcgis#home/
+# change index to home
+sudo mv /arcgis/portal/framework/webapps/arcgis#home/index.html /arcgis/portal/framework/webapps/arcgis#home/home.html
+sudo cp ~/repos/foretclimat/pages/* /arcgis/portal/framework/webapps/arcgis#home/
+sudo cp ~/repos/foretclimat/media /arcgis/portal/framework/webapps/arcgis#home/
+
+# If you don't plan adding standby machine in the future, don't configure the file server 
+# and use local paths instead of shared directories for ArcGIS Server server directories, 
+# Portal for ArcGIS content directory, and ArcGIS Data Store backup directories in arcgis-enterprise-primary.json.
+
+##################################
+# File Server Machine install
+
+sudo apt-get update
+sudo apt-get upgrade
+sudo reboot
+
