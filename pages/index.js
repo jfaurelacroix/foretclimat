@@ -442,17 +442,116 @@ require([
     })
   });
 
-  const BATIMENTS_SENTIERS = new FeatureLayer({
-    url: "https://www.foretclimat.ca/server/rest/services/Hosted/passerelle_home_gdb/FeatureServer",
+  const BATIMENTS_PS = new FeatureLayer({
+    url: "https://www.foretclimat.ca/server/rest/services/Hosted/passerelle_home_gdb/FeatureServer/0",
     outFields: ["*"],
-    title: "Batiments et sentiers",
+    title: "Batiments",
+    renderer: {
+      type: "simple", 
+      symbol: {
+        type: "simple-marker",
+        size: 4,
+        color: new Color("#1463ff")
+      },
+    },
+  })
+
+  const CHEMINS_PL = new FeatureLayer({
+    url: "https://www.foretclimat.ca/server/rest/services/Hosted/passerelle_home_gdb/FeatureServer/1",
+    outFields: ["*"],
+    title: "Chemins",
+    renderer: {
+      type: "simple", 
+      symbol: {
+        type: "simple-line",
+        width: "1px",
+        color: new Color("#f4dd9a")
+      },
+    },
+  })
+
+  const SENTIERS_PL = new FeatureLayer({
+    url: "https://www.foretclimat.ca/server/rest/services/Hosted/passerelle_home_gdb/FeatureServer/3",
+    outFields: ["*"],
+    title: "Sentiers",
+    renderer: {
+      type: "simple", 
+      symbol: {
+        type: "simple-line",
+        width: "1.5px",
+        style: "dash",
+        color: new Color("#b86500")
+      },
+    },
+  })
+
+  const FM_AB_BLOC = new FeatureLayer({
+    url: "https://www.foretclimat.ca/server/rest/services/Hosted/passerelle_home_gdb/FeatureServer/4",
+    outFields: ["*"],
+    title: "Délimitations de la Forêt-Montmorency",
+    renderer: {
+      type: "unique-value",
+      field: "id",
+      defaultSymbol: { type: "simple-fill" }, 
+      uniqueValueInfos: [{
+        value: "A",
+        symbol: {
+          type: "simple-fill",
+          style: "backward-diagonal",
+          color: new Color("#5faae7")
+        }
+      }, {
+        value: "B",
+        symbol: {
+          type: "simple-fill",
+          style: "forward-diagonal",
+          color: new Color("#d4e96d")
+        }
+      }]
+    },
   })
 
   const search = new Search ({
     view: view,
-    allPlaceholder: "<= Rechercher une couche ou un lieu",
+    allPlaceholder: "Rechercher une couche ou un lieu",
     portal: myPortal, // https://enterprise.arcgis.com/fr/portal/latest/administer/windows/configure-portal-to-geocode-addresses.htm
     sources: [ //https://developers.arcgis.com/javascript/latest/sample-code/widgets--multiplesource/
+      {
+        layer: BATIMENTS_PS,
+        exactMatch: false,
+        name: "Batiments",
+        placeholder: "Rechercher un batiment",
+        Fields: ["nom", "type"],
+        outFields: ["*"],
+        maxResults: 6,
+        maxSuggestions: 6,
+        suggestionsEnabled: true,
+        minSuggestCharacters: 0
+      },
+      {
+        layer: CHEMINS_PL,
+        exactMatch: false,
+        name: "Chemins",
+        placeholder: "Rechercher un chemin",
+        Fields: ["chemin_nom", "etat"],
+        outFields: ["*"],
+        maxResults: 6,
+        maxSuggestions: 6,
+        suggestionsEnabled: true,
+        minSuggestCharacters: 0
+      },
+      {
+        layer: SENTIERS_PL,
+        exactMatch: false,
+        name: "Sentiers",
+        placeholder: "Rechercher un sentier",
+        Fields: ["chemin_nom", "etat"],
+        outFields: ["*"],
+        maxResults: 6,
+        maxSuggestions: 6,
+        suggestionsEnabled: true,
+        minSuggestCharacters: 0
+      },
       {
         layer: IMLNU_PS,
         exactMatch: false,
@@ -621,19 +720,26 @@ require([
       // layer in the LayerList widget.
   
       let item = event.item;
-      let mySymbol = item.layer.renderer.symbol.clone();
+      let mySymbol;
       item.panel = {
         content: "",
         open: true
       }
-      symbolUtils.renderPreviewHTML(mySymbol).then(renderedSymbol=>{
-        item.panel.content = renderedSymbol;
-      });
+      if(item.layer.renderer.type == 'simple'){
+        if(item.panel.content == ""){
+          mySymbol = item.layer.renderer.symbol;
+          symbolUtils.renderPreviewHTML(mySymbol).then(renderedSymbol=>{
+            item.panel.content = renderedSymbol;
+          });
+        }
+      }else{
+        item.panel.content = "legend";
+      }
     }
   });
 
-  
-  map.addMany([BATIMENTS_SENTIERS, PLANT_BLOC, REGEN_BLOC,  RECOLTE_BLOC, REGEN_BLOC, REBOIS_BLOC, INTER_BLOC,  IMLNU_BLOC, PLANT_PS, REGEN_PS, RECOLTE_PS, REGEN_PS, REBOIS_PS, INTER_PS, IMLNU_PS]);
+  Window.map = map;
+  map.addMany([FM_AB_BLOC, CHEMINS_PL, SENTIERS_PL, PLANT_BLOC, REGEN_BLOC,  RECOLTE_BLOC, REGEN_BLOC, REBOIS_BLOC, INTER_BLOC,  IMLNU_BLOC, PLANT_PS, REGEN_PS, RECOLTE_PS, REGEN_PS, REBOIS_PS, INTER_PS, IMLNU_PS, BATIMENTS_PS,]);
   view.ui.add(["textBoxDiv", search], "top-left");
   view.ui.add(["account"], "top-right");
   view.ui.add([toggle], "bottom-left");
@@ -657,5 +763,6 @@ require([
     addAccountEventListenerSignIn();
   }
 
+  setPublicMode(map);
   startTutorial();
 });
