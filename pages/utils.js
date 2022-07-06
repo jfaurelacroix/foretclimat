@@ -103,6 +103,39 @@ function setLangUser(){
   }
 }
 
+function handleChange(mySwitch){
+  if(mySwitch.checked){
+    setResearchMode(Window.map);
+  }else{
+    setPublicMode(Window.map);
+  }
+}
+
+
+function setPublicMode(map){
+  for (const layer of map.allLayers.items){
+    if (layer.url.includes("BD_Inventaires_Secteur_gdb") && !layer.url.includes("World_Imagery")){
+      layer.visible = false;
+      layer.listMode = 'hide';
+    }else{
+      layer.visible = true;
+      layer.listMode = 'show';
+    }
+  }
+}
+
+function setResearchMode(map){
+  for (const layer of map.allLayers.items){
+    if (layer.url.includes("BD_Inventaires_Secteur_gdb") || layer.url.includes("World_Imagery")){
+      layer.visible = true;
+    }else{
+      layer.visible = false;
+    }
+    layer.listMode = 'show';
+  }
+
+}
+
 function showBlackBG(){
   const background = document.getElementById("blackBG");
   background.style.display = 'inline';
@@ -150,7 +183,7 @@ function startTutorial(){
   showBlackBG();
   setPositionAndText(tutBox, "Bienvenue sur le site de la passerelle Forêt-Climat.<br><br>Cliquez sur « Suivant » pour suivre le tutoriel.<br> Vous pouvez aussi « Passer » à tout moment.", '50%', undefined, undefined,'50%');
   waitForNext().then(() => {
-    accountTutorial();
+    controlsTutorial(tutBox);
   });
 
 }
@@ -170,4 +203,8 @@ function waitForNext(){
             resolve(true)
         });
       })
+}
+
+function controlsTutorial(tutBox){
+  setPositionAndText(tutBox, "Le clique gauche afin de naviguer sur la carte.<br>Le clique droit permet de faire des rotations.<br>La molette de la souris permet de zoomer ou de dézoomer.", '50%', undefined, undefined,'50%');
 }
