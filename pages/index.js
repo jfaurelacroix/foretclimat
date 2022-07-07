@@ -443,7 +443,7 @@ require([
   });
 
   const BATIMENTS_PS = new FeatureLayer({
-    url: "https://www.foretclimat.ca/server/rest/services/Hosted/passerelle_home_gdb/FeatureServer/0",
+    url: "https://www.foretclimat.ca/server/rest/services/Hosted/FM_batiments/FeatureServer",
     outFields: ["*"],
     title: "Batiments",
     renderer: {
@@ -457,7 +457,7 @@ require([
   })
 
   const CHEMINS_PL = new FeatureLayer({
-    url: "https://www.foretclimat.ca/server/rest/services/Hosted/passerelle_home_gdb/FeatureServer/1",
+    url: "https://www.foretclimat.ca/server/rest/services/Hosted/Chemin_FM/FeatureServer",
     outFields: ["*"],
     title: "Chemins",
     renderer: {
@@ -471,7 +471,7 @@ require([
   })
 
   const SENTIERS_PL = new FeatureLayer({
-    url: "https://www.foretclimat.ca/server/rest/services/Hosted/passerelle_home_gdb/FeatureServer/3",
+    url: "https://www.foretclimat.ca/server/rest/services/Hosted/Project_FM_sentiers/FeatureServer",
     outFields: ["*"],
     title: "Sentiers",
     renderer: {
@@ -486,7 +486,7 @@ require([
   })
 
   const FM_AB_BLOC = new FeatureLayer({
-    url: "https://www.foretclimat.ca/server/rest/services/Hosted/passerelle_home_gdb/FeatureServer/4",
+    url: "https://www.foretclimat.ca/server/rest/services/Hosted/FM_poly_AB/FeatureServer",
     outFields: ["*"],
     title: "Délimitations de la Forêt-Montmorency",
     renderer: {
@@ -741,9 +741,9 @@ require([
   Window.map = map;
   map.addMany([FM_AB_BLOC, CHEMINS_PL, SENTIERS_PL, PLANT_BLOC, REGEN_BLOC,  RECOLTE_BLOC, REGEN_BLOC, REBOIS_BLOC, INTER_BLOC,  IMLNU_BLOC, PLANT_PS, REGEN_PS, RECOLTE_PS, REGEN_PS, REBOIS_PS, INTER_PS, IMLNU_PS, BATIMENTS_PS,]);
   view.ui.add(["textBoxDiv", search], "top-left");
-  view.ui.add(["account"], "top-right");
+  view.ui.add(["account", "sideburger"], "top-right");
   view.ui.add([toggle], "bottom-left");
-  view.ui.add([locateWidget, compass, layerList, "tutorialHelp"], "bottom-right");
+  view.ui.add([locateWidget, compass, layerList, "tutorialHelp", "switch"], "bottom-right");
   view.ui.move(["zoom"], "bottom-right");
 
   // auto-dock https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Popup.html#dockOptions
@@ -761,8 +761,8 @@ require([
     addAccountEventListenerHome();
   }else{
     addAccountEventListenerSignIn();
+    startTutorial();
   }
 
-  setPublicMode(map);
-  startTutorial();
+  setPublicMode();
 });

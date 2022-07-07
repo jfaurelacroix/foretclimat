@@ -7,6 +7,11 @@ html, body, #viewDiv {
     margin: 0;
     height: 100%;
     border-color:  var(--blue);
+    position: relative;
+}
+
+.esri-ui{
+    z-index: initial;
 }
 
 /* Textbox to the right of the Foret-Climat Logo */
@@ -110,10 +115,12 @@ html, body, #viewDiv {
     height: auto;
     width: auto;
     padding: 10px;
-    background-color: rgb(245, 245, 245, 0.8);
-    transition: top 0.3s, bottom 0.3s, left 0.3s, right 0.3s, display 0.5s;
-    transform: translate(50%, -50%);
+    background-color: rgb(245, 245, 245, 0.9);
+    transition: 0.5s;
+    transform: translate(-50%, -50%);
     display: none;
+    top: 50%;
+    left: 50%;
 }
 
 /* Profile icon*/
@@ -129,12 +136,15 @@ html, body, #viewDiv {
     border-color: var(--blue);
 }
 
-.container {
+.container.esri-component {
     position: fixed;
     top: 25px;
     right: 20px;
     display: inline-block;
     cursor: pointer;
+    -webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
 }
 
 .bar1, .bar2, .bar3 {
@@ -247,13 +257,14 @@ html, body, #viewDiv {
 }
 
 /* Toggle Switch */
-.switch {
+.switch.esri-component {
     position: fixed;
     bottom: 240px;
     right: 12px;
     display: inline-block;
     width: 40px;
     height: 23px;
+	box-shadow: none;
   }
   
   /* Hide default HTML checkbox */
