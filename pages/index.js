@@ -473,28 +473,17 @@ require([
     title: "Chemins",
     renderer: {
       type: "unique-value",
-      field: "etat",
-      defaultSymbol: { type: "simple-line", color: new Color("#feeba4")}, 
+      field: "CL_CHEM2",
+      legendOptions:{title: "Classification du chemin"},
+      defaultSymbol: { type: "simple-line", color: new Color("#79f45d")}, 
       uniqueValueInfos: [{
-        value: "Route nationale pavée",
-        symbol: {
-          type: "simple-line",
-          color: new Color("#5B7444")
-        }
-      },{
-        value: "Entretenu",
-        symbol: {
-          type: "simple-line",
-          color: new Color("#A3C586")
-        }
-      },{
-        value: "Non entretenu",
+        value: "Chemin carrossable non pavé",
         symbol: {
           type: "simple-line",
           color: new Color("#FFCC33")
         }
       },{
-        value: "Ferme",
+        value: "Chemin non carrossable",
         symbol: {
           type: "simple-line",
           color: new Color("#FF9900")
@@ -524,6 +513,7 @@ require([
     renderer: {
       type: "unique-value",
       field: "Difficulte",
+      legendOptions:{title: "Difficulté du sentier"},
       defaultSymbol: { type: "simple-line", color: new Color("#50CAE1"), style: "dash", width: '1.5px'}, 
       uniqueValueInfos: [{
         value: "facile",
@@ -607,20 +597,21 @@ require([
     renderer: {
       type: "unique-value",
       field: "id",
+      legendOptions:{title: "Délimitations des zones"},
       defaultSymbol: { type: "simple-fill" }, 
       uniqueValueInfos: [{
         value: "A",
         symbol: {
           type: "simple-fill",
-          style: "backward-diagonal",
-          color: new Color("#5faae7")
+          style: "forward-diagonal",
+          color: new Color("#fcdad4")
         }
       }, {
         value: "B",
         symbol: {
           type: "simple-fill",
           style: "forward-diagonal",
-          color: new Color("#d4e96d")
+          color: new Color("#f69483")
         }
       }]
     },
