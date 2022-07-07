@@ -451,9 +451,20 @@ require([
       symbol: {
         type: "simple-marker",
         size: 4,
-        color: new Color("#1463ff")
+        color: new Color("#C84127")
       },
     },
+    popupTemplate: new PopupTemplate({
+      title: "{NOM}",
+      content: [{
+        type: "fields", // Autocasts as new FieldsContent()
+        // Autocasts as new FieldInfo[]
+        fieldInfos: [{
+          fieldName: "type",
+          label: "Type de batiment",
+        }]
+      }]
+    })
   })
 
   const CHEMINS_PL = new FeatureLayer({
@@ -461,13 +472,49 @@ require([
     outFields: ["*"],
     title: "Chemins",
     renderer: {
-      type: "simple", 
-      symbol: {
-        type: "simple-line",
-        width: "1px",
-        color: new Color("#f4dd9a")
-      },
+      type: "unique-value",
+      field: "etat",
+      defaultSymbol: { type: "simple-line", color: new Color("#feeba4")}, 
+      uniqueValueInfos: [{
+        value: "Route nationale pavée",
+        symbol: {
+          type: "simple-line",
+          color: new Color("#5B7444")
+        }
+      },{
+        value: "Entretenu",
+        symbol: {
+          type: "simple-line",
+          color: new Color("#A3C586")
+        }
+      },{
+        value: "Non entretenu",
+        symbol: {
+          type: "simple-line",
+          color: new Color("#FFCC33")
+        }
+      },{
+        value: "Ferme",
+        symbol: {
+          type: "simple-line",
+          color: new Color("#FF9900")
+        }
+      },]
     },
+    popupTemplate: new PopupTemplate({
+      title: "Chemin #{NO_CHEM} {CHEMIN_NOM}",
+      content: [{
+        type: "fields", // Autocasts as new FieldsContent()
+        // Autocasts as new FieldInfo[]
+        fieldInfos: [{
+          fieldName: "etat",
+          label: "État",
+        },{
+          fieldName: "CL_CHEM2",
+          label: "Classe du chemin",
+        }]
+      }]
+    })
   })
 
   const SENTIERS_PL = new FeatureLayer({
@@ -475,14 +522,82 @@ require([
     outFields: ["*"],
     title: "Sentiers",
     renderer: {
-      type: "simple", 
+      type: "unique-value",
+      field: "Difficulte",
+      defaultSymbol: { type: "simple-line", color: new Color("#50CAE1"), style: "dash", width: '1.5px'}, 
+      uniqueValueInfos: [{
+        value: "facile",
+        symbol: {
+          type: "simple-line",
+          style: "dash",
+          color: new Color("#d7eaf3"),
+          width: '1.5px'
+        }
+      },{
+        value: "difficile",
+        symbol: {
+          type: "simple-line",
+          style: "dash",
+          color: new Color("#77b5d9"),
+          width: '1.5px'
+        }
+      },{
+        value: "très difficile",
+        symbol: {
+          type: "simple-line",
+          style: "dash",
+          color: new Color("#14397d"),
+          width: '1.5px'
+        }
+      }]
+    },
+    popupTemplate: new PopupTemplate({
+      title: "Sentier {Nom}",
+      content: [{
+        type: "fields", // Autocasts as new FieldsContent()
+        // Autocasts as new FieldInfo[]
+        fieldInfos: [{
+          fieldName: "Difficulte",
+          label: "Difficulté",
+        },{
+          fieldName: "Patin",
+          label: "Patin",
+        },{
+          fieldName: "Usager",
+          label: "Usage",
+        }]
+      }]
+    })
+  })
+
+  const MOTONEIGE_PL = new FeatureLayer({
+    url: "https://www.foretclimat.ca/server/rest/services/Hosted/Project_FM_motoneige/FeatureServer",
+    outFields: ["*"],
+    title: "Pistes de motoneige",
+    renderer: {
+      type: "simple",
       symbol: {
         type: "simple-line",
-        width: "1.5px",
-        style: "dash",
-        color: new Color("#b86500")
-      },
+        color: new Color('#b132f1')
+      }
     },
+    popupTemplate: new PopupTemplate({
+      title: "Piste de motoneige {NOM_CLUB}",
+      content: [{
+        type: "fields", // Autocasts as new FieldsContent()
+        // Autocasts as new FieldInfo[]
+        fieldInfos: [{
+          fieldName: "NOM_CLUB",
+          label: "Nom du club",
+        },{
+          fieldName: "NO_CLUB",
+          label: "# du club",
+        },{
+          fieldName: "REGION_FCM",
+          label: "Région",
+        }]
+      }]
+    })
   })
 
   const FM_AB_BLOC = new FeatureLayer({
@@ -509,6 +624,17 @@ require([
         }
       }]
     },
+    popupTemplate: new PopupTemplate({
+      title: "Zone {ID}",
+      content: [{
+        type: "fields", // Autocasts as new FieldsContent()
+        // Autocasts as new FieldInfo[]
+        fieldInfos: [{
+          fieldName: "area",
+          label: "Aire",
+        }]
+      }]
+    })
   })
 
   const search = new Search ({
@@ -521,7 +647,8 @@ require([
         exactMatch: false,
         name: "Batiments",
         placeholder: "Rechercher un batiment",
-        Fields: ["nom", "type"],
+        searchFields: ["nom", "type"],
+        displayField: "nom",
         outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
@@ -533,7 +660,8 @@ require([
         exactMatch: false,
         name: "Chemins",
         placeholder: "Rechercher un chemin",
-        Fields: ["chemin_nom", "etat"],
+        searchFields: ["chemin_nom", "etat"],
+        displayField: "chemin_nom",
         outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
@@ -545,7 +673,21 @@ require([
         exactMatch: false,
         name: "Sentiers",
         placeholder: "Rechercher un sentier",
-        Fields: ["chemin_nom", "etat"],
+        searchFields: ["chemin_nom", "difficulte"],
+        displayField: "chemin_nom",
+        outFields: ["*"],
+        maxResults: 6,
+        maxSuggestions: 6,
+        suggestionsEnabled: true,
+        minSuggestCharacters: 0
+      },
+      {
+        layer: MOTONEIGE_PL,
+        exactMatch: false,
+        name: "Piste de motoneige",
+        placeholder: "Rechercher un club et ses pistes",
+        searchFields: ["nom_club"],
+        displayField: "nom_club",
         outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
@@ -557,7 +699,8 @@ require([
         exactMatch: false,
         name: "Points matière ligneuse non utilisée",
         placeholder: "Rechercher un point",
-        Fields: ["objectid", "annee", "secteur"],
+        searchFields: ["objectid", "annee",  "ID_PE"],
+        displayFields: ["ID_PE"],
         outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
@@ -570,7 +713,8 @@ require([
         name: "Polygones matière ligneuse non utilisée",
         placeholder: "Rechercher un polygone",
         outFields: ["*"],
-        Fields: ["objectid", "annee", "secteur"],
+        searchFields: ["objectid", "annee", "ID_BLOC"],
+        displayFields: ["ID_BLOC"],
         maxResults: 6,
         maxSuggestions: 6,
         suggestionsEnabled: true,
@@ -581,7 +725,8 @@ require([
         exactMatch: false,
         name: "Points intervention",
         placeholder: "Rechercher un point",
-        Fields: ["objectid", "annee", "secteur"],
+        searchFields: ["objectid", "annee",  "ID_PE"],
+        displayFields: ["ID_PE"],
         outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
@@ -593,7 +738,8 @@ require([
         exactMatch: false,
         name: "Polygones intervention",
         placeholder: "Rechercher un polygone",
-        Fields: ["objectid", "annee", "secteur"],
+        searchFields: ["objectid", "annee", "ID_BLOC"],
+        displayFields: ["ID_BLOC"],
         outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
@@ -605,7 +751,8 @@ require([
         exactMatch: false,
         name: "Points qualité du reboisement",
         placeholder: "Rechercher un point",
-        Fields: ["objectid", "annee", "secteur"],
+        searchFields: ["objectid", "annee",  "ID_PE"],
+        displayFields: ["ID_PE"],
         outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
@@ -617,7 +764,8 @@ require([
         exactMatch: false,
         name: "Polygones qualité du reboisement",
         placeholder: "Rechercher un polygone",
-        Fields: ["objectid", "annee", "secteur"],
+        searchFields: ["objectid", "annee", "ID_BLOC"],
+        displayFields: ["ID_BLOC"],
         outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
@@ -629,7 +777,8 @@ require([
         exactMatch: false,
         name: "Points récolte",
         placeholder: "Rechercher un point",
-        Fields: ["objectid", "annee", "secteur"],
+        searchFields: ["objectid", "annee",  "ID_PE"],
+        displayFields: ["ID_PE"],
         outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
@@ -641,7 +790,8 @@ require([
         exactMatch: false,
         name: "Polygones récolte",
         placeholder: "Rechercher un polygone",
-        Fields: ["objectid", "annee", "secteur"],
+        searchFields: ["objectid", "annee", "ID_BLOC"],
+        displayFields: ["ID_BLOC"],
         outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
@@ -653,7 +803,8 @@ require([
         exactMatch: false,
         name: "Points Régénération",
         placeholder: "Rechercher un point",
-        Fields: ["objectid", "annee", "secteur"],
+        searchFields: ["objectid", "annee",  "ID_PE"],
+        displayFields: ["ID_PE"],
         outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
@@ -665,7 +816,8 @@ require([
         exactMatch: false,
         name: "Polygones régénération",
         placeholder: "Rechercher un polygone",
-        Fields: ["objectid", "annee", "secteur"],
+        searchFields: ["objectid", "annee", "ID_BLOC"],
+        displayFields: ["ID_BLOC"],
         outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
@@ -677,7 +829,8 @@ require([
         exactMatch: false,
         name: "Points suivi de plantation",
         placeholder: "Rechercher un point",
-        Fields: ["objectid", "annee", "secteur"],
+        searchFields: ["objectid", "annee",  "ID_PE"],
+        displayFields: ["ID_PE"],
         outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
@@ -689,7 +842,8 @@ require([
         exactMatch: false,
         name: "Polygones suivi de plantation",
         placeholder: "Rechercher un polygone",
-        Fields: ["objectid", "annee", "secteur"],
+        searchFields: ["objectid", "annee", "ID_BLOC"],
+        displayFields: ["ID_BLOC"],
         outFields: ["*"],
         maxResults: 6,
         maxSuggestions: 6,
@@ -739,7 +893,7 @@ require([
   });
 
   Window.map = map;
-  map.addMany([FM_AB_BLOC, CHEMINS_PL, SENTIERS_PL, PLANT_BLOC, REGEN_BLOC,  RECOLTE_BLOC, REGEN_BLOC, REBOIS_BLOC, INTER_BLOC,  IMLNU_BLOC, PLANT_PS, REGEN_PS, RECOLTE_PS, REGEN_PS, REBOIS_PS, INTER_PS, IMLNU_PS, BATIMENTS_PS,]);
+  map.addMany([FM_AB_BLOC, PLANT_BLOC, REGEN_BLOC,  RECOLTE_BLOC, REGEN_BLOC, REBOIS_BLOC, INTER_BLOC,  IMLNU_BLOC, PLANT_PS, REGEN_PS, RECOLTE_PS, REGEN_PS, REBOIS_PS, INTER_PS, IMLNU_PS, CHEMINS_PL, MOTONEIGE_PL, SENTIERS_PL, BATIMENTS_PS,]);
   view.ui.add(["textBoxDiv", search], "top-left");
   view.ui.add(["account", "sideburger"], "top-right");
   view.ui.add([toggle], "bottom-left");
