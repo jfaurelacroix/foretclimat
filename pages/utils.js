@@ -105,15 +105,15 @@ function setLangUser(){
 
 function handleChange(mySwitch){
   if(mySwitch.checked){
-    setResearchMode(Window.map);
+    setResearchMode();
   }else{
-    setPublicMode(Window.map);
+    setPublicMode();
   }
 }
 
 
-function setPublicMode(map){
-  for (const layer of map.allLayers.items){
+function setPublicMode(){
+  for (const layer of Window.map.allLayers.items){
     if (layer.url.includes("BD_Inventaires_Secteur_gdb") && !layer.url.includes("World_Imagery")){
       layer.visible = false;
       layer.listMode = 'hide';
@@ -124,8 +124,8 @@ function setPublicMode(map){
   }
 }
 
-function setResearchMode(map){
-  for (const layer of map.allLayers.items){
+function setResearchMode(){
+  for (const layer of Window.map.allLayers.items){
     if (layer.url.includes("BD_Inventaires_Secteur_gdb") || layer.url.includes("World_Imagery")){
       layer.visible = true;
     }else{
@@ -147,47 +147,6 @@ function hideBlackBG(){
   background.style.display = 'none';
 }
 
-function showElementInFront(id){
-  const element = document.getElementById(id);
-  element.style.zIndex = '1000';
-}
-
-function hideElementInFront(id){
-  const element = document.getElementById(id);
-  element.style.zIndex = '1';
-}
-
-function setPositionAndText(tutBox, text, top, bottom, left, right){
-  if(typeof top != 'undefined'){
-    tutBox.style.bottom = "";
-    tutBox.style.top = top;
-  }
-  if(typeof bottom != 'undefined'){
-    tutBox.style.top = "";
-    tutBox.style.bottom = bottom;
-  }
-  if(typeof left != 'undefined'){
-    tutBox.style.right = "";
-    tutBox.style.left = left;
-  }
-  if(typeof right != 'undefined'){
-    tutBox.style.left = "";
-    tutBox.style.right = right;
-  }
-  document.getElementById("tutorialInfo").innerHTML = text;
-}
-
-function startTutorial(){
-  const tutBox = document.getElementById('tutorialBox');
-  tutBox.style.display = 'inline';
-  showBlackBG();
-  setPositionAndText(tutBox, "Bienvenue sur le site de la passerelle Forêt-Climat.<br><br>Cliquez sur « Suivant » pour suivre le tutoriel.<br> Vous pouvez aussi « Passer » à tout moment.", '50%', undefined, undefined,'50%');
-  waitForNext().then(() => {
-    controlsTutorial(tutBox);
-  });
-
-}
-
 function skipTutorial(){
   const tutBox = document.getElementById('tutorialBox');
   tutBox.style.display = 'none';
@@ -205,6 +164,68 @@ function waitForNext(){
       })
 }
 
+function startTutorial(){
+  const tutBox = document.getElementById('tutorialBox');
+  tutBox.style.display = 'inline';
+  showBlackBG();
+  document.getElementById("tutorialInfo").innerHTML = "<p>Bienvenue sur le site de la passerelle Forêt-Climat.<br></p><p>Cliquez sur « Suivant » pour suivre le tutoriel.</p><p>Vous pouvez aussi « Passer » à tout moment.</p>";
+  waitForNext().then(() => {
+    controlsTutorial(tutBox);
+  });
+}
+
 function controlsTutorial(tutBox){
-  setPositionAndText(tutBox, "Le clique gauche afin de naviguer sur la carte.<br>Le clique droit permet de faire des rotations.<br>La molette de la souris permet de zoomer ou de dézoomer.", '50%', undefined, undefined,'50%');
+  document.getElementById("tutorialInfo").innerHTML = "<p>Le clique gauche permet de naviguer sur la carte.</p><p>Le clique droit permet de faire des rotations.</p><p>La molette de la souris permet de zoomer ou de dézoomer.</p>";
+  waitForNext().then(() => {
+    topLeftTutorial(tutBox);
+  });
+}
+
+function topLeftTutorial(tutBox){
+  document.getElementById("tutorialInfo").innerHTML = "<p>Voici la barre de recherche.</p><p>Il est possible de séléctionner une couche précise pour faire la recherche en cliquant sur la flèche à gauche.</p>";
+  let topElements = document.getElementsByClassName("esri-ui-top-left")[0];
+  topElements.style.zIndex = 1000;
+  waitForNext().then(() => {
+    topElements.style.zIndex = 'initial';
+    topRightTutorial(tutBox);
+  });
+}
+
+function topRightTutorial(tutBox){
+  document.getElementById("tutorialInfo").innerHTML = "<p>Cliquez sur le profil pour vous connecter avec votre compte d'établissement ou votre compte Forêt-Climat.</p><p>Cliquez sur le menu pour accéder au reste du site ou aux Storymaps.</p>";
+  let topElements = document.getElementsByClassName("esri-ui-top-right")[0];
+  topElements.style.zIndex = 1000;
+  waitForNext().then(() => {
+    topElements.style.zIndex = 'initial';
+    bottomLeftTutorial(tutBox);
+  });
+}
+
+function bottomLeftTutorial(tutBox){
+  document.getElementById("tutorialInfo").innerHTML = "<p>Il est possible de changer le fond de carte en cliquant en bas à droite.</p>";
+  let bottomElements = document.getElementsByClassName("esri-ui-bottom-left")[0];
+  bottomElements.style.zIndex = 1000;
+  waitForNext().then(() => {
+    bottomElements.style.zIndex = 'initial';
+    bottomRightTutorial(tutBox);
+  });
+}
+
+function bottomRightTutorial(tutBox){
+  document.getElementById("tutorialInfo").innerHTML = "<p>Voici la légende. En cliquant sur l'oeil, il est possible de masquer/montrer les différentes couches.</p><p>L'interrupteur permet de montrer des couches supplémentaires avec des données intéressantes.</p><p>Le « i » permet de recommencer le tutoriel.</p><p>La boussole permet de réorienter la vue selon le nord.</p><p>Le bouton en dessous permet de vous localiser sur la carte et de ramener la vue sur votre emplacement.</p><p>Les derniers boutons permettent de gérer le zoom.</p>";
+  let next = document.getElementById("tutorialNext");
+  let skip = document.getElementById("tutorialSkip");
+  let bottomElements = document.getElementsByClassName("esri-ui-bottom-right")[0];
+  bottomElements.style.zIndex = 1000;
+  next.innerHTML = "Terminer";
+  next.style.float = "";
+  skip.style.display = "none";
+
+  waitForNext().then(() => {
+    bottomElements.style.zIndex = 'initial';
+    skipTutorial()
+    next.innerHTML = "Suivant";
+    next.style.float = "left";
+    skip.style.display = "initial";
+  });
 }
