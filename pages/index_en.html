@@ -18,7 +18,7 @@
         <img
           id="logoPasserelle"
           src="./media/logofc.png"
-          alt="Logo de la Passerelle"
+          alt="ForetClimatLogo"
           >
     </div>
     <button id="account" class="btn btn-primary esri-button">
@@ -58,12 +58,8 @@
       <a class="SidenavElement user" href="./organization.html" style="display:none;">Organization</a>
       <a class="SidenavElement lang" href="./index.html">Français</a>
       <div id="partLogoDiv">
-        <img src="./media/UL_FFGG_C_d.png" width="175" alt="Logo de la FFGG" />
-        <img
-          src="./media/cfi-fci_couleur.png"
-          width="175"
-          alt="Logo de la FCI"
-        />
+        <img src="./media/UL_FFGG_C_d.png" width="175" alt="FFGG Logo" />
+        <img src="./media/cfi-fci_couleur.png" width="175" alt="FCI Logo"/>
       </div>
     </div>
     <div id="blackBG"></div>
@@ -72,8 +68,9 @@
         <button id="tutorialNext" class="tutorialButton" onclick=""style="float:left">Next</button>
         <button id="tutorialSkip" class="tutorialButton" onclick="skipTutorial()"style="float:right">Skip</button>
     </div>
+    <button id="tutorialHelp" class="esri-component esri-widget--button esri-widget esri-interactive" onclick="startTutorial()">i</button>
     <label class="switch" id="switch">
-      <input type="checkbox">
+      <input type="checkbox" onchange='handleChange(this);'>
       <span class="slider round"></span>
     </label>
     <script type="text/javascript" src="./utils.js"></script>

@@ -168,21 +168,33 @@ function startTutorial(){
   const tutBox = document.getElementById('tutorialBox');
   tutBox.style.display = 'inline';
   showBlackBG();
-  document.getElementById("tutorialInfo").innerHTML = "<p>Bienvenue sur le site de la passerelle Forêt-Climat.<br></p><p>Cliquez sur « Suivant » pour suivre le tutoriel.</p><p>Vous pouvez aussi « Passer » à tout moment.</p>";
+  if(document.documentElement.lang == "en"){
+    document.getElementById("tutorialInfo").innerHTML = "<p>Welcome to the Forêt-Climat website.<br></p><p>Click on \"Next\" to follow the tutorial.</p><p>You can also \"Skip\" at any moment.</p>";
+  }else{
+    document.getElementById("tutorialInfo").innerHTML = "<p>Bienvenue sur le site de la passerelle Forêt-Climat.<br></p><p>Cliquez sur « Suivant » pour suivre le tutoriel.</p><p>Vous pouvez aussi « Passer » à tout moment.</p>";
+  }
   waitForNext().then(() => {
     controlsTutorial(tutBox);
   });
 }
 
 function controlsTutorial(tutBox){
-  document.getElementById("tutorialInfo").innerHTML = "<p>Le clique gauche permet de naviguer sur la carte.</p><p>Le clique droit permet de faire des rotations.</p><p>La molette de la souris permet de zoomer ou de dézoomer.</p>";
+  if(document.documentElement.lang == "en"){
+    document.getElementById("tutorialInfo").innerHTML = "<p>Left click lets you naviguate the map.</p><p>Right click lets your rotate the map.</p><p>The mouse wheel controls the zoom.</p>";
+  }else{
+    document.getElementById("tutorialInfo").innerHTML = "<p>Le clique gauche permet de naviguer sur la carte.</p><p>Le clique droit permet de faire des rotations.</p><p>La molette de la souris permet de zoomer ou de dézoomer.</p>";
+  }
   waitForNext().then(() => {
     topLeftTutorial(tutBox);
   });
 }
 
 function topLeftTutorial(tutBox){
-  document.getElementById("tutorialInfo").innerHTML = "<p>Voici la barre de recherche.</p><p>Il est possible de séléctionner une couche précise pour faire la recherche en cliquant sur la flèche à gauche.</p>";
+  if(document.documentElement.lang == "en"){
+    document.getElementById("tutorialInfo").innerHTML = "<p>There is the search bar.</p><p>You are able to select a specific layer for the search by clicking on the small arrow to the left.</p>";
+  }else{
+    document.getElementById("tutorialInfo").innerHTML = "<p>Voici la barre de recherche.</p><p>Il est possible de séléctionner une couche précise pour faire la recherche en cliquant sur la flèche à gauche.</p>";
+  }
   let topElements = document.getElementsByClassName("esri-ui-top-left")[0];
   topElements.style.zIndex = 1000;
   waitForNext().then(() => {
@@ -192,7 +204,11 @@ function topLeftTutorial(tutBox){
 }
 
 function topRightTutorial(tutBox){
-  document.getElementById("tutorialInfo").innerHTML = "<p>Cliquez sur le profil pour vous connecter avec votre compte d'établissement ou votre compte Forêt-Climat.</p><p>Cliquez sur le menu pour accéder au reste du site ou aux Storymaps.</p>";
+  if(document.documentElement.lang == "en"){
+    document.getElementById("tutorialInfo").innerHTML = "<p>Click on the profile icon to log in to your institution or your Forêt-Climat account.</p><p>Click on the menu to access the the rest of the site or the Storymaps.</p>";
+  }else{
+    document.getElementById("tutorialInfo").innerHTML = "<p>Cliquez sur l'icone de profil pour vous connecter avec votre compte d'établissement ou votre compte Forêt-Climat.</p><p>Cliquez sur le menu pour accéder au reste du site ou aux Storymaps.</p>";
+  }
   let topElements = document.getElementsByClassName("esri-ui-top-right")[0];
   topElements.style.zIndex = 1000;
   waitForNext().then(() => {
@@ -202,7 +218,11 @@ function topRightTutorial(tutBox){
 }
 
 function bottomLeftTutorial(tutBox){
-  document.getElementById("tutorialInfo").innerHTML = "<p>Il est possible de changer le fond de carte en cliquant en bas à droite.</p>";
+  if(document.documentElement.lang == "en"){
+    document.getElementById("tutorialInfo").innerHTML = "<p>The bottom left map lets you change the basemap.</p>";
+  }else{
+    document.getElementById("tutorialInfo").innerHTML = "<p>La carte en bas à gauche permet de changer le fond de carte.</p>";
+  }
   let bottomElements = document.getElementsByClassName("esri-ui-bottom-left")[0];
   bottomElements.style.zIndex = 1000;
   waitForNext().then(() => {
@@ -212,19 +232,31 @@ function bottomLeftTutorial(tutBox){
 }
 
 function bottomRightTutorial(tutBox){
-  document.getElementById("tutorialInfo").innerHTML = "<p>Voici la légende. En cliquant sur l'oeil, il est possible de masquer/montrer les différentes couches.</p><p>L'interrupteur permet de montrer des couches supplémentaires avec des données intéressantes.</p><p>Le « i » permet de recommencer le tutoriel.</p><p>La boussole permet de réorienter la vue selon le nord.</p><p>Le bouton en dessous permet de vous localiser sur la carte et de ramener la vue sur votre emplacement.</p><p>Les derniers boutons permettent de gérer le zoom.</p>";
+  if(document.documentElement.lang == "en"){
+    document.getElementById("tutorialInfo").innerHTML = "<p>You can find the legend at the bottom right. By clicking the eye, you can either hide or show the different layers.</p><p>The toggle switch lets you see additional layers</p><p>The « i » restarts the tutorial.</p><p>The compass reorients the view towards the north.</p><p>The localization button shows your location on the map and moves the view to where you are.</p><p>The buttons at the bottom control the zoom.</p>";
+  }else{
+    document.getElementById("tutorialInfo").innerHTML = "<p>En bas à droite se trouve la légende. En cliquant sur l'oeil, il est possible de masquer ou démasquer les différentes couches.</p><p>L'interrupteur permet de montrer des couches supplémentaires.</p><p>Le « i » permet de recommencer le tutoriel.</p><p>La boussole permet de réorienter la vue vers le nord.</p><p>Le bouton de localisation permet de voir votre emplacement sur la carte et de ramener la vue sur l'endroit où vous vous trouvez.</p><p>Les boutons du bas gèrent le zoom.</p>";
+  }
   let next = document.getElementById("tutorialNext");
   let skip = document.getElementById("tutorialSkip");
   let bottomElements = document.getElementsByClassName("esri-ui-bottom-right")[0];
   bottomElements.style.zIndex = 1000;
-  next.innerHTML = "Terminer";
+  if(document.documentElement.lang == "en"){
+    next.innerHTML = "Close";
+  }else{
+    next.innerHTML = "Terminer";
+  }
   next.style.float = "";
   skip.style.display = "none";
 
   waitForNext().then(() => {
     bottomElements.style.zIndex = 'initial';
     skipTutorial()
-    next.innerHTML = "Suivant";
+    if(document.documentElement.lang == "en"){
+      next.innerHTML = "Next";
+    }else{
+      next.innerHTML = "Suivant";
+    }
     next.style.float = "left";
     skip.style.display = "initial";
   });
