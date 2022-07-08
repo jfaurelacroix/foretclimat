@@ -613,7 +613,7 @@ require([
   const FM_AB_BLOC = new FeatureLayer({
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/FM_poly_AB/FeatureServer",
     outFields: ["*"],
-    title: "Délimitations de la Forêt-Montmorency",
+    title: "Délimitations de la Forêt Montmorency",
     renderer: {
       type: "unique-value",
       field: "id",
@@ -647,6 +647,45 @@ require([
       }]
     })
   })
+
+  /* changes everything in english for the feature layers */
+  if(document.documentElement.lang=="en"){
+    IMLNU_PS.title = "Points of unused woody material";
+    IMLNU_PS.popupTemplate.title = "Inventory of unused wood material {annee}";
+    IMLNU_PS.popupTemplate.content[0].fieldInfos[0].label = "Unused woody material";
+    IMLNU_PS.popupTemplate.content[0].fieldInfos[1].label = "Volume affected by harvesting operations";
+    
+    IMLNU_BLOC.title = "Points of unused woody material";
+    IMLNU_BLOC.popupTemplate.title = "Inventory of unused wood material {annee}";
+    IMLNU_BLOC.popupTemplate.content[0].mediaInfos[0].title = "";
+    IMLNU_BLOC.popupTemplate.content[0].mediaInfos[0].caption = "";
+    IMLNU_BLOC.popupTemplate.content[0].mediaInfos[1].title = "";
+    IMLNU_BLOC.popupTemplate.content[0].mediaInfos[1].caption = "";
+    /* TODO */
+    BATIMENTS_PS.title = "Buildings";
+    BATIMENTS_PS.popupTemplate.content[0].fieldInfos[0].label = "Building type";
+  
+    CHEMINS_PL.title = "Roads";
+    CHEMINS_PL.renderer.legendOptions = {title: "Road classification"},
+    CHEMINS_PL.popupTemplate.title = "Road #{NO_CHEM} {CHEMIN_NOM}";
+    CHEMINS_PL.popupTemplate.content[0].fieldInfos[0].label = "Road condition";
+    CHEMINS_PL.popupTemplate.content[0].fieldInfos[1].label = "Road classes";
+
+    SENTIERS_PL.title = "Paths";
+    SENTIERS_PL.renderer.legendOptions = {title: "Difficulty of the path"},
+    SENTIERS_PL.popupTemplate.title = "Path {Nom}";
+    SENTIERS_PL.popupTemplate.content[0].fieldInfos[0].label = "Difficulty";
+    SENTIERS_PL.popupTemplate.content[0].fieldInfos[2].label = "Use";
+
+    MOTONEIGE_PL.title = "Snowmobile path";
+    MOTONEIGE_PL.popupTemplate.title = "Snowmobile path {NOM_CLUB}";
+    MOTONEIGE_PL.popupTemplate.content[0].fieldInfos[0].label = "Name of the club";
+    MOTONEIGE_PL.popupTemplate.content[0].fieldInfos[1].label = "Region";
+
+    FM_AB_BLOC.title = "Delimitations of the Forêt Montmorency";
+    FM_AB_BLOC.renderer.legendOptions = {title: "Delimitations of the zones"},
+    FM_AB_BLOC.popupTemplate.content[0].fieldInfos[0].label = "Area";
+  }
 
   /* Parameters used for each sources in the following search widget */
   let searchSourcesParam = {
