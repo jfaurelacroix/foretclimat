@@ -27,6 +27,7 @@ require([
     url: esriConfig.portalUrl
   });
 
+  /* The Portal WebMap */
   const map = new WebMap({
     portalItem: {
       // autocasts as new PortalItem()
@@ -35,9 +36,11 @@ require([
     }
   });
 
+  /* The map view is contained in the "viewDiv" of the HTML doc*/ 
   const view = new MapView({
     map: map,
     container: "viewDiv",
+    /* Extent is based on FM_AB_BLOC */
     extent:{
       xmin: '-7935173.813346129',
       ymin: '5967391.847883448',
@@ -47,7 +50,7 @@ require([
     }
   });
 
-
+  /* Points IMLNU */
   const IMLNU_PS = new FeatureLayer(
     {
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/BD_Inventaires_Secteur_gdb/FeatureServer/0",
@@ -85,6 +88,7 @@ require([
     })
   });
 
+  /* Polygons IMLNU */
   const IMLNU_BLOC = new FeatureLayer({
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/BD_Inventaires_Secteur_gdb/FeatureServer/1",
     outFields: ["*"],
@@ -121,6 +125,7 @@ require([
     })
   });
 
+  /* Points Intervention */
   const INTER_PS =  new FeatureLayer({
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/BD_Inventaires_Secteur_gdb/FeatureServer/2",
     outFields: ["*"],
@@ -152,6 +157,7 @@ require([
     })
   });
 
+  /* Polygons Intervention */
   const INTER_BLOC = new FeatureLayer({
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/BD_Inventaires_Secteur_gdb/FeatureServer/3",
     outFields: ["*"],
@@ -188,6 +194,7 @@ require([
     })
   });
 
+  /* Points Qualite Reboisement */
   const REBOIS_PS = new FeatureLayer({
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/BD_Inventaires_Secteur_gdb/FeatureServer/4",
     outFields: ["*"],
@@ -213,6 +220,7 @@ require([
     })
   });
 
+  /* Polygons Qualite Reboisement */
   const REBOIS_BLOC = new FeatureLayer({
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/BD_Inventaires_Secteur_gdb/FeatureServer/5",
     outFields: ["*"],
@@ -249,6 +257,7 @@ require([
     })
   });
 
+  /* Points Recolte */
   const RECOLTE_PS =  new FeatureLayer({
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/BD_Inventaires_Secteur_gdb/FeatureServer/6",
     outFields: ["*"],
@@ -271,6 +280,7 @@ require([
     })
   });
 
+  /* Polygons Recolte */
   const RECOLTE_BLOC = new FeatureLayer({
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/BD_Inventaires_Secteur_gdb/FeatureServer/8",
     outFields: ["*"],
@@ -307,6 +317,7 @@ require([
     })
   });
 
+  /* Points Regeneration */
   const REGEN_PS = new FeatureLayer({
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/BD_Inventaires_Secteur_gdb/FeatureServer/7",
     outFields: ["*"],
@@ -342,6 +353,7 @@ require([
     })
   });
 
+  /* Polygons Regeneration */
   const REGEN_BLOC = new FeatureLayer({
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/BD_Inventaires_Secteur_gdb/FeatureServer/9",
     outFields: ["*"],
@@ -378,6 +390,7 @@ require([
     })
   });
 
+  /* Points SuiviPlantation */
   const PLANT_PS = new FeatureLayer({
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/BD_Inventaires_Secteur_gdb/FeatureServer/10",
     outFields: ["*"],
@@ -407,6 +420,7 @@ require([
     })
   });
 
+  /* Polygons SuiviPlantation */
   const PLANT_BLOC = new FeatureLayer({
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/BD_Inventaires_Secteur_gdb/FeatureServer/12",
     outFields: ["*"],
@@ -443,6 +457,7 @@ require([
     })
   });
 
+  /* Layer about human constructions on site */
   const BATIMENTS_PS = new FeatureLayer({
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/FM_batiments/FeatureServer",
     outFields: ["*"],
@@ -468,6 +483,7 @@ require([
     })
   })
 
+  /* Layer about the roads and other paths */
   const CHEMINS_PL = new FeatureLayer({
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/Chemin_FM/FeatureServer",
     outFields: ["*"],
@@ -507,6 +523,7 @@ require([
     })
   })
 
+  /* Layer about the walking paths */
   const SENTIERS_PL = new FeatureLayer({
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/Project_FM_sentiers/FeatureServer",
     outFields: ["*"],
@@ -561,6 +578,7 @@ require([
     })
   })
 
+  /* Layer about the snowmobile club path */
   const MOTONEIGE_PL = new FeatureLayer({
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/Project_FM_motoneige/FeatureServer",
     outFields: ["*"],
@@ -591,6 +609,7 @@ require([
     })
   })
 
+  /* Layer delimiting zones A and B of Foret Montmorency */
   const FM_AB_BLOC = new FeatureLayer({
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/FM_poly_AB/FeatureServer",
     outFields: ["*"],
@@ -629,6 +648,7 @@ require([
     })
   })
 
+  /* Parameters used for each sources in the following search widget */
   let searchSourcesParam = {
     exactMatch: false,
     outFields: ["*"],
@@ -638,9 +658,10 @@ require([
     minSuggestCharacters: 0
   }
 
+  /* Widget that is the search bar. Add each layer as a source */
   const search = new Search ({
     view: view,
-    allPlaceholder: "Rechercher une couche ou un lieu",
+    allPlaceholder: "Rechercher un lieu ou une couche",
     portal: myPortal, // https://enterprise.arcgis.com/fr/portal/latest/administer/windows/configure-portal-to-geocode-addresses.htm
     sources: [ //https://developers.arcgis.com/javascript/latest/sample-code/widgets--multiplesource/
       {
@@ -774,19 +795,23 @@ require([
     ]
   });
 
+  /* Widget to change the basemap */
   const toggle = new BasemapToggle({
     view: view,
     nextBasemap: "osm" //https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html#basemap
   });
 
+  /* Widget to locate the user on the map */
   const locateWidget = new Locate({
     view: view
   });
 
+  /* Widget that acts as a compass */
   const compass = new Compass({
     view: view
   });
 
+  /* Widget to let the user hide/show different layers, also acts as a legend */
   const layerList = new LayerList({
     view: view,
     listItemCreatedFunction: function (event) {
@@ -800,6 +825,7 @@ require([
         content: "",
         open: true
       }
+      /* If simple renderer: manually add the symbol to the content panel */
       if(item.layer.renderer.type == 'simple'){
         if(item.panel.content == ""){
           mySymbol = item.layer.renderer.symbol;
@@ -807,18 +833,25 @@ require([
             item.panel.content = renderedSymbol;
           });
         }
+      /* Else the id string "legend" will automatically generate the legend for unique value renderers */
       }else{
         item.panel.content = "legend";
       }
     }
   });
 
+  /* Defined to be used in utils.js */
   Window.map = map;
+
+  /* Adds every layer to the map */
   map.addMany([FM_AB_BLOC, PLANT_BLOC, REGEN_BLOC,  RECOLTE_BLOC, REGEN_BLOC, REBOIS_BLOC, INTER_BLOC,  IMLNU_BLOC, PLANT_PS, REGEN_PS, RECOLTE_PS, REGEN_PS, REBOIS_PS, INTER_PS, IMLNU_PS, CHEMINS_PL, MOTONEIGE_PL, SENTIERS_PL, BATIMENTS_PS,]);
+
+  /* Adds every item as esri-component but they are still positionned manually using position: fixed */
   view.ui.add(["textBoxDiv", search], "top-left");
   view.ui.add(["account", "sideburger"], "top-right");
   view.ui.add([toggle], "bottom-left");
   view.ui.add([locateWidget, compass, layerList, "tutorialHelp", "switch"], "bottom-right");
+
   view.ui.move(["zoom"], "bottom-right");
 
   // auto-dock https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Popup.html#dockOptions

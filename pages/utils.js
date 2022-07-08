@@ -179,6 +179,7 @@ function waitForNext(){
     })
 }
 
+/* Starts the tutorial scenario from the beginning */
 function startTutorial(){
   const tutBox = document.getElementById('tutorialBox');
   tutBox.style.display = 'inline';
@@ -195,6 +196,7 @@ function startTutorial(){
   });
 }
 
+/* 2nd step of tutorial (controls on the map) */
 function controlsTutorial(tutBox){
   if(document.documentElement.lang == "en"){
     document.getElementById("tutorialInfo").innerHTML = "<p>Left click lets you naviguate the map.</p><p>Right click lets your rotate the map.</p><p>The mouse wheel controls the zoom.</p>";
@@ -208,6 +210,7 @@ function controlsTutorial(tutBox){
   });
 }
 
+/* 3rd step of tutorial (Top left) */
 function topLeftTutorial(tutBox){
   if(document.documentElement.lang == "en"){
     document.getElementById("tutorialInfo").innerHTML = "<p>There is the search bar.</p><p>You are able to select a specific layer for the search by clicking on the small arrow to the left.</p>";
@@ -224,6 +227,7 @@ function topLeftTutorial(tutBox){
   });
 }
 
+/* 4th step of tutorial (Top right) */
 function topRightTutorial(tutBox){
   if(document.documentElement.lang == "en"){
     document.getElementById("tutorialInfo").innerHTML = "<p>Click on the profile icon to log in to your institution or your Forêt-Climat account.</p><p>Click on the menu to access the the rest of the site or the Storymaps.</p>";
@@ -240,6 +244,7 @@ function topRightTutorial(tutBox){
   });
 }
 
+/* 5th step of tutorial (Bottom left) */
 function bottomLeftTutorial(tutBox){
   if(document.documentElement.lang == "en"){
     document.getElementById("tutorialInfo").innerHTML = "<p>The bottom left map lets you change the basemap.</p>";
@@ -256,6 +261,7 @@ function bottomLeftTutorial(tutBox){
   });
 }
 
+/* 6th step of tutorial (Bottom right) */
 function bottomRightTutorial(tutBox){
   if(document.documentElement.lang == "en"){
     document.getElementById("tutorialInfo").innerHTML = "<p>You can find the legend at the bottom right. By clicking the eye, you can either hide or show the different layers.</p><p>The toggle switch lets you see additional layers</p><p>The « i » restarts the tutorial.</p><p>The compass reorients the view towards the north.</p><p>The localization button shows your location on the map and moves the view to where you are.</p><p>The buttons at the bottom control the zoom.</p>";
