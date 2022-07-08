@@ -1,4 +1,4 @@
-1.  Setup ArcGIS Pro with the Portal
+# 1.  Setup ArcGIS Pro with the Portal
 
 ![](media/image1.png)
 
@@ -21,7 +21,7 @@ Finally, "Set as Active Portal".
 
 
 
-2.  How to share with the Portal
+# 2.  How to share with the Portal
 
 ![](media/image4.png)
 
@@ -34,7 +34,7 @@ After filling in the fields, you can click "Share".
 
 
 
-3.  Setup a database connection to the ArcGIS Server
+# 3.  Setup a database connection to the ArcGIS Server
 
 ![](media/image5.png)
 
