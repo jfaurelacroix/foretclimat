@@ -48,7 +48,8 @@ require([
   });
 
 
-  const IMLNU_PS = new FeatureLayer({
+  const IMLNU_PS = new FeatureLayer(
+    {
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/BD_Inventaires_Secteur_gdb/FeatureServer/0",
     outFields: ["*"],
     title: "Points de matière ligneuse non utilisée",
@@ -628,6 +629,15 @@ require([
     })
   })
 
+  let searchSourcesParam = {
+    exactMatch: false,
+    outFields: ["*"],
+    maxResults: 6,
+    maxSuggestions: 6,
+    suggestionsEnabled: true,
+    minSuggestCharacters: 0
+  }
+
   const search = new Search ({
     view: view,
     allPlaceholder: "Rechercher une couche ou un lieu",
@@ -635,218 +645,138 @@ require([
     sources: [ //https://developers.arcgis.com/javascript/latest/sample-code/widgets--multiplesource/
       {
         layer: BATIMENTS_PS,
-        exactMatch: false,
         name: "Batiments",
         placeholder: "Rechercher un batiment",
         searchFields: ["nom", "type"],
         displayField: "nom",
-        outFields: ["*"],
-        maxResults: 6,
-        maxSuggestions: 6,
-        suggestionsEnabled: true,
-        minSuggestCharacters: 0
+        searchSourcesParam
       },
       {
         layer: CHEMINS_PL,
-        exactMatch: false,
         name: "Chemins",
         placeholder: "Rechercher un chemin",
         searchFields: ["chemin_nom", "etat"],
         displayField: "chemin_nom",
-        outFields: ["*"],
-        maxResults: 6,
-        maxSuggestions: 6,
-        suggestionsEnabled: true,
-        minSuggestCharacters: 0
+        searchSourcesParam
       },
       {
         layer: SENTIERS_PL,
-        exactMatch: false,
         name: "Sentiers",
         placeholder: "Rechercher un sentier",
         searchFields: ["chemin_nom", "difficulte"],
         displayField: "chemin_nom",
-        outFields: ["*"],
-        maxResults: 6,
-        maxSuggestions: 6,
-        suggestionsEnabled: true,
-        minSuggestCharacters: 0
+        searchSourcesParam
       },
       {
         layer: MOTONEIGE_PL,
-        exactMatch: false,
         name: "Piste de motoneige",
         placeholder: "Rechercher un club et ses pistes",
         searchFields: ["nom_club"],
         displayField: "nom_club",
-        outFields: ["*"],
-        maxResults: 6,
-        maxSuggestions: 6,
-        suggestionsEnabled: true,
-        minSuggestCharacters: 0
+        searchSourcesParam
       },
       {
         layer: IMLNU_PS,
-        exactMatch: false,
         name: "Points matière ligneuse non utilisée",
         placeholder: "Rechercher un point",
         searchFields: ["objectid", "annee",  "ID_PE"],
         displayFields: ["ID_PE"],
-        outFields: ["*"],
-        maxResults: 6,
-        maxSuggestions: 6,
-        suggestionsEnabled: true,
-        minSuggestCharacters: 0
+        searchSourcesParam
       },
       {
         layer: IMLNU_BLOC,
-        exactMatch: false,
         name: "Polygones matière ligneuse non utilisée",
         placeholder: "Rechercher un polygone",
-        outFields: ["*"],
         searchFields: ["objectid", "annee", "ID_BLOC"],
         displayFields: ["ID_BLOC"],
-        maxResults: 6,
-        maxSuggestions: 6,
-        suggestionsEnabled: true,
-        minSuggestCharacters: 0
+        searchSourcesParam
       },
       {
         layer: INTER_PS,
-        exactMatch: false,
         name: "Points intervention",
         placeholder: "Rechercher un point",
         searchFields: ["objectid", "annee",  "ID_PE"],
         displayFields: ["ID_PE"],
-        outFields: ["*"],
-        maxResults: 6,
-        maxSuggestions: 6,
-        suggestionsEnabled: true,
-        minSuggestCharacters: 0
+        searchSourcesParam
       },
       {
         layer: INTER_BLOC,
-        exactMatch: false,
         name: "Polygones intervention",
         placeholder: "Rechercher un polygone",
         searchFields: ["objectid", "annee", "ID_BLOC"],
         displayFields: ["ID_BLOC"],
-        outFields: ["*"],
-        maxResults: 6,
-        maxSuggestions: 6,
-        suggestionsEnabled: true,
-        minSuggestCharacters: 0
+        searchSourcesParam
       },
       {
         layer: REBOIS_PS,
-        exactMatch: false,
         name: "Points qualité du reboisement",
         placeholder: "Rechercher un point",
         searchFields: ["objectid", "annee",  "ID_PE"],
         displayFields: ["ID_PE"],
-        outFields: ["*"],
-        maxResults: 6,
-        maxSuggestions: 6,
-        suggestionsEnabled: true,
-        minSuggestCharacters: 0
+        searchSourcesParam
       },
       {
         layer: REBOIS_BLOC,
-        exactMatch: false,
         name: "Polygones qualité du reboisement",
         placeholder: "Rechercher un polygone",
         searchFields: ["objectid", "annee", "ID_BLOC"],
         displayFields: ["ID_BLOC"],
-        outFields: ["*"],
-        maxResults: 6,
-        maxSuggestions: 6,
-        suggestionsEnabled: true,
-        minSuggestCharacters: 0
+        searchSourcesParam
       },
       {
         layer: RECOLTE_PS,
-        exactMatch: false,
         name: "Points récolte",
         placeholder: "Rechercher un point",
         searchFields: ["objectid", "annee",  "ID_PE"],
         displayFields: ["ID_PE"],
-        outFields: ["*"],
-        maxResults: 6,
-        maxSuggestions: 6,
-        suggestionsEnabled: true,
-        minSuggestCharacters: 0
+        searchSourcesParam
       },
       {
         layer: RECOLTE_BLOC,
-        exactMatch: false,
         name: "Polygones récolte",
         placeholder: "Rechercher un polygone",
         searchFields: ["objectid", "annee", "ID_BLOC"],
         displayFields: ["ID_BLOC"],
-        outFields: ["*"],
-        maxResults: 6,
-        maxSuggestions: 6,
-        suggestionsEnabled: true,
-        minSuggestCharacters: 0
+        searchSourcesParam
       },
       {
         layer: REGEN_PS,
-        exactMatch: false,
         name: "Points Régénération",
         placeholder: "Rechercher un point",
         searchFields: ["objectid", "annee",  "ID_PE"],
         displayFields: ["ID_PE"],
-        outFields: ["*"],
-        maxResults: 6,
-        maxSuggestions: 6,
-        suggestionsEnabled: true,
-        minSuggestCharacters: 0
+        searchSourcesParam
       },
       {
         layer: REGEN_BLOC,
-        exactMatch: false,
         name: "Polygones régénération",
         placeholder: "Rechercher un polygone",
         searchFields: ["objectid", "annee", "ID_BLOC"],
         displayFields: ["ID_BLOC"],
-        outFields: ["*"],
-        maxResults: 6,
-        maxSuggestions: 6,
-        suggestionsEnabled: true,
-        minSuggestCharacters: 0
+        searchSourcesParam
       },
       {
         layer: PLANT_PS,
-        exactMatch: false,
         name: "Points suivi de plantation",
         placeholder: "Rechercher un point",
         searchFields: ["objectid", "annee",  "ID_PE"],
         displayFields: ["ID_PE"],
-        outFields: ["*"],
-        maxResults: 6,
-        maxSuggestions: 6,
-        suggestionsEnabled: true,
-        minSuggestCharacters: 0
+        searchSourcesParam
       },
       {
         layer: PLANT_BLOC,
-        exactMatch: false,
         name: "Polygones suivi de plantation",
         placeholder: "Rechercher un polygone",
         searchFields: ["objectid", "annee", "ID_BLOC"],
         displayFields: ["ID_BLOC"],
-        outFields: ["*"],
-        maxResults: 6,
-        maxSuggestions: 6,
-        suggestionsEnabled: true,
-        minSuggestCharacters: 0
+        searchSourcesParam
       }
     ]
   });
 
   const toggle = new BasemapToggle({
     view: view,
-    nextBasemap: "hybrid"
+    nextBasemap: "osm" //https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html#basemap
   });
 
   const locateWidget = new Locate({
