@@ -1,3 +1,8 @@
+1. [Setup ArcGIS Pro with the Portal](https://github.com/jfaurelacroix/foretclimat/blob/main/usingPortal.md#1--setup-arcgis-pro-with-the-portal)
+2. [How to share with the Portal](https://github.com/jfaurelacroix/foretclimat/blob/main/usingPortal.md#2--how-to-share-with-the-portal)
+3. [Setup a database connection to the ArcGIS Server](https://github.com/jfaurelacroix/foretclimat/blob/main/usingPortal.md#3--setup-a-database-connection-to-the-arcgis-server)
+
+---------------------------------------------
 # 1.  Setup ArcGIS Pro with the Portal
 
 ![](media/image1.png)
