@@ -103,6 +103,7 @@ function setLangUser(){
   }
 }
 
+/* Handles bottom-right Switch toggle changes. If it's checked => display every layer, otherwise => display layer for visitors */
 function handleChange(mySwitch){
   if(mySwitch.checked){
     setResearchMode();
@@ -111,7 +112,7 @@ function handleChange(mySwitch){
   }
 }
 
-
+/* Hides every layer from BD_Inventaires_Secteur_gdb and displays the rest */
 function setPublicMode(){
   for (const layer of Window.map.allLayers.items){
     if (layer.url.includes("BD_Inventaires_Secteur_gdb") && !layer.url.includes("World_Imagery")){
@@ -124,6 +125,7 @@ function setPublicMode(){
   }
 }
 
+/* Makes every layer "showable" and makes every layer from BD_Inventaires_Secteur_gdb visible on the screen */
 function setResearchMode(){
   for (const layer of Window.map.allLayers.items){
     if (layer.url.includes("BD_Inventaires_Secteur_gdb") || layer.url.includes("World_Imagery")){
@@ -133,35 +135,48 @@ function setResearchMode(){
     }
     layer.listMode = 'show';
   }
-
 }
 
+/* Shows the 0.9 opacity black background to be used during the tutorial */
 function showBlackBG(){
   const background = document.getElementById("blackBG");
   background.style.display = 'inline';
 
 }
 
+/* Hides the 0.9 opacity black background to be used during the tutorial */
 function hideBlackBG(){
   const background = document.getElementById("blackBG");
   background.style.display = 'none';
 }
 
+/* Ends the tutorial (when you skip or at the end) it hides the box and the background */
 function skipTutorial(){
   const tutBox = document.getElementById('tutorialBox');
   tutBox.style.display = 'none';
+  let uiElements = document.getElementsByClassName("esri-ui-inner-container esri-ui-corner-container")[0];
+  for(const element of uiElements.childNodes){
+    element.style.zIndex = 'initial';
+  }
   hideBlackBG();
 }
 
+/* Pauses the tutorial until you click on the "Next" Button */
 function waitForNext(){
-  var myButton = document.getElementById('tutorialNext');
+  var myButtonNext = document.getElementById('tutorialNext');
+  var myButtonSkip = document.getElementById('tutorialSkip');
   return new Promise(resolve => {
-    myButton.addEventListener('click',
+    myButtonNext.addEventListener('click',
         async function handler(event) {
-            myButton.removeEventListener('click', handler);
+            myButtonNext.removeEventListener('click', handler);
             resolve(true)
         });
-      })
+    myButtonSkip.addEventListener('click',
+      async function handler(event) {
+          myButtonSkip.removeEventListener('click', handler);
+          resolve(false)
+      });
+    })
 }
 
 function startTutorial(){
@@ -173,8 +188,10 @@ function startTutorial(){
   }else{
     document.getElementById("tutorialInfo").innerHTML = "<p>Bienvenue sur le site de la passerelle Forêt-Climat.<br></p><p>Cliquez sur « Suivant » pour suivre le tutoriel.</p><p>Vous pouvez aussi « Passer » à tout moment.</p>";
   }
-  waitForNext().then(() => {
-    controlsTutorial(tutBox);
+  waitForNext().then((bool) => {
+    if(bool){
+      controlsTutorial(tutBox);
+    }
   });
 }
 
@@ -184,8 +201,10 @@ function controlsTutorial(tutBox){
   }else{
     document.getElementById("tutorialInfo").innerHTML = "<p>Le clique gauche permet de naviguer sur la carte.</p><p>Le clique droit permet de faire des rotations.</p><p>La molette de la souris permet de zoomer ou de dézoomer.</p>";
   }
-  waitForNext().then(() => {
-    topLeftTutorial(tutBox);
+  waitForNext().then((bool) => {
+    if(bool){
+      topLeftTutorial(tutBox);
+    }
   });
 }
 
@@ -197,9 +216,11 @@ function topLeftTutorial(tutBox){
   }
   let topElements = document.getElementsByClassName("esri-ui-top-left")[0];
   topElements.style.zIndex = 1000;
-  waitForNext().then(() => {
-    topElements.style.zIndex = 'initial';
-    topRightTutorial(tutBox);
+  waitForNext().then((bool) => {
+    if(bool){
+      topElements.style.zIndex = 'initial';
+      topRightTutorial(tutBox);
+    }
   });
 }
 
@@ -211,9 +232,11 @@ function topRightTutorial(tutBox){
   }
   let topElements = document.getElementsByClassName("esri-ui-top-right")[0];
   topElements.style.zIndex = 1000;
-  waitForNext().then(() => {
-    topElements.style.zIndex = 'initial';
-    bottomLeftTutorial(tutBox);
+  waitForNext().then((bool) => {
+    if(bool){
+      topElements.style.zIndex = 'initial';
+      bottomLeftTutorial(tutBox);
+    }
   });
 }
 
@@ -225,9 +248,11 @@ function bottomLeftTutorial(tutBox){
   }
   let bottomElements = document.getElementsByClassName("esri-ui-bottom-left")[0];
   bottomElements.style.zIndex = 1000;
-  waitForNext().then(() => {
-    bottomElements.style.zIndex = 'initial';
-    bottomRightTutorial(tutBox);
+  waitForNext().then((bool) => {
+    if(bool){
+      bottomElements.style.zIndex = 'initial';
+      bottomRightTutorial(tutBox);
+    }
   });
 }
 
