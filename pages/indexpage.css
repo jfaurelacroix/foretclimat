@@ -1,5 +1,5 @@
 :root {
-    --blue: #AFD5AA;
+    --blue: #6C756B;
 }
 
 html, body, #viewDiv {
@@ -210,7 +210,7 @@ html, body, #viewDiv {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
-    color: #181818;
+    color: #f3f3f3;
     display: block;
     transition: 0.3s;
 }
@@ -236,7 +236,7 @@ html, body, #viewDiv {
 
 /* When you mouse over the navigation links, change their color */
 .sidenav a.SidenavElement:hover {
-    text-decoration-color: rgb(0, 0, 0);
+    text-decoration-color: rgb(255, 255, 255);
 }
 
 /* Position and style the close button (top right corner) */
@@ -246,6 +246,13 @@ html, body, #viewDiv {
     right: 13px;
     font-size: 48px;
     margin-left: 50px;
+}
+
+.sidenav #partLogoDiv {
+    position: fixed;
+    bottom: 25px;
+    margin-left: 100px;
+    display: block;
 }
 
 /* || Toggle Switch */
