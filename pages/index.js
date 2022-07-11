@@ -723,7 +723,7 @@ require([
         layer: SENTIERS_PL,
         name: "Sentiers",
         placeholder: "Rechercher un sentier",
-        searchFields: ["chemin_nom", "difficulte"],
+        searchFields: ["chemin_nom", "difficulte", "usage"],
         displayField: "chemin_nom",
         searchSourcesParam
       },
@@ -834,6 +834,43 @@ require([
     ]
   });
 
+  /* Changes placeholders if page is in english */
+  if(document.documentElement.lang=="en"){
+    search.allPlaceholder = "Search for places or layers"
+    search.allSources.items[0].name = "Buildings";
+    search.allSources.items[0].placeholder = "Search for buildings";
+    search.allSources.items[1].name = "Roads";
+    search.allSources.items[1].placeholder = "Search for roads";
+    search.allSources.items[2].name = "Paths";
+    search.allSources.items[2].placeholder = "Search for paths";
+    search.allSources.items[3].name = "Snowmobile paths";
+    search.allSources.items[3].placeholder = "Search for snowmobile paths";
+    search.allSources.items[4].name = "Points of unused wood material";
+    search.allSources.items[4].placeholder = "Search for points";
+    search.allSources.items[5].name = "Polygons of unused wood material";
+    search.allSources.items[5].placeholder = "Search for polygons";
+    search.allSources.items[6].name = "Points of intervention";
+    search.allSources.items[6].placeholder = "Search for points";
+    search.allSources.items[7].name = "Polygons of intervention";
+    search.allSources.items[7].placeholder = "Search for polygons";
+    search.allSources.items[8].name = "Points of reforestation";
+    search.allSources.items[8].placeholder = "Search for points";
+    search.allSources.items[9].name = "Polygons of reforestation";
+    search.allSources.items[9].placeholder = "Search for polygons";
+    search.allSources.items[10].name = "Points of harvest";
+    search.allSources.items[10].placeholder = "Search for points";
+    search.allSources.items[11].name = "Polygons of harvest";
+    search.allSources.items[11].placeholder = "Search for polygons";
+    search.allSources.items[12].name = "Points of regeneration";
+    search.allSources.items[12].placeholder = "Search for points";
+    search.allSources.items[13].name = "Polygons of regeneration";
+    search.allSources.items[13].placeholder = "Search for polygons";
+    search.allSources.items[14].name = "Points of planting";
+    search.allSources.items[14].placeholder = "Search for points";
+    search.allSources.items[15].name = "Polygons of planting";
+    search.allSources.items[15].placeholder = "Search for polygons";
+  }
+
   /* Widget to change the basemap */
   const toggle = new BasemapToggle({
     view: view,
@@ -886,7 +923,7 @@ require([
   map.addMany([FM_AB_BLOC, PLANT_BLOC, REGEN_BLOC,  RECOLTE_BLOC, REGEN_BLOC, REBOIS_BLOC, INTER_BLOC,  IMLNU_BLOC, PLANT_PS, REGEN_PS, RECOLTE_PS, REGEN_PS, REBOIS_PS, INTER_PS, IMLNU_PS, CHEMINS_PL, MOTONEIGE_PL, SENTIERS_PL, BATIMENTS_PS,]);
 
   /* Adds every item as esri-component but they are still positionned manually using position: fixed */
-  view.ui.add(["textBoxDiv", search], "top-left");
+  view.ui.add(["logoPasserelle", search], "top-left");
   view.ui.add(["account", "sideburger"], "top-right");
   view.ui.add([toggle], "bottom-left");
   view.ui.add([locateWidget, compass, layerList, "tutorialHelp", "switch"], "bottom-right");

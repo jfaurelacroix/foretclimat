@@ -1,5 +1,5 @@
 :root {
-    --blue: #6C756B;
+    --blue: #AFD5AA;
 }
 
 html, body, #viewDiv {
@@ -10,26 +10,25 @@ html, body, #viewDiv {
     position: relative;
 }
 
+/* || UI */
+
+/* For the tutorial to work with the background we need to set the z-index */
 .esri-ui{
     z-index: initial;
 }
 
-/* Textbox to the right of the Foret-Climat Logo */
-
-#textBoxDiv {
+/* the Foret-Climat Logo */
+#logoPasserelle {
+    width: 165px;
     background-color: rgb(245, 245, 245, 0.8);
     position: fixed;
     top: 20px;
     left: 20px;
     font-size: var(--calcite-font-size-0);
-    width: 165px;
     height: 165px;
 }
 
-#logoPasserelle {
-    width: 165px;
-}
-
+/* "i" for the tutorial */
 #tutorialHelp {
     position: fixed;
     bottom: 190px;
@@ -43,6 +42,8 @@ html, body, #viewDiv {
     overflow: hidden;
     font-family: monospace;
 }
+
+/* || The Esri widgets */
 
 /* Search bar */
 .esri-search {
@@ -70,6 +71,7 @@ html, body, #viewDiv {
     right: 15px;
 }
 
+/* Layer-list / legend */
 .esri-layer-list{
     position: fixed;
     bottom: 30px;
@@ -85,8 +87,9 @@ html, body, #viewDiv {
     right: 10px;
 }
 
-/* opacity when showing the tutorial */
+/* || Tutorial */
 
+/* opacity when showing the tutorial */
 #blackBG{
     z-index: 1;
     height: 100%;
@@ -99,6 +102,7 @@ html, body, #viewDiv {
     display:none
 }
 
+/* the 2 buttons used for tutorial */
 .tutorialButton{
     border-radius: 2px;
     color: rgb(20,20,20);
@@ -106,6 +110,7 @@ html, body, #viewDiv {
     cursor:pointer;
 }
 
+/* The box where the text and buttons are contained */
 #tutorialBox {
     z-index: 1001;
     border-radius: 10px;
@@ -124,7 +129,6 @@ html, body, #viewDiv {
 }
 
 /* Profile icon*/
-
 #account {
     position: fixed;
     top: 20px;
@@ -135,6 +139,8 @@ html, body, #viewDiv {
     background-color : rgba(245, 245, 245, 1);
     border-color: var(--blue);
 }
+
+/* || Menu Burger */
 
 .container.esri-component {
     position: fixed;
@@ -158,35 +164,24 @@ html, body, #viewDiv {
 }
 
 /* Rotate first bar */
-
 .change .bar1 {
     -webkit-transform: rotate(-45deg) translate(-8px, 6px);
     transform: rotate(-45deg) translate(-8px, 6px);
 }
 
 /* Fade out the second bar */
-
 .change .bar2 {
     opacity: 0;
 }
 
 /* Rotate last bar */
-
 .change .bar3 {
     -webkit-transform: rotate(45deg) translate(-8px, -8px);
     transform: rotate(45deg) translate(-8px, -8px);
 }
 
-/* Div of partner logos */
 
-.sidenav #partLogoDiv {
-    position: fixed;
-    bottom: 25px;
-    margin-left: 100px;
-    display: block;
-}
-
-/* The side navigation menu */
+/* || Sidenavigation menu */
 
 .sidenav {
     height: 100%;
@@ -211,12 +206,11 @@ html, body, #viewDiv {
 }
 
 /* The navigation menu links */
-
 .sidenav a {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
-    color: #ffffff;
+    color: #181818;
     display: block;
     transition: 0.3s;
 }
@@ -241,13 +235,11 @@ html, body, #viewDiv {
 }
 
 /* When you mouse over the navigation links, change their color */
-
 .sidenav a.SidenavElement:hover {
-    text-decoration-color: rgba(200, 200, 200, 1);
+    text-decoration-color: rgb(0, 0, 0);
 }
 
 /* Position and style the close button (top right corner) */
-
 .sidenav .closebtn {
     position: absolute;
     top: 6px;
@@ -256,7 +248,8 @@ html, body, #viewDiv {
     margin-left: 50px;
 }
 
-/* Toggle Switch */
+/* || Toggle Switch */
+
 .switch.esri-component {
     position: fixed;
     bottom: 240px;
