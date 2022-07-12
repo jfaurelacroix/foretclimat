@@ -69,7 +69,7 @@ mv apt-* apt
 mv esri-iis-* esri-iis
 mv esri-tomcat-* esri-tomcat
 ```
-make sure that you have all the required tar and license files available (in /media/data/bkp_ArcGIS_files/)
+Make sure that you have all the required tar and license files available (in /media/data/bkp_ArcGIS_files/)
 - ArcGIS_Server_Linux_109_177864.tar.gz
 - ArcGIS_Web_Adaptor_Java_Linux_109_177888.tar.gz
 - apache-tomcat-8.5.63.tar.gz (will be downloaded from the internet if not present in the local ArcGIS software repository)
@@ -203,5 +203,23 @@ sudo mv /arcgis/portal/framework/webapps/arcgis#home/index.html /arcgis/portal/f
 sudo cp ~/repos/foretclimat/pages/* /arcgis/portal/framework/webapps/arcgis#home/
 sudo cp ~/repos/foretclimat/media /arcgis/portal/framework/webapps/arcgis#home/
 ```
+#### Schedule notebook task
+As arcgis user create the following directory
+```
+mkdir /gisdata/notebookserver/directories/arcgisworkspace/arcgisdata
+```
+Go to https://www.foretclimat.ca/portal/home/notebook/manager.html > Directories
 
-If you don't plan adding standby machine in the future, don't configure the file server and use local paths instead of shared directories for ArcGIS Server server directories, Portal for ArcGIS content directory, and ArcGIS Data Store backup directories in arcgis-enterprise-primary.json.
+Click on "+ Register Data Directory"
+
+Name: data
+Path: /gisdata/notebookserver/directories/arcgisworkspace/arcgisdata
+
+Then, import the notebook used for the homepage graphs.
+
+After having saved the notebook,  the "Tasks" button becomes available in the top ribbon of the notebook editor.
+
+Click on "Create Task", enter a Title and hit "Next".
+
+For "Repeat Type" pick "Day". For "Time" pick "4:00 AM"
+Make sure it is never ending and updates the notebook on completion.

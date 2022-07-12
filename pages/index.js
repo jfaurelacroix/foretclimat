@@ -107,18 +107,14 @@ require([
         type: "media", //https://developers.arcgis.com/javascript/latest/api-reference/esri-popup-content-MediaContent.html 
         activeMediaInfoIndex: 1,
         mediaInfos: [{
-          title: "<b>title</b>",
           type: "image", // Autocasts as new ImageMediaInfo object
-          caption: "summary",
           value: {
-            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/a58f1ad9d8434ed9856573e560481514/data"
+            sourceURL: "https://www.foretclimat.ca/notebooks/notebooks/a267cc1af247415ba3d59d9f859883b4/files/directories/data/0_area.png"
           }
         },{
-          title: "<b>title</b>",
           type: "image", // Autocasts as new ImageMediaInfo object
-          caption: "summary",
           value: {
-            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/f3bcceeda8374061b621c35fb9d9e09e/data"
+            sourceURL: "https://www.foretclimat.ca/notebooks/notebooks/a267cc1af247415ba3d59d9f859883b4/files/directories/data/IMLNU_Bloc_year.png"
           }
         }]
       }]
@@ -176,18 +172,14 @@ require([
         type: "media", //https://developers.arcgis.com/javascript/latest/api-reference/esri-popup-content-MediaContent.html
         activeMediaInfoIndex: 1,
         mediaInfos: [{
-          title: "<b>title</b>",
           type: "image", // Autocasts as new ImageMediaInfo object
-          caption: "summary",
           value: {
-            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/ee57708918ba4f1db1e84996e89e632c/data"
+            sourceURL: "https://www.foretclimat.ca/notebooks/notebooks/a267cc1af247415ba3d59d9f859883b4/files/directories/data/1_area.png"
           }
         },{
-          title: "<b>title</b>",
           type: "image", // Autocasts as new ImageMediaInfo object
-          caption: "summary",
           value: {
-            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/eacb6b50cdd3443ca1e01bd0b4c58f4c/data"
+            sourceURL: "https://www.foretclimat.ca/notebooks/notebooks/a267cc1af247415ba3d59d9f859883b4/files/directories/data/Inter_Bloc_year.png"
           }
         }]
       }]
@@ -239,18 +231,14 @@ require([
         type: "media", //https://developers.arcgis.com/javascript/latest/api-reference/esri-popup-content-MediaContent.html
         activeMediaInfoIndex: 1,
         mediaInfos: [{
-          title: "<b>title</b>",
           type: "image", // Autocasts as new ImageMediaInfo object
-          caption: "summary",
           value: {
-            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/281517611b064b8496dd57ee3e00ddf9/data"
+            sourceURL: "https://www.foretclimat.ca/notebooks/notebooks/a267cc1af247415ba3d59d9f859883b4/files/directories/data/2_area.png"
           }
         },{
-          title: "<b>title</b>",
           type: "image", // Autocasts as new ImageMediaInfo object
-          caption: "summary",
           value: {
-            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/485fbb1c6c3a4b359214a917904e7614/data"
+            sourceURL: "https://www.foretclimat.ca/notebooks/notebooks/a267cc1af247415ba3d59d9f859883b4/files/directories/data/QualRebois_Bloc_year.png"
           }
         }]
       }]
@@ -299,18 +287,14 @@ require([
         type: "media", //https://developers.arcgis.com/javascript/latest/api-reference/esri-popup-content-MediaContent.html
         activeMediaInfoIndex: 1,
         mediaInfos: [{
-          title: "<b>title</b>",
           type: "image", // Autocasts as new ImageMediaInfo object
-          caption: "summary",
           value: {
-            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/b8f4e9a778a542d2924d4d157fdb7af4/data"
+            sourceURL: "https://www.foretclimat.ca/notebooks/notebooks/a267cc1af247415ba3d59d9f859883b4/files/directories/data/3_area.png"
           }
         },{
-          title: "<b>title</b>",
           type: "image", // Autocasts as new ImageMediaInfo object
-          caption: "summary",
           value: {
-            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/28040139f18045e3a24778674b3ac9fe/data"
+            sourceURL: "https://www.foretclimat.ca/notebooks/notebooks/a267cc1af247415ba3d59d9f859883b4/files/directories/data/Recolte_Bloc_year.png"
           }
         }]
       }]
@@ -372,18 +356,14 @@ require([
         type: "media", //https://developers.arcgis.com/javascript/latest/api-reference/esri-popup-content-MediaContent.html
         activeMediaInfoIndex: 1,
         mediaInfos: [{
-          title: "<b>title</b>",
           type: "image", // Autocasts as new ImageMediaInfo object
-          caption: "summary",
           value: {
-            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/5d658e17095e439ea7f796f21cb8cd4a/data"
+            sourceURL: "https://www.foretclimat.ca/notebooks/notebooks/a267cc1af247415ba3d59d9f859883b4/files/directories/data/4_area.png"
           }
         },{
-          title: "<b>title</b>",
           type: "image", // Autocasts as new ImageMediaInfo object
-          caption: "summary",
           value: {
-            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/957537c4d69f48b0aa8ce33bf8360195/data"
+            sourceURL: "https://www.foretclimat.ca/notebooks/notebooks/a267cc1af247415ba3d59d9f859883b4/files/directories/data/Regen_Bloc_year.png"
           }
         }]
       }]
@@ -439,18 +419,14 @@ require([
         type: "media", //https://developers.arcgis.com/javascript/latest/api-reference/esri-popup-content-MediaContent.html
         activeMediaInfoIndex: 1,
         mediaInfos: [{
-          title: "<b>title</b>",
           type: "image", // Autocasts as new ImageMediaInfo object
-          caption: "summary",
           value: {
-            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/957537c4d69f48b0aa8ce33bf8360195/data"
+            sourceURL: "https://www.foretclimat.ca/notebooks/notebooks/a267cc1af247415ba3d59d9f859883b4/files/directories/data/5_area.png"
           }
         },{
-          title: "<b>title</b>",
           type: "image", // Autocasts as new ImageMediaInfo object
-          caption: "summary",
           value: {
-            sourceURL: "https://www.foretclimat.ca/portal/sharing/rest/content/items/56725eed416b4e26b3359786e602e31d/data"
+            sourceURL: "https://www.foretclimat.ca/notebooks/notebooks/a267cc1af247415ba3d59d9f859883b4/files/directories/data/SuiviPlant_Bloc_year.png"
           }
         }]
       }]
