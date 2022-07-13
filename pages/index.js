@@ -109,12 +109,12 @@ require([
         mediaInfos: [{
           type: "image", // Autocasts as new ImageMediaInfo object
           value: {
-            sourceURL: "https://www.foretclimat.ca/notebooks/notebooks/a267cc1af247415ba3d59d9f859883b4/files/directories/data/0_area.png"
+            sourceURL: "media/graphs/0_area.png"
           }
         },{
           type: "image", // Autocasts as new ImageMediaInfo object
           value: {
-            sourceURL: "https://www.foretclimat.ca/notebooks/notebooks/a267cc1af247415ba3d59d9f859883b4/files/directories/data/IMLNU_Bloc_year.png"
+            sourceURL: "media/graphs/IMLNU_Bloc_year.png"
           }
         }]
       }]
@@ -174,12 +174,12 @@ require([
         mediaInfos: [{
           type: "image", // Autocasts as new ImageMediaInfo object
           value: {
-            sourceURL: "https://www.foretclimat.ca/notebooks/notebooks/a267cc1af247415ba3d59d9f859883b4/files/directories/data/1_area.png"
+            sourceURL: "media/graphs/1_area.png"
           }
         },{
           type: "image", // Autocasts as new ImageMediaInfo object
           value: {
-            sourceURL: "https://www.foretclimat.ca/notebooks/notebooks/a267cc1af247415ba3d59d9f859883b4/files/directories/data/Inter_Bloc_year.png"
+            sourceURL: "media/graphs/Inter_Bloc_year.png"
           }
         }]
       }]
@@ -233,12 +233,12 @@ require([
         mediaInfos: [{
           type: "image", // Autocasts as new ImageMediaInfo object
           value: {
-            sourceURL: "https://www.foretclimat.ca/notebooks/notebooks/a267cc1af247415ba3d59d9f859883b4/files/directories/data/2_area.png"
+            sourceURL: "media/graphs/2_area.png"
           }
         },{
           type: "image", // Autocasts as new ImageMediaInfo object
           value: {
-            sourceURL: "https://www.foretclimat.ca/notebooks/notebooks/a267cc1af247415ba3d59d9f859883b4/files/directories/data/QualRebois_Bloc_year.png"
+            sourceURL: "media/graphs/QualRebois_Bloc_year.png"
           }
         }]
       }]
@@ -289,12 +289,12 @@ require([
         mediaInfos: [{
           type: "image", // Autocasts as new ImageMediaInfo object
           value: {
-            sourceURL: "https://www.foretclimat.ca/notebooks/notebooks/a267cc1af247415ba3d59d9f859883b4/files/directories/data/3_area.png"
+            sourceURL: "media/graphs/3_area.png"
           }
         },{
           type: "image", // Autocasts as new ImageMediaInfo object
           value: {
-            sourceURL: "https://www.foretclimat.ca/notebooks/notebooks/a267cc1af247415ba3d59d9f859883b4/files/directories/data/Recolte_Bloc_year.png"
+            sourceURL: "media/graphs/Recolte_Bloc_year.png"
           }
         }]
       }]
@@ -358,12 +358,12 @@ require([
         mediaInfos: [{
           type: "image", // Autocasts as new ImageMediaInfo object
           value: {
-            sourceURL: "https://www.foretclimat.ca/notebooks/notebooks/a267cc1af247415ba3d59d9f859883b4/files/directories/data/4_area.png"
+            sourceURL: "media/graphs/4_area.png"
           }
         },{
           type: "image", // Autocasts as new ImageMediaInfo object
           value: {
-            sourceURL: "https://www.foretclimat.ca/notebooks/notebooks/a267cc1af247415ba3d59d9f859883b4/files/directories/data/Regen_Bloc_year.png"
+            sourceURL: "media/graphs/Regen_Bloc_year.png"
           }
         }]
       }]
@@ -421,12 +421,12 @@ require([
         mediaInfos: [{
           type: "image", // Autocasts as new ImageMediaInfo object
           value: {
-            sourceURL: "https://www.foretclimat.ca/notebooks/notebooks/a267cc1af247415ba3d59d9f859883b4/files/directories/data/5_area.png"
+            sourceURL: "media/graphs/5_area.png"
           }
         },{
           type: "image", // Autocasts as new ImageMediaInfo object
           value: {
-            sourceURL: "https://www.foretclimat.ca/notebooks/notebooks/a267cc1af247415ba3d59d9f859883b4/files/directories/data/SuiviPlant_Bloc_year.png"
+            sourceURL: "media/graphs/SuiviPlant_Bloc_year.png"
           }
         }]
       }]

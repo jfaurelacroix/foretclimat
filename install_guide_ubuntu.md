@@ -215,6 +215,12 @@ Click on "+ Register Data Directory"
 Name: data
 Path: /gisdata/notebookserver/directories/arcgisworkspace/arcgisdata
 
+Bind the data folder to the media
+```
+mkdir /arcgis/portal/framework/webapps/arcgis#home/media/graphs/
+mount --bind /gisdata/notebookserver/directories/arcgisworkspace/arcgisdata /arcgis/portal/framework/webapps/arcgis#home/media/graphs
+```
+
 Then, import the notebook used for the homepage graphs.
 
 After having saved the notebook,  the "Tasks" button becomes available in the top ribbon of the notebook editor.
