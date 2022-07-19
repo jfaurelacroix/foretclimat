@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="robots" content="noindex, follow" />
+        <link
+          rel="stylesheet"
+          href="https://js.arcgis.com/4.23/esri/themes/light/main.css"
+        />
+        <link rel="stylesheet" href="./charts.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="https://js.arcgis.com/4.23/"></script>
+    </head>
+    <body>
+        <div id="viewDiv"></div>
+        <div id="selectDiv" class="esri-widget">
+            Choose a data table to display:
+            <select id="layerSelect" class="esri-select"></select>
+            <button id="layerSelectButton" class="esri-button">Select</button>
+        </div>
+        <div id="tableContainer">
+
+        </div>
+        <div id="chartContainer" class="esri-component">
+            Chart type:
+            <select id="type" class="esri-select">
+                <option value="Lines">Lines Chart</option>
+                <option value="Columns">Columns Chart</option>
+                <!--<option value="Bars">Bars Chart</option>-->
+                <option value="Scatter">Scatterplot</option>
+                <option value="Markers">Lines with markers</option>
+                <option value="Areas">Area chart</option>
+            </select>
+            Aggregation: 
+            <select id="aggregation" class="esri-select">
+                <option value="none">None</option>
+                <option value="count">Count</option>
+                <option value="sum">Sum</option>
+                <option value="min">Min</option>
+                <option value="max">Max</option>
+                <option value="avg">Average</option>
+            </select>
+            <br>
+            <a id="attr1String">X:</a>
+            <select id="attributes1" class="esri-select">
+            </select>
+            <a id="attr2String">Y:</a>
+            <select id="attributes2" class="esri-select">
+            </select>
+            <button id="plotChart" class="esri-button">Create Chart</button>
+            <div id="chart">
+
+            </div>
+            <div id="info">
+
+            </div>
+        </div>
+        <script src="./charts.js"></script>
+    </body>
+</html>

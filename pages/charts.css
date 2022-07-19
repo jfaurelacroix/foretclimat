@@ -1,0 +1,24 @@
+#tableContainer{
+    height: 50%;
+}
+
+#chartContainer{
+    padding-top: 15px;
+}
+
+#chart{
+    width:50%;
+    height:42%;
+}
+
+.esri-select{
+    width: initial;
+    display: inline-block;
+    padding-right: 25px; 
+}
+
+.esri-button{
+    width: initial;
+    margin: 5px;
+    display: inline-block;
+}
