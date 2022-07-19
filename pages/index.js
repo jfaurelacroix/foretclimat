@@ -921,8 +921,11 @@ require([
     addAccountEventListenerHome();
   }else{
     addAccountEventListenerSignIn();
-    startTutorial();
   }
 
+  if(!localStorage.noFirstVisit){
+    startTutorial();
+    localStorage.noFirstVisit = true;
+  }
   setPublicMode();
 });
