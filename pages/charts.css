@@ -7,8 +7,8 @@
 }
 
 #chart{
-    width:50%;
-    height:42%;
+    width:45%;
+    height:40%;
 }
 
 .esri-select{
@@ -21,4 +21,14 @@
     width: initial;
     margin: 5px;
     display: inline-block;
+}
+
+#YAttributesDiv{
+    display: inline-block;
+}
+
+
+#selectableLegend{
+    display: inline-block; 
+
 }

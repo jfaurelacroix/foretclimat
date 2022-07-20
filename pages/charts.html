@@ -31,7 +31,7 @@
                 <option value="Areas">Area chart</option>
             </select>
             Aggregation: 
-            <select id="aggregation" class="esri-select">
+            <select id="aggregationSelect" class="esri-select">
                 <option value="none">None</option>
                 <option value="count">Count</option>
                 <option value="sum">Sum</option>
@@ -40,16 +40,19 @@
                 <option value="avg">Average</option>
             </select>
             <br>
-            <a id="attr1String">X:</a>
-            <select id="attributes1" class="esri-select">
+            <a id="attrXString">X:</a>
+            <select id="attributesX" class="esri-select">
             </select>
-            <a id="attr2String">Y:</a>
-            <select id="attributes2" class="esri-select">
-            </select>
-            <button id="plotChart" class="esri-button">Create Chart</button>
+            <div id="YAttributesDiv">
+                <a class="attrYString">Y<sub>1</sub>:</a>
+                <select class="attributesY esri-select"></select>
+            </div>
+            <button id="addYButton" class="esri-button">+</button>
+            <button id="plotChartButton" class="esri-button">Create Chart</button>
             <div id="chart">
 
-            </div>
+            </div> 
+            <table id="selectableLegend"></table>
             <div id="info">
 
             </div>
