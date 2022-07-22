@@ -27,7 +27,22 @@
     display: inline-block;
 }
 
-.plusminus{
-    width: 30px;
-    height: 30px;
+.plusminus-group .esri-button{
+    width: 50%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    float: left;
+    transform: translate(0%, 35%); 
+    border: 1px solid #000000;
+}
+.plusminus-group .esri-button:not(:last-child) {
+    border-right: none; /* Prevent double borders */
+}
+
+.plusminus-group{
+    display: inline-block;
+    
+    width: 64px;
+    height: 32px;
 }

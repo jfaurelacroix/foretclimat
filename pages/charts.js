@@ -65,11 +65,12 @@ require([
     
 
     /* Changes the displayed table and changes the options for the attribute selections*/
-    function changeLayer(){
+    async function changeLayer(){
         let selectedValue = document.getElementById("layerSelect").value;
         document.getElementById("tableContainer").innerHTML = null;
         featureTable(selectedValue);
-        Promise.all(populateAllAttributes(selectedValue)).then(generateInitialGraphOnChange)
+        populateAllAttributes(selectedValue)
+        generateInitialGraphOnChange();
     }
     
     /* Adds the options to the select data table */
@@ -296,20 +297,25 @@ require([
         });
     }
 
+    /* Calls populateAttribute for every attribute and returns the array of Promise */
     function populateAllAttributes(selectedValue){
-        let arrayOfpopulateAttribute = new Array(document.getElementsByClassName("attributesY").length + 1)
-        arrayOfpopulateAttribute[0] = populateAttribute(selectedValue, document.getElementById("attributesX"))
-        for(let i = 1; i < document.getElementsByClassName("attributesY").length + 1; i++){
-            arrayOfpopulateAttribute[i] = populateAttribute(selectedValue, document.getElementsByClassName("attributesY")[i-1]);
-        }
-        return arrayOfpopulateAttribute;
+        return new Promise(function(resolve, reject){
+            let arrayOfPromise = [document.getElementsByClassName("attributesY").length + 1]
+            arrayOfPromise[0] = populateAttribute(selectedValue, document.getElementById("attributesX"))
+            for(let i = 1; i < document.getElementsByClassName("attributesY").length + 1; i++){
+                arrayOfPromise[i] = populateAttribute(selectedValue, document.getElementsByClassName("attributesY")[i-1]);
+            }
+            Promise.all(arrayOfPromise).then(function(){resolve()})
+        })  
     }
 
+    /* Adds a new Y attribute when clicking on "+" button. calls populate on it */
     function addY(){
         document.getElementById("YAttributesDiv").innerHTML += '<a class="attrYString">Y<sub>' + (document.getElementsByClassName("attributesY").length + 1) + '</sub>:</a><select class="attributesY esri-select"></select> '
         populateAttribute(document.getElementById("layerSelect").value, document.getElementsByClassName("attributesY")[document.getElementsByClassName("attributesY").length - 1]);
     }
 
+    /* Removes a Y attribute (there can't be less than 1) when clicking on "-" */
     function removeY(){
         if(document.getElementsByClassName("attributesY").length > 1){
             document.getElementsByClassName("attributesY")[document.getElementsByClassName("attributesY").length - 1].remove();
@@ -317,6 +323,7 @@ require([
         }
     }
 
+    /* You can choose the default chart to be displayed for each Table */
     function setFieldsForChart(){
         var fieldNameY = "";
         var fieldNameX = "";
@@ -350,8 +357,8 @@ require([
                 break;
             //Inter_Table4_Regen
             case "18":
-                fieldNameY = "essence";
-                fieldNameX = "objectid";
+                fieldNameY = "objectid";
+                fieldNameX = "essence";
                 aggregation = "count";
                 break;
             //Inter_Table5_Arbre
@@ -437,42 +444,52 @@ require([
 
         }
         document.getElementById("aggregationSelect").value = aggregation;
-        Promise.all(aggregationSelectOnChange()).then(function(){
-            document.getElementsByClassName("attributesY")[0].value = fieldNameY;
-            document.getElementById("attributesX").value = fieldNameX;
-            displayChart()
-        })
+        // Waits for the "onChange" to apply then changes the fields and displays the chart.
+        return new Promise(async function(resolve, reject){
+            await aggregationSelectOnChange().then(function(){
+                document.getElementsByClassName("attributesY")[0].value = fieldNameY;
+                document.getElementById("attributesX").value = fieldNameX;
+            })
+            resolve();
+        });
     }
 
-    function generateInitialGraphOnChange(){
+    async function generateInitialGraphOnChange(){
         document.getElementById("type").value = "ClusteredColumns";
         document.getElementById("attributesX").value = "id_pe";
-        setFieldsForChart();
+        await setFieldsForChart();
+        displayChart()
     }
 
-    function aggregationSelectOnChange(){
+    async function aggregationSelectOnChange(){
         let aggrSelect = document.getElementById("aggregationSelect");
         if(aggrSelect.value == 'none'){
             document.getElementById("attrXString").innerHTML = 'X:';
             document.getElementById("YAttributesDiv").innerHTML = '<a class="attrYString">Y<sub>1</sub>:</a><select class="attributesY esri-select"></select>';
-            for(const button of document.getElementsByClassName("plusminus")){
+            for(const button of [document.getElementById("addYButton"), document.getElementById("removeYButton")]){
                 button.disabled = false;
                 button.style.backgroundColor = "#0079c1";
-                button.style.borderColor = "#0079c1"
+                button.style.borderColor = "#000000"
             }
         }else{
             document.getElementById("attrXString").innerHTML = 'Group by:';
             document.getElementById("YAttributesDiv").innerHTML = '<a class="attrYString">'+ aggrSelect.options[aggrSelect.selectedIndex].innerHTML + ' attribute:</a><select class="attributesY esri-select"></select>';
-            for(const button of document.getElementsByClassName("plusminus")){
+            for(const button of [document.getElementById("addYButton"), document.getElementById("removeYButton")]){
                 button.disabled = true;
                 button.style.backgroundColor = "gray";
                 button.style.borderColor = "gray"
             }
         }
-        return populateAllAttributes(document.getElementById("layerSelect").value);
+        
+        return new Promise(async function(resolve, reject) {
+            await populateAllAttributes(document.getElementById("layerSelect").value)
+            resolve()
+        });
     }
 
+    //Fetches the different available tables for the layer select
     populateLayer();
+    //Event listeners for the buttons and more
     document.getElementById("layerSelectButton").addEventListener("click", changeLayer);
     document.getElementById("plotChartButton").addEventListener("click", displayChart);
     document.getElementById("addYButton").addEventListener("click", addY);

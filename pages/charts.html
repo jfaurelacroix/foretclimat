@@ -21,24 +21,27 @@
 
         </div>
         <div id="chartContainer" class="esri-component">
-            Chart type:
+            <a>Chart type:</a>
             <select id="type" class="esri-select">
-                <option value="Lines">Lines Chart</option>
                 <option value="ClusteredColumns">Columns Chart</option>
-                <!--<option value="Bars">Bars Chart</option>-->
-                <option value="Scatter">Scatterplot</option>
+                <option value="Lines">Lines Chart</option>
                 <option value="Markers">Lines with markers</option>
+                <!--<option value="Bars">Bars Chart</option>-->
+                <option value="Scatter">Scatterplot</option>      
                 <option value="Areas">Area chart</option>
             </select>
-            Aggregation: 
+            <br>
+            <br>
+            <a>Aggregation:</a> 
             <select id="aggregationSelect" class="esri-select">
                 <option value="none">None</option>
                 <option value="count">Count</option>
                 <option value="sum">Sum</option>
-                <option value="min">Min</option>
-                <option value="max">Max</option>
+                <option value="min">Minimum</option>
+                <option value="max">Maximum</option>
                 <option value="avg">Average</option>
             </select>
+            <br>
             <br>
             <a id="attrXString">X:</a>
             <select id="attributesX" class="esri-select">
@@ -47,8 +50,10 @@
                 <a class="attrYString">Y<sub>1</sub>:</a>
                 <select class="attributesY esri-select"></select>
             </div>
-            <button id="addYButton" class="esri-button plusminus">+</button>
-            <button id="removeYButton" class="esri-button plusminus">-</button>
+            <div class="plusminus-group">
+                <button id="addYButton" class="esri-button">+</button>
+                <button id="removeYButton" class="esri-button">-</button>
+            </div>
             <button id="plotChartButton" class="esri-button">Create Chart</button>
             <div id="chart">
 
