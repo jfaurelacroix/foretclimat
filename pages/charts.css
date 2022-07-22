@@ -27,8 +27,7 @@
     display: inline-block;
 }
 
-
-#selectableLegend{
-    display: inline-block; 
-
+.plusminus{
+    width: 30px;
+    height: 30px;
 }

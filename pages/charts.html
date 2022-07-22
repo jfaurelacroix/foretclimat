@@ -24,7 +24,7 @@
             Chart type:
             <select id="type" class="esri-select">
                 <option value="Lines">Lines Chart</option>
-                <option value="Columns">Columns Chart</option>
+                <option value="ClusteredColumns">Columns Chart</option>
                 <!--<option value="Bars">Bars Chart</option>-->
                 <option value="Scatter">Scatterplot</option>
                 <option value="Markers">Lines with markers</option>
@@ -47,7 +47,8 @@
                 <a class="attrYString">Y<sub>1</sub>:</a>
                 <select class="attributesY esri-select"></select>
             </div>
-            <button id="addYButton" class="esri-button">+</button>
+            <button id="addYButton" class="esri-button plusminus">+</button>
+            <button id="removeYButton" class="esri-button plusminus">-</button>
             <button id="plotChartButton" class="esri-button">Create Chart</button>
             <div id="chart">
 
