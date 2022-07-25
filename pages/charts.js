@@ -62,11 +62,10 @@ require([
         })
         return displayedTable;
     }
-    
 
     /* Changes the displayed table and changes the options for the attribute selections*/
     async function changeLayer(){
-        let selectedValue = document.getElementById("layerSelect").value;
+        let selectedValue = document.getElementById("tableSelect").value;
         document.getElementById("tableContainer").innerHTML = null;
         featureTable(selectedValue);
         populateAllAttributes(selectedValue)
@@ -75,7 +74,7 @@ require([
     
     /* Adds the options to the select data table */
     function populateLayer(){
-        const selection = document.getElementById("layerSelect");
+        const selection = document.getElementById("tableSelect");
         let url = "https://www.foretclimat.ca/server/rest/services/Hosted/BD_Inventaires_Secteur_gdb/FeatureServer?f=pjson";
         jQuery.getJSON(url, function(data){
             if(data.tables != null){
@@ -197,6 +196,7 @@ require([
         return displayedLayer.queryFeatures(myQuery)
     }
 
+    /* Returns the name for the Yaxis */
     function YaxisTitleMaker(featureSet){
         let titleYaxis = new Array(featureSet.fields.length - 1);
         if(document.getElementById("aggregationSelect").value == "none"){
@@ -312,7 +312,7 @@ require([
     /* Adds a new Y attribute when clicking on "+" button. calls populate on it */
     function addY(){
         document.getElementById("YAttributesDiv").innerHTML += '<a class="attrYString">Y<sub>' + (document.getElementsByClassName("attributesY").length + 1) + '</sub>:</a><select class="attributesY esri-select"></select> '
-        populateAttribute(document.getElementById("layerSelect").value, document.getElementsByClassName("attributesY")[document.getElementsByClassName("attributesY").length - 1]);
+        populateAttribute(document.getElementById("tableSelect").value, document.getElementsByClassName("attributesY")[document.getElementsByClassName("attributesY").length - 1]);
     }
 
     /* Removes a Y attribute (there can't be less than 1) when clicking on "-" */
@@ -328,7 +328,7 @@ require([
         var fieldNameY = "";
         var fieldNameX = "";
         var aggregation = "none";
-        switch(document.getElementById("layerSelect").value){
+        switch(document.getElementById("tableSelect").value){
             //IMLNU_Table1_SyntheseFI
             case "13":
                 fieldNameY = "mlnu_tot";
@@ -454,6 +454,7 @@ require([
         });
     }
 
+    /* Builds a default chart when changing the selected layer */
     async function generateInitialGraphOnChange(){
         document.getElementById("type").value = "ClusteredColumns";
         document.getElementById("attributesX").value = "id_pe";
@@ -461,6 +462,7 @@ require([
         displayChart()
     }
 
+    /* Changes the fields for the users when changing the aggregationSelect field */
     async function aggregationSelectOnChange(){
         let aggrSelect = document.getElementById("aggregationSelect");
         if(aggrSelect.value == 'none'){
@@ -482,7 +484,7 @@ require([
         }
         
         return new Promise(async function(resolve, reject) {
-            await populateAllAttributes(document.getElementById("layerSelect").value)
+            await populateAllAttributes(document.getElementById("tableSelect").value)
             resolve()
         });
     }
@@ -490,7 +492,7 @@ require([
     //Fetches the different available tables for the layer select
     populateLayer();
     //Event listeners for the buttons and more
-    document.getElementById("layerSelectButton").addEventListener("click", changeLayer);
+    document.getElementById("tableSelectButton").addEventListener("click", changeLayer);
     document.getElementById("plotChartButton").addEventListener("click", displayChart);
     document.getElementById("addYButton").addEventListener("click", addY);
     document.getElementById("removeYButton").addEventListener("click", removeY);
