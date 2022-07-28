@@ -6,8 +6,17 @@
           rel="stylesheet"
           href="https://js.arcgis.com/4.23/esri/themes/light/main.css"
         />
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script src="https://www.gstatic.com/charts/loader.js"></script>
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.23.0/pivot.min.css"
+        />
         <link rel="stylesheet" href="./charts.css" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.23.0/pivot.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.23.0/gchart_renderers.min.js"></script>
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <script src="https://js.arcgis.com/4.23/"></script>
     </head>
     <body>
@@ -22,44 +31,9 @@
 
         </div>
         <div id="chartContainer" class="esri-component">
-            <a>Chart type:</a>
-            <select id="type" class="esri-select">
-                <option value="ClusteredColumns">Columns Chart</option>
-                <option value="Lines">Lines Chart</option>
-                <option value="Markers">Lines with markers</option>
-                <!--<option value="Bars">Bars Chart</option>-->
-                <option value="Scatter">Scatterplot</option>      
-                <option value="Areas">Area chart</option>
-            </select>
-            <br>
-            <br>
-            <a>Aggregation:</a> 
-            <select id="aggregationSelect" class="esri-select">
-                <option value="none">None</option>
-                <option value="count">Count</option>
-                <option value="sum">Sum</option>
-                <option value="min">Minimum</option>
-                <option value="max">Maximum</option>
-                <option value="avg">Average</option>
-            </select>
-            <br>
-            <br>
-            <a id="attrXString">X:</a>
-            <select id="attributesX" class="esri-select">
-            </select>
-            <div id="YAttributesDiv">
-                <a class="attrYString">Y<sub>1</sub>:</a>
-                <select class="attributesY esri-select"></select>
-            </div>
-            <div class="plusminus-group">
-                <button id="addYButton" class="esri-button">+</button>
-                <button id="removeYButton" class="esri-button">-</button>
-            </div>
-            <button id="plotChartButton" class="esri-button">Create Chart</button>
             <div id="chart">
 
-            </div> 
-            <table id="selectableLegend"></table>
+            </div>
         </div>
         <div id="tableTextInformation">
 
