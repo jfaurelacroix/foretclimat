@@ -47,3 +47,49 @@
     width: 64px;
     height: 32px;
 }
+
+.pvtVals{
+    background: none;
+    border: none;
+}
+
+/*from esri-select*/
+.pvtAttrDropdown, .pvtAggregator, .pvtRenderer{
+    cursor:pointer;display:inline;font-family:inherit;font-size:.85em;height:32px;color:#323232;border:1px solid rgba(110,110,110,.3);margin:0;-webkit-appearance:none;-moz-appearance:none;border-radius:0;padding:0 .5em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-8 -8 32 32' width='32' height='32'%3E%3Cpath d='M8 11.207l-4-4V5.793l4 4 4-4v1.414z' fill='%236e6e6e' fillrule='nonzero'/%3E%3C/svg%3E") no-repeat right center #fff
+}
+
+.pvtAttrDropdown{
+    padding-right: 25px;
+    float:left;
+}
+
+.pvtRenderer{
+    width: 100%;
+}
+
+.pvtCols, .pvtRows{
+    background: #e7e7e7;
+    border: 1px solid #949494;
+    margin:0px;
+}
+
+.pvtAxisContainer{
+    border: 1px solid #949494;
+}
+
+table.pvtUi tbody tr td{
+    padding: 0px;
+}
+
+.pvtAxisContainer li span.pvtAttr{
+    background: #0079c1;
+    color: #fff;
+}
+
+.pvtTriangle{
+    color: #fff;
+}
+
+.pvtColOrder, .pvtRowOrder{
+    font: 0.8em  "Calibri";
+}

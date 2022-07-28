@@ -68,8 +68,7 @@ require([
         let selectedValue = document.getElementById("tableSelect").value;
         document.getElementById("tableContainer").innerHTML = null;
         featureTable(selectedValue);
-        populateAllAttributes(selectedValue)
-        generateInitialGraphOnChange();
+        generatePivotChart();
         setInformativeText();
     }
     
@@ -79,12 +78,16 @@ require([
         let url = "https://www.foretclimat.ca/server/rest/services/Hosted/BD_Inventaires_Secteur_gdb/FeatureServer?f=pjson";
         jQuery.getJSON(url, function(data){
             if(data.tables != null){
-                /*for (const layer of data.layers){
-                    selection.innerHTML += "<option value='"+ layer.id +"'>"+ layer.name +"</option>"; 
-                }*/
+                selection.innerHTML += "<optgroup label='Tables'>";
                 for (const table of data.tables){
                     selection.innerHTML += "<option value='"+ table.id +"'>"+ table.name +"</option>";
-                }          
+                }  
+                selection.innerHTML += "</optgroup>";
+                selection.innerHTML += "<optgroup label='Layers'>";
+                for (const layer of data.layers){
+                    selection.innerHTML += "<option value='"+ layer.id +"'>"+ layer.name +"</option>"; 
+                } 
+                selection.innerHTML += "</optgroup>";      
             }
             changeLayer();
         });
@@ -126,202 +129,6 @@ require([
             })
         }
         return mySeries;
-    }
-
-    /* Changes fields to integers and returns which integer corresponds to which string */
-    function transformStringsToInt(featureSet){
-        let uniqueStringArray = [];
-        let labels = [];
-        if(document.getElementById("aggregationSelect").value == 'none'){
-            if(featureSet.fields[0].type == 'string'){
-                for (let i = 0; i < featureSet.features.length; i++){
-                    let valueOfAttribute = featureSet.features[i].attributes[document.getElementById("attributesX").value];
-                    if(valueOfAttribute == '' || valueOfAttribute == null){
-                        valueOfAttribute = 'NULL'
-                    }
-                    if(!uniqueStringArray.includes(valueOfAttribute)){
-                        uniqueStringArray.push(valueOfAttribute);
-                        labels.push({value: uniqueStringArray.length - 1, text: valueOfAttribute});
-                        featureSet.features[i].attributes[document.getElementById("attributesX").value] = uniqueStringArray.length - 1;
-                    }else{
-                        featureSet.features[i].attributes[document.getElementById("attributesX").value] = uniqueStringArray.indexOf(valueOfAttribute );
-                    }
-                    
-                }
-            }
-        }else{
-            if(featureSet.fields[1].type == 'string'){
-                for (let i = 0; i < featureSet.features.length; i++){
-                    let valueOfAttribute = featureSet.features[i].attributes[document.getElementById("attributesX").value];
-                    if(valueOfAttribute == '' || valueOfAttribute == null){
-                        valueOfAttribute = 'NULL'
-                    }
-                    if(!uniqueStringArray.includes(valueOfAttribute)){
-                        uniqueStringArray.push(valueOfAttribute);
-                        labels.push({value: uniqueStringArray.length - 1, text: valueOfAttribute});
-                        featureSet.features[i].attributes[document.getElementById("attributesX").value] = uniqueStringArray.length - 1;
-                    }else{
-                        featureSet.features[i].attributes[document.getElementById("attributesX").value] = uniqueStringArray.indexOf(valueOfAttribute );
-                    }
-                    
-                }
-            }
-        }
-        return labels;
-    }
-
-    /* Query the data for the chart being created */
-    function queryForChart(){
-        let myQuery;
-        let outArray = [document.getElementsByClassName("attributesY").length]
-        for (let i = 0; i < document.getElementsByClassName("attributesY").length; i++){
-            outArray[i] = document.getElementsByClassName("attributesY")[i].value;
-        }
-        if(document.getElementById("aggregationSelect").value == 'none'){
-            myQuery = {
-                where: "1=1",
-                outFields: [document.getElementById("attributesX").value].concat(outArray)
-            }
-        }else{
-            myQuery = {
-                where: "1=1",
-                groupByFieldsForStatistics: [document.getElementById("attributesX").value],
-                outStatistics: [{
-                        "statisticType": document.getElementById("aggregationSelect").value,
-                        "onStatisticField": outArray, 
-                        "outStatisticFieldName": outArray
-                    },
-                ]
-            }
-        }
-        return displayedLayer.queryFeatures(myQuery)
-    }
-
-    /* Returns the name for the Yaxis */
-    function YaxisTitleMaker(featureSet){
-        let titleYaxis = new Array(featureSet.fields.length - 1);
-        if(document.getElementById("aggregationSelect").value == "none"){
-            for (let i = 1; i < featureSet.fields.length; i++){
-                titleYaxis[i -1] = featureSet.fields[i].name;
-            }
-        }else{
-            titleYaxis[0] = featureSet.fields[0].name;
-        }
-        return titleYaxis
-    }
-
-    /* Creates a new chart from the parameters */
-    function createChart(type){
-        chart.destroy();
-        chart = new Chart("chart");
-        chart.setTheme(myTheme);
-        chart.addPlot("default",{
-            // Add the chart type
-            type: type,
-            gap: 20,
-            hAxis: "x",
-            vAxis: "y"
-        });
-        queryForChart().then((featureSet) => {
-            try{
-                let xAxisLabels = transformStringsToInt(featureSet);
-                let myData = createSerie(featureSet.features);
-                let isUsingLabels = true;
-                if(xAxisLabels.length == 0) {
-                    xAxisLabels = null;
-                    isUsingLabels = false;
-                }; 
-                let titleYaxis = YaxisTitleMaker(featureSet);
-                switch(type)
-                {
-                    case "Lines":
-                        chart.addAxis("x", {title: document.getElementById("attributesX").value, titleOrientation: "away", labels: xAxisLabels, minorTicks:!isUsingLabels, majorTicks:!isUsingLabels});
-                        chart.addAxis("y", {title: titleYaxis, vertical: true});
-                        break;
-                    case "ClusteredColumns":
-                        chart.addAxis("x", {title: document.getElementById("attributesX").value, titleOrientation: "away", labels: xAxisLabels, minorTicks:!isUsingLabels, majorTicks:!isUsingLabels});
-                        chart.addAxis("y", {title: titleYaxis, vertical: true, min:0});
-                        break;
-                    /*case "Bars":
-                        break;
-                    */
-                    case "Scatter":
-                        chart.addAxis("x", {title: document.getElementById("attributesX").value, titleOrientation: "away", labels: xAxisLabels, minorTicks:!isUsingLabels, majorTicks:!isUsingLabels});
-                        chart.addAxis("y", {title: titleYaxis, vertical: true});
-                        break;
-                    case "Markers":
-                        chart.addAxis("x", {title: document.getElementById("attributesX").value, titleOrientation: "away", labels: xAxisLabels, minorTicks:!isUsingLabels, majorTicks:!isUsingLabels});
-                        chart.addAxis("y", {title: titleYaxis, vertical: true});                    
-                        break;
-                    case "Areas":
-                        chart.addAxis("x", {title: document.getElementById("attributesX").value, titleOrientation: "away", labels: xAxisLabels, minorTicks:!isUsingLabels, majorTicks:!isUsingLabels});
-                        chart.addAxis("y", {title: titleYaxis, vertical: true, min:0});
-                }
-                let index = 1
-                for(let el of myData){
-                    chart.addSeries("Serie"+index, el);
-                    index += 1;
-                }
-                chart.render();
-                selectableLegend.chart = chart;
-                selectableLegend.refresh();
-            } catch (err){
-                document.getElementById("chart").innerHTML = err;
-            }
-            
-        })
-    }
-    
-    /* Validates that it can create a graph and creates it */
-    function displayChart(){
-        let type = document.getElementById("type").value;
-        // Field validation
-        try {
-            for(let el of document.getElementsByClassName("attributesY")){
-                if(document.getElementById("attributesX").value == el.value) throw "Impossible. Même attribut";
-            }
-            createChart(type);
-        } catch(err) {
-            document.getElementById("chart").innerHTML = err;
-        }
-        
-    }
-
-    /* Adds the options to the attribute selectors */
-    function populateAttribute(selectedValue, selector){
-        selector.innerHTML = null;
-        let url = "https://www.foretclimat.ca/server/rest/services/Hosted/BD_Inventaires_Secteur_gdb/FeatureServer/"+ selectedValue +"?f=pjson";
-        return jQuery.getJSON(url, function(data){
-            for (let i = 0; i < data.fields.length; i++){
-                selector.innerHTML += "<option value='"+ data.fields[i].name +"'>"+ data.fields[i].name +"</option>";         
-            }
-        });
-    }
-
-    /* Calls populateAttribute for every attribute and returns the array of Promise */
-    function populateAllAttributes(selectedValue){
-        return new Promise(function(resolve, reject){
-            let arrayOfPromise = [document.getElementsByClassName("attributesY").length + 1]
-            arrayOfPromise[0] = populateAttribute(selectedValue, document.getElementById("attributesX"))
-            for(let i = 1; i < document.getElementsByClassName("attributesY").length + 1; i++){
-                arrayOfPromise[i] = populateAttribute(selectedValue, document.getElementsByClassName("attributesY")[i-1]);
-            }
-            Promise.all(arrayOfPromise).then(function(){resolve()})
-        })  
-    }
-
-    /* Adds a new Y attribute when clicking on "+" button. calls populate on it */
-    function addY(){
-        document.getElementById("YAttributesDiv").innerHTML += '<a class="attrYString">Y<sub>' + (document.getElementsByClassName("attributesY").length + 1) + '</sub>:</a><select class="attributesY esri-select"></select> '
-        populateAttribute(document.getElementById("tableSelect").value, document.getElementsByClassName("attributesY")[document.getElementsByClassName("attributesY").length - 1]);
-    }
-
-    /* Removes a Y attribute (there can't be less than 1) when clicking on "-" */
-    function removeY(){
-        if(document.getElementsByClassName("attributesY").length > 1){
-            document.getElementsByClassName("attributesY")[document.getElementsByClassName("attributesY").length - 1].remove();
-            document.getElementsByClassName("attrYString")[document.getElementsByClassName("attrYString").length - 1].remove();
-        }
     }
 
     /* You can choose the default chart to be displayed for each Table */
@@ -444,15 +251,6 @@ require([
                 break;
 
         }
-        document.getElementById("aggregationSelect").value = aggregation;
-        // Waits for the "onChange" to apply then changes the fields and displays the chart.
-        return new Promise(async function(resolve, reject){
-            await aggregationSelectOnChange().then(function(){
-                document.getElementsByClassName("attributesY")[0].value = fieldNameY;
-                document.getElementById("attributesX").value = fieldNameX;
-            })
-            resolve();
-        });
     }
 
     function setInformativeText(){
@@ -547,48 +345,36 @@ require([
     }
 
     /* Builds a default chart when changing the selected layer */
-    async function generateInitialGraphOnChange(){
-        document.getElementById("type").value = "ClusteredColumns";
-        document.getElementById("attributesX").value = "id_pe";
-        await setFieldsForChart();
-        displayChart()
-    }
-
-    /* Changes the fields for the users when changing the aggregationSelect field */
-    async function aggregationSelectOnChange(){
-        let aggrSelect = document.getElementById("aggregationSelect");
-        if(aggrSelect.value == 'none'){
-            document.getElementById("attrXString").innerHTML = 'X:';
-            document.getElementById("YAttributesDiv").innerHTML = '<a class="attrYString">Y<sub>1</sub>:</a><select class="attributesY esri-select"></select>';
-            for(const button of [document.getElementById("addYButton"), document.getElementById("removeYButton")]){
-                button.disabled = false;
-                button.style.backgroundColor = "#0079c1";
-                button.style.borderColor = "#000000"
-            }
-        }else{
-            document.getElementById("attrXString").innerHTML = 'Group by:';
-            document.getElementById("YAttributesDiv").innerHTML = '<a class="attrYString">'+ aggrSelect.options[aggrSelect.selectedIndex].innerHTML + ' attribute:</a><select class="attributesY esri-select"></select>';
-            for(const button of [document.getElementById("addYButton"), document.getElementById("removeYButton")]){
-                button.disabled = true;
-                button.style.backgroundColor = "gray";
-                button.style.borderColor = "gray"
-            }
+    function generatePivotChart(){
+        myQuery = {
+            where: "1=1",
+            outFields: ['*']
         }
+        let featureQuery = displayedLayer.queryFeatures(myQuery).then((data) => {
+            google.load("visualization", "1", {packages:["corechart", "charteditor"]});
+            $(function(){
+                let input = new Array(data.features.length);
+                for (let i = 0; i < data.features.length; i++){
+                    input[i] = data.features[i].attributes;
+                }
+                var derivers = $.pivotUtilities.derivers;
+                console.log(input)
+                var renderers = $.extend($.pivotUtilities.renderers,
+                    $.pivotUtilities.gchart_renderers);
+                    $("#chart").pivotUI(input, {
+                        renderers: renderers,
+                        rendererOptions: { gchart: {width: 800, height: 600}},
+                        rows: data.fields,
+                        columns: data.fields
+                    });
+            });
+        })
         
-        return new Promise(async function(resolve, reject) {
-            await populateAllAttributes(document.getElementById("tableSelect").value)
-            resolve()
-        });
     }
-
     //Fetches the different available tables for the layer select
     populateLayer();
     //Event listeners for the buttons and more
     document.getElementById("tableSelectButton").addEventListener("click", changeLayer);
-    document.getElementById("plotChartButton").addEventListener("click", displayChart);
-    document.getElementById("addYButton").addEventListener("click", addY);
-    document.getElementById("removeYButton").addEventListener("click", removeY);
-    document.getElementById("aggregationSelect").addEventListener("change", aggregationSelectOnChange);     
 });
 
 
