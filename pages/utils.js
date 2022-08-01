@@ -104,7 +104,7 @@ function setLangUser(){
 }
 
 /* Handles bottom-right Switch toggle changes. If it's checked => display every layer, otherwise => display layer for visitors */
-function handleChange(mySwitch){
+function handleChangeMode(mySwitch){
   if(mySwitch.checked){
     setResearchMode();
   }else{

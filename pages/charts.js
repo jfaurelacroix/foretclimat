@@ -5,18 +5,7 @@ require([
     "esri/WebMap",
     "esri/portal/Portal",
     "esri/layers/FeatureLayer",
-    "dojox/charting/Chart",
-    "dojox/charting/plot2d/Bars",
-    "dojox/charting/plot2d/Lines",
-    "dojox/charting/plot2d/ClusteredColumns",
-    "dojox/charting/plot2d/Scatter",
-    "dojox/charting/plot2d/Markers",
-    "dojox/charting/plot2d/Areas",
-    "dojox/charting/SimpleTheme",
-    "dojox/charting/themes/common",
-    "dojox/charting/widget/SelectableLegend",
-    "dojox/charting/axis2d/Default",
-  ], (esriConfig, FeatureTable, View, WebMap, Portal, FeatureLayer, Chart, Bars, Lines, ClusteredColumns, Scatter, Markers, Areas, SimpleTheme, theme, SelectableLegend) => {
+  ], (esriConfig, FeatureTable, View, WebMap, Portal, FeatureLayer) => {
     esriConfig.portalUrl = "https://www.foretclimat.ca/portal";
 
     const myPortal = new Portal({
@@ -68,188 +57,290 @@ require([
         let selectedValue = document.getElementById("tableSelect").value;
         document.getElementById("tableContainer").innerHTML = null;
         featureTable(selectedValue);
+        setFieldsForChart();
         generatePivotChart();
         setInformativeText();
     }
-    
+
+
     /* Adds the options to the select data table */
     function populateLayer(){
         const selection = document.getElementById("tableSelect");
+        selection.innerHTML = null;
         let url = "https://www.foretclimat.ca/server/rest/services/Hosted/BD_Inventaires_Secteur_gdb/FeatureServer?f=pjson";
         jQuery.getJSON(url, function(data){
             if(data.tables != null){
-                selection.innerHTML += "<optgroup label='Tables'>";
-                for (const table of data.tables){
-                    selection.innerHTML += "<option value='"+ table.id +"'>"+ table.name +"</option>";
+                for (const table of data.tables.concat(data.layers)){
+                    if(table.name.includes(document.getElementById("tableCategorySelect").value) && table.name.startsWith(document.getElementById("tableInventorySelect").value)){
+                        selection.innerHTML += "<option value='"+ table.id +"'>"+ table.name +"</option>";
+                    }
                 }  
-                selection.innerHTML += "</optgroup>";
-                selection.innerHTML += "<optgroup label='Layers'>";
-                for (const layer of data.layers){
-                    selection.innerHTML += "<option value='"+ layer.id +"'>"+ layer.name +"</option>"; 
-                } 
-                selection.innerHTML += "</optgroup>";      
             }
             changeLayer();
         });
         
     }
 
-    /* Initialize the chart variable (will be overridden each time a graph is created) */
-    var chart = new Chart("chart");
-    var myTheme = new SimpleTheme({
-		colors: [
-			"#A4CE67",
-			"#739363",
-			"#6B824A",
-			"#343434",
-			"#636563"
-		]
-	});
-    chart.setTheme(myTheme);
-    var selectableLegend = new SelectableLegend({chart: chart, outline: true}, "selectableLegend");
-    
-    /* Formats the data to plot with dojox charting */
-    function createSerie(features){
-        let attrYArray = document.getElementsByClassName("attributesY");
-        let mySeries = new Array(attrYArray.length);
-        for (let i = 0; i < attrYArray.length; i++){
-            mySeries[i] = new Array(features.length);
-            for(let k = 0; k < features.length; k++){
-                mySeries[i][k] = {
-                    x : features[k].attributes[document.getElementById("attributesX").value],
-                    y : features[k].attributes[attrYArray[i].value]
-                }
-            }
-        }
-        for(const array of mySeries){
-            array.sort(function(a,b){
-                if(a.x < b.x) return -1;
-                if(a.x > b.x) return 1;
-                return 0;
-            })
-        }
-        return mySeries;
-    }
+    var fieldNameX = [];
+    var fieldNameY = [];
+    var aggregation = "Count";
+    var renderer = "Table";
+    var aggregationAttribute = "";
 
     /* You can choose the default chart to be displayed for each Table */
     function setFieldsForChart(){
-        var fieldNameY = "";
-        var fieldNameX = "";
-        var aggregation = "none";
+        fieldNameX = [];
+        fieldNameY = [];
+        aggregation = "Count";
+        renderer = "Bar Chart";
+        aggregationAttribute = "";
         switch(document.getElementById("tableSelect").value){
+            //IMLNU_PS
+            case "0":
+                fieldNameX = ["bloc"];
+                fieldNameY = ["annee"];
+                aggregation = "Count";
+                renderer = "Bar Chart";
+                break;
+            //IMLNU_Bloc
+            case "1":
+                fieldNameX = [];
+                fieldNameY = ["bloc"];
+                aggregation = "Average";
+                aggregationAttribute = "SHAPE__Area";
+                renderer = "Multiple Pie Chart";
+                break;
+            //Inter_PS
+            case "2":
+                fieldNameX = ["id_bloc"];
+                fieldNameY = [];
+                aggregation = "Count";
+                renderer = "Bar Chart";
+                break;
+            //Inter_Bloc
+            case "3":
+                fieldNameX = [];
+                fieldNameY = ["bloc"];
+                aggregation = "Average";
+                aggregationAttribute = "SHAPE__Area";
+                renderer = "Bar Chart";
+                break;
+            //QualRebois_PS
+            case "4":
+                fieldNameX = ["id_bloc"];
+                fieldNameY = ["realise"];
+                aggregation = "Count";
+                renderer = "Bar Chart";
+                break;
+            //QualRebois_Bloc
+            case "5":
+                fieldNameX = ["an_perturb"];
+                fieldNameY = ["bloc"];
+                aggregation = "Count";
+                renderer = "Scatter Plot";
+                break;
+            //Recolte_PS
+            case "6":
+                fieldNameX = ["pe"];
+                fieldNameY = ["annee"];
+                aggregation = "Count";
+                renderer = "Stacked Bar Chart";
+                break;
+            //Regen_PS
+            case "7":
+                fieldNameX = ["annee"];
+                fieldNameY = [];
+                aggregation = "Count";
+                renderer = "Bar Chart";
+                break;
+            //Recolte_Bloc
+            case "8":
+                fieldNameX = ["annee"];
+                fieldNameY = ["bloc"];
+                aggregation = "Count";
+                renderer = "Scatter Chart";
+                break;
+            //Regen_Bloc
+            case "9":
+                fieldNameX = ["bloc"];
+                fieldNameY = ["annee"];
+                aggregation = "Count";
+                renderer = "Bar Chart";
+                break;
+            //SuiviPlant_PS
+            case "10":
+                fieldNameX = ["pe"];
+                fieldNameY = ["annee"];
+                aggregation = "Count";
+                renderer = "Stacked Bar Chart";
+                break;
+            //SuiviPlant_Bloc
+            case "12":
+                fieldNameX = ["annee"];
+                fieldNameY = ["an_origine"];
+                aggregation = "Count";
+                renderer = "Bar Chart";
+                break;
             //IMLNU_Table1_SyntheseFI
             case "13":
-                fieldNameY = "mlnu_tot";
-                fieldNameX = "id_pe";
+                fieldNameX = [];
+                fieldNameY = ["id_pe"];
+                aggregation = "Sum";
+                aggregationAttribute = "mlnu_tot";
+                renderer = "Row Heatmap";
                 break;
             //IMLNU_Table2_SyntheseR
             case "14":
-                fieldNameY = "mlnu_tot";
-                fieldNameX = "id_pe";
+                fieldNameX = ["id_pe"];
+                fieldNameY = [];
+                aggregation = "Sum";
+                aggregationAttribute = "mlnu_tot";
+                renderer = "Line Chart";
                 break;
             //Inter_Table1_Diagnostic
             case "15":
-                fieldNameY = "haut_moy_regen_cm";
-                fieldNameX = "id_pe";
+                fieldNameX = ["chablis_partiel"];
+                fieldNameY = [];
+                aggregation = "Average";
+                aggregationAttribute = "haut_moy_regen_cm"
+                renderer = "Bar Chart";
                 break;
             //Inter_Table2_Dendro
             case "16":
-                fieldNameY = "dhp";
-                fieldNameX = "id_pe";
+                fieldNameX = [];
+                fieldNameY = ["essence"];
+                aggregation = "Average";
+                aggregationAttribute = "dhp"
+                renderer = "Horizontal Bar Chart";
                 break;
             //Inter_Table3_Gaules
             case "17":
-                fieldNameY = "frequence";
-                fieldNameX = "essence";
-                aggregation = "count";
+                fieldNameX = ["classe"];
+                fieldNameY = ["essence"];
+                aggregation = "Count";
+                renderer = "Stacked Bar Chart";
                 break;
             //Inter_Table4_Regen
             case "18":
-                fieldNameY = "objectid";
-                fieldNameX = "essence";
-                aggregation = "count";
+                fieldNameX = ["essence"];
+                fieldNameY = [];
+                aggregation = "Count";
+                renderer = "Bar Chart";
                 break;
             //Inter_Table5_Arbre
             case "19":
-                fieldNameY = "haut_m";
-                fieldNameX = "id_pe";
+                fieldNameX = ["age"];
+                fieldNameY = [];
+                aggregation = "Average";
+                aggregationAttribute = "haut_m"
+                renderer = "Bar Chart";
                 break;
             //Inter_Table6_EspIndicatrices
             case "20":
-                fieldNameY = "objectid";
-                fieldNameX = "espece";
-                aggregation = "count";
+                fieldNameX = [];
+                fieldNameY = ["espece"];
+                aggregation = "Count";
+                renderer = "Horizontal Bar Chart";
                 break;
             //Inter_Table7_Calcul
             case "21":
-                fieldNameY = "st_tot";
-                fieldNameX = "id_pe";
+                fieldNameX = ["st_tot"];
+                fieldNameY = [];
+                aggregation = "Count";
+                renderer = "Bar Chart";
                 break;
             //QualRebois_Table1_A
             case "22":
-                fieldNameY = "compact_faible";
-                fieldNameX = "id_pe";
-                aggregation = "none";  
+                fieldNameX = ["compact_faible"];
+                fieldNameY = ["verticalite"];
+                aggregation = "Count";
+                renderer = "Row Heatmap";
                 break;
             //QualRebois_Table1_BC
             case "23":
-                fieldNameY = "plants_rebois_c";
-                fieldNameX = "id_pe";
+                fieldNameX = [];
+                fieldNameY = ["id_pe"];
+                aggregation = "Sum";
+                aggregationAttribute = "plants_rebois_c"
+                renderer = "Horizontal Bar Chart";
                 break;
             //QualRebois_Table3_Grappe
             case "24":
-                fieldNameY = "id_pe";
-                fieldNameX = "plant_reboise";
-                aggregation = "count";
+                fieldNameX = ["plant_reboise"];
+                fieldNameY = [];
+                aggregation = "Count";
+                renderer = "Bar Chart";
                 break;
             //Regen_Table1_CD
             case "25":
-                fieldNameY = "haut_tige_avenir_cm";
-                fieldNameX = "id_pe";
+                fieldNameX = ["id_pe"];
+                fieldNameY = ["brout_r"];
+                aggregation = "Average";
+                aggregationAttribute = "haut_tige_avenir_cm";
+                renderer = "Bar Chart";
                 break;
             //Regen_Table2_Denombre
             case "26":
-                fieldNameY = "nb_sab_2";
-                fieldNameX = "id_pe";
+                fieldNameX = ["id_pe"];
+                fieldNameY = [];
+                aggregation = "Sum";
+                aggregationAttribute = "nb_sab_2"
+                renderer = "Bar Chart";
                 break;
             //Regen_Table3_Recouvrement
             case "27":
-                fieldNameY = "recouv";
-                fieldNameX = "id_micro";
-                aggregation = "avg";
+                fieldNameX = ["espece"];
+                fieldNameY = ["recouv"];
+                aggregation = "Average";
+                aggregationAttribute = "recouv"
+                renderer = "Bar Chart";
                 break;
             //Regen_Table4_Veterans
             case "28":
-                fieldNameY = "nb_vet_bop";
-                fieldNameX = "id_pe";
+                fieldNameX = [];
+                fieldNameY = ["nb_vet_bop"];
+                aggregation = "Count";
+                renderer = "Bar Chart";
                 break;
             //Regen_Table5_Calcul
             case "29":
-                fieldNameY = "moy_haut_tige_avenir_cm";
-                fieldNameX = "id_pe";
+                fieldNameX = [];
+                fieldNameY = ["moy_haut_tige_avenir_cm"];
+                aggregation = "Count";
+                renderer = "Bar Chart";
                 break;
             //SuiviPlant_Table1_TigeAvenir
             case "30":
-                fieldNameY = "h_couv_cm";
-                fieldNameX = "id_pe";
+                fieldNameX = ["id_pe"];
+                fieldNameY = ["ta_r_60_sab"];
+                aggregation = "Average";
+                aggregationAttribute = "h_couv_cm"
+                renderer = "Line Chart";
                 break;
             //SuiviPlant_Table2_Denombre
             case "31":
-                fieldNameY = "res";
-                fieldNameX = "id_pe";
+                fieldNameX = ["id_pe"];
+                fieldNameY = [];
+                aggregation = "Sum";
+                aggregationAttribute = "res"
+                renderer = "Bar Chart";
                 break;
             //SuiviPlant_Table3_Recouvrement
             case "32":
-                fieldNameY = "recouv";
-                fieldNameX = "espece";
-                aggregation = "avg";
+                fieldNameX = ["espece"];
+                fieldNameY = [];
+                aggregation = "Average";
+                aggregationAttribute = "recouv"
+                renderer = "Bar Chart";
                 break;
             //SuiviPlant_Table4_Veterans
             case "33":
-                fieldNameY = "nb_vet_bop";
-                fieldNameX = "id_pe";
+                fieldNameX = ["id_pe"];
+                fieldNameY = [];
+                aggregation = "Average";
+                aggregationAttribute = "nb_vet_bop"
+                renderer = "Bar Chart";
                 break;
-
         }
     }
 
@@ -351,30 +442,74 @@ require([
             outFields: ['*']
         }
         let featureQuery = displayedLayer.queryFeatures(myQuery).then((data) => {
-            google.load("visualization", "1", {packages:["corechart", "charteditor"]});
             $(function(){
                 let input = new Array(data.features.length);
                 for (let i = 0; i < data.features.length; i++){
                     input[i] = data.features[i].attributes;
                 }
                 var derivers = $.pivotUtilities.derivers;
-                console.log(input)
                 var renderers = $.extend($.pivotUtilities.renderers,
-                    $.pivotUtilities.gchart_renderers);
-                    $("#chart").pivotUI(input, {
-                        renderers: renderers,
-                        rendererOptions: { gchart: {width: 800, height: 600}},
-                        rows: data.fields,
-                        columns: data.fields
-                    });
+                    $.pivotUtilities.plotly_renderers);
+                $("#chartContainer").pivotUI(input, {
+                    renderers: renderers,
+                    rendererOptions: { gchart: {width: 800, height: 600}},
+                    rows: fieldNameY,
+                    cols: fieldNameX
+                }, true);
+                //Overwrite is true
+                document.getElementsByClassName("pvtAggregator")[0].value = aggregation;
+                document.getElementsByClassName("pvtRenderer")[0].value = renderer;
+                if(aggregationAttribute != ""){
+                    waitForElementToDisplay(".pvtAttrDropdown", function(){
+                        document.getElementsByClassName("pvtAttrDropdown")[0].value = aggregationAttribute;document.getElementsByClassName("pvtAttrDropdown")[0].dispatchEvent(new Event("change"))
+                    }, 500, 5000) 
+                }
             });
+            
         })
-        
     }
+
+    function waitForElementToDisplay(selector, callback, checkFrequencyInMs, timeoutInMs) {
+        var startTimeInMs = Date.now();
+        (function loopSearch() {
+          if (document.querySelector(selector) != null) {
+            callback();
+            return;
+          }
+          else {
+            setTimeout(function () {
+              if (timeoutInMs && Date.now() - startTimeInMs > timeoutInMs)
+                return;
+              loopSearch();
+            }, checkFrequencyInMs);
+          }
+        })();
+      }
+
+    function handleChangeTable(){
+        mySwitch = document.getElementById("switchTable");
+        if(mySwitch.checked){
+          showTable();
+        }else{
+          hideTable();
+        }
+    }
+
+    function showTable(){
+        document.getElementById("tableContainer").style.display = "block";
+    }
+
+    function hideTable(){
+        document.getElementById("tableContainer").style.display = "none";
+    }
+
     //Fetches the different available tables for the layer select
     populateLayer();
     //Event listeners for the buttons and more
-    document.getElementById("tableSelectButton").addEventListener("click", changeLayer);
+    document.getElementById("tableSelect").addEventListener("change", changeLayer);
+    document.getElementById("tableCategorySelect").addEventListener("change", populateLayer);
+    document.getElementById("tableInventorySelect").addEventListener("change", populateLayer);
+    document.getElementById("switchTable").addEventListener("change", handleChangeTable);
 });
 
 

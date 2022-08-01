@@ -8,9 +8,11 @@
       href="https://js.arcgis.com/4.23/esri/themes/light/main.css"
     />
     <link rel="stylesheet" href="./indexpage.css" />
+    <link rel="stylesheet" href="./sidenav.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://js.arcgis.com/4.23/"></script>
     <script src="./index.js"></script>
+    <title>Index Forêt-Climat</title>
   </head>
   <body>
     <div id="viewDiv"></div>
@@ -71,7 +73,7 @@
     </div>
     <button id="tutorialHelp" class="esri-component esri-widget--button esri-widget esri-interactive" onclick="startTutorial()">i</button>
     <label class="switch" id="switch">
-      <input type="checkbox" onchange='handleChange(this);'>
+      <input type="checkbox" onchange='handleChangeMode(this);'>
       <span class="slider round"></span>
     </label>
     <script type="text/javascript" src="./utils.js"></script>

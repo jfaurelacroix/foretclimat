@@ -18,10 +18,10 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.23.0/pivot.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.23.0/plotly_renderers.min.js"></script>
         <script src="https://js.arcgis.com/4.23/"></script>
-        <title>Données Forêt-Climat</title>
+        <title>Forêt-Climat Data</title>
     </head>
     <body>
-        <h1 class="esri-widget" style="font-size:1.5em;text-align:center">Outil de visualisation de données</h1>
+        <h1 class="esri-widget" style="font-size:1.5em;text-align:center">Data visualization tool</h1>
         <img
           id="logoPasserelle"
           src="./media/logofc.png"
@@ -43,18 +43,18 @@
                   onclick="document.getElementsByClassName('container')[0].classList.toggle('change');closeNav();"
                   >&times;</a
                 >
-                <a id="greeter">Bienvenue!</a>
-                <a class="SidenavElement" href="./home.html">Accueil</a>
-                <a class="SidenavElement" href="./storymaps.html">StoryMaps</a>
-                <a class="SidenavElement" href="./charts.html">Explorer les données</a>
-                <a class="SidenavElement user" href="./gallery.html" style="display:none;">Bibliothèque</a>
-                <a class="SidenavElement user" href="./webmap/viewer.html" style="display:none;">Carte</a>
-                <a class="SidenavElement user" href="./webscene/viewer.html" style="display:none;">Scène</a>
+                <a id="greeter">Welcome!</a>
+                <a class="SidenavElement" href="./home.html">Home</a>
+                <a class="SidenavElement" href="./storymaps_en.html">StoryMaps</a>
+                <a class="SidenavElement" href="./charts.html">Explore the data</a>
+                <a class="SidenavElement user" href="./gallery.html" style="display:none;">Gallery</a>
+                <a class="SidenavElement user" href="./webmap/viewer.html" style="display:none;">Map</a>
+                <a class="SidenavElement user" href="./webscene/viewer.html" style="display:none;">Scene</a>
                 <a class="SidenavElement user" href="./notebook/notebookhome.html" style="display:none;">Notebook</a>
-                <a class="SidenavElement user" href="./groups.html" style="display:none;">Groupes</a>
-                <a class="SidenavElement user" href="./content.html" style="display:none;">Contenu</a>
-                <a class="SidenavElement user" href="./organization.html" style="display:none;">Organisation</a>
-                <a class="SidenavElement lang" href="./charts_en.html">English</a>
+                <a class="SidenavElement user" href="./groups.html" style="display:none;">Groups</a>
+                <a class="SidenavElement user" href="./content.html" style="display:none;">Content</a>
+                <a class="SidenavElement user" href="./organization.html" style="display:none;">Organization</a>
+                <a class="SidenavElement lang" href="./charts.html">Français</a>
                 <div id="partLogoDiv">
                   <img src="./media/UL_FFGG_C_d.png" width="175" alt="Logo de la FFGG" />
                   <br>
@@ -67,14 +67,14 @@
         </div>
         <br>
         <div id="selectDiv" class="esri-widget">
-            <a>Sélectionner une table de données:</a>
+            <a>Select a data table:</a>
             <select id="tableCategorySelect" class="esri-select">
                 <option value="Table">Tables</option>
                 <option value="PS">Points</option>
-                <option value="Bloc">Polygones</option>
+                <option value="Bloc">Polygons</option>
             </select>
             <select id="tableInventorySelect" class="esri-select">
-                <option value="">Tout</option>
+                <option value="">All</option>
                 <option value="IMLNU">IMLNU</option>
                 <option value="Inter">Inter</option>
                 <option value="QualRebois">QualRebois</option>
@@ -85,7 +85,7 @@
             <select id="tableSelect" class="esri-select"></select>
             <a href="https://www.foretclimat.ca/server/rest/services/Hosted/BD_Inventaires_Secteur_gdb/FeatureServer" style="float:right">REST API</a>
             <br><br>
-            <a>Montrer/Masquer la table de données</a>
+            <a>Show/Hide data table</a>
             <label class="switch" id="switch">
                 <input type="checkbox" id="switchTable">
                 <span class="slider round"></span>
@@ -102,6 +102,7 @@
         <div id="tableTextInformation">
 
         </div>
+        
         <script src="./charts.js"></script>
         <script src="./utils.js"></script>
     </body>
