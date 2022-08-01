@@ -1,16 +1,15 @@
 #tableContainer{
+    position: relative;
     height: 50%;
+    display: none;
+    padding-bottom: 50px;
 }
 
-#chartContainer{
-    padding-top: 15px;
-    float:left;
-
-}
-
-#chart{
-    width:100%;
-    height:40%;
+#logoPasserelle{
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    height: 85px;
 }
 
 .esri-select{
@@ -48,48 +47,157 @@
     height: 32px;
 }
 
-.pvtVals{
-    background: none;
-    border: none;
-}
-
 /*from esri-select*/
 .pvtAttrDropdown, .pvtAggregator, .pvtRenderer{
-    cursor:pointer;display:inline;font-family:inherit;font-size:.85em;height:32px;color:#323232;border:1px solid rgba(110,110,110,.3);margin:0;-webkit-appearance:none;-moz-appearance:none;border-radius:0;padding:0 .5em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-8 -8 32 32' width='32' height='32'%3E%3Cpath d='M8 11.207l-4-4V5.793l4 4 4-4v1.414z' fill='%236e6e6e' fillrule='nonzero'/%3E%3C/svg%3E") no-repeat right center #fff
-}
-
-.pvtAttrDropdown{
-    padding-right: 25px;
-    float:left;
-}
-
-.pvtRenderer{
-    width: 100%;
-}
-
-.pvtCols, .pvtRows{
-    background: #e7e7e7;
-    border: 1px solid #949494;
-    margin:0px;
-}
-
-.pvtAxisContainer{
-    border: 1px solid #949494;
-}
-
-table.pvtUi tbody tr td{
-    padding: 0px;
+    cursor:pointer;display:inline;font-family:inherit;height:32px;color:#323232;border:1px solid rgba(110,110,110,.3);margin:0;-webkit-appearance:none;-moz-appearance:none;border-radius:0;padding:0 .5em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-8 -8 32 32' width='32' height='32'%3E%3Cpath d='M8 11.207l-4-4V5.793l4 4 4-4v1.414z' fill='%236e6e6e' fillrule='nonzero'/%3E%3C/svg%3E") no-repeat right center #fff
 }
 
 .pvtAxisContainer li span.pvtAttr{
     background: #0079c1;
+    border: 0.15em outset #005d92;
     color: #fff;
+    font-size: 20px;
+    font-family: sans-serif;
 }
 
 .pvtTriangle{
     color: #fff;
 }
 
+#chartContainer button {
+    align-items:center;background-color:#0079c1;border:1px solid #0079c1;color:#fff;cursor:pointer;display:flex;font-family:inherit;font-size:14px;min-height:32px;justify-content:center;word-break:normal;white-space:normal;overflow:hidden;padding:6px 7px;width:100%;transition:background-color 125ms ease-in-out,border 125ms ease-in-out; display:inline-block;width:40%;border:1px solid black
+}
+
+#chartContainer input[type=checkbox]{
+    appearance: none;
+    background-color: #fff;
+    margin: 0;
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid currentColor;
+    border-radius: 0.15em;
+    transform: translateY(-0.075em);
+    display: inline-grid;
+    place-content: center;
+    margin-right: 5px;
+}
+
+#chartContainer input[type=checkbox]::before{
+    content: "";
+    width: 1.2em;
+    height: 1.2em;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em #0079c1;
+    clip-path: polygon(28% 38%, 41% 53%, 75% 24%, 86% 38%, 40% 78%, 15% 50%);
+}
+
+#chartContainer input[type=checkbox]:checked::before{
+    transform: scale(1);
+}
+
+#chartContainer input[type=checkbox]:hover{
+    border-color:#005d92;
+    border-width: 3px;
+}
+
 .pvtColOrder, .pvtRowOrder{
     font: 0.8em  "Calibri";
 }
+
+.previous {
+    text-decoration: none;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: inline-block;
+    padding: 8px 16px;
+    text-align: center;
+    background-color: #e4e4e4;
+    color: black;
+    font-weight: 900;
+  }
+
+  .previous:hover {
+    background-color: rgb(216, 216, 216);
+    color: black;
+  }
+  
+  .round {
+    border-radius: 50%;
+  }
+
+/* Rounded border */
+hr.rounded {
+    border-top: 5px solid rgb(112, 112, 112);
+    border-radius: 3px;
+    width: 98%;
+  }
+
+/* || Toggle Switch */
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 23px;
+    box-shadow: none;
+    transform: translate(0,-60%)
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 17px;
+    width: 17px;
+    left: 3px;
+    bottom: 3px;
+    background-color: #ffffff;
+    -webkit-transition: .3s;
+    transition: .3s;
+  }
+  
+  input:checked + .slider {
+    background-color: #0079c1;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #858585;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(17px);
+    -ms-transform: translateX(17px);
+    transform: translateX(17px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
