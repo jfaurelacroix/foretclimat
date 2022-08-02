@@ -5,6 +5,10 @@
     padding-bottom: 50px;
 }
 
+#sideburger{
+    position: absolute
+}
+
 #logoPasserelle{
     position: absolute;
     top: 5px;

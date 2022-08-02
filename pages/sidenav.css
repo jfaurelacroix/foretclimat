@@ -34,6 +34,7 @@
     color: #f3f3f3;
     display: block;
     transition: 0.3s;
+    white-space: nowrap;
 }
 
 .sidenav a#greeter{
