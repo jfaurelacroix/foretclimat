@@ -292,3 +292,8 @@ function bottomRightTutorial(tutBox){
     skip.style.display = "initial";
   });
 }
+
+if (getCookie("esri_auth") != "") {
+  changeUserInfoHTML(getCookieEmail());
+  setUpNavMenu();
+}
