@@ -27,6 +27,44 @@
           src="./media/logofc.png"
           alt="Logo de la Passerelle"
         /> 
+        
+        <br>
+        <div id="selectDiv" class="esri-widget">
+            <a>Select a data table:</a>
+            <select id="tableCategorySelect" class="esri-select">
+                <option value="Table">Tables</option>
+                <option value="PS">Points</option>
+                <option value="Bloc">Polygons</option>
+            </select>
+            <select id="tableInventorySelect" class="esri-select">
+                <option value="">All</option>
+                <option value="IMLNU">IMLNU</option>
+                <option value="Inter">Inter</option>
+                <option value="QualRebois">QualRebois</option>
+                <option value="Recolte">Recolte</option>
+                <option value="Regen">Regen</option>
+                <option value="SuiviPlant">SuiviPlant</option>  
+            </select>
+            <select id="tableSelect" class="esri-select"></select>
+            <a href="https://www.foretclimat.ca/server/rest/services/Hosted/BD_Inventaires_Secteur_gdb/FeatureServer" style="float:right">REST API</a>
+            <br><br>
+            <a>Show/Hide data table</a>
+            <label class="switch" id="switch">
+                <input type="checkbox" id="switchTable">
+                <span class="slider round"></span>
+              </label>
+        </div>
+        
+        <div id="tableContainer">
+
+        </div>
+        <hr class="rounded">
+        <div id="chartContainer" class="esri-component">
+
+        </div>
+        <div id="tableTextInformation">
+
+        </div>
         <div
             id="sideburger"
             class="container esri-component"
@@ -65,44 +103,6 @@
                   />
                 </div>
         </div>
-        <br>
-        <div id="selectDiv" class="esri-widget">
-            <a>Select a data table:</a>
-            <select id="tableCategorySelect" class="esri-select">
-                <option value="Table">Tables</option>
-                <option value="PS">Points</option>
-                <option value="Bloc">Polygons</option>
-            </select>
-            <select id="tableInventorySelect" class="esri-select">
-                <option value="">All</option>
-                <option value="IMLNU">IMLNU</option>
-                <option value="Inter">Inter</option>
-                <option value="QualRebois">QualRebois</option>
-                <option value="Recolte">Recolte</option>
-                <option value="Regen">Regen</option>
-                <option value="SuiviPlant">SuiviPlant</option>  
-            </select>
-            <select id="tableSelect" class="esri-select"></select>
-            <a href="https://www.foretclimat.ca/server/rest/services/Hosted/BD_Inventaires_Secteur_gdb/FeatureServer" style="float:right">REST API</a>
-            <br><br>
-            <a>Show/Hide data table</a>
-            <label class="switch" id="switch">
-                <input type="checkbox" id="switchTable">
-                <span class="slider round"></span>
-              </label>
-        </div>
-        
-        <div id="tableContainer">
-
-        </div>
-        <hr class="rounded">
-        <div id="chartContainer" class="esri-component">
-
-        </div>
-        <div id="tableTextInformation">
-
-        </div>
-        
         <script src="./charts.js"></script>
         <script src="./utils.js"></script>
     </body>
