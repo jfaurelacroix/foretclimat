@@ -921,9 +921,11 @@ require([
     addAccountEventListenerSignIn();
   }
 
+  /* if first visit => start tutorial and note that it's not first visit */
   if(!localStorage.noFirstVisit){
     startTutorial();
     localStorage.noFirstVisit = true;
   }
-  setPublicMode();
+  document.getElementById("switchLayers").addEventListener("change", handleChangeLayersMode);
+  document.getElementById("switchLayers").dispatchEvent(new Event("change"))
 });
