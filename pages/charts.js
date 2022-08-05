@@ -59,7 +59,6 @@ require([
         featureTable(selectedValue);
         setFieldsForChart();
         generatePivotChart();
-        setInformativeText();
     }
 
 
@@ -344,97 +343,6 @@ require([
         }
     }
 
-    function setInformativeText(){
-        var informativeText = "";
-        switch(document.getElementById("tableSelect").value){
-            //IMLNU_Table1_SyntheseFI
-            case "13":
-                informativeText = "";
-                break;
-            //IMLNU_Table2_SyntheseR
-            case "14":
-                informativeText = "";
-                break;
-            //Inter_Table1_Diagnostic
-            case "15":
-                informativeText = "";
-                break;
-            //Inter_Table2_Dendro
-            case "16":
-                informativeText = "";
-                break;
-            //Inter_Table3_Gaules
-            case "17":
-                informativeText = "";
-                break;
-            //Inter_Table4_Regen
-            case "18":
-                informativeText = "";
-                break;
-            //Inter_Table5_Arbre
-            case "19":
-                informativeText = "";
-                break;
-            //Inter_Table6_EspIndicatrices
-            case "20":
-                informativeText = "";
-                break;
-            //Inter_Table7_Calcul
-            case "21":
-                informativeText = "";
-                break;
-            //QualRebois_Table1_A
-            case "22":
-                informativeText = "";
-                break;
-            //QualRebois_Table1_BC
-            case "23":
-                informativeText = "";
-                break;
-            //QualRebois_Table3_Grappe
-            case "24":
-                informativeText = "";
-                break;
-            //Regen_Table1_CD
-            case "25":
-                informativeText = "";
-                break;
-            //Regen_Table2_Denombre
-            case "26":
-                informativeText = "";
-                break;
-            //Regen_Table3_Recouvrement
-            case "27":
-                informativeText = "";
-                break;
-            //Regen_Table4_Veterans
-            case "28":
-                informativeText = "";
-                break;
-            //Regen_Table5_Calcul
-            case "29":
-                informativeText = "";
-                break;
-            //SuiviPlant_Table1_TigeAvenir
-            case "30":
-                informativeText = "";
-                break;
-            //SuiviPlant_Table2_Denombre
-            case "31":
-                informativeText = "";
-                break;
-            //SuiviPlant_Table3_Recouvrement
-            case "32":
-                informativeText = "";
-                break;
-            //SuiviPlant_Table4_Veterans
-            case "33":
-                informativeText = "";
-                break;
-        }
-        document.getElementById("tableTextInformation").innerHTML = informativeText;
-    }
-
     /* Builds a default chart when changing the selected layer */
     function generatePivotChart(){
         myQuery = {
@@ -469,6 +377,7 @@ require([
         })
     }
 
+    /* Waits for an element to display to callback */
     function waitForElementToDisplay(selector, callback, checkFrequencyInMs, timeoutInMs) {
         var startTimeInMs = Date.now();
         (function loopSearch() {
@@ -486,6 +395,7 @@ require([
         })();
       }
 
+    /* Displays or hides the FeatureTable according to the switch */
     function handleChangeTable(){
         mySwitch = document.getElementById("switchTable");
         if(mySwitch.checked){
@@ -495,10 +405,12 @@ require([
         }
     }
 
+    /* Shows the table */
     function showTable(){
         document.getElementById("tableContainer").style.display = "block";
     }
 
+    /* Hides the tables */
     function hideTable(){
         document.getElementById("tableContainer").style.display = "none";
     }
