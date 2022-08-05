@@ -916,8 +916,6 @@ require([
 
   /* if user is logged in (esri_auth cookie is present) */
   if (getCookie("esri_auth") != "") {
-    changeUserInfoHTML(getCookieEmail());
-    setUpNavMenu();
     addAccountEventListenerHome();
   }else{
     addAccountEventListenerSignIn();

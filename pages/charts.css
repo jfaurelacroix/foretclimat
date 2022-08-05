@@ -1,3 +1,4 @@
+/* Where the FeatureTable is displayed */
 #tableContainer{
     position: relative;
     height: 50%;
@@ -5,11 +6,12 @@
     padding-bottom: 50px;
 }
 
+/* Places the sidemenu burger top right without it moving when scrolling */
 #sideburger{
     position: absolute
 }
 
-
+/* Top-left logo */
 #logoPasserelle{
     position: absolute;
     top: 5px;
@@ -17,46 +19,26 @@
     height: 85px;
 }
 
+/* Selects */
 .esri-select{
     width: initial;
     display: inline-block;
     padding-right: 25px; 
 }
 
+/* Buttons */
 .esri-button{
     width: initial;
     margin: 5px;
     display: inline-block;
 }
 
-#YAttributesDiv{
-    display: inline-block;
-}
-
-.plusminus-group .esri-button{
-    width: 50%;
-    height: 100%;
-    margin: 0px;
-    padding: 0px;
-    float: left;
-    transform: translate(0%, 35%); 
-    border: 1px solid #000000;
-}
-.plusminus-group .esri-button:not(:last-child) {
-    border-right: none; /* Prevent double borders */
-}
-
-.plusminus-group{
-    display: inline-block;
-    width: 64px;
-    height: 32px;
-}
-
-/*from esri-select*/
+/*from esri-select to copy the selects*/
 .pvtAttrDropdown, .pvtAggregator, .pvtRenderer{
     cursor:pointer;display:inline;font-family:inherit;height:32px;color:#323232;border:1px solid rgba(110,110,110,.3);margin:0;-webkit-appearance:none;-moz-appearance:none;border-radius:0;padding:0 .5em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-8 -8 32 32' width='32' height='32'%3E%3Cpath d='M8 11.207l-4-4V5.793l4 4 4-4v1.414z' fill='%236e6e6e' fillrule='nonzero'/%3E%3C/svg%3E") no-repeat right center #fff
 }
 
+/* The attributes in the pivottable js */
 .pvtAxisContainer li span.pvtAttr{
     background: #0079c1;
     border: 0.15em outset #005d92;
@@ -65,14 +47,18 @@
     font-family: sans-serif;
 }
 
+/* the triangle in the attribute box */
 .pvtTriangle{
     color: #fff;
 }
 
+/* || when clicking the attributes in the pivottable js */
+/* The buttons */
 #chartContainer button {
     align-items:center;background-color:#0079c1;border:1px solid #0079c1;color:#fff;cursor:pointer;display:flex;font-family:inherit;font-size:14px;min-height:32px;justify-content:center;word-break:normal;white-space:normal;overflow:hidden;padding:6px 7px;width:100%;transition:background-color 125ms ease-in-out,border 125ms ease-in-out; display:inline-block;width:40%;border:1px solid black
 }
 
+/* The checkboxes */
 #chartContainer input[type=checkbox]{
     appearance: none;
     background-color: #fff;
@@ -86,9 +72,11 @@
     transform: translateY(-0.075em);
     display: inline-grid;
     place-content: center;
-    margin-right: 5px;
+    margin: 8px;
+    margin-bottom: 0px;
 }
 
+/* the checkmark unchecked */
 #chartContainer input[type=checkbox]::before{
     content: "";
     width: 1.2em;
@@ -99,50 +87,24 @@
     clip-path: polygon(28% 38%, 41% 53%, 75% 24%, 86% 38%, 40% 78%, 15% 50%);
 }
 
+/* the checkmark checked */
 #chartContainer input[type=checkbox]:checked::before{
     transform: scale(1);
 }
 
+/* when hovering with the mouse */
 #chartContainer input[type=checkbox]:hover{
     border-color:#005d92;
     border-width: 3px;
 }
 
+/* The symbols used to reorder */
 .pvtColOrder, .pvtRowOrder{
     font: 0.8em  "Calibri";
 }
 
-.previous {
-    text-decoration: none;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    display: inline-block;
-    padding: 8px 16px;
-    text-align: center;
-    background-color: #e4e4e4;
-    color: black;
-    font-weight: 900;
-  }
-
-  .previous:hover {
-    background-color: rgb(216, 216, 216);
-    color: black;
-  }
-  
-  .round {
-    border-radius: 50%;
-  }
-
-/* Rounded border */
-hr.rounded {
-    border-top: 5px solid rgb(112, 112, 112);
-    border-radius: 3px;
-    width: 98%;
-  }
 
 /* || Toggle Switch */
-
 .switch {
     position: relative;
     display: inline-block;
