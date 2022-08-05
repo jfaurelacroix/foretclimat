@@ -104,8 +104,8 @@ function setLangUser(){
 }
 
 /* Handles bottom-right Switch toggle changes. If it's checked => display every layer, otherwise => display layer for visitors */
-function handleChangeMode(mySwitch){
-  if(mySwitch.checked){
+function handleChangeLayersMode(){
+  if(document.getElementById("switchLayers").checked){
     setResearchMode();
   }else{
     setPublicMode();
@@ -292,6 +292,45 @@ function bottomRightTutorial(tutBox){
     skip.style.display = "initial";
   });
 }
+
+/* Waits for an element to display to callback */
+function waitForElementToDisplay(selector, callback, checkFrequencyInMs, timeoutInMs) {
+  var startTimeInMs = Date.now();
+  (function loopSearch() {
+    if (document.querySelector(selector) != null) {
+      callback();
+      return;
+    }
+    else {
+      setTimeout(function () {
+        if (timeoutInMs && Date.now() - startTimeInMs > timeoutInMs)
+          return;
+        loopSearch();
+      }, checkFrequencyInMs);
+    }
+  })();
+}
+
+/* Displays or hides the FeatureTable according to the switch */
+function handleChangeTable(){
+    mySwitch = document.getElementById("switchTable");
+    if(mySwitch.checked){
+      showTable();
+    }else{
+      hideTable();
+    }
+}
+
+/* Shows the table */
+function showTable(){
+    document.getElementById("tableContainer").style.display = "block";
+}
+
+/* Hides the tables */
+function hideTable(){
+    document.getElementById("tableContainer").style.display = "none";
+}
+
 
 if (getCookie("esri_auth") != "") {
   changeUserInfoHTML(getCookieEmail());

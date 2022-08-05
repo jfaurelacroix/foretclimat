@@ -377,44 +377,6 @@ require([
         })
     }
 
-    /* Waits for an element to display to callback */
-    function waitForElementToDisplay(selector, callback, checkFrequencyInMs, timeoutInMs) {
-        var startTimeInMs = Date.now();
-        (function loopSearch() {
-          if (document.querySelector(selector) != null) {
-            callback();
-            return;
-          }
-          else {
-            setTimeout(function () {
-              if (timeoutInMs && Date.now() - startTimeInMs > timeoutInMs)
-                return;
-              loopSearch();
-            }, checkFrequencyInMs);
-          }
-        })();
-      }
-
-    /* Displays or hides the FeatureTable according to the switch */
-    function handleChangeTable(){
-        mySwitch = document.getElementById("switchTable");
-        if(mySwitch.checked){
-          showTable();
-        }else{
-          hideTable();
-        }
-    }
-
-    /* Shows the table */
-    function showTable(){
-        document.getElementById("tableContainer").style.display = "block";
-    }
-
-    /* Hides the tables */
-    function hideTable(){
-        document.getElementById("tableContainer").style.display = "none";
-    }
-
     //Fetches the different available tables for the layer select
     populateLayer();
     //Event listeners for the buttons and more
@@ -422,6 +384,7 @@ require([
     document.getElementById("tableCategorySelect").addEventListener("change", populateLayer);
     document.getElementById("tableInventorySelect").addEventListener("change", populateLayer);
     document.getElementById("switchTable").addEventListener("change", handleChangeTable);
+    document.getElementById("switchTable").dispatchEvent(new Event("change"));
 });
 
 
