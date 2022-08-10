@@ -104,37 +104,18 @@ sudo chmod 777 -R /opt/tomcat_arcgis
 ## 2.  Download the certificate and setup auto-renew
 #### Downloading the certificate
 
-Installing certbot
+Installing certbot and openssl
 ```
 sudo apt-get install snapd
 sudo snap install --classic certbot
-sudo certbot certonly --standalone -d www.foretclimat.ca
+sudo apt-get install openssl
 ```
 Request Certificate using certbot
 ```
-sudo cp /etc/letsencrypt/live/www.foretclimat.ca/fullchain.pem /opt/tomcat_arcgis
-sudo cp /etc/letsencrypt/live/www.foretclimat.ca/privkey.pem /opt/tomcat_arcgis
-```
-Format the certificate for ArcGIS
-```
-cd /opt/tomcat_arcgis
-sudo apt-get install openssl
-sudo openssl pkcs12 -inkey privkey.pem -in fullchain.pem -export -out cert.pfx -password pass:"PassForetClimatCert435"
-```
-
-Give rights to the user
-```
-sudo chown arcgis /opt/tomcat_arcgis/cert.pfx
-sudo chmod 755 /opt/tomcat_arcgis/cert.pfx
+sudo certbot certonly --webroot --agree-tos -d www.foretclimat.ca -w /opt/tomcat_arcgis/webapps/ROOT
 ```
 
 #### Setup autorenewing
-Prepare script to convert cert to pkcs12 https://github.com/StormWindStudios/OpenSSL-Notes/blob/master/letsencrypt_autopfx.md
-```
-sudo mkdir -p /etc/letsencrypt/renewal-hooks/deploy
-sudo cp ~/repos/foretclimat/scripts/auto_pfx.sh /etc/letsencrypt/renewal-hooks/deploy
-sudo chmod +x /etc/letsencrypt/renewal-hooks/deploy/auto_pfx.sh
-```
 Locate the chef script you will need to use move the chef script to ~/repos
 ```
 cp ~/repos/foretclimat/chef-json/* ~/repos/arcgis_cookbook/
@@ -149,6 +130,17 @@ Download jq and execute the script to edit the chef json files
 ```
 sudo apt-get install jq
 ./scripts/credentials.sh
+```
+Prepare script to convert cert to pkcs12 https://github.com/StormWindStudios/OpenSSL-Notes/blob/master/letsencrypt_autopfx.md
+```
+sudo mkdir -p /etc/letsencrypt/renewal-hooks/deploy
+sudo cp ~/repos/foretclimat/scripts/auto_pfx.sh /etc/letsencrypt/renewal-hooks/deploy
+sudo chmod +x /etc/letsencrypt/renewal-hooks/deploy/auto_pfx.sh
+```
+
+Run the script to format the certificat
+```
+sudo /etc/letsencrypt/renewal-hooks/deploy/auto_pfx.sh
 ```
 
 ## 3.  Run the chef script
