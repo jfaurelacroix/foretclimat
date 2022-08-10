@@ -33,23 +33,42 @@
     display: inline-block;
 }
 
+table.pvtUi{
+    font-size: 14px;
+}
+
+table.pvtUi p{
+    margin: 2px;
+    text-align: left;
+}
+
 /*from esri-select to copy the selects*/
 .pvtAttrDropdown, .pvtAggregator, .pvtRenderer{
-    cursor:pointer;display:inline;font-family:inherit;height:32px;color:#323232;border:1px solid rgba(110,110,110,.3);margin:0;-webkit-appearance:none;-moz-appearance:none;border-radius:0;padding:0 .5em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-8 -8 32 32' width='32' height='32'%3E%3Cpath d='M8 11.207l-4-4V5.793l4 4 4-4v1.414z' fill='%236e6e6e' fillrule='nonzero'/%3E%3C/svg%3E") no-repeat right center #fff
+    cursor:pointer;display:inline;font-family:inherit;height:32px;color:#323232;border:1px solid rgba(110,110,110,.3);margin:0;-webkit-appearance:none;-moz-appearance:none;border-radius:0;padding: 0 0.5em;padding-right: 25px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-8 -8 32 32' width='32' height='32'%3E%3Cpath d='M8 11.207l-4-4V5.793l4 4 4-4v1.414z' fill='%236e6e6e' fillrule='nonzero'/%3E%3C/svg%3E") no-repeat right center #fff
 }
 
 /* The attributes in the pivottable js */
 .pvtAxisContainer li span.pvtAttr{
-    background: #0079c1;
-    border: 0.15em outset #005d92;
-    color: #fff;
-    font-size: 20px;
-    font-family: sans-serif;
+    background: #7cc7f3;
+    border: 0.08em outset #005d92;
+    color: #000;
+    font-size: 16px;
+    font-family: inherit;
 }
 
 /* the triangle in the attribute box */
 .pvtTriangle{
-    color: #fff;
+    color: #000;
+    font-size: 22px;
+    margin: 2px;
+    display: inline-block;
+    transform: translate(0,10%)
+}
+
+/* data table generated */
+table.pvtTable{
+    font-size: 16px;
+    font-family: "Avenir Next", "Avenir", "Helvetica Neue", sans-serif;
 }
 
 /* || when clicking the attributes in the pivottable js */
@@ -101,8 +120,16 @@
 /* The symbols used to reorder */
 .pvtColOrder, .pvtRowOrder{
     font: 0.8em  "Calibri";
+    background: #7cc7f3;
+    border: 0.08em outset #005d92;
+    border-radius: 4px;
+    padding: 4px;
 }
 
+/* The box location */
+#chartContainer .pvtFilterBox{
+    
+}
 
 /* || Toggle Switch */
 .switch {
@@ -111,7 +138,7 @@
     width: 40px;
     height: 23px;
     box-shadow: none;
-    transform: translate(0,-60%)
+    transform: translate(0,-10%)
   }
   
   /* Hide default HTML checkbox */

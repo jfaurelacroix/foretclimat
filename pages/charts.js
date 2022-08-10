@@ -341,6 +341,122 @@ require([
                 renderer = "Bar Chart";
                 break;
         }
+        if(document.documentElement.lang == "fr"){
+            switch(aggregation){
+                case "80% Lower Bound":
+                    aggregation = "Borne inférieure 80%";
+                    break;
+                case "80% Upper Bound":
+                    aggregation = "Borne supérieure 80%";
+                    break;
+                case "Average":
+                    aggregation = "Moyenne";
+                    break;
+                case "Count":
+                    aggregation = "Nombre";
+                    break;
+                case "Count Unique Values":
+                    aggregation = "Nombre de valeurs uniques";
+                    break;
+                case "Count as Fraction of Columns":
+                    aggregation = "Nombre en proportion de la colonne";
+                    break;
+                case "Count as Fraction of Rows":
+                    aggregation = "Nombre en proportion de la ligne";
+                    break;
+                case "Count as Fraction of Total":
+                    aggregation = "Nombre en proportion du totale";
+                    break;
+                case "First":
+                    aggregation = "Premier";
+                    break;
+                case "Integer Sum":
+                    aggregation = "Somme en entiers";
+                    break;
+                case "Last":
+                    aggregation = "Dernier";
+                    break;
+                case "List Unique Values":
+                    aggregation = "Liste de valeurs uniques";
+                    break;
+                case "Maximum":
+                    aggregation = "Maximum";
+                    break;
+                case "Median":
+                    // Not in french
+                    aggregation = "Nombre";
+                    break;
+                case "Minimum":
+                    aggregation = "Minimum";
+                    break;
+                case "Sample Standard Deviation":
+                    // Not in french
+                    aggregation = "Nombre";
+                    break;
+                case "Sample Variance":
+                    // Not in french
+                    aggregation = "Nombre";
+                    break;
+                case "Sum":
+                    aggregation = "Somme";
+                    break;
+                case "Sum as Fraction of Columns":
+                    aggregation = "Somme en proportion de la colonne";
+                    break;
+                case "Sum as Fraction of Rows":
+                    aggregation = "Somme en proportion de la ligne";
+                    break;
+                case "Sum as Fraction of Total":
+                    aggregation = "Somme en proportion du totale";
+                    break;
+                case "Sum over Sum":
+                // Not in french
+                    aggregation = "Nombre";
+                    break;
+            }
+
+            switch(renderer){
+                case "Table":
+                    renderer = "Table";
+                    break;
+                case "Table Barchart":
+                    renderer = "Table avec barres"
+                    break;
+                case "Heatmap":
+                    renderer = "Carte de chaleur";
+                    break;
+                case "Row Heatmap":
+                    renderer = "Carte de chaleur par ligne";
+                    break;
+                case "Col Heatmap":
+                    renderer = "Carte de chaleur par colonne";
+                    break;
+                case "Horizontal Bar Chart":
+                    renderer = "Graphique à barres horizontales superposées"
+                    break;
+                case "Horizontal Stacked Bar Chart":
+                    renderer = "Graphique à barres horizontales";
+                    break;
+                case "Bar Chart":
+                    renderer = "Graphique à barres";
+                    break;
+                case "Stacked Bar Chart":
+                    renderer = "Graphique à barres superposées";
+                    break;
+                case "Line Chart":
+                    renderer = "Graphique linéaire";
+                    break;
+                case "Area Chart":
+                    renderer = "Graphique en aires";
+                    break;
+                case "Scatter Chart":
+                    renderer = "Graphique en nuage de points";
+                    break;
+                case "Multiple Pie Chart":
+                    renderer = "Graphiques circulaires multiples";
+                    break;
+            }
+        }
     }
 
     /* Builds a default chart when changing the selected layer */
@@ -356,25 +472,72 @@ require([
                     input[i] = data.features[i].attributes;
                 }
                 var derivers = $.pivotUtilities.derivers;
-                var renderers = $.extend($.pivotUtilities.renderers,
-                    $.pivotUtilities.plotly_renderers);
+                var renderers;
+                if(document.documentElement.lang == "fr"){
+                    renderers = $.extend($.pivotUtilities.locales.fr.renderers,
+                        $.pivotUtilities.plotly_renderers);
+                }else{
+                    renderers = $.extend($.pivotUtilities.renderers,
+                        $.pivotUtilities.plotly_renderers);
+                }
                 $("#chartContainer").pivotUI(input, {
                     renderers: renderers,
-                    rendererOptions: { gchart: {width: 800, height: 600}},
+                    rendererOptions: {},
                     rows: fieldNameY,
                     cols: fieldNameX
-                }, true);
+                }, true, document.documentElement.lang);
                 //Overwrite is true
                 document.getElementsByClassName("pvtAggregator")[0].value = aggregation;
                 document.getElementsByClassName("pvtRenderer")[0].value = renderer;
+
+                addLabels();
+                
                 if(aggregationAttribute != ""){
                     waitForElementToDisplay(".pvtAttrDropdown", function(){
-                        document.getElementsByClassName("pvtAttrDropdown")[0].value = aggregationAttribute;document.getElementsByClassName("pvtAttrDropdown")[0].dispatchEvent(new Event("change"))
-                    }, 500, 5000) 
+                        document.getElementsByClassName("pvtAttrDropdown")[0].value = aggregationAttribute;document.getElementsByClassName("pvtAttrDropdown")[0].dispatchEvent(new Event("change"));
+                        }, 500, 5000) 
                 }
             });
             
         })
+    }
+
+    function addLabels(){
+        let newNode = document.createElement("p");
+        if(document.documentElement.lang == "fr"){
+            newNode.innerHTML = "Moteur de rendu:";
+        }else{
+            newNode.innerHTML = "Renderer:";
+        }
+        document.getElementsByClassName("pvtUiCell")[0].insertBefore(newNode, document.getElementsByClassName("pvtRenderer")[0]);
+
+        newNode = document.createElement("p");
+        if(document.documentElement.lang == "fr"){
+            newNode.innerHTML = "Fonction d'aggregation:";
+        }else{
+            newNode.innerHTML = "Aggregator:";
+        }
+        document.getElementsByClassName("pvtVals")[0].insertBefore(newNode, document.getElementsByClassName("pvtAggregator")[0]);
+
+        newNode = document.createElement("p");
+        newNode.style = "display:inline;"
+        if(document.documentElement.lang == "fr"){
+            newNode.innerHTML = "Trier:";
+        }else{
+            newNode.innerHTML = "Sort:";
+        }
+        document.getElementsByClassName("pvtVals")[0].insertBefore(newNode, document.getElementsByClassName("pvtAggregator")[0].nextSibling);
+
+        newNode = document.createElement("p");
+        newNode.style = "display:inline;"
+        newNode.id = "variableString";
+        if(document.documentElement.lang == "fr"){
+            newNode.innerHTML = "Variable:";
+        }else{
+            newNode.innerHTML = "Variable:";
+        }
+        document.getElementsByClassName("pvtVals")[0].insertBefore(newNode, document.getElementsByClassName("pvtColOrder")[0].nextSibling.nextSibling);
+        getEventListeners(document.getElementsByClassName("pvtAggregator")[0])
     }
 
     //Fetches the different available tables for the layer select

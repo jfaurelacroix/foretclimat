@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="fr">
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta name="robots" content="noindex, follow" />
@@ -16,7 +17,8 @@
         <link rel="stylesheet" href="./charts.css" />
         <link rel="stylesheet" href="./sidenav.css" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.23.0/pivot.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.23.0/plotly_renderers.min.js"></script>
+        <script src="./plotly_renderers.min.fr.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.23.0/pivot.fr.min.js"></script>
         <script src="https://js.arcgis.com/4.23/"></script>
         <title>Données Forêt-Climat</title>
     </head>
@@ -47,7 +49,7 @@
             <select id="tableSelect" class="esri-select"></select>
             <a href="https://www.foretclimat.ca/server/rest/services/Hosted/BD_Inventaires_Secteur_gdb/FeatureServer" style="float:right">REST API</a>
             <br><br>
-            <a>Montrer/Masquer la table de données</a>
+            <a>Montrer/Masquer la table de données: </a>
             <label class="switch" id="switch">
                 <input type="checkbox" id="switchTable">
                 <span class="slider round"></span>
