@@ -3,7 +3,11 @@
     position: relative;
     height: 50%;
     display: none;
-    padding-bottom: 50px;
+    padding-bottom: 10px;
+}
+
+.esri-grid__grid{
+    min-height: 400px;
 }
 
 /* Places the sidemenu burger top right without it moving when scrolling */
@@ -37,9 +41,13 @@ table.pvtUi{
     font-size: 14px;
 }
 
-table.pvtUi p{
+table.pvtUi div.pvtCheckContainer p{
     margin: 2px;
     text-align: left;
+}
+
+td.pvtUiCell p {
+    margin-bottom: 0px;
 }
 
 /*from esri-select to copy the selects*/
@@ -50,8 +58,8 @@ table.pvtUi p{
 /* The attributes in the pivottable js */
 .pvtAxisContainer li span.pvtAttr{
     background: #7cc7f3;
-    border: 0.08em outset #005d92;
-    color: #000;
+    border: 0.09em solid #6396b4;
+    color: rgb(15, 15, 15);
     font-size: 16px;
     font-family: inherit;
 }
@@ -66,8 +74,8 @@ table.pvtUi p{
 }
 
 /* data table generated */
-table.pvtTable{
-    font-size: 16px;
+table.pvtTable tbody tr th, table.pvtTable tbody tr td, table.pvtTable thead tr th{
+    font-size: 14px;
     font-family: "Avenir Next", "Avenir", "Helvetica Neue", sans-serif;
 }
 
@@ -88,10 +96,11 @@ table.pvtTable{
     height: 1.15em;
     border: 0.15em solid currentColor;
     border-radius: 0.15em;
-    transform: translateY(-0.075em);
+    transform: translateY(0.18em);
     display: inline-grid;
     place-content: center;
     margin: 8px;
+    margin-right: 4px;
     margin-bottom: 0px;
 }
 
@@ -124,11 +133,35 @@ table.pvtTable{
     border: 0.08em outset #005d92;
     border-radius: 4px;
     padding: 4px;
+    text-align: center;
+}
+
+.pvtTranspose{
+    font: 0.8em  "Calibri";
+    background: #7cc7f3;
+    border: 0.08em outset #005d92;
+    border-radius: 4px;
+    padding: 4px;
+    margin: 5px;
+    margin-left: 0px;
+    text-align: center;
+    cursor: pointer;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently */
+}
+
+td.pvtUiCell{
+    min-width: 164px;
+    min-height: 164px;
+    height: 164px;
 }
 
 /* The box location */
-#chartContainer .pvtFilterBox{
-    
+#chartContainer .pvtFilterBox {
 }
 
 /* || Toggle Switch */
