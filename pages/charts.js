@@ -488,7 +488,8 @@ require([
                     aggregatorName: aggregation,
                     rendererName: renderer,
                     rows: fieldNameY,
-                    cols: fieldNameX
+                    cols: fieldNameX,
+                    unusedAttrsVertical: false
                 }, true, document.documentElement.lang);
                 //Overwrite is true
                 addLabels();
