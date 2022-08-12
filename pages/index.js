@@ -902,7 +902,7 @@ require([
   map.addMany([FM_AB_BLOC, PLANT_BLOC, REGEN_BLOC,  RECOLTE_BLOC, REGEN_BLOC, REBOIS_BLOC, INTER_BLOC,  IMLNU_BLOC, PLANT_PS, REGEN_PS, RECOLTE_PS, REGEN_PS, REBOIS_PS, INTER_PS, IMLNU_PS, CHEMINS_PL, MOTONEIGE_PL, SENTIERS_PL, BATIMENTS_PS,]);
 
   /* Adds every item as esri-component but they are still positionned manually using position: fixed */
-  view.ui.add(["logoPasserelle", search], "top-left");
+  view.ui.add(["logoPasserelleLink", search], "top-left");
   view.ui.add(["account", "sideburger"], "top-right");
   view.ui.add([toggle], "bottom-left");
   view.ui.add([locateWidget, compass, layerList, "tutorialHelp", "switch"], "bottom-right");
