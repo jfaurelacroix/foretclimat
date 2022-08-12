@@ -47,6 +47,9 @@ require([
       xmax: '-7896652.048618149',
       ymax: '6032429.818627685',
       spatialReference:  {wkid:3857}
+    },
+    constraints: {
+      minZoom: 4,
     }
   });
 

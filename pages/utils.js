@@ -89,7 +89,7 @@ function addAccountEventListenerSignIn(){
 
 function addAccountEventListenerHome(){
   document.getElementById('account').addEventListener("click", function() {
-    window.location = "./home.html";
+    window.location = "./user.html";
   });
 }
 
