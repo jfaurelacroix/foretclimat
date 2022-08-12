@@ -482,20 +482,20 @@ require([
                 }
                 $("#chartContainer").pivotUI(input, {
                     renderers: renderers,
-                    rendererOptions: {},
+                    rendererOptions: {
+                        
+                    },
+                    aggregatorName: aggregation,
+                    rendererName: renderer,
                     rows: fieldNameY,
                     cols: fieldNameX
                 }, true, document.documentElement.lang);
                 //Overwrite is true
-                document.getElementsByClassName("pvtAggregator")[0].value = aggregation;
-                document.getElementsByClassName("pvtRenderer")[0].value = renderer;
-
                 addLabels();
-                
                 if(aggregationAttribute != ""){
                     waitForElementToDisplay(".pvtAttrDropdown", function(){
                         document.getElementsByClassName("pvtAttrDropdown")[0].value = aggregationAttribute;document.getElementsByClassName("pvtAttrDropdown")[0].dispatchEvent(new Event("change"));
-                        }, 500, 5000) 
+                        }, 50, 5000) 
                 }
             });
             
@@ -505,39 +505,29 @@ require([
     function addLabels(){
         let newNode = document.createElement("p");
         if(document.documentElement.lang == "fr"){
-            newNode.innerHTML = "Moteur de rendu:";
+            newNode.innerHTML = "Type de visualisation:";
         }else{
-            newNode.innerHTML = "Renderer:";
+            newNode.innerHTML = "Visualization type:";
         }
         document.getElementsByClassName("pvtUiCell")[0].insertBefore(newNode, document.getElementsByClassName("pvtRenderer")[0]);
 
         newNode = document.createElement("p");
+        newNode.style = "text-align: left;"
         if(document.documentElement.lang == "fr"){
-            newNode.innerHTML = "Fonction d'aggregation:";
+            newNode.innerHTML = "Fonction d'agrégation:";
         }else{
             newNode.innerHTML = "Aggregator:";
         }
-        document.getElementsByClassName("pvtVals")[0].insertBefore(newNode, document.getElementsByClassName("pvtAggregator")[0]);
+        document.getElementsByClassName("pvtUiCell")[0].insertBefore(newNode, document.getElementsByClassName("pvtAggregator")[0]);
 
         newNode = document.createElement("p");
         newNode.style = "display:inline;"
         if(document.documentElement.lang == "fr"){
-            newNode.innerHTML = "Trier:";
+            newNode.innerHTML = " Trier:";
         }else{
-            newNode.innerHTML = "Sort:";
+            newNode.innerHTML = " Sort:";
         }
-        document.getElementsByClassName("pvtVals")[0].insertBefore(newNode, document.getElementsByClassName("pvtAggregator")[0].nextSibling);
-
-        newNode = document.createElement("p");
-        newNode.style = "display:inline;"
-        newNode.id = "variableString";
-        if(document.documentElement.lang == "fr"){
-            newNode.innerHTML = "Variable:";
-        }else{
-            newNode.innerHTML = "Variable:";
-        }
-        document.getElementsByClassName("pvtVals")[0].insertBefore(newNode, document.getElementsByClassName("pvtColOrder")[0].nextSibling.nextSibling);
-        getEventListeners(document.getElementsByClassName("pvtAggregator")[0])
+        document.getElementsByClassName("pvtVals")[0].insertBefore(newNode, document.getElementsByClassName("pvtRowOrder")[0]);
     }
 
     //Fetches the different available tables for the layer select

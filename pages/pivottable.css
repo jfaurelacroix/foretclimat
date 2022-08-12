@@ -5,6 +5,7 @@
     line-height: 1.3em;;
     border-collapse: collapse;
 }
+
 .pvtUi select {
     user-select: none;
     -webkit-user-select: none;
@@ -25,19 +26,14 @@ table.pvtTable {
     margin-left: 3px;
     font-family: Verdana;
 }
+
+
 table.pvtTable thead tr th,
 table.pvtTable tbody tr th {
     background-color: #ebf0f8;
     border: 1px solid #c8d4e3;
     font-size: 8pt;
     padding: 5px;
-}
-
-table.pvtTable .pvtColLabel {
-    text-align: center;
-}
-table.pvtTable .pvtTotalLabel {
-    text-align: right;
 }
 
 table.pvtTable tbody tr td {
@@ -47,6 +43,22 @@ table.pvtTable tbody tr td {
     border: 1px solid #c8d4e3;
     vertical-align: top;
     text-align: right;
+}
+
+table.pvtTable .pvtColLabel {
+    text-align: center;
+}
+table.pvtTable .pvtTotalLabel {
+    text-align: right;
+}
+
+table.pvtUi tbody tr td.pvtUiCell, table.pvtUi tbody tr td.pvtVals.pvtUiCell{
+    color: #2a3f5f;
+    padding: 5px;
+    background-color: #dae2f0;
+    border: 1px solid #a9acaf;
+    vertical-align: top;
+    text-align: left;
 }
 
 .pvtTotal,
@@ -68,8 +80,7 @@ table.pvtTable tbody tr td {
     -ms-user-select: none;
 }
 
-.pvtAxisContainer,
-.pvtVals {
+table.pvtUi tbody tr td.pvtAxisContainer {
     border: 1px solid #a2b1c6;
     background: #f2f5fa;
     padding: 5px;
@@ -132,7 +143,7 @@ table.pvtTable tbody tr td {
 }
 
 .pvtVals {
-    text-align: center;
+    text-align: left;
     white-space: nowrap;
     vertical-align: top;
     padding-bottom: 12px;
