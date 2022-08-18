@@ -464,7 +464,7 @@ require([
 
   /* Layer about the roads and other paths */
   const CHEMINS_PL = new FeatureLayer({
-    url: "https://www.foretclimat.ca/server/rest/services/Hosted/Chemin_FM/FeatureServer",
+    url: "https://www.foretclimat.ca/server/rest/services/Hosted/FM_chemins/FeatureServer",
     outFields: ["*"],
     title: "Chemins",
     renderer: {
@@ -504,7 +504,7 @@ require([
 
   /* Layer about the walking paths */
   const SENTIERS_PL = new FeatureLayer({
-    url: "https://www.foretclimat.ca/server/rest/services/Hosted/Project_FM_sentiers/FeatureServer",
+    url: "https://www.foretclimat.ca/server/rest/services/Hosted/FM_sentiers/FeatureServer",
     outFields: ["*"],
     title: "Sentiers",
     renderer: {
@@ -559,7 +559,7 @@ require([
 
   /* Layer about the snowmobile club path */
   const MOTONEIGE_PL = new FeatureLayer({
-    url: "https://www.foretclimat.ca/server/rest/services/Hosted/Project_FM_motoneige/FeatureServer",
+    url: "https://www.foretclimat.ca/server/rest/services/Hosted/FM_motoneige/FeatureServer",
     outFields: ["*"],
     title: "Pistes de motoneige",
     renderer: {
