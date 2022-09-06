@@ -106,22 +106,24 @@ sudo chown arcgis -R /opt/tomcat_arcgis
 sudo chmod 777 -R /opt/tomcat_arcgis
 ```
 
-## 2.  Download the certificate and setup auto-renew
+## 2.  Download certbot, the certificate and setup auto-renew
 #### Downloading the certificate
 
 Installing certbot and openssl
 ```
 sudo apt-get install snapd
+sudo snap install core
 sudo snap install --classic certbot
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
 sudo apt-get install openssl
 ```
 Request Certificate using certbot
 ```
-sudo certbot certonly --webroot --agree-tos -d www.foretclimat.ca -w /opt/tomcat_arcgis/webapps/ROOT
+sudo certbot certonly --standalone -d www.foretclimat.ca
 ```
 
-#### Setup autorenewing
-Locate the chef script you will need to use move the chef script to ~/repos
+#### Setup autorenewing script and credentials script
+Locate the chef script you will need to use and move it to ~/repos
 ```
 cp ~/repos/foretclimat/chef-json/* ~/repos/arcgis_cookbook/
 ```
@@ -131,7 +133,7 @@ cd ~/repos/foretclimat
 sudo chmod 755 scripts/credentials.sh
 sudo vi scripts/credentials.sh
 ```
-Download jq and execute the script to edit the chef json files
+Download jq (to help the script edit JSON files) and execute the script to edit the right files
 ```
 sudo apt-get install jq
 ./scripts/credentials.sh
@@ -142,6 +144,7 @@ sudo mkdir -p /etc/letsencrypt/renewal-hooks/deploy
 sudo cp ~/repos/foretclimat/scripts/auto_pfx.sh /etc/letsencrypt/renewal-hooks/deploy
 sudo chmod +x /etc/letsencrypt/renewal-hooks/deploy/auto_pfx.sh
 ```
+[Change certbot with webroot](You will need to use certbot with webroot after running the chef script for autorenewing to work)
 
 Run the script to format the certificat
 ```
@@ -199,6 +202,11 @@ Copy the files into /arcgis/portal/framework/webapps/arcgis#home/ also changes i
 sudo mv /arcgis/portal/framework/webapps/arcgis#home/index.html /arcgis/portal/framework/webapps/arcgis#home/home.html
 sudo cp ~/repos/foretclimat/pages/* /arcgis/portal/framework/webapps/arcgis#home/
 sudo cp ~/repos/foretclimat/media /arcgis/portal/framework/webapps/arcgis#home/
+```
+#### Change certbot with webroot
+Changes from standalone to webroot of the arcgis server. Otherwise it cannot renew because the port is in use.
+```
+sudo certbot certonly --webroot --agree-tos -d www.foretclimat.ca -w /opt/tomcat_arcgis/webapps/ROOT
 ```
 #### Schedule notebook task
 As arcgis user create the following directory
