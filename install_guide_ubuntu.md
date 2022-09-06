@@ -2,9 +2,9 @@
 
 1. [Prepare the machine for the installation](#1--prepare-the-machine-for-the-installation)
 2. [Download the certificate and setup auto-renew](#2--download-the-certificate-and-setup-auto-renew)
-3.  [Run the chef script](#3--run-the-chef-script)
-4.  [Notebook server installation](#4--notebook-server-installation)
-5.  [Setup the website and homepage](#5--setup-the-website-and-homepage)
+3. [Run the chef script](#3--run-the-chef-script)
+4. [Notebook server installation](#4--notebook-server-installation)
+5. [Setup the website and homepage](#5--setup-the-website-and-homepage)
 
 ---------------------------------------------
 
@@ -144,7 +144,7 @@ sudo mkdir -p /etc/letsencrypt/renewal-hooks/deploy
 sudo cp ~/repos/foretclimat/scripts/auto_pfx.sh /etc/letsencrypt/renewal-hooks/deploy
 sudo chmod +x /etc/letsencrypt/renewal-hooks/deploy/auto_pfx.sh
 ```
-[Change certbot with webroot](You will need to use certbot with webroot after running the chef script for autorenewing to work)
+[You will need to use certbot with webroot after running the chef script for autorenewing to work](###-change-certbot-with-webroot)
 
 Run the script to format the certificat
 ```
