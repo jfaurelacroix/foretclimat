@@ -147,9 +147,9 @@ sudo chmod +x /etc/letsencrypt/renewal-hooks/deploy/auto_pfx.sh
 ```
 [You will need to use certbot with webroot after running the chef script for autorenewing to work](#change-certbot-with-webroot)
 
-Run the script to format the certificat
+Force renewal. It will run the script used to format the certificate
 ```
-sudo /etc/letsencrypt/renewal-hooks/deploy/auto_pfx.sh
+sudo certbot --force-renewal
 ```
 
 ## 3.  Run the chef script
