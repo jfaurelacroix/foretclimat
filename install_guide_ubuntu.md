@@ -125,7 +125,7 @@ sudo certbot certonly --standalone -d www.foretclimat.ca
 #### Setup autorenewing script and credentials script
 Locate the chef script you will need to use and move it to ~/repos
 ```
-cp ~/repos/foretclimat/chef-json/* ~/repos/arcgis_cookbook/
+cp ~/repos/foretclimat/chef-json/* ~/repos/arcgis-cookbook/
 ```
 Modify scripts/credentials.sh to choose the certificate password and the admin account password
 ```
