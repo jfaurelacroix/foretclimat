@@ -136,7 +136,8 @@ sudo vi scripts/credentials.sh
 Download jq (to help the script edit JSON files) and execute the script to edit the right files
 ```
 sudo apt-get install jq
-./scripts/credentials.sh
+cd ~/repos/arcgis-cookbook/
+~/repos/foretclimat/scripts/credentials.sh
 ```
 Prepare script to convert cert to pkcs12 https://github.com/StormWindStudios/OpenSSL-Notes/blob/master/letsencrypt_autopfx.md
 ```
