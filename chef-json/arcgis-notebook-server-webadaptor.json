@@ -14,7 +14,6 @@
     "arcgis": {
         "version": "10.9",
         "run_as_user": "arcgis",
-		"run_as_password": "***REMOVED***",
         "repository": {
             "archives": "/media/data/bkp_ArcGIS_files",
             "setups": "/media/data/setups"
@@ -25,7 +24,6 @@
         "notebook_server": {
             "wa_name": "notebooks",
             "url": "https://www.foretclimat.ca:11443/arcgis",
-            "wa_url": "https://***REMOVED***/notebooks",
             "admin_username": "jfaurel",
             "admin_password": "change.it"
         },
