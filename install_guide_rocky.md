@@ -1,4 +1,4 @@
-# ArcGIS Enterprise Ubuntu Install Guide
+# ArcGIS Enterprise Rocky Install Guide
 
 1. [Prepare the machine for the installation](#1--prepare-the-machine-for-the-installation)
 2. [Download the certificate and setup auto-renew](#2--download-the-certificate-and-setup-auto-renew)
@@ -15,8 +15,9 @@ ssh dti-a-idul@machine.ip.adress
 ```
 Update and reboot
 ```
-sudo apt-get update
-sudo apt-get upgrade
+sudo dnf update
+sudo dnf install epel-release
+sudo dnf upgrade
 sudo reboot
 ```
 Create the user used in the arcgis script
@@ -31,8 +32,8 @@ curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P chefdk -c stable 
 ```
 Install git if not already installed:
 https://git-scm.com/download/linux
-
-Create a folder for your repos and cd into it
+sudo dnf install git
+Create a folder for your repositories and cd into it
 ```
 mkdir repos
 cd repos
@@ -44,7 +45,7 @@ git clone https://github.com/Esri/arcgis-cookbook
 ```
 Inside the cookbooks folder, add necessary cookbooks from chef
 ```
-cd arcgis-cookbook/cookbooks/arcgis-enterprise
+
 ```
 Downloading the missing cookbooks (using Berkshelf)
 ```
@@ -94,14 +95,14 @@ ArcGIS software repository directory is specified by arcgis.repository.archives 
 Enable running sudo without password for the user running the Chef client.
 Create the file structure
 ```
-sudo mkdir -p /gisdata/arcgisserver
-sudo mkdir -p /gisdata/arcgisportal
+sudo mkdir -p ./gisdata/arcgisserver
+sudo mkdir -p ./gisdata/arcgisportal
 sudo mkdir /opt/tomcat_arcgis
 ```
 Give rights to user
 ```
-sudo chown arcgis -R /gisdata
-sudo chmod 755 -R /gisdata
+sudo chown arcgis -R ./gisdata
+sudo chmod 755 -R ./gisdata
 sudo chown arcgis -R /opt/tomcat_arcgis
 sudo chmod 777 -R /opt/tomcat_arcgis
 ```
@@ -111,13 +112,16 @@ sudo chmod 777 -R /opt/tomcat_arcgis
 
 Installing certbot and openssl
 ```
-sudo apt-get install snapd
+
+sudo dnf install snapd
+sudo systemctl enable --now snapd.socket
+sudo ln -s /var/lib/snapd/snap /snap
 sudo snap install --classic certbot
-sudo apt-get install openssl
+sudo dnf install openssl
 ```
 Request Certificate using certbot
 ```
-sudo certbot certonly --webroot --agree-tos -d www.foretclimat.ca -w /opt/tomcat_arcgis/webapps/ROOT
+sudo certbot certonly --webroot --agree-tos -d www.foretclimat.dev -w /opt/tomcat_arcgis/webapps/ROOT
 ```
 
 #### Setup autorenewing
