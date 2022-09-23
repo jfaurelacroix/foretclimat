@@ -133,9 +133,10 @@ cd ~/repos/foretclimat
 sudo chmod 755 scripts/credentials.sh
 sudo vi scripts/credentials.sh
 ```
-Download jq (to help the script edit JSON files) and execute the script to edit the right files
+Download jq (for the script), edit CERT_PW and ADMIN_PW in credentials.sh and execute it (it will edit the right attributes in the right files)
 ```
 sudo apt-get install jq
+vi ./scripts/credentials.sh
 ./scripts/credentials.sh
 ```
 Prepare script to convert cert to pkcs12 https://github.com/StormWindStudios/OpenSSL-Notes/blob/master/letsencrypt_autopfx.md
