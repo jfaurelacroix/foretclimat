@@ -1,33 +1,35 @@
 {
     "java": {
         "version": "11",
-        "tarball_path": "$HOME/arcgis_data/archives/openjdk-11_linux-x64_bin.tar.gz"
+        "tarball_path": "/media/data/bkp_ArcGIS_files/openjdk-11_linux-x64_bin.tar.gz"
     },
     "tomcat": {
-        "version": "8.5.63",
-        "tarball_path": "$HOME/arcgis_data/archives/apache-tomcat-8.5.63.tar.gz",
-        "install_path": "/tomcat_arcgis",
-        "keystore_file": "/etc/tomcat7/pkcs12_cert.pfx",
+        "version": "9.0.48",
+        "tarball_path": "/media/data/bkp_ArcGIS_files/apache-tomcat-9.0.48.tar.gz",
+        "install_path": "/opt/tomcat_arcgis",
+        "keystore_file": "/opt/tomcat_arcgis/cert.pfx",
         "keystore_type": "pkcs12",
-        "keystore_password": "change.it"
+        "keystore_password": "change.it",
+	"cert_alias": "cert"
     },
     "arcgis": {
         "version": "10.9",
         "run_as_user": "arcgis",
         "repository": {
-            "archives": "$HOME/arcgis_data/archives",
-            "setups": "/opt/software/setups"
+            "archives": "/media/data/bkp_ArcGIS_files",
+            "setups": "/media/data/setups"
         },
         "web_server": {
             "webapp_dir": "/opt/tomcat_arcgis/webapps"
         },
         "server": {
             "install_dir": "/",
-            "private_url": "https://foretclimat.ca:6443/arcgis",
-            "web_context_url": "https://foretclimat.ca/server",
+            "private_url": "https://www.foretclimat.ca:6443/arcgis",
+            "web_context_url": "https://www.foretclimat.ca/server",
             "admin_username": "jfaurel",
-            "admin_password": "***REMOVED***",
-            "authorization_file": "/opt/software/authorization_files/10.9/EducationSiteArcGISServerEnterprise_ArcGISServer_1066756.prvc",
+            "admin_password": "change.it",
+            "authorization_file": "/opt/software/authorization_files/10.9/EducationSiteArcGISServerEnterprise_ArcGISServer_1164245.prvc",
+            "authorization_file_version": "10.9",
             "directories_root": "/gisdata/arcgisserver",
             "log_dir": "/arcgis/server/usr/logs",
             "log_level": "WARNING",
@@ -35,8 +37,11 @@
             "config_store_connection_string": "/gisdata/arcgisserver/config-store",
             "install_system_requirements": true,
             "wa_name": "server",
+	    "keystore_file": "/opt/tomcat_arcgis/cert.pfx",
+	    "keystore_password": "change.it",
+	    "cert_alias": "cert",
             "system_properties": {
-                "WebContextURL": "https://foretclimat.ca/server"
+                "WebContextURL": "https://www.foretclimat.ca/server"
             }
         },
         "data_store": {
@@ -57,8 +62,8 @@
         "portal": {
             "install_dir": "/",
             "admin_username": "jfaurel2",
-            "admin_password": "***REMOVED***",
-            "admin_email": "julie.faure-lacroix@calculquebec.ca",
+            "admin_password": "change.it",
+            "admin_email": "julie.faure-lacroix@calcul-quebec.ca",
             "admin_full_name": "Julie Faure-Lacroix",
             "admin_description": "Initial account administrator",
             "security_question": "Your favorite ice cream flavor?",
@@ -69,13 +74,17 @@
             "content_store_provider": "FileSystem",
             "content_store_connection_string": "/gisdata/arcgisportal/content",
             "object_store": "",
-            "authorization_file": "/opt/software/authorization_files/10.9/ArcGIS_Enterprise_Portal_109_356891_20210727.json",
+            "authorization_file": "/opt/software/authorization_files/10.9/ArcGIS_Enterprise_Portal_109_383944_20220513.json",
+            "authorization_file_version": "10.9",
             "user_license_type_id": "",
             "install_system_requirements": true,
             "wa_name": "portal",
+	    "keystore_file": "/opt/tomcat_arcgis/cert.pfx",
+	    "keystore_password": "change.it",
+	    "cert_alias": "cert",
             "system_properties": {
-                "privatePortalURL": "https://foretclimat.ca:7443/arcgis",
-                "WebContextURL": "https://foretclimat.ca/portal"
+                "privatePortalURL": "https://www.foretclimat.ca:7443/arcgis",
+                "WebContextURL": "https://www.foretclimat.ca/portal"
             }
         },
         "web_adaptor": {

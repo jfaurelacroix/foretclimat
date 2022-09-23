@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="robots" content="noindex, follow" />
+        <link
+          rel="stylesheet"
+          href="https://js.arcgis.com/4.23/esri/themes/light/main.css"
+        />
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script src="https://cdn.plot.ly/plotly-basic-latest.min.js"></script>
+        <link
+          rel="stylesheet"
+          href="pivottable.css"
+        />
+        <link rel="stylesheet" href="./charts.css" />
+        <link rel="stylesheet" href="./sidenav.css" />
+        <script src="./pivot.min.js"></script>
+        <script src="./plotly_renderers.min.fr.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.23.0/pivot.fr.min.js"></script>
+        <script src="https://js.arcgis.com/4.23/"></script>
+        <title>Données Forêt-Climat</title>
+    </head>
+    <body>
+        <h1 class="esri-widget" style="font-size:1.5em;text-align:center">Outil de visualisation de données</h1>
+        <img
+          id="logoPasserelle"
+          src="./media/logofc.png"
+          alt="Logo de la Passerelle"
+        /> 
+        <br>
+        <div id="selectDiv" class="esri-widget">
+            <a>Sélectionner une table de données:</a>
+            <select id="tableCategorySelect" class="esri-select">
+                <option value="Table">Tables</option>
+                <option value="PS">Points</option>
+                <option value="Bloc">Polygones</option>
+            </select>
+            <select id="tableInventorySelect" class="esri-select">
+                <option value="">Tout</option>
+                <option value="IMLNU">IMLNU</option>
+                <option value="Inter">Inter</option>
+                <option value="QualRebois">QualRebois</option>
+                <option value="Recolte">Recolte</option>
+                <option value="Regen">Regen</option>
+                <option value="SuiviPlant">SuiviPlant</option>  
+            </select>
+            <select id="tableSelect" class="esri-select"></select>
+            <a href="https://www.foretclimat.ca/server/rest/services/Hosted/BD_Inventaires_Secteur_gdb/FeatureServer" style="float:right">REST API</a>
+            <br><br>
+            <a>Montrer/Masquer la table de données: </a>
+            <label class="switch" id="switch">
+                <input type="checkbox" id="switchTable">
+                <span class="slider round"></span>
+              </label>
+        </div>
+        <hr class="rounded">
+        <div id="chartContainer" class="esri-component">
+
+        </div>
+        <div id="tableTextInformation">
+
+        </div>
+        <div
+            id="sideburger"
+            class="container esri-component"
+            onclick="this.classList.toggle('change');changeNav()"
+        >
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
+        <div id="Sidenav" class="sidenav" style="width: 0px;">
+                <a
+                  href="javascript:void(0)"
+                  class="closebtn"
+                  onclick="document.getElementsByClassName('container')[0].classList.toggle('change');closeNav();"
+                  >&times;</a
+                >
+                <a id="greeter">Bienvenue!</a>
+                <a class="SidenavElement" href="./home.html">Accueil</a>
+                <a class="SidenavElement" href="./storymaps.html">StoryMaps</a>
+                <a class="SidenavElement" href="./charts.html">Explorer les données</a>
+                <a class="SidenavElement user" href="./gallery.html" style="display:none;">Bibliothèque</a>
+                <a class="SidenavElement user" href="./webmap/viewer.html" style="display:none;">Carte</a>
+                <a class="SidenavElement user" href="./webscene/viewer.html" style="display:none;">Scène</a>
+                <a class="SidenavElement user" href="./notebook/notebookhome.html" style="display:none;">Notebook</a>
+                <a class="SidenavElement user" href="./groups.html" style="display:none;">Groupes</a>
+                <a class="SidenavElement user" href="./content.html" style="display:none;">Contenu</a>
+                <a class="SidenavElement user" href="./organization.html" style="display:none;">Organisation</a>
+                <a class="SidenavElement lang" href="./charts_en.html">English</a>
+                <div id="partLogoDiv">
+                  <img src="./media/UL_FFGG_C_d.png" width="175" alt="Logo de la FFGG" />
+                  <br>
+                  <img
+                    src="./media/cfi-fci_couleur.png"
+                    width="175"
+                    alt="Logo de la FCI"
+                  />
+                </div>
+        </div>
+        <div id="tableContainer"></div>    
+        <script src="./charts.js"></script>
+        <script src="./utils.js"></script>
+    </body>
+</html>

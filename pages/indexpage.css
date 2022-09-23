@@ -1,0 +1,216 @@
+html, body, #viewDiv {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    border-color:  var(--blue);
+    position: relative;
+}
+
+/* || UI */
+
+/* For the tutorial to work with the background we need to set the z-index */
+.esri-ui{
+    z-index: initial;
+}
+
+/* the Foret-Climat Logo */
+#logoPasserelle {
+    width: 165px;
+    background-color: rgb(245, 245, 245, 0.8);
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: var(--calcite-font-size-0);
+    height: 165px;
+}
+
+/* "i" for the tutorial */
+#tutorialHelp {
+    position: fixed;
+    bottom: 190px;
+    right: 15px;
+    background-color : rgba(245, 245, 245, 1);
+    border-radius: 50%;
+    border: 1px;
+    text-align: center;
+    vertical-align:middle;
+    display: table-cell;
+    overflow: hidden;
+    font-family: monospace;
+}
+
+/* || The Esri widgets */
+
+/* Search bar */
+.esri-search {
+    position: fixed;
+    padding: 5px;
+    top: 200px;
+    left: 20px;
+    width: 350px;
+    height: 40px;
+}
+
+/* compass */
+.esri-compass{
+    position: fixed;
+    padding: 5px;
+    bottom: 148px;
+    right: 15px;
+}
+
+/* locate button */
+.esri-locate{
+    position: fixed;
+    padding: 5px;
+    bottom: 105px;
+    right: 15px;
+}
+
+/* Layer-list / legend */
+.esri-layer-list{
+    position: fixed;
+    bottom: 30px;
+    right: 60px;
+    height: 234px;
+}
+
+
+/* docked popup window */
+.esri-popup--is-docked{
+    position: fixed;
+    top: 90px;
+    right: 10px;
+}
+
+/* || Tutorial */
+
+/* opacity when showing the tutorial */
+#blackBG{
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    background: black;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    opacity: 0.5;
+    display:none
+}
+
+/* the 2 buttons used for tutorial */
+.tutorialButton{
+    border-radius: 2px;
+    color: rgb(20,20,20);
+    width: 20%;
+    cursor:pointer;
+}
+
+/* The box where the text and buttons are contained */
+#tutorialBox {
+    z-index: 1001;
+    border-radius: 10px;
+    text-align: center;
+    border: 3px solid rgb(0, 0, 0);
+    position:absolute;
+    height: auto;
+    width: auto;
+    padding: 10px;
+    background-color: rgb(245, 245, 245, 0.9);
+    transition: 0.5s;
+    transform: translate(-50%, -50%);
+    display: none;
+    top: 50%;
+    left: 50%;
+}
+
+/* Profile icon*/
+#account {
+    position: fixed;
+    top: 20px;
+    right: 75px;
+    padding: 0px;
+    width: 50px;
+    border-radius: 50%;
+    background-color : rgba(245, 245, 245, 1);
+    border-color: var(--blue);
+}
+
+/* || Toggle Switch */
+
+.switch.esri-component {
+    position: fixed;
+    bottom: 240px;
+    right: 12px;
+    display: inline-block;
+    width: 40px;
+    height: 23px;
+	box-shadow: none;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 17px;
+    width: 17px;
+    left: 3px;
+    bottom: 3px;
+    background-color: #ffffff;
+    -webkit-transition: .3s;
+    transition: .3s;
+  }
+  
+  input:checked + .slider {
+    background-color: var(--blue);
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px var(--blue);
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(17px);
+    -ms-transform: translateX(17px);
+    transform: translateX(17px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+    .sidenav a {
+        font-size: 18px;
+    }
+}
