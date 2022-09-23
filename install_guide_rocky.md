@@ -114,14 +114,17 @@ Installing certbot and openssl
 ```
 
 sudo dnf install snapd
+
 sudo systemctl enable --now snapd.socket
 sudo ln -s /var/lib/snapd/snap /snap
+sudo snap install core
 sudo snap install --classic certbot
 sudo dnf install openssl
 ```
 Request Certificate using certbot
 ```
-sudo certbot certonly --webroot --agree-tos -d www.foretclimat.dev -w /opt/tomcat_arcgis/webapps/ROOT
+sudo /snap/bin/certbot certonly --standalone -d www.foretclimat.dev
+
 ```
 
 #### Setup autorenewing
@@ -137,7 +140,7 @@ sudo vi scripts/credentials.sh
 ```
 Download jq and execute the script to edit the chef json files
 ```
-sudo apt-get install jq
+sudo dnf install jq
 ./scripts/credentials.sh
 ```
 Prepare script to convert cert to pkcs12 https://github.com/StormWindStudios/OpenSSL-Notes/blob/master/letsencrypt_autopfx.md
@@ -145,9 +148,12 @@ Prepare script to convert cert to pkcs12 https://github.com/StormWindStudios/Ope
 sudo mkdir -p /etc/letsencrypt/renewal-hooks/deploy
 sudo cp ~/repos/foretclimat/scripts/auto_pfx.sh /etc/letsencrypt/renewal-hooks/deploy
 sudo chmod +x /etc/letsencrypt/renewal-hooks/deploy/auto_pfx.sh
+
+sudo openssl pkcs12 -export -out cert.pfx -inkey /etc/letsencrypt/live/www.foretclimat.dev/privkey.pem -in /etc/letsencrypt/live/www.foretclimat.dev/fullchain.pem
+sudo cp cert.pfx /opt/tomcat_arcgis/
 ```
 
-Run the script to format the certificat
+Run the script to format the certificate
 ```
 sudo /etc/letsencrypt/renewal-hooks/deploy/auto_pfx.sh
 ```
