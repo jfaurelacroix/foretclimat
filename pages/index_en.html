@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="robots" content="noindex, follow" />
+    <link
+      rel="stylesheet"
+      href="https://js.arcgis.com/4.23/esri/themes/light/main.css"
+    />
+    <link rel="stylesheet" href="./indexpage.css" />
+    <link rel="stylesheet" href="./sidenav.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://js.arcgis.com/4.23/"></script>
+    <script src="./index.js"></script>
+    <title>Index Forêt-Climat</title>
+  </head>
+  <body>
+    <div id="viewDiv"></div>
+      <a id="logoPasserelleLink" href="./home.html">
+        <img
+          id="logoPasserelle"
+          src="./media/logofc.png"
+          alt="ForetClimat Logo"
+          >
+      </a>
+    <button id="account" class="btn btn-primary esri-button">
+      <img
+        id="accountThumbnail"
+        style="width:100%;border-radius:100%;"
+        alt=""
+        src="https://www.foretclimat.ca/portal/home/10.9.0/js/arcgisonline/css/images/no-user-thumb.jpg";
+        class="esri-header-account-image"
+      />
+    </button>
+    <div
+      id="sideburger"
+      class="container"
+      onclick="this.classList.toggle('change');changeNav()"
+    >
+      <div class="bar1"></div>
+      <div class="bar2"></div>
+      <div class="bar3"></div>
+    </div>
+    <div id="Sidenav" class="sidenav" style="width: 0px;">
+      <a
+        href="javascript:void(0)"
+        class="closebtn"
+        onclick="document.getElementsByClassName('container')[0].classList.toggle('change');closeNav();"
+        >&times;</a
+      >
+      <a id="greeter">Welcome!</a>
+      <a class="SidenavElement" href="./home.html">Home</a>
+      <a class="SidenavElement" href="./storymaps_en.html">StoryMaps</a>
+      <a class="SidenavElement" href="./charts_en.html">Explore the data</a>
+      <a class="SidenavElement user" href="./gallery.html" style="display:none;">Gallery</a>
+      <a class="SidenavElement user" href="./webmap/viewer.html" style="display:none;">Map</a>
+      <a class="SidenavElement user" href="./webscene/viewer.html" style="display:none;">Scene</a>
+      <a class="SidenavElement user" href="./notebook/notebookhome.html" style="display:none;">Notebook</a>
+      <a class="SidenavElement user" href="./groups.html" style="display:none;">Groups</a>
+      <a class="SidenavElement user" href="./content.html" style="display:none;">Content</a>
+      <a class="SidenavElement user" href="./organization.html" style="display:none;">Organization</a>
+      <a class="SidenavElement lang" href="./index.html">Français</a>
+      <div id="partLogoDiv">
+        <img src="./media/UL_FFGG_C_d.png" width="175" alt="FFGG Logo" />
+        <img src="./media/cfi-fci_couleur.png" width="175" alt="FCI Logo"/>
+      </div>
+    </div>
+    <div id="blackBG"></div>
+    <div id="tutorialBox">
+        <a id="tutorialInfo"></a><br><br>
+        <button id="tutorialNext" class="tutorialButton" onclick=""style="float:left">Next</button>
+        <button id="tutorialSkip" class="tutorialButton" onclick="skipTutorial()"style="float:right">Skip</button>
+    </div>
+    <button id="tutorialHelp" class="esri-component esri-widget--button esri-widget esri-interactive" onclick="startTutorial()">i</button>
+    <label class="switch" id="switch">
+      <input type="checkbox" id="switchLayers">
+      <span class="slider round"></span>
+    </label>
+    <script type="text/javascript" src="./utils.js"></script>
+  </body>
+</html>
