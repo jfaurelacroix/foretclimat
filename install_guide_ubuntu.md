@@ -94,14 +94,13 @@ ArcGIS software repository directory is specified by arcgis.repository.archives 
 Enable running sudo without password for the user running the Chef client.
 Create the file structure
 ```
-sudo mkdir -p /gisdata/arcgisserver
-sudo mkdir -p /gisdata/arcgisportal
+sudo mkdir /gisdata
 sudo mkdir /opt/tomcat_arcgis
 ```
 Give rights to user
 ```
-sudo chown arcgis -R /gisdata
-sudo chmod 755 -R /gisdata
+sudo chown arcgis /gisdata
+sudo chmod 755 /gisdata
 sudo chown arcgis -R /opt/tomcat_arcgis
 sudo chmod 777 -R /opt/tomcat_arcgis
 ```
@@ -125,7 +124,7 @@ sudo certbot certonly --standalone -d www.foretclimat.ca
 #### Setup autorenewing script and credentials script
 Locate the chef script you will need to use and move it to ~/repos
 ```
-cp ~/repos/foretclimat/chef-json/* ~/repos/arcgis_cookbook/
+cp ~/repos/foretclimat/chef-json/* ~/repos/arcgis-cookbook/
 ```
 Modify scripts/credentials.sh to choose the certificate password and the admin account password
 ```
@@ -136,8 +135,8 @@ sudo vi scripts/credentials.sh
 Download jq (for the script), edit CERT_PW and ADMIN_PW in credentials.sh and execute it (it will edit the right attributes in the right files)
 ```
 sudo apt-get install jq
-vi ./scripts/credentials.sh
-./scripts/credentials.sh
+cd ~/repos/arcgis-cookbook/
+~/repos/foretclimat/scripts/credentials.sh
 ```
 Prepare script to convert cert to pkcs12 https://github.com/StormWindStudios/OpenSSL-Notes/blob/master/letsencrypt_autopfx.md
 ```
@@ -147,9 +146,9 @@ sudo chmod +x /etc/letsencrypt/renewal-hooks/deploy/auto_pfx.sh
 ```
 [You will need to use certbot with webroot after running the chef script for autorenewing to work](#change-certbot-with-webroot)
 
-Run the script to format the certificat
+Force renewal. It will run the script used to format the certificate
 ```
-sudo /etc/letsencrypt/renewal-hooks/deploy/auto_pfx.sh
+sudo certbot --force-renewal
 ```
 
 ## 3.  Run the chef script

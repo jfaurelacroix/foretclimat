@@ -10,7 +10,7 @@
         "keystore_file": "/opt/tomcat_arcgis/cert.pfx",
         "keystore_type": "pkcs12",
         "keystore_password": "change.it",
-		"cert_alias": "cert"
+	"cert_alias": "cert"
     },
     "arcgis": {
         "version": "10.9",
@@ -37,10 +37,9 @@
             "config_store_connection_string": "/gisdata/arcgisserver/config-store",
             "install_system_requirements": true,
             "wa_name": "server",
-			"wa_url": "https://***REMOVED***/server",
-			"keystore_file": "/opt/tomcat_arcgis/cert.pfx",
-			"keystore_password": "change.it",
-			"cert_alias": "cert",
+	    "keystore_file": "/opt/tomcat_arcgis/cert.pfx",
+	    "keystore_password": "change.it",
+	    "cert_alias": "cert",
             "system_properties": {
                 "WebContextURL": "https://www.foretclimat.ca/server"
             }
@@ -80,10 +79,9 @@
             "user_license_type_id": "",
             "install_system_requirements": true,
             "wa_name": "portal",
-			"wa_url": "https://***REMOVED***/portal",
-			"keystore_file": "/opt/tomcat_arcgis/cert.pfx",
-			"keystore_password": "change.it",
-			"cert_alias": "cert",
+	    "keystore_file": "/opt/tomcat_arcgis/cert.pfx",
+	    "keystore_password": "change.it",
+	    "cert_alias": "cert",
             "system_properties": {
                 "privatePortalURL": "https://www.foretclimat.ca:7443/arcgis",
                 "WebContextURL": "https://www.foretclimat.ca/portal"
