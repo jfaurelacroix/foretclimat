@@ -61,6 +61,7 @@ mv <files> arcgis_data/archives
 # if needed, transfer files from valerias globus endpoint
 scp -r idul@login.valeria.science:projects/ul-val-prj-foret-climat_at_valeria.science/incoming/ .
 
+mv ArcGIS_Enterprise_Portal_109_.json /opt/software/authorization_files/10.9/
 # Enable running sudo without password for the user running the Chef client.
 
 # locate the chef script you will need to use
@@ -106,6 +107,8 @@ cp /etc/letsencrypt/live/foretclimat.ca/fullchain.pem /tomcat_arcgis/
 
 sudo systemctl enable firewalld
 # reboot
+
+# make sure that ports 7443 and 
 
 cd /opt/cinc
 sudo sudo cinc-client -z -j arcgis-enterprise-primary.json
