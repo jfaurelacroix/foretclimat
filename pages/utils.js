@@ -54,7 +54,7 @@ function getCookieEmail(){
 function changeUserInfoHTML(email){
     let url = 'https://www.foretclimat.ca/portal/sharing/rest/community/users/' + email + '?f=pjson';
     jQuery.getJSON(url, function(data){
-        if(data.thumbnail != null){
+        if(data.thumbnail != null && document.getElementById("accountThumbnail") != null){
             thumbnailVar = "https://www.foretclimat.ca/portal/sharing/rest/community/users/" +
             getCookieEmail() + "/info/" + data.thumbnail;
             document.getElementById("accountThumbnail").src = thumbnailVar;
