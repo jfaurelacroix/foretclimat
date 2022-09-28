@@ -95,14 +95,11 @@ Enable running sudo without password for the user running the Chef client.
 Create the file structure
 ```
 sudo mkdir /gisdata
-sudo mkdir /opt/tomcat_arcgis
 ```
 Give rights to user
 ```
 sudo chown arcgis /gisdata
 sudo chmod 755 /gisdata
-sudo chown arcgis -R /opt/tomcat_arcgis
-sudo chmod 777 -R /opt/tomcat_arcgis
 ```
 
 ## 2.  Download certbot, the certificate and setup auto-renew
