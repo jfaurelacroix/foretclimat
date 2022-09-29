@@ -4,8 +4,8 @@
         "tarball_path": "/media/data/bkp_ArcGIS_files/openjdk-11_linux-x64_bin.tar.gz"
     },
     "tomcat": {
-        "version": "9.0.48",
-        "tarball_path": "/media/data/bkp_ArcGIS_files/apache-tomcat-9.0.48.tar.gz",
+        "version": "10.0.26",
+        "tarball_path": "/media/data/bkp_ArcGIS_files/apache-tomcat-10.0.26.tar.gz",
         "install_path": "/opt/tomcat_arcgis",
         "keystore_file": "/opt/tomcat_arcgis/cert.pfx",
         "keystore_type": "pkcs12",
@@ -40,6 +40,7 @@
 	    "keystore_file": "/opt/tomcat_arcgis/cert.pfx",
 	    "keystore_password": "change.it",
 	    "cert_alias": "cert",
+	    "root_cert": "/opt/tomcat_arcgis/cert.pfx",
             "system_properties": {
                 "WebContextURL": "https://www.foretclimat.ca/server"
             }
@@ -82,6 +83,7 @@
 	    "keystore_file": "/opt/tomcat_arcgis/cert.pfx",
 	    "keystore_password": "change.it",
 	    "cert_alias": "cert",
+	    "root_cert": "/opt/tomcat_arcgis/cert.pfx",
             "system_properties": {
                 "privatePortalURL": "https://www.foretclimat.ca:7443/arcgis",
                 "WebContextURL": "https://www.foretclimat.ca/portal"
