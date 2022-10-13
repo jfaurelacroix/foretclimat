@@ -97,6 +97,8 @@ Create the file structure
 ```
 sudo mkdir -p ./gisdata/arcgisserver
 sudo mkdir -p ./gisdata/arcgisportal
+sudo mkdir -p ./gisdata/arcgisdatastore
+sudo mkdir -p ./gisdata/arcgisbackup
 sudo mkdir /opt/tomcat_arcgis
 ```
 Give rights to user
@@ -104,7 +106,8 @@ Give rights to user
 sudo chown arcgis -R ./gisdata
 sudo chmod 755 -R ./gisdata
 sudo chown arcgis -R /opt/tomcat_arcgis
-sudo chmod 777 -R /opt/tomcat_arcgis
+sudo chmod 755 -R /opt/tomcat_arcgis
+sudo chmod 777 /opt/tomcat_arcgis/logs
 ```
 
 ## 2.  Download the certificate and setup auto-renew
@@ -150,6 +153,7 @@ sudo cp ~/repos/foretclimat/scripts/auto_pfx.sh /etc/letsencrypt/renewal-hooks/d
 sudo chmod +x /etc/letsencrypt/renewal-hooks/deploy/auto_pfx.sh
 
 sudo openssl pkcs12 -export -out cert.pfx -inkey /etc/letsencrypt/live/www.foretclimat.dev/privkey.pem -in /etc/letsencrypt/live/www.foretclimat.dev/fullchain.pem
+# set the password to whatever you will use in the primary json script
 sudo cp cert.pfx /opt/tomcat_arcgis/
 ```
 
@@ -159,10 +163,24 @@ sudo /etc/letsencrypt/renewal-hooks/deploy/auto_pfx.sh
 ```
 
 ## 3.  Run the chef script
+
+You might want to set SELinux to permissive https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/using_selinux/changing-selinux-states-and-modes_using-selinux
+
+SELinux might cause some issues and the script might crash. You might need to do things like this:
+
+```
+sudo chmod 755 /media/data/arcgis/portal/startportal.sh
+sudo chmod 755 /media/data/arcgis/webadaptor10.9/java/tools/arcgis-wareg.jar
+sudo ausearch -c '(ortal.sh)' --raw | audit2allow -M my-ortalsh
+sudo  semodule -X 300 -i my-ortalsh.pp
+```
+You can run the script but if you need to kill it before the end, you should reboot the machine. 
+Also, make sure that the hostname is the one expected in the license file.
 ```
 cd ~/repos/arcgis-cookbook
 sudo chef-client -z -j arcgis-enterprise-primary.json
 ```
+
 ## 4.  Notebook server installation
 Prepare the archives
 ```
