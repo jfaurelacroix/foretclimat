@@ -160,7 +160,7 @@ sudo chef-client -z -j arcgis-enterprise-primary.json
 Prepare the archives
 ```
 sudo mkdir /media/data/setups/10.9
-tar -xf ArcGIS_Notebook_Server_Linux_1091_180226.tar.gz -C /media/data/setups/10.9
+tar -xf /media/data/bkp_ArcGIS_files/ArcGIS_Notebook_Server_Linux_1091_180226.tar.gz -C /media/data/setups/10.9
 ```
 Make sure that you have all the required tar files available (in /media/data/bkp_ArcGIS_files/)
 - ArcGIS_Notebook_Docker_Advanced_109_177823.tar.gz
@@ -173,7 +173,7 @@ Change docker's directory if needed (https://enterprise.arcgis.com/en/notebook/l
 
 Grab the authorization file
 ```
-sudo cp ArcGISNotebookServerAdvanced_ArcGISServer_1178969.prvc /opt/software/authorization_files/10.9
+sudo cp /media/data/bkp_ArcGIS_files/ArcGISNotebookServerAdvanced_ArcGISServer_1178969.prvc /opt/software/authorization_files/10.9
 ```
 Installs Notebook Server, autorizes and creates site
 ```
