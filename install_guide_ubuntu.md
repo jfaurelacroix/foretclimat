@@ -173,7 +173,7 @@ Change docker's directory if needed (https://enterprise.arcgis.com/en/notebook/l
 
 Grab the authorization file
 ```
-sudo cp /media/data/bkp_ArcGIS_files/ArcGISNotebookServerAdvanced_ArcGISServer_1178969.prvc /opt/software/authorization_files/10.9
+sudo cp /media/data/bkp_ArcGIS_files/ArcGISNotebookServerAdvanced_ArcGISServer_1178969.prvc /opt/software/authorization_files/10.9/notebook_server.prvc
 ```
 Installs Notebook Server, autorizes and creates site
 ```
