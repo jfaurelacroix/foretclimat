@@ -201,7 +201,7 @@ Copy the files into /arcgis/portal/framework/webapps/arcgis#home/ also changes i
 ```
 sudo mv /arcgis/portal/framework/webapps/arcgis#home/index.html /arcgis/portal/framework/webapps/arcgis#home/home.html
 sudo cp ~/repos/foretclimat/pages/* /arcgis/portal/framework/webapps/arcgis#home/
-sudo cp ~/repos/foretclimat/media /arcgis/portal/framework/webapps/arcgis#home/
+sudo cp -r ~/repos/foretclimat/media /arcgis/portal/framework/webapps/arcgis#home/
 ```
 #### Change certbot with webroot
 Changes from standalone to webroot of the arcgis server. Otherwise it cannot renew because the port is in use.
