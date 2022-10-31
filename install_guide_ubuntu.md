@@ -170,7 +170,10 @@ Make sure that you have all the required tar files available (in /media/data/bkp
 - ArcGISNotebookServerAdvanced_ArcGISServer_1178969.prvc (authorization file)
 
 Change docker's directory if needed (https://enterprise.arcgis.com/en/notebook/latest/install/linux/install-docker-for-arcgis-notebook-server.htm)
-
+and change file size limit for docker to work properly
+```
+ulimit -Sn 65535
+```
 Grab the authorization file
 ```
 sudo cp /media/data/bkp_ArcGIS_files/ArcGISNotebookServerAdvanced_ArcGISServer_1178969.prvc /opt/software/authorization_files/10.9/notebook_server.prvc
