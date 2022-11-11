@@ -1,7 +1,7 @@
 # ArcGIS Enterprise Ubuntu Install Guide
 
 1. [Prepare the machine for the installation](#1--prepare-the-machine-for-the-installation)
-2. [Download the certificate and setup auto-renew](#2--download-certbot,-the-certificate-and-setup-auto-renew)
+2. [Download the certificate and setup auto-renew](#2--download-certbot-the-certificate-and-setup-auto-renew)
 3. [Run the chef script](#3--run-the-chef-script)
 4. [Notebook server installation](#4--notebook-server-installation)
 5. [Setup the website and homepage](#5--setup-the-website-and-homepage)
