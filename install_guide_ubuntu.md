@@ -196,7 +196,7 @@ Create redirect to /portal/home
 ```
 cd /opt/tomcat_arcgis/webapps
 sudo mkdir ROOT
-sudo sh -c "echo '<% response.sendRedirect("https://www.foretclimat.ca/portal/home/index.html"); %>' > ROOT/index.jsp"
+sudo sh -c "echo '<% response.sendRedirect(\"https://www.foretclimat.ca/portal/home/index.html\"); %>' > ROOT/index.jsp"
 sudo chown -R arcgis ROOT
 sudo chmod 755 -R ROOT
 ```
