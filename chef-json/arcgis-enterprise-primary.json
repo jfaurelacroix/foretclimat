@@ -85,7 +85,7 @@
 	    "cert_alias": "cert",
 	    "root_cert": "/opt/tomcat_arcgis/cert.pfx",
             "system_properties": {
-                "privatePortalURL": "https://www.foretclimat.ca:7443/arcgis",
+                "privatePortalURL": "https://localhost:7443/arcgis",
                 "WebContextURL": "https://www.foretclimat.ca/portal"
             }
         },
