@@ -1,0 +1,16 @@
+{
+	"imageId": "06e0c3aae962fc426562bbe88b262a7fc3a7aa108996dde901c7c1d325338004",
+	"containerType": "docker",
+	"name": "ArcGIS Notebook Python 3 Advanced",
+	"requiresAdvancedPrivileges": true,
+	"maxMemoryUnit": "g",
+	"maxSwapMemory": 0,
+	"maxSwapMemoryUnit": "g",
+	"maxCpu": 2.0,
+	"id": "ebf5ad09-04b7-4477-a5dc-deb9a1a28d87",
+	"version": "5.0",
+	"maxMemory": 6.0,
+	"sharedMemorySize": 2048,
+	"sharedMemorySizeUnit": "m",
+	"esriProvidedRuntime": true
+}

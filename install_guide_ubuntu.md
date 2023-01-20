@@ -178,6 +178,10 @@ Grab the authorization file
 ```
 sudo cp /media/data/bkp_ArcGIS_files/ArcGISNotebookServerAdvanced_ArcGISServer_1178969.prvc /opt/software/authorization_files/10.9/notebook_server.prvc
 ```
+Copy the custom docker image to the location specified in notebook_server.json
+```
+sudo cp ~/repos/foretclimat/notebook/ArcGIS_Notebook_Docker_Advanced_Passerelle.tar.gz /media/data/bkp_ArcGIS_files/
+```
 Installs Notebook Server, autorizes and creates site
 ```
 sudo chef-client -z -j notebook-server.json
@@ -190,7 +194,10 @@ Federates Notebook with Enteprise Portal (PORT 7443 MUST BE OPEN)
 ```
 sudo chef-client -z -j notebook-server-federation.json
 ```
-
+Change the Image ID for advanced notebook to pick the custom one
+```
+sudo cp ~/repos/foretclimat/notebook/runtime.json /arcgis/notebookserver/framework/etc/factory/runtimes/Advanced/runtime.json
+```
 ## 5.  Setup the website and homepage
 Create redirect to /portal/home
 ```
