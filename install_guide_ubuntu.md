@@ -198,6 +198,11 @@ Change the Image ID for advanced notebook to pick the custom one
 ```
 sudo cp ~/repos/foretclimat/notebook/runtime.json /arcgis/notebookserver/framework/etc/factory/runtimes/Advanced/runtime.json
 ```
+Change the image ID with the custom Advanced ID
+```
+docker images --no-trunc
+sudo vi /gisdata/notebookserver/config-store/notebookruntimes/X #Where X is the numbers corresponding to the advanced notebook
+```
 ## 5.  Setup the website and homepage
 Create redirect to /portal/home
 ```
