@@ -115,7 +115,7 @@ function handleChangeLayersMode(){
 /* Hides every layer from BD_Inventaires_Secteur_gdb and displays the rest */
 function setPublicMode(){
   for (const layer of Window.map.allLayers.items){
-    if (layer.url.includes("BD_Inventaires_Secteur_gdb") && !layer.url.includes("World_Imagery")){
+    if (layer.url.includes("BD_Inventaires_Secteur_gdb") && !layer.url.includes("World_Imagery") && !layer.url.includes("cdn.arcgis.com")){
       layer.visible = false;
       layer.listMode = 'hide';
     }else{
@@ -128,7 +128,7 @@ function setPublicMode(){
 /* Makes every layer "showable" and makes every layer from BD_Inventaires_Secteur_gdb visible on the screen */
 function setResearchMode(){
   for (const layer of Window.map.allLayers.items){
-    if (layer.url.includes("BD_Inventaires_Secteur_gdb") || layer.url.includes("World_Imagery")){
+    if (layer.url.includes("BD_Inventaires_Secteur_gdb") || layer.url.includes("World_Imagery") || layer.url.includes("cdn.arcgis.com")){
       layer.visible = true;
     }else{
       layer.visible = false;
