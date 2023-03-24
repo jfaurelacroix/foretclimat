@@ -1,6 +1,6 @@
 # Utiliser globus sur une machine virtuelle linux
 
-## 1. Créer un endpoint sur la machine actuel :
+## 1. Créer un endpoint sur la machine actuelle :
 
 Suivre la procédure d’installation de globus connect :
 https://docs.globus.org/how-to/globus-connect-personal-linux/
@@ -21,7 +21,7 @@ La procédure est terminée. Utiliser pour ouvrir le endpoint en background:
 ./globusconnectpersonal -start &
 ```
 
-## 2. Utiliser le client globus directement dans la machine virtuelle :
+## 2. Utiliser le client Globus directement dans la machine virtuelle :
 
 Installation du client globus
 ```
