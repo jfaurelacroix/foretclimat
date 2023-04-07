@@ -62,3 +62,15 @@ Pour faire un transfere:
 ```
 globus transfer [options ex: --recursive] <from-endpoint>:<from-path> <to-endpoint>:<to-path>
 ```
+
+## 3. Synchroniser 2 dossiers
+
+Ouvrir globus web et aller sur le file manager.
+
+Selectionner le dossier source dans la partie de gauche et selectionner le dossier destination dans la partie de droite
+
+Cliquer sur "Transfer & Timer Options" pour ouvrir les options additionnelles.
+
+Cocher "sync - only transfer new or changed files" afin de ne pas faire de transfère inutile
+
+Choisir un intervalle de "Repeat" et remplir les champs prévus pour la répétition. Cela permet de répéter la synchronisation à un intervalle régulier.
