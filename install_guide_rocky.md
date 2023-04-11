@@ -1,10 +1,10 @@
 # ArcGIS Enterprise Rocky Install Guide
 
 1. [Prepare the machine for the installation](#1--prepare-the-machine-for-the-installation)
-2. [Download the certificate and setup auto-renew](#2--download-the-certificate-and-setup-auto-renew)
-3.  [Run the chef script](#3--run-the-chef-script)
-4.  [Notebook server installation](#4--notebook-server-installation)
-5.  [Setup the website and homepage](#5--setup-the-website-and-homepage)
+2. [Download the certificate and setup auto-renew](#2--download-certbot-the-certificate-and-setup-auto-renew)
+3. [Run the chef script](#3--run-the-chef-script)
+4. [Notebook server installation](#4--notebook-server-installation)
+5. [Setup the website and homepage](#5--setup-the-website-and-homepage)
 
 ---------------------------------------------
 
@@ -31,9 +31,11 @@ Make sure to have the right version
 curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P chefdk -c stable -v 4.13.3
 ```
 Install git if not already installed:
-https://git-scm.com/download/linux
+```
 sudo dnf install git
-Create a folder for your repositories and cd into it
+```
+
+Create a folder for your repos and cd into it
 ```
 mkdir repos
 cd repos
@@ -45,7 +47,7 @@ git clone https://github.com/Esri/arcgis-cookbook
 ```
 Inside the cookbooks folder, add necessary cookbooks from chef
 ```
-
+cd arcgis-cookbook/cookbooks/arcgis-enterprise
 ```
 Downloading the missing cookbooks (using Berkshelf)
 ```
@@ -95,27 +97,22 @@ ArcGIS software repository directory is specified by arcgis.repository.archives 
 Enable running sudo without password for the user running the Chef client.
 Create the file structure
 ```
-sudo mkdir -p ./gisdata/arcgisserver
-sudo mkdir -p ./gisdata/arcgisportal
-sudo mkdir -p ./gisdata/arcgisdatastore
-sudo mkdir -p ./gisdata/arcgisbackup
-sudo mkdir /opt/tomcat_arcgis
+sudo mkdir /gisdata
+sudo mkdir /opt/tomcat_arcgis/
 ```
 Give rights to user
 ```
-sudo chown arcgis -R ./gisdata
-sudo chmod 755 -R ./gisdata
-sudo chown arcgis -R /opt/tomcat_arcgis
-sudo chmod 755 -R /opt/tomcat_arcgis
-sudo chmod 777 /opt/tomcat_arcgis/logs
+sudo chown arcgis /gisdata
+sudo chmod 755 /gisdata
+sudo chown arcgis /opt/tomcat_arcgis/
+sudo chmod 755 /opt/tomcat_arcgis
 ```
 
-## 2.  Download the certificate and setup auto-renew
+## 2.  Download certbot, the certificate and setup auto-renew
 #### Downloading the certificate
 
 Installing certbot and openssl
 ```
-
 sudo dnf install snapd
 
 sudo systemctl enable --now snapd.socket
@@ -126,14 +123,13 @@ sudo dnf install openssl
 ```
 Request Certificate using certbot
 ```
-sudo /snap/bin/certbot certonly --standalone -d www.foretclimat.dev
-
+sudo /snap/bin/certbot certonly --standalone -d www.foretclimat.ca
 ```
 
-#### Setup autorenewing
-Locate the chef script you will need to use move the chef script to ~/repos
+#### Setup autorenewing script and credentials script
+Locate the chef script you will need to use and move it to ~/repos
 ```
-cp ~/repos/foretclimat/chef-json/* ~/repos/arcgis_cookbook/
+cp ~/repos/foretclimat/chef-json/* ~/repos/arcgis-cookbook/
 ```
 Modify scripts/credentials.sh to choose the certificate password and the admin account password
 ```
@@ -141,29 +137,30 @@ cd ~/repos/foretclimat
 sudo chmod 755 scripts/credentials.sh
 sudo vi scripts/credentials.sh
 ```
-Download jq and execute the script to edit the chef json files
+Download jq (for the script), edit CERT_PW and ADMIN_PW in credentials.sh and execute it (it will edit the right attributes in the right files)
 ```
 sudo dnf install jq
-./scripts/credentials.sh
+cd ~/repos/arcgis-cookbook/
+~/repos/foretclimat/scripts/credentials.sh
 ```
 Prepare script to convert cert to pkcs12 https://github.com/StormWindStudios/OpenSSL-Notes/blob/master/letsencrypt_autopfx.md
 ```
 sudo mkdir -p /etc/letsencrypt/renewal-hooks/deploy
 sudo cp ~/repos/foretclimat/scripts/auto_pfx.sh /etc/letsencrypt/renewal-hooks/deploy
 sudo chmod +x /etc/letsencrypt/renewal-hooks/deploy/auto_pfx.sh
-
-sudo openssl pkcs12 -export -out cert.pfx -inkey /etc/letsencrypt/live/www.foretclimat.dev/privkey.pem -in /etc/letsencrypt/live/www.foretclimat.dev/fullchain.pem
-# set the password to whatever you will use in the primary json script
-sudo cp cert.pfx /opt/tomcat_arcgis/
 ```
+[You will need to use certbot with webroot after running the chef script for autorenewing to work](#change-certbot-with-webroot)
 
-Run the script to format the certificate
+Force renewal. It will run the script used to format the certificate
 ```
-sudo /etc/letsencrypt/renewal-hooks/deploy/auto_pfx.sh
+sudo /snap/bin/certbot --force-renewal
 ```
 
 ## 3.  Run the chef script
-
+```
+cd ~/repos/arcgis-cookbook
+sudo chef-client -z -j arcgis-enterprise-primary.json
+```
 You might want to set SELinux to permissive https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/using_selinux/changing-selinux-states-and-modes_using-selinux
 
 SELinux might cause some issues and the script might crash. You might need to do things like this:
@@ -176,16 +173,11 @@ sudo  semodule -X 300 -i my-ortalsh.pp
 ```
 You can run the script but if you need to kill it before the end, you should reboot the machine. 
 Also, make sure that the hostname is the one expected in the license file.
-```
-cd ~/repos/arcgis-cookbook
-sudo chef-client -z -j arcgis-enterprise-primary.json
-```
-
 ## 4.  Notebook server installation
 Prepare the archives
 ```
 sudo mkdir /media/data/setups/10.9
-tar -xf ArcGIS_Notebook_Server_Linux_1091_180226.tar.gz -C /media/data/setups/10.9
+tar -xf /media/data/bkp_ArcGIS_files/ArcGIS_Notebook_Server_Linux_1091_180226.tar.gz -C /media/data/setups/10.9
 ```
 Make sure that you have all the required tar files available (in /media/data/bkp_ArcGIS_files/)
 - ArcGIS_Notebook_Docker_Advanced_109_177823.tar.gz
@@ -195,10 +187,17 @@ Make sure that you have all the required tar files available (in /media/data/bkp
 - ArcGISNotebookServerAdvanced_ArcGISServer_1178969.prvc (authorization file)
 
 Change docker's directory if needed (https://enterprise.arcgis.com/en/notebook/latest/install/linux/install-docker-for-arcgis-notebook-server.htm)
-
+and change file size limit for docker to work properly
+```
+ulimit -Sn 65535
+```
 Grab the authorization file
 ```
-sudo cp ArcGISNotebookServerAdvanced_ArcGISServer_1178969.prvc /opt/software/authorization_files/10.9
+sudo cp /media/data/bkp_ArcGIS_files/ArcGISNotebookServerAdvanced_ArcGISServer_1178969.prvc /opt/software/authorization_files/10.9/notebook_server.prvc
+```
+Copy the custom docker image to the location specified in notebook_server.json
+```
+sudo cp ~/repos/foretclimat/notebook/ArcGIS_Notebook_Docker_Advanced_Passerelle.tar.gz /media/data/bkp_ArcGIS_files/
 ```
 Installs Notebook Server, autorizes and creates site
 ```
@@ -212,13 +211,21 @@ Federates Notebook with Enteprise Portal (PORT 7443 MUST BE OPEN)
 ```
 sudo chef-client -z -j notebook-server-federation.json
 ```
-
+Change the Image ID for advanced notebook to pick the custom one
+```
+sudo cp ~/repos/foretclimat/notebook/runtime.json /arcgis/notebookserver/framework/etc/factory/runtimes/Advanced/runtime.json
+```
+Change the image ID with the custom Advanced ID
+```
+docker images --no-trunc
+sudo vi /gisdata/notebookserver/config-store/notebookruntimes/X #Where X is the numbers corresponding to the advanced notebook
+```
 ## 5.  Setup the website and homepage
 Create redirect to /portal/home
 ```
 cd /opt/tomcat_arcgis/webapps
 sudo mkdir ROOT
-echo '<% response.sendRedirect("https://www.foretclimat.ca/portal/home/index.html"); %>' > ROOT/index.jsp
+sudo sh -c "echo '<% response.sendRedirect(\"https://www.foretclimat.ca/portal/home/index.html\"); %>' > ROOT/index.jsp"
 sudo chown -R arcgis ROOT
 sudo chmod 755 -R ROOT
 ```
@@ -226,7 +233,12 @@ Copy the files into /arcgis/portal/framework/webapps/arcgis#home/ also changes i
 ```
 sudo mv /arcgis/portal/framework/webapps/arcgis#home/index.html /arcgis/portal/framework/webapps/arcgis#home/home.html
 sudo cp ~/repos/foretclimat/pages/* /arcgis/portal/framework/webapps/arcgis#home/
-sudo cp ~/repos/foretclimat/media /arcgis/portal/framework/webapps/arcgis#home/
+sudo cp -r ~/repos/foretclimat/media /arcgis/portal/framework/webapps/arcgis#home/
+```
+#### Change certbot with webroot
+Changes from standalone to webroot of the arcgis server. Otherwise it cannot renew because the port is in use.
+```
+sudo /snap/bin/certbot certonly --webroot --agree-tos -d www.foretclimat.ca -w /opt/tomcat_arcgis/webapps/ROOT
 ```
 #### Schedule notebook task
 As arcgis user create the following directory
