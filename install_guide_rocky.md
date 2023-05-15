@@ -80,15 +80,18 @@ mv esri-tomcat-* esri-tomcat
 Make sure that you have all the required tar and license files available (in /media/data/bkp_ArcGIS_files/)
 - ArcGIS_Server_Linux_109_177864.tar.gz
 - ArcGIS_Web_Adaptor_Java_Linux_109_177888.tar.gz
-- apache-tomcat-8.5.63.tar.gz (will be downloaded from the internet if not present in the local ArcGIS software repository)
+- apache-tomcat-9.x.x.tar.gz (will be downloaded from the internet if not present in the local ArcGIS software repository)
 - openjdk-11_linux-x64_bin.tar.gz (will be downloaded from the internet if not present in the local ArcGIS software repository)
+
+After following the globus guide to setup an endpoint on the machine,
+transfer bkp_ArcGIS_files from Valeria to /opt
 
 Make sure to have the authorization_files located at the right place
 ```
-cd /media/data/bkp_ArcGIS_files
+cd /opt/bkp_ArcGIS_files
 sudo mkdir -p /opt/software/authorization_files/10.9
-sudo cp ArcGIS_Enterprise_Portal_109_383944_20220513.json /opt/software/authorization_files/10.9
-sudo cp EducationSiteArcGISServerEnterprise_ArcGISServer_1164245.prvc /opt/software/authorization_files/10.9
+sudo cp ArcGIS_Enterprise_Portal_X.json /opt/software/authorization_files/10.9
+sudo cp EducationSiteArcGISServerEnterprise_ArcGISServer_X.prvc /opt/software/authorization_files/10.9
 ```
 Make sure the arcgis-enterprise-primary.json auth file match these files.
 
@@ -97,13 +100,13 @@ ArcGIS software repository directory is specified by arcgis.repository.archives 
 Enable running sudo without password for the user running the Chef client.
 Create the file structure
 ```
-sudo mkdir /gisdata
+sudo mkdir /data/gisdata
 sudo mkdir /opt/tomcat_arcgis/
 ```
 Give rights to user
 ```
-sudo chown arcgis /gisdata
-sudo chmod 755 /gisdata
+sudo chown arcgis /data/gisdata
+sudo chmod 755 /data/gisdata
 sudo chown arcgis /opt/tomcat_arcgis/
 sudo chmod 755 /opt/tomcat_arcgis
 ```
