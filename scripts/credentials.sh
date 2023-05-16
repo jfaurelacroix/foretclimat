@@ -35,11 +35,17 @@ prompt_enc_pw() {
     fi
 }
 
+CURR_DIR=$(pwd)
+if [[ "$CURR_DIR" != "${HOME}/repos/foretclimat/chef-json" ]]; then
+        echo "Wrong directory. You must be in ~/repos/foretclimat/chef-json"
+		exit 1
+fi
+
 prompt_cert_pw
 prompt_admin_pw
 prompt_enc_pw
 
-# change the passwords above
+# changes the passwords above
 jq --arg passwd "$CERT_PW" '.tomcat.keystore_password = $passwd' arcgis-enterprise-primary.json > tmp.$$.json
 jq --arg passwd "$ADMIN_PW" '.arcgis.server.admin_password = $passwd' tmp.$$.json > tmp2.$$.json && mv tmp2.$$.json tmp.$$.json
 jq --arg passwd "$CERT_PW" '.arcgis.server.keystore_password = $passwd' tmp.$$.json > tmp2.$$.json && mv tmp2.$$.json tmp.$$.json
