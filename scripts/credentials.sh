@@ -55,6 +55,5 @@ jq --arg passwd "$ADMIN_PW" '.arcgis.notebook_server.admin_password = $passwd' a
 jq --arg passwd "$CERT_PW" '.tomcat.keystore_password = $passwd' tmp.$$.json > tmp2.$$.json && mv tmp2.$$.json tmp.$$.json
 openssl enc -aes-256-cbc -pass pass:"$ENC_PW" -salt -in tmp.$$.json -out arcgis-notebook-server-webadaptor.enc -pbkdf2
 rm tmp.$$.json
-rm tmp2.$$.json
 # change renewal script
 # sed -i "s/change.it/$CERT_PW/" ~/repos/foretclimat/scripts/auto_pfx.sh
