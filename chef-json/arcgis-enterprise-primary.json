@@ -61,7 +61,7 @@
             }
         },
         "portal": {
-            "install_dir": "/opt"
+            "install_dir": "/opt",
             "admin_username": "jfaurel2",
             "admin_password": "change.it",
             "admin_email": "julie.faure-lacroix@calcul-quebec.ca",
