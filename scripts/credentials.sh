@@ -17,7 +17,7 @@ prompt_admin_pw() {
 	read -s -p "Confirm your password: " CONFIRM_PW
 	echo
 
-    if [[ "$CERT_PW" != "$CONFIRM_PW" ]]; then
+    if [[ "$ADMIN_PW" != "$CONFIRM_PW" ]]; then
         echo "Passwords do not match. Please try again."
         prompt_admin_pw
     fi
@@ -29,7 +29,7 @@ prompt_enc_pw() {
 	read -s -p "Confirm your password: " CONFIRM_PW
 	echo
 
-    if [[ "$CERT_PW" != "$CONFIRM_PW" ]]; then
+    if [[ "$ENC_PW" != "$CONFIRM_PW" ]]; then
         echo "Passwords do not match. Please try again."
         prompt_enc_pw
     fi
