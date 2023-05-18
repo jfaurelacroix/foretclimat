@@ -36,7 +36,7 @@ prompt_enc_pw() {
 }
 
 CURR_DIR=$(pwd)
-if [[ "$CURR_DIR" != "${HOME}/repos/foretclimat/chef-json" ]]; then
+if [[ "$CURR_DIR" != "${HOME}/repos/arcgis-cookbook/" ]]; then
         echo "Wrong directory. You must be in ~/repos/foretclimat/chef-json"
 		exit 1
 fi
@@ -62,4 +62,7 @@ jq --arg passwd "$CERT_PW" '.tomcat.keystore_password = $passwd' tmp.$$.json > t
 openssl enc -aes-256-cbc -pass pass:"$ENC_PW" -salt -in tmp.$$.json -out arcgis-notebook-server-webadaptor.enc -pbkdf2
 rm tmp.$$.json
 # change renewal script
-# sed -i "s/change.it/$CERT_PW/" ~/repos/foretclimat/scripts/auto_pfx.sh
+sed -i "s/change.it/$CERT_PW/" ~/repos/foretclimat/scripts/auto_pfx.sh
+
+# openssl enc -d -aes-256-cbc -salt -in arcgis-enterprise-primary.enc -out decrypted.json -pbkdf2 && chef-client -z -j decrypted.json && rm decrypted.json
+
