@@ -107,7 +107,7 @@ Give rights to user
 ```
 sudo chown arcgis /data/gisdata
 sudo chmod 700 /data/gisdata
-sudo chown arcgis /opt/tomcat_arcgis/
+sudo chown tomcat_arcgis /opt/tomcat_arcgis/
 sudo chmod 700 /opt/tomcat_arcgis
 ```
 
@@ -230,8 +230,7 @@ Create redirect to /portal/home
 cd /opt/tomcat_arcgis/webapps
 sudo mkdir ROOT
 sudo sh -c "echo '<% response.sendRedirect(\"https://www.foretclimat.ca/portal/home/index.html\"); %>' > ROOT/index.jsp"
-OR TOMCAT_ARCGIS?
-sudo chown -R arcgis ROOT
+sudo chown -R tomcat_arcgis ROOT
 sudo chmod 700 -R ROOT
 ```
 Copy the files into /arcgis/portal/framework/webapps/arcgis#home/ also changes index to home
