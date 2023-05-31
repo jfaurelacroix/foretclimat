@@ -1,16 +1,4 @@
 #!/bin/bash
-prompt_cert_pw() {
-    read -s -p "Enter the password for the certificate: " CERT_PW
-	echo
-	read -s -p "Confirm your password: " CONFIRM_PW
-	echo
-
-    if [[ "$CERT_PW" != "$CONFIRM_PW" ]]; then
-        echo "Passwords do not match. Please try again."
-        prompt_cert_pw
-    fi
-}
-
 prompt_admin_pw() {
     read -s -p "Enter the password for the admin account: " ADMIN_PW
 	echo
@@ -41,7 +29,6 @@ if [[ "$CURR_DIR" != "${HOME}/repos/arcgis-cookbook/" ]]; then
 		exit 1
 fi
 
-prompt_cert_pw
 prompt_admin_pw
 prompt_enc_pw
 
@@ -61,8 +48,5 @@ jq --arg passwd "$ADMIN_PW" '.arcgis.notebook_server.admin_password = $passwd' a
 jq --arg passwd "$CERT_PW" '.tomcat.keystore_password = $passwd' tmp.$$.json > tmp2.$$.json && mv tmp2.$$.json tmp.$$.json
 openssl enc -aes-256-cbc -pass pass:"$ENC_PW" -salt -in tmp.$$.json -out arcgis-notebook-server-webadaptor.enc -pbkdf2
 rm tmp.$$.json
-# change renewal script
-sed -i "s/change.it/$CERT_PW/" ~/repos/foretclimat/scripts/auto_pfx.sh
-
 # openssl enc -d -aes-256-cbc -salt -in arcgis-enterprise-primary.enc -out decrypted.json -pbkdf2 && chef-client -z -j decrypted.json && rm decrypted.json
 

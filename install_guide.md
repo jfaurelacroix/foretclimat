@@ -1,7 +1,7 @@
 # ArcGIS Enterprise Rocky Install Guide
 
 1. [Prepare the machine for the installation](#1--prepare-the-machine-for-the-installation)
-2. [Download the certificate and setup auto-renew](#2--download-certbot-the-certificate-and-setup-auto-renew)
+2. [Choose and encrypt the passwords](#2--setup-credentials)
 3. [Run the chef script](#3--run-the-chef-script)
 4. [Notebook server installation](#4--notebook-server-installation)
 5. [Setup the website and homepage](#5--setup-the-website-and-homepage)
@@ -110,26 +110,7 @@ sudo chmod 700 /data/gisdata
 sudo chown tomcat_arcgis /opt/tomcat_arcgis/
 sudo chmod 700 /opt/tomcat_arcgis
 ```
-
-## 2.  Download certbot, the certificate and setup auto-renew
-#### Downloading the certificate
-
-Installing certbot and openssl
-```
-sudo dnf install snapd
-
-sudo systemctl enable --now snapd.socket
-sudo ln -s /var/lib/snapd/snap /snap
-sudo snap install core
-sudo snap install --classic certbot
-sudo dnf install openssl
-```
-Request Certificate using certbot
-```
-sudo /snap/bin/certbot certonly --standalone -d www.foretclimat.ca
-```
-
-#### Setup autorenewing script and credentials script
+## 2. Setup credentials
 Locate the chef script you will need to use and move it to ~/repos
 ```
 cp ~/repos/foretclimat/chef-json/* ~/repos/arcgis-cookbook/
@@ -145,18 +126,7 @@ cd ~/repos/arcgis-cookbook/
 sudo chmod 700 ~/repos/foretclimat/scripts/credentials.sh
 ~/repos/foretclimat/scripts/credentials.sh
 ```
-Prepare script to convert cert to pkcs12 https://github.com/StormWindStudios/OpenSSL-Notes/blob/master/letsencrypt_autopfx.md
-```
-sudo mkdir -p /etc/letsencrypt/renewal-hooks/deploy
-sudo cp ~/repos/foretclimat/scripts/auto_pfx.sh /etc/letsencrypt/renewal-hooks/deploy
-sudo chmod 700 /etc/letsencrypt/renewal-hooks/deploy/auto_pfx.sh
-```
-[You will need to use certbot with webroot (after the first chef run) for autorenewing to work](#change-certbot-with-webroot)
 
-Force renewal. It will run the script used to format the certificate
-```
-sudo certbot --force-renewal
-```
 
 ## 3.  Run the chef script
 Enter the encryption password. It will decrypt the JSON, execute the installation and remove the decrypted file.
@@ -238,11 +208,6 @@ Copy the files into /arcgis/portal/framework/webapps/arcgis#home/ also changes i
 sudo mv /arcgis/portal/framework/webapps/arcgis#home/index.html /arcgis/portal/framework/webapps/arcgis#home/home.html
 sudo cp ~/repos/foretclimat/pages/* /arcgis/portal/framework/webapps/arcgis#home/
 sudo cp -r ~/repos/foretclimat/media /arcgis/portal/framework/webapps/arcgis#home/
-```
-#### Change certbot with webroot
-Changes from standalone to webroot of the arcgis server. Otherwise it cannot renew because the port is in use.
-```
-sudo /snap/bin/certbot certonly --webroot --agree-tos -d www.foretclimat.ca -w /opt/tomcat_arcgis/webapps/ROOT
 ```
 #### Schedule notebook task
 As arcgis user create the following directory

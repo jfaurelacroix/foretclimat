@@ -7,10 +7,6 @@
         "version": "9.0.75",
         "tarball_path": "/opt/software/bkp_ArcGIS_files/apache-tomcat-9.0.75.tar.gz",
         "install_path": "/opt/tomcat_arcgis",
-        "keystore_file": "/opt/tomcat_arcgis/cert.pfx",
-        "keystore_type": "pkcs12",
-        "keystore_password": "change.it",
-	"cert_alias": "cert"
     },
     "arcgis": {
         "version": "10.9",
@@ -37,10 +33,6 @@
             "config_store_connection_string": "/opt/arcgis/connection/arcgisserver/config-store",
             "install_system_requirements": true,
             "wa_name": "server",
-	    "keystore_file": "/opt/tomcat_arcgis/cert.pfx",
-	    "keystore_password": "change.it",
-	    "cert_alias": "cert",
-	    "root_cert": "/opt/tomcat_arcgis/cert.pfx",
             "system_properties": {
                 "WebContextURL": "https://www.foretclimat.ca/server"
             }
@@ -80,10 +72,6 @@
             "user_license_type_id": "",
             "install_system_requirements": true,
             "wa_name": "portal",
-	    "keystore_file": "/opt/tomcat_arcgis/cert.pfx",
-	    "keystore_password": "change.it",
-	    "cert_alias": "cert",
-	    "root_cert": "/opt/tomcat_arcgis/cert.pfx",
             "system_properties": {
                 "privatePortalURL": "https://localhost:7443/arcgis",
                 "WebContextURL": "https://www.foretclimat.ca/portal"
