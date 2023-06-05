@@ -13,8 +13,9 @@ From your computer, ssh into the machine
 ```
 ssh dti-a-idul@machine.ip.adress
 ```
-Update and reboot
+Install Java, update and reboot
 ```
+sudo yum install java-1.8.0-openjdk-devel
 sudo dnf update
 sudo dnf install epel-release
 sudo dnf upgrade
@@ -101,14 +102,27 @@ Enable running sudo without password for the user running the Chef client.
 Create the file structure
 ```
 sudo mkdir /data/gisdata
-sudo mkdir /opt/tomcat_arcgis/
 ```
 Give rights to user
 ```
 sudo chown arcgis /data/gisdata
 sudo chmod 700 /data/gisdata
-sudo chown tomcat_arcgis /opt/tomcat_arcgis/
-sudo chmod 700 /opt/tomcat_arcgis
+sudo chown arcgis -R /opt/software/
+```
+Change the limits for the user arcgis
+```
+sudo vi /etc/security/limits.conf
+```
+Add the following lines:
+```
+#arcgis soft nofile 65535
+#arcgis hard nofile 65535
+```
+Change the /tmp used for the installation if there's not enough room
+```
+sudo mkdir /opt/arcgis_tmp
+sudo chown arcgis /opt/arcgis_tmp
+export IATEMPDIR=/opt/arcgis_tmp
 ```
 ## 2. Setup credentials
 Locate the chef script you will need to use and move it to ~/repos
@@ -132,7 +146,7 @@ sudo chmod 700 ~/repos/foretclimat/scripts/credentials.sh
 Enter the encryption password. It will decrypt the JSON, execute the installation and remove the decrypted file.
 ```
 cd ~/repos/arcgis-cookbook
-openssl enc -d -aes-256-cbc -salt -in arcgis-enterprise-primary.enc -out decrypted.json -pbkdf2 && chef-client -z -j decrypted.json && rm decrypted.json
+openssl enc -d -aes-256-cbc -salt -in arcgis-enterprise-primary.enc -out decrypted.json -pbkdf2 && sudo chef-client -z -j decrypted.json && rm decrypted.json
 ```
 You might want to set SELinux to permissive https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/using_selinux/changing-selinux-states-and-modes_using-selinux
 

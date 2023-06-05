@@ -6,7 +6,7 @@
     "tomcat": {
         "version": "9.0.75",
         "tarball_path": "/opt/software/bkp_ArcGIS_files/apache-tomcat-9.0.75.tar.gz",
-        "install_path": "/opt/tomcat_arcgis",
+        "install_path": "/opt/tomcat_arcgis"
     },
     "arcgis": {
         "version": "10.9",
