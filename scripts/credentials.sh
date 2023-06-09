@@ -33,7 +33,7 @@ prompt_admin_pw
 prompt_enc_pw
 
 # changes the passwords above
-jq --arg passwd "$ADMIN_PW" '.arcgis.server.admin_password = $passwd' tmp.$$.json > tmp2.$$.json && mv tmp2.$$.json tmp.$$.json
+jq --arg passwd "$ADMIN_PW" '.arcgis.server.admin_password = $passwd' arcgis-enterprise-primary.json > tmp.$$.json 
 jq --arg passwd "$ADMIN_PW" '.arcgis.portal.admin_password = $passwd' tmp.$$.json > tmp2.$$.json && mv tmp2.$$.json tmp.$$.json 
 openssl enc -aes-256-cbc -pass pass:"$ENC_PW" -salt -in tmp.$$.json -out arcgis-enterprise-primary.enc -pbkdf2
 jq --arg passwd "$ADMIN_PW" '.arcgis.portal.admin_password = $passwd' notebook-server-federation.json > tmp.$$.json

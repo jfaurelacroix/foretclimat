@@ -146,12 +146,6 @@ You might want to set SELinux to permissive https://access.redhat.com/documentat
 
 SELinux might cause some issues and the script might crash. You might need to do things like this:
 
-```
-sudo chmod 700 /opt/arcgis/portal/startportal.sh
-sudo chmod 700 /opt/arcgis/webadaptor10.9/java/tools/arcgis-wareg.jar
-sudo ausearch -c '(ortal.sh)' --raw | audit2allow -M my-ortalsh
-sudo  semodule -X 300 -i my-ortalsh.pp
-```
 You can run the script but if you need to kill it before the end, you should reboot the machine. 
 Also, make sure that the hostname is the one expected in the license file.
 
@@ -205,17 +199,18 @@ sudo vi /gisdata/notebookserver/config-store/notebookruntimes/X #Where X is the 
 ## 5.  Setup the website and homepage
 Create redirect to /portal/home
 ```
-cd /opt/tomcat_arcgis/webapps
-sudo mkdir ROOT
-sudo sh -c "echo '<% response.sendRedirect(\"https://www.foretclimat.ca/portal/home/index.html\"); %>' > ROOT/index.jsp"
-sudo chown -R tomcat_arcgis ROOT
-sudo chmod 700 -R ROOT
+sudo mkdir /opt/tomcat_arcgis/webapps/ROOT
+sudo sh -c "echo '<% response.sendRedirect(\"https://www.foretclimat.ca/portal/home/index.html\"); %>' > /opt/tomcat_arcgis/webapps/ROOT/index.jsp"
+sudo chown -R tomcat_arcgis /opt/tomcat_arcgis/webapps/ROOT
+sudo chmod 700 -R /opt/tomcat_arcgis/webapps/ROOT
 ```
 Copy the files into /arcgis/portal/framework/webapps/arcgis#home/ also changes index to home
 ```
-sudo mv /arcgis/portal/framework/webapps/arcgis#home/index.html /arcgis/portal/framework/webapps/arcgis#home/home.html
-sudo cp ~/repos/foretclimat/pages/* /arcgis/portal/framework/webapps/arcgis#home/
-sudo cp -r ~/repos/foretclimat/media /arcgis/portal/framework/webapps/arcgis#home/
+sudo mv /opt/arcgis/portal/framework/webapps/arcgis#home/index.html /opt/arcgis/portal/framework/webapps/arcgis#home/home.html
+sudo cp ~/repos/foretclimat/pages/* /opt/arcgis/portal/framework/webapps/arcgis#home/
+sudo cp -r ~/repos/foretclimat/media /opt/arcgis/portal/framework/webapps/arcgis#home/
+sudo chown -R arcgis 
+sudo chmod 700 -R /opt/arcgis/portal/framework/webapps/arcgis#home/
 ```
 #### Schedule notebook task
 As arcgis user create the following directory
