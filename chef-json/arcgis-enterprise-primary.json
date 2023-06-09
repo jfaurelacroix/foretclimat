@@ -20,11 +20,10 @@
         },
         "server": {
             "install_dir": "/opt",
-            "private_url": "https://www.foretclimat.ca:6443/arcgis",
-            "web_context_url": "https://www.foretclimat.ca/server",
+			"web_context_url": "https://www.foretclimat.ca/server",
             "admin_username": "jfaurel",
             "admin_password": "change.it",
-            "authorization_file": "/opt/software/authorization_files/10.9/EducationSiteArcGISServerEnterprise_ArcGISServer_1164245.prvc",
+            "authorization_file": "/opt/software/authorization_files/10.9/EducationSiteArcGISServerEnterprise_ArcGISServer_1334432.prvc",
             "authorization_file_version": "10.9",
             "directories_root": "/data/gisdata/arcgisserver",
             "log_dir": "/var/log/arcgis/server",
@@ -32,15 +31,11 @@
             "config_store_type": "FILESYSTEM",
             "config_store_connection_string": "/opt/arcgis/connection/arcgisserver/config-store",
             "install_system_requirements": true,
-            "wa_name": "server",
-            "system_properties": {
-                "WebContextURL": "https://www.foretclimat.ca/server"
-            }
+            "wa_name": "server"   
         },
         "data_store": {
             "install_dir": "/opt",
             "data_dir": "/data/gisdata/arcgisdatastore",
-            "preferredidentifier": "hostname",
             "install_system_requirements": true,
             "types": "tileCache,relational",
             "tilecache": {
@@ -65,17 +60,10 @@
             "log_level": "WARNING",
             "content_store_type": "fileStore",
             "content_store_provider": "FileSystem",
-            "content_store_connection_string": "/opt/arcgis/connection/arcgisportal/content",
-            "object_store": "",
-            "authorization_file": "/opt/software/authorization_files/10.9/ArcGIS_Enterprise_Portal_109_383944_20220513.json",
+            "authorization_file": "/opt/software/authorization_files/10.9/ArcGIS_Enterprise_Portal_109_421261_20230605.json",
             "authorization_file_version": "10.9",
-            "user_license_type_id": "",
             "install_system_requirements": true,
-            "wa_name": "portal",
-            "system_properties": {
-                "privatePortalURL": "https://localhost:7443/arcgis",
-                "WebContextURL": "https://www.foretclimat.ca/portal"
-            }
+            "wa_name": "portal"
         },
         "web_adaptor": {
             "install_dir": "/opt",

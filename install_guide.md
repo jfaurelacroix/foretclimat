@@ -118,12 +118,6 @@ Add the following lines:
 #arcgis soft nofile 65535
 #arcgis hard nofile 65535
 ```
-Change the /tmp used for the installation if there's not enough room
-```
-sudo mkdir /opt/arcgis_tmp
-sudo chown arcgis /opt/arcgis_tmp
-export IATEMPDIR=/opt/arcgis_tmp
-```
 ## 2. Setup credentials
 Locate the chef script you will need to use and move it to ~/repos
 ```
