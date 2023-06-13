@@ -207,9 +207,9 @@ sudo chmod 700 -R /opt/tomcat_arcgis/webapps/ROOT
 Copy the files into /arcgis/portal/framework/webapps/arcgis#home/ also changes index to home
 ```
 sudo mv /opt/arcgis/portal/framework/webapps/arcgis#home/index.html /opt/arcgis/portal/framework/webapps/arcgis#home/home.html
-sudo cp ~/repos/foretclimat/pages/* /opt/arcgis/portal/framework/webapps/arcgis#home/
+sudo cp -r ~/repos/foretclimat/pages/* /opt/arcgis/portal/framework/webapps/arcgis#home/
 sudo cp -r ~/repos/foretclimat/media /opt/arcgis/portal/framework/webapps/arcgis#home/
-sudo chown -R arcgis 
+sudo chown -R arcgis /opt/arcgis/portal/framework/webapps/arcgis#home/
 sudo chmod 700 -R /opt/arcgis/portal/framework/webapps/arcgis#home/
 ```
 #### Schedule notebook task

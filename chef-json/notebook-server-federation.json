@@ -1,7 +1,7 @@
 {
     "arcgis": {
         "portal": {
-            "private_url": "https://www.foretclimat.ca:7443/arcgis",
+            "private_url": "https://localhost:7443/arcgis",
             "admin_username": "jfaurel2",
             "admin_password": "change.it"
         },

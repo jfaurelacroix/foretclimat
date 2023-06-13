@@ -3,19 +3,18 @@
         "version": "10.9",
         "run_as_user": "arcgis",
         "repository": {
-            "archives": "/media/data/bkp_ArcGIS_files",
-	    "setups": "/media/data/setups"
+            "archives": "/opt/software/bkp_ArcGIS_files",
+			"setups": "/opt/software/setups"
         },
         "notebook_server": {
-            "install_dir": "/",
+            "install_dir": "/opt",
             "install_system_requirements": true,
             "install_samples_data": true,
-	    "url": "https://localhost:11443/arcgis",
             "authorization_file": "/opt/software/authorization_files/10.9/notebook_server.prvc",
-	    "license_level": "advanced",
-            "setup_archive": "/media/data/bkp_ArcGIS_files/ArcGIS_Notebook_Server_Linux_1091_180226.tar.gz",
-            "data_setup_archive": "/media/data/bkp_ArcGIS_files/ArcGIS_Notebook_Server_Samples_Data_Linux_109_177914.tar.gz",
-	    "advanced_images": "/media/data/bkp_ArcGIS_files/ArcGIS_Notebook_Docker_Advanced_Passerelle.tar.gz",
+			"license_level": "advanced",
+            "setup_archive": "/opt/software/bkp_ArcGIS_files/ArcGIS_Notebook_Server_Linux_1091_180226.tar.gz",
+            "data_setup_archive": "/opt/software/bkp_ArcGIS_files/ArcGIS_Notebook_Server_Samples_Data_Linux_109_177914.tar.gz",
+			"advanced_images": "/media/data/bkp_ArcGIS_files/ArcGIS_Notebook_Docker_Advanced_Passerelle.tar.gz",
             "admin_username": "jfaurel",
             "admin_password": "change.it",
             "directories_root": "/gisdata/notebookserver/directories",
@@ -23,9 +22,8 @@
             "config_store_type": "FILESYSTEM",
             "config_store_connection_string": "/gisdata/notebookserver/config-store",      
             "log_level": "WARNING",
-            "log_dir": "/arcgis/notebookserver/usr/logs",
-            "configure_autostart": true,
-            "system_properties": { }
+            "log_dir": "/var/log/arcgis/notebookserver",
+            "configure_autostart": true
         }
     },
     "run_list": [
