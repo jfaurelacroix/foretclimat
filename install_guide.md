@@ -152,8 +152,7 @@ Also, make sure that the hostname is the one expected in the license file.
 ## 4.  Notebook server installation
 Prepare the archives
 ```
-sudo mkdir /opt/setups/10.9
-tar -xf /opt/bkp_ArcGIS_files/ArcGIS_Notebook_Server_Linux_1091_180226.tar.gz -C /opt/setups/10.9
+tar -xf /opt/software/bkp_ArcGIS_files/ArcGIS_Notebook_Server_Linux_109_177908.tar.gz -C /opt/software/setups/10.9
 ```
 Make sure that you have all the required tar files available (in /media/data/bkp_ArcGIS_files/)
 - ArcGIS_Notebook_Docker_Advanced_109_177823.tar.gz
@@ -163,33 +162,33 @@ Make sure that you have all the required tar files available (in /media/data/bkp
 - ArcGISNotebookServerAdvanced_ArcGISServer_1178969.prvc (authorization file)
 
 Change docker's directory if needed (https://enterprise.arcgis.com/en/notebook/latest/install/linux/install-docker-for-arcgis-notebook-server.htm)
-and change file size limit for docker to work properly
-```
-ulimit -Sn 65535
-```
+
 Grab the authorization file
 ```
-sudo cp /opt/bkp_ArcGIS_files/ArcGISNotebookServerAdvanced_ArcGISServer_1178969.prvc /opt/software/authorization_files/10.9/notebook_server.prvc
+sudo cp /opt/software/bkp_ArcGIS_files/ArcGISNotebookServerAdvanced_ArcGISServer_1178969.prvc /opt/software/authorization_files/10.9/notebook_server.prvc
 ```
-Copy the custom docker image to the location specified in notebook_server.json
+Download the docker cookbook
 ```
-sudo cp ~/repos/foretclimat/notebook/ArcGIS_Notebook_Docker_Advanced_Passerelle.tar.gz /opt/bkp_ArcGIS_files/
+cd ~/repos/arcgis-cookbook
+knife supermarket download docker 4.9.0
+tar -xzf docker-4.9.0.tar.gz
+mv docker cookbooks && rm docker-4.9.0.tar.gz
 ```
 Installs Notebook Server, autorizes and creates site
 ```
-sudo chef-client -z -j notebook-server.json
+openssl enc -d -aes-256-cbc -salt -in notebook-server.enc -out decrypted.json -pbkdf2 && sudo chef-client -z -j decrypted.json && rm decrypted.json
 ```
 Installs Web Adaptor if not already installed, registers notebook with the WA
 ```
-sudo chef-client -z -j arcgis-notebook-server-webadaptor.json
+openssl enc -d -aes-256-cbc -salt -in arcgis-notebook-server-webadaptor.enc -out decrypted.json -pbkdf2 && sudo chef-client -z -j decrypted.json && rm decrypted.json
 ```
 Federates Notebook with Enteprise Portal (PORT 7443 MUST BE OPEN)
 ```
-sudo chef-client -z -j notebook-server-federation.json
+openssl enc -d -aes-256-cbc -salt -in notebook-server-federation.enc -out decrypted.json -pbkdf2 && sudo chef-client -z -j decrypted.json && rm decrypted.json
 ```
 Change the Image ID for advanced notebook to pick the custom one
 ```
-sudo cp ~/repos/foretclimat/notebook/runtime.json /arcgis/notebookserver/framework/etc/factory/runtimes/Advanced/runtime.json
+sudo cp ~/repos/foretclimat/notebook/runtime.json /opt/arcgis/notebookserver/framework/etc/factory/runtimes/Advanced/
 ```
 Change the image ID with the custom Advanced ID
 ```
@@ -204,7 +203,7 @@ sudo sh -c "echo '<% response.sendRedirect(\"https://www.foretclimat.ca/portal/h
 sudo chown -R tomcat_arcgis /opt/tomcat_arcgis/webapps/ROOT
 sudo chmod 700 -R /opt/tomcat_arcgis/webapps/ROOT
 ```
-Copy the files into /arcgis/portal/framework/webapps/arcgis#home/ also changes index to home
+Copy the files into /opt/arcgis/portal/framework/webapps/arcgis#home/ also changes index to home
 ```
 sudo mv /opt/arcgis/portal/framework/webapps/arcgis#home/index.html /opt/arcgis/portal/framework/webapps/arcgis#home/home.html
 sudo cp -r ~/repos/foretclimat/pages/* /opt/arcgis/portal/framework/webapps/arcgis#home/
