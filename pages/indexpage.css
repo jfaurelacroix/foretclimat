@@ -15,8 +15,8 @@ html, body, #viewDiv {
 
 /* the Foret-Climat Logo */
 #logoPasserelle {
-    width: 165px;
     background-color: rgb(245, 245, 245, 0.8);
+    padding: 20px;
     position: fixed;
     top: 20px;
     left: 20px;
@@ -45,7 +45,7 @@ html, body, #viewDiv {
 .esri-search {
     position: fixed;
     padding: 5px;
-    top: 200px;
+    top: 240px;
     left: 20px;
     width: 350px;
     height: 40px;

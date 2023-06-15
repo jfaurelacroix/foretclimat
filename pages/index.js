@@ -19,25 +19,28 @@ require([
   "esri/PopupTemplate",
   "esri/symbols/support/symbolUtils",
   "esri/widgets/Compass"
-], (esriConfig, WebMap, MapView, Search, BasemapToggle, Locate, Portal, FeatureLayer, intl, LayerList, Color, PopupTemplate, symbolUtils, Compass) => {
+],  (esriConfig, WebMap, MapView, Search, BasemapToggle, Locate, Portal, FeatureLayer, intl, LayerList, Color, PopupTemplate, symbolUtils, Compass ) => {
+  try{
   esriConfig.portalUrl = "https://www.foretclimat.ca/portal";
   intl.setLocale(locale);
-
+  var map = null;
+  var view = null;
   const myPortal = new Portal({
-    url: esriConfig.portalUrl
+    url: esriConfig.portalUrl,
+    authMode: "anonymous"
   });
 
   /* The Portal WebMap */
-  const map = new WebMap({
+  map = new WebMap({
     portalItem: {
       // autocasts as new PortalItem()
       id: "8dacc82f02d94d24bb4a3c751ba4db34", // id is in the content page url
-      portal: myPortal
+      portal: myPortal,
     }
   });
 
   /* The map view is contained in the "viewDiv" of the HTML doc*/ 
-  const view = new MapView({
+  view = new MapView({
     map: map,
     container: "viewDiv",
     /* Extent is based on FM_AB_BLOC */
@@ -51,8 +54,8 @@ require([
     constraints: {
       minZoom: 4,
     }
-  });
-
+  })
+  
   /* Points IMLNU */
   const IMLNU_PS = new FeatureLayer(
     {
@@ -850,6 +853,7 @@ require([
     search.allSources.items[15].placeholder = "Search for polygons";
   }
 
+
   /* Widget to change the basemap */
   const toggle = new BasemapToggle({
     view: view,
@@ -893,7 +897,14 @@ require([
         item.panel.content = "legend";
       }
     }
-  });
+});
+  if (map.loadStatus != 'loaded'){
+    throw new Error("Map failed to load")
+  }
+  const failedLayers = map.layers.filter(i => i.loadStatus != 'loaded');
+  if (failedLayers.length > 0) {
+    throw new Error("Layers failed to load")
+  }
 
   /* Defined to be used in utils.js */
   Window.map = map;
@@ -915,8 +926,43 @@ require([
       width: 999999,
       height: 999999
     }
+  
+}
+}catch(error){
+    console.error("Failed to load the webmap:", error);
+    
+    // Load an alternative map or display an error message
+    // Example: Load a different webmap
+    map = new WebMap({
+      portalItem: {
+        id: "67372ff42cd145319639a99152b15bc3",
+        portal: new Portal({
+          url: "https://www.arcgis.com/",
+          authMode: "anonymous"
+      })
+      }
+    });
+  
+    view = new MapView({
+      container: "viewDiv",
+      map: map,
+      extent:{
+        xmin: '-7935173.813346129',
+        ymin: '5967391.847883448',
+        xmax: '-7896652.048618149',
+        ymax: '6032429.818627685',
+        spatialReference:  {wkid:3857}
+      },
+      constraints: {
+        minZoom: 4,
+      }
+    });
+    view.ui.add(["logoPasserelleLink"], "top-left");
+    view.ui.add(["account", "sideburger"], "top-right");
+    view.ui.add([ "tutorialHelp", "switch"], "bottom-right");
+  
+    view.ui.move(["zoom"], "bottom-right");
   }
-
   /* if user is logged in (esri_auth cookie is present) */
   if (getCookie("esri_auth") != "") {
     addAccountEventListenerHome();
