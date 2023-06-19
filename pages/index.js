@@ -55,7 +55,11 @@ require([
       minZoom: 4,
     }
   })
-  
+  /* Defined to be used in utils.js */
+  Window.map = map;
+  if (map.loadStatus != 'loaded'){
+    throw new Error("Map failed to load")
+  }
   /* Points IMLNU */
   const IMLNU_PS = new FeatureLayer(
     {
@@ -898,16 +902,11 @@ require([
       }
     }
 });
-  if (map.loadStatus != 'loaded'){
-    throw new Error("Map failed to load")
-  }
+  
   const failedLayers = map.layers.filter(i => i.loadStatus != 'loaded');
   if (failedLayers.length > 0) {
     throw new Error("Layers failed to load")
   }
-
-  /* Defined to be used in utils.js */
-  Window.map = map;
 
   /* Adds every layer to the map */
   map.addMany([FM_AB_BLOC, PLANT_BLOC, REGEN_BLOC,  RECOLTE_BLOC, REGEN_BLOC, REBOIS_BLOC, INTER_BLOC,  IMLNU_BLOC, PLANT_PS, REGEN_PS, RECOLTE_PS, REGEN_PS, REBOIS_PS, INTER_PS, IMLNU_PS, CHEMINS_PL, MOTONEIGE_PL, SENTIERS_PL, BATIMENTS_PS,]);
