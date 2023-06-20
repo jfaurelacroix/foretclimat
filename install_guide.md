@@ -193,7 +193,7 @@ sudo cp ~/repos/foretclimat/notebook/runtime.json /opt/arcgis/notebookserver/fra
 Change the image ID with the custom Advanced ID
 ```
 docker images --no-trunc
-sudo vi /gisdata/notebookserver/config-store/notebookruntimes/X #Where X is the numbers corresponding to the advanced notebook
+sudo vi /data/gisdata/notebookserver/config-store/notebookruntimes/X #Where X is the numbers corresponding to the advanced notebook
 ```
 ## 5.  Setup the website and homepage
 Create redirect to /portal/home
@@ -211,21 +211,28 @@ sudo cp -r ~/repos/foretclimat/media /opt/arcgis/portal/framework/webapps/arcgis
 sudo chown -R arcgis /opt/arcgis/portal/framework/webapps/arcgis#home/
 sudo chmod 700 -R /opt/arcgis/portal/framework/webapps/arcgis#home/
 ```
+Add the error pages to the site
+```
+sudo cp ~/repos/foretclimat/errorpages /opt/tomcat_arcgis/
+sudo chmod 700 /opt/tomcat_arcgis/errorpages/ -R
+sudo chown tomcat_arcgis /opt/tomcat_arcgis/errorpages/ -R
+sudo chgrp tomcat_arcgis /opt/tomcat_arcgis/errorpages/ -R
+```
 #### Schedule notebook task
 As arcgis user create the following directory
 ```
-mkdir /gisdata/notebookserver/directories/arcgisworkspace/arcgisdata
+mkdir /data/gisdata/notebookserver/directories/arcgisworkspace/arcgisdata
 ```
 Go to https://www.foretclimat.ca/portal/home/notebook/manager.html > Directories
 
 Click on "+ Register Data Directory"
 
 Name: data
-Path: /gisdata/notebookserver/directories/arcgisworkspace/arcgisdata
+Path: /data/gisdata/notebookserver/directories/arcgisworkspace/arcgisdata
 
 Bind the data folder to the media
 ```
-mkdir /arcgis/portal/framework/webapps/arcgis#home/media/graphs/
+mkdir /opt/arcgis/portal/framework/webapps/arcgis#home/media/graphs/
 mount --bind /gisdata/notebookserver/directories/arcgisworkspace/arcgisdata /arcgis/portal/framework/webapps/arcgis#home/media/graphs
 ```
 

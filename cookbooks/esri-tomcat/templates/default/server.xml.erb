@@ -153,7 +153,8 @@
         <!--
         <Valve className="org.apache.catalina.authenticator.SingleSignOn" />
         -->
-	<Valve className="org.apache.catalina.valves.ErrorReportValve" errorCode.404="/opt/tomcat_arcgis/errorpages/404.html"/>
+        <Valve className="org.apache.catalina.valves.ErrorReportValve" errorCode.404="/opt/tomcat_arcgis/errorpages/404.html"/>
+        <Valve className="org.apache.catalina.valves.ErrorReportValve" errorCode.503="/opt/tomcat_arcgis/errorpages/503.html"/>
 
         <!-- Access log processes all example.
              Documentation at: /docs/config/valve.html
