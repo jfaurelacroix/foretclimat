@@ -40,6 +40,6 @@ end
 case node['platform']
 when 'ubuntu', 'debian'
   execute 'iptables-save > /etc/iptables/rules.v4'
-when 'rhel', 'redhat', 'centos', 'oracle', 'rocky'
+when 'rhel', 'redhat', 'centos', 'oracle'
   execute 'iptables-save > /etc/sysconfig/iptables'
 end

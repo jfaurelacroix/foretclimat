@@ -2,35 +2,6 @@
 
 This file is used to list changes made in each version of the docker cookbook.
 
-## 4.12.0 (2020-01-03)
-
-- Include support for other architectures using upstream repo - [@ramereth](https://github.com/ramereth)
-
-## 4.11.0 (2019-12-16)
-
-- Update format of docker tarball filenames > 18.06.3 - [@smcavallo](https://github.com/smcavallo)
-- Rework integration and unit tests to get everything green again - [@smcavallo](https://github.com/smcavallo)
-- Update the systemd unit file - [@smcavallo](https://github.com/smcavallo)
-- Remove the legacy foodcritic comments that aren't needed since we use cookstyle - [@tas50](https://github.com/tas50)
-
-## 4.10.0 (2019-11-18)
-
-- Cookstyle: Don't set allowed_actions in the resource - [@tas50](https://github.com/tas50)
-- update to the latest version of docker (for security reasons) - [@smcavallo](https://github.com/smcavallo)
-- fixing the default docker version in the kitchen tests - [@smcavallo](https://github.com/smcavallo)
-
-## 4.9.3 (2019-08-14)
-
-- fixes issue #1061, docker_volume 'driver' and 'opts' don't work
-
-## 4.9.2 (2019-02-15)
-
-- Support setting shared memory size.
-
-## 4.9.1 (2019-02-01)
-
-- added systemd_socket_opts for additional configuration of the systemd socket file
-
 ## 4.9.0 (2018-12-17)
 
 - Add support for windows - [@smcavallo](https://github.com/smcavallo)

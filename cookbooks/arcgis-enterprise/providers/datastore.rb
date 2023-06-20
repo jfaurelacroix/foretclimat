@@ -112,7 +112,7 @@ action :install do
 
     cmd = Mixlib::ShellOut.new("\"#{cmd}\" #{args}", { :timeout => 3600 })
     cmd.run_command
-    cmd.error!
+    Utils.sensitive_command_error(cmd, [ @new_resource.run_as_password ])
 
     if @new_resource.data_dir != node.default['arcgis']['data_store']['data_dir']
       properties_filename = ::File.join(@new_resource.install_dir,
@@ -212,18 +212,20 @@ end
 
 action :update_account do
   if node['platform'] == 'windows'
-    datastore_tools = ArcGIS::DataStoreTools.new(node['arcgis']['version'],
-                                                 node['platform'],
-                                                 @new_resource.install_dir,
-                                                 node['arcgis']['data_store']['install_subdir'],
-                                                 @new_resource.run_as_user)
+    if Utils.sc_logon_account('ArcGIS Data Store') != @new_resource.run_as_user
+      datastore_tools = ArcGIS::DataStoreTools.new(node['arcgis']['version'],
+                                                   node['platform'],
+                                                   @new_resource.install_dir,
+                                                   node['arcgis']['data_store']['install_subdir'],
+                                                   @new_resource.run_as_user)
 
-    datastore_tools.configure_service_account(@new_resource.run_as_user,
-                                              @new_resource.run_as_password)
+      datastore_tools.configure_service_account(@new_resource.run_as_user,
+                                                @new_resource.run_as_password)
+    end
 
     # Update logon account of the windows service directly in addition to running configureserviceaccount.bat
     Utils.sc_config('ArcGIS Data Store', @new_resource.run_as_user, @new_resource.run_as_password)
-
+    
     new_resource.updated_by_last_action(true)
   end
 end
@@ -402,7 +404,7 @@ action :configure_backup_location do
 
   # At 10.8 tilecache backup location is no longer registered by default
   # therefore --operation register needs to be used.
-  if %w[tilecache spatiotemporal].include?(@new_resource.store) && Gem::Version.new(node['arcgis']['version']) >= Gem::Version.new('10.8')
+  if %w[tilecache spatiotemporal graph].include?(@new_resource.store) && Gem::Version.new(node['arcgis']['version']) >= Gem::Version.new('10.8')
     operation = 'register'
   end
 

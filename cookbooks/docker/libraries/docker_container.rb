@@ -59,7 +59,6 @@ module DockerCookbook
     property :runtime, String, default: 'runc'
     property :ro_rootfs, [TrueClass, FalseClass], default: false
     property :security_opt, [String, Array], coerce: proc { |v| v.nil? ? nil : Array(v) }
-    property :shm_size, [String, Integer], default: '64m', coerce: proc { |v| coerce_to_bytes(v) }
     property :signal, String, default: 'SIGTERM'
     property :stdin_once, [TrueClass, FalseClass], default: false, desired_state: false
     property :sysctls, Hash, default: {}
@@ -539,7 +538,6 @@ module DockerCookbook
               'ReadonlyRootfs'  => new_resource.ro_rootfs,
               'Runtime'         => new_resource.runtime,
               'SecurityOpt'     => new_resource.security_opt,
-              'ShmSize'         => new_resource.shm_size,
               'Sysctls'         => new_resource.sysctls,
               'Ulimits'         => ulimits_to_hash,
               'UsernsMode'      => new_resource.userns_mode,
@@ -703,33 +701,33 @@ module DockerCookbook
 
         if new_resource.detach == true &&
            (
-             new_resource.attach_stderr == true ||
-             new_resource.attach_stdin == true ||
-             new_resource.attach_stdout == true ||
-             new_resource.stdin_once == true
+            new_resource.attach_stderr == true ||
+            new_resource.attach_stdin == true ||
+            new_resource.attach_stdout == true ||
+            new_resource.stdin_once == true
            )
           raise Chef::Exceptions::ValidationFailed, 'Conflicting options detach, attach_stderr, attach_stdin, attach_stdout, stdin_once.'
         end
 
         if new_resource.network_mode == 'host' &&
            (
-             !(new_resource.hostname.nil? || new_resource.hostname.empty?) ||
-             !(new_resource.mac_address.nil? || new_resource.mac_address.empty?)
+            !(new_resource.hostname.nil? || new_resource.hostname.empty?) ||
+            !(new_resource.mac_address.nil? || new_resource.mac_address.empty?)
            )
           raise Chef::Exceptions::ValidationFailed, 'Cannot specify hostname or mac_address when network_mode is host.'
         end
 
         if new_resource.network_mode == 'container' &&
            (
-             !(new_resource.hostname.nil? || new_resource.hostname.empty?) ||
-               !(new_resource.dns.nil? || new_resource.dns.empty?) ||
-               !(new_resource.dns_search.nil? || new_resource.dns_search.empty?) ||
-               !(new_resource.mac_address.nil? || new_resource.mac_address.empty?) ||
-               !(new_resource.extra_hosts.nil? || new_resource.extra_hosts.empty?) ||
-               !(new_resource.exposed_ports.nil? || new_resource.exposed_ports.empty?) ||
-               !(new_resource.port_bindings.nil? || new_resource.port_bindings.empty?) ||
-               !(new_resource.publish_all_ports.nil? || new_resource.publish_all_ports.empty?) ||
-               !new_resource.port.nil?
+           !(new_resource.hostname.nil? || new_resource.hostname.empty?) ||
+             !(new_resource.dns.nil? || new_resource.dns.empty?) ||
+             !(new_resource.dns_search.nil? || new_resource.dns_search.empty?) ||
+             !(new_resource.mac_address.nil? || new_resource.mac_address.empty?) ||
+             !(new_resource.extra_hosts.nil? || new_resource.extra_hosts.empty?) ||
+             !(new_resource.exposed_ports.nil? || new_resource.exposed_ports.empty?) ||
+             !(new_resource.port_bindings.nil? || new_resource.port_bindings.empty?) ||
+             !(new_resource.publish_all_ports.nil? || new_resource.publish_all_ports.empty?) ||
+             !new_resource.port.nil?
            )
           raise Chef::Exceptions::ValidationFailed, 'Cannot specify hostname, dns, dns_search, mac_address, extra_hosts, exposed_ports, port_bindings, publish_all_ports, port when network_mode is container.'
         end

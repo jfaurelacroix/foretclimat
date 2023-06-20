@@ -301,7 +301,6 @@ docker_service_manager_systemd 'default' do
   tls_client_cert "/path/to/cert.pem"
   tls_client_key "/path/to/key.pem"
   systemd_opts ["TasksMax=infinity","MountFlags=private"]
-  systemd_socket_opts ["Accept=yes"]
   action :start
 end
 ```
@@ -407,7 +406,6 @@ The `docker_service` resource property list mostly corresponds to the options fo
 #### Systemd-specific Options
 
 - `systemd_opts` - An array of strings that will be included as individual lines in the systemd service unit for Docker. _Note_: This option is only relevant for systems where systemd is the default service manager or where systemd is specified explicitly as the service manager.
-- `systemd_socket_opts` - An array of strings that will be included as individual lines in the systemd socket unit for Docker. _Note_: This option is only relevant for systems where systemd is the default service manager or where systemd is specified explicitly as the service manager.
 
 ### Actions
 
@@ -648,7 +646,7 @@ end
 
 The `docker_container` is responsible for managing Docker container actions. It speaks directly to the [Docker remote API](https://docs.docker.com/reference/api/docker_remote_api_v1.20/).
 
-Containers are process oriented, and move through an event cycle. Thanks to [Glider Labs](http://gliderlabs.com/) for this excellent diagram. ![alt tag](https://gliderlabs.com/images/2015/docker_events.png)
+Containers are process oriented, and move through an event cycle. Thanks to [Glider Labs](http://gliderlabs.com/) for this excellent diagram. ![alt tag](http://gliderlabs.com/images/docker_events.png)
 
 ### Actions
 
@@ -715,7 +713,6 @@ Most `docker_container` properties are the `snake_case` version of the `CamelCas
 - `running_wait_time` - Amount of seconds `docker_container` wait to determine if a process is running.
 - `runtime` - Runtime to use when running container. Defaults to `runc`.
 - `security_opt` - A list of string values to customize labels for MLS systems, such as SELinux.
-- `shm_size` - The size of `/dev/shm`. The format is `<number><unit>`, where number must be greater than 0. Unit is optional and can be b (bytes), k (kilobytes), m(megabytes), or g (gigabytes). The default is `64m`.
 - `signal` - The signal to send when using the `:kill` action. Defaults to `SIGTERM`.
 - `sysctls` - A hash of sysctls to set on the container. Defaults to `{}`.
 - `tty` - Boolean value to allocate a pseudo-TTY. Defaults to `false`.
@@ -1387,3 +1384,4 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ```
+

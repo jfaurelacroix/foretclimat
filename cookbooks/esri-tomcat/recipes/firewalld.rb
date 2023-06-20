@@ -18,7 +18,7 @@
 #
 
 # Install firewalld if it's not already installed
-dnf_package 'firewalld' do
+package 'firewalld' do
   action :install
 end
 

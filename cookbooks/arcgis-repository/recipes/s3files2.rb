@@ -2,7 +2,7 @@
 # Cookbook:: arcgis-repository
 # Recipe:: s3files2
 #
-# Copyright 2021 Esri
+# Copyright 2023 Esri
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,6 +17,8 @@
 # limitations under the License.
 #
 
+include_recipe 'arcgis-repository::aws_cli'
+
 # Create archives directory
 directory node['arcgis']['repository']['local_archives'] do
   mode '0755' if node['platform'] != 'windows'
@@ -24,37 +26,34 @@ directory node['arcgis']['repository']['local_archives'] do
   action :create
 end
 
-node['arcgis']['repository']['files'].each do |filename, props|
-  # Download the remote file from S3
+if node['arcgis']['repository']['server']['s3bucket'].empty?
+  # Get S3 bucket name and AWS region from the ArcGIS Software Repository service info.
+  repository = ArcGIS::RepositoryClient.new(node['arcgis']['repository']['server']['url'], nil, nil)
+  repository_info = repository.info
+  s3_bucket = repository_info['bucket']
+  s3_region = repository_info['region']
+else
   s3_bucket = node['arcgis']['repository']['server']['s3bucket']
   s3_region = node['arcgis']['repository']['server']['region']
+end
+
+aws_access_key = node['arcgis']['repository']['server']['aws_access_key']
+
+env = if aws_access_key.nil? || aws_access_key.empty?
+        {} # Use IAM role credentials
+      else
+        {'AWS_ACCESS_KEY_ID' => aws_access_key,
+        'AWS_SECRET_ACCESS_KEY' => node['arcgis']['repository']['server']['aws_secret_access_key']}
+      end
+
+node['arcgis']['repository']['files'].each do |filename, props|
+  # Download the remote file from S3
   s3_key = props['subfolder'].nil? ? filename : ::File.join(props['subfolder'], filename)
   path = ::File.join(node['arcgis']['repository']['local_archives'], filename)
 
-  if node['platform'] == 'windows'
-    keys = if node['arcgis']['repository']['server']['aws_access_key'].empty?
-             '' # Use IAM role credentials
-           else
-             "-AccessKey #{node['arcgis']['repository']['server']['aws_access_key']} " \
-             "-SecretKey #{node['arcgis']['repository']['server']['aws_secret_access_key']}"
-           end
-
-    powershell_script "Download #{filename}" do
-      code "Read-S3Object -BucketName #{s3_bucket} -Region #{s3_region} -Key #{s3_key} -File #{path} #{keys}"
-      not_if { ::File.exist?(::File.join(node['arcgis']['repository']['local_archives'], filename)) }
-    end
-  else
-    keys = if node['arcgis']['repository']['server']['aws_access_key'].empty?
-             {} # Use IAM role credentials
-           else
-             {'AWS_ACCESS_KEY_ID' => node['arcgis']['repository']['server']['aws_access_key'],
-              'AWS_SECRET_ACCESS_KEY' => node['arcgis']['repository']['server']['aws_secret_access_key']}
-           end
-
-    execute "Download #{filename}" do
-      command "aws s3 cp s3://#{s3_bucket}/#{s3_key} #{path} --region #{s3_region} --no-progress"
-      environment keys
-      not_if { ::File.exist?(::File.join(node['arcgis']['repository']['local_archives'], filename)) }
-    end
+  execute "Download #{filename}" do
+    command "aws s3 cp s3://#{s3_bucket}/#{s3_key} #{path} --region #{s3_region} --no-progress"
+    environment env
+    not_if { ::File.exist?(::File.join(node['arcgis']['repository']['local_archives'], filename)) }
   end
 end
