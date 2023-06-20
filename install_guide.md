@@ -46,37 +46,12 @@ Clone the git repos (Forêt-Climat and Esri's cookbooks)
 git clone https://github.com/jfaurelacroix/foretclimat
 git clone https://github.com/Esri/arcgis-cookbook
 ```
-Inside the cookbooks folder, add necessary cookbooks from chef
+Inside the cookbooks folder, copy the cookbooks from the foretclimat repo
 ```
-cd arcgis-cookbook/cookbooks/arcgis-enterprise
-```
-Downloading the missing cookbooks (using Berkshelf)
-```
-cd ~/repos/arcgis-cookbook/cookbooks/arcgis-enterprise
-berks install
-mv ~/.berkshelf/cookbooks/* ~/repos/arcgis-cookbook/cookbooks
-```
-Rename every file
-```
-cd ~/repos/arcgis-cookbook/cookbooks
-mv limits-* limits
-mv hostsfile-* hostsfile
-mv windows-* windows
-mv windows_firewall-* windows_firewall
-mv ms_dotnet-* ms_dotnet
-mv nfs-* nfs
-mv java_properties-* java_properties
-mv aws-* aws
-mv seven_zip-* seven_zip
-mv line-* line
-mv openssl-* openssl
-mv tomcat-* tomcat
-mv iptables-* iptables
-mv s3_file-* s3_file
-mv tar-* tar
-mv apt-* apt
-mv esri-iis-* esri-iis
-mv esri-tomcat-* esri-tomcat
+cd arcgis-cookbook/cookbooks/
+sudo cp -rf ~/repos/foretclimat/cookbooks/ .
+sudo chown arcgis . -R
+sudo chgrp arcgis . -R
 ```
 Make sure that you have all the required tar and license files available (in /opt/bkp_ArcGIS_files/)
 - ArcGIS_Server_Linux_109_177864.tar.gz
