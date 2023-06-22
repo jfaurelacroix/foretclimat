@@ -19,7 +19,6 @@
         },
         "notebook_server": {
             "wa_name": "notebooks",
-            "url": "https://localhost:11443/arcgis",
             "admin_username": "jfaurel",
             "admin_password": "change.it"
         },
