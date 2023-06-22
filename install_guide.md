@@ -193,6 +193,17 @@ sudo chmod 700 /opt/tomcat_arcgis/errorpages/ -R
 sudo chown tomcat_arcgis /opt/tomcat_arcgis/errorpages/ -R
 sudo chgrp tomcat_arcgis /opt/tomcat_arcgis/errorpages/ -R
 ```
+Allow proxy for ArcGIS Portal to work correctly with the items:
+
+Go to https://www.foretclimat.ca/portal/portaladmin
+After entering the admin credentials, Go to Security > Config > Update Security Configuration
+(https://www.foretclimat.ca/portal/portaladmin/security/config/update)
+and add this: 
+```
+,"allowedProxyHosts":"www.foretclimat.ca,fclim-pr-srv01.l.ul.ca
+```
+Then "Update Configuration" and it is done
+
 #### Schedule notebook task
 As arcgis user create the following directory
 ```
