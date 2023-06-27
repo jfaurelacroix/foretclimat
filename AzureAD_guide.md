@@ -13,7 +13,9 @@ Retourner à l'accueil et aller sur le service "Azure Active Directory"
 À gauche, aller sur l'onglet "App registrations", puis choisir l'application en question
 ("FFGG-RECH-ARGIS-Passerelle-de-visualisation-donnes")
 
-Sur la page "Overview", Cliquer sur "Endpoints", vous aurez besoin des URLs à l'étape qui suit.
+Sur la page "Overview", Cliquer sur le lien "FFGG-RECH-ARGIS-Passerelle-de-visualisation-donnes" à coté de "Managed application in local directory"
+
+Ensuite, dans l'onglet "Single sign-on" dans la partie 3 "SAML Certificates", copier "App Federation Metadata URL" pour l'étape suivante.
 
 ## 2. Ajouter l'authentification sur le portail ArcGIS
 
@@ -25,6 +27,6 @@ Choisir "One Identity Provider".
 
 Donner un nom et choisir "Automatically" afin de laisser les utilisateurs rejoindre la passerelle.
 
-Copier l'URL "Federation metadata document" de l'étape précédente et coller dans l'espace prévu.
+Copier l'URL de l'étape précédente et coller dans l'espace prévu.
 
 Faire sauvegarder. Voilà l'authentification Azure AD a été ajoutée

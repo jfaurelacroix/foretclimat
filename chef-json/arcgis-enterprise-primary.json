@@ -31,7 +31,10 @@
             "config_store_type": "FILESYSTEM",
             "config_store_connection_string": "/opt/arcgis/connection/arcgisserver/config-store",
             "install_system_requirements": true,
-            "wa_name": "server"   
+            "wa_name": "server",
+			"system_properties": {
+				"WebContextURL": "https://www.foretclimat.ca/server"
+			}			
         },
         "data_store": {
             "install_dir": "/opt",
@@ -63,7 +66,10 @@
             "authorization_file": "/opt/software/authorization_files/10.9/ArcGIS_Enterprise_Portal_109_421261_20230605.json",
             "authorization_file_version": "10.9",
             "install_system_requirements": true,
-            "wa_name": "portal"
+            "wa_name": "portal",
+			"system_properties": {
+				"WebContextURL": "https://www.foretclimat.ca/portal"
+			}
         },
         "web_adaptor": {
             "install_dir": "/opt",

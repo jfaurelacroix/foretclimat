@@ -4,8 +4,9 @@ PartOf=<%= @docker_name %>.service
 
 [Socket]
 ListenStream=<%= @docker_socket %>
+SocketMode=0660
+SocketUser=root
 SocketGroup=<%= @config.group %>
-<%= @systemd_socket_args  %>
 
 [Install]
 WantedBy=sockets.target

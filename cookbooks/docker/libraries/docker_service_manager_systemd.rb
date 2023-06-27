@@ -26,7 +26,6 @@ module DockerCookbook
       end
 
       # stock systemd unit file
-      # See - https://github.com/docker/docker-ce-packaging/blob/master/systemd/docker.service
       template "/lib/systemd/system/#{docker_name}.service" do
         source 'systemd/docker.service.erb'
         cookbook 'docker'
@@ -51,8 +50,7 @@ module DockerCookbook
         variables(
           config: new_resource,
           docker_name: docker_name,
-          docker_socket: connect_socket,
-          systemd_socket_args: systemd_socket_args
+          docker_socket: connect_socket
         )
         action connect_socket.nil? ? :delete : :create
       end

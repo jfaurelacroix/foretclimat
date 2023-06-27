@@ -17,10 +17,10 @@
 			"advanced_images": "/opt/software/bkp_ArcGIS_files/ArcGIS_Notebook_Docker_Advanced_Passerelle.tar.gz",
             "admin_username": "jfaurel",
             "admin_password": "change.it",
-            "directories_root": "/gisdata/notebookserver/directories",
-            "workspace": "/gisdata/notebookserver/directories/arcgisworkspace",
+            "directories_root": "/data/gisdata/notebookserver/directories",
+            "workspace": "/data/gisdata/notebookserver/directories/arcgisworkspace",
             "config_store_type": "FILESYSTEM",
-            "config_store_connection_string": "/gisdata/notebookserver/config-store",      
+            "config_store_connection_string": "/data/gisdata/notebookserver/config-store",      
             "log_level": "WARNING",
             "log_dir": "/var/log/arcgis/notebookserver",
             "configure_autostart": true

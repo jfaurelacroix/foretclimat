@@ -1,0 +1,37 @@
+{
+  "name": "esri-iis",
+  "description": "Enables IIS features required by ArcGIS Web Adaptor (IIS) and configures HTTPS binding.",
+  "long_description": "---\nlayout: default\ntitle: \"esri-iis cookbook\"\ncategory: cookbooks\nitem: esri-iis\nversion: 0.2.1\nlatest: true\n---\n\n# esri-iis Cookbook\n\nThis cookbook enables IIS, installs features required by ArcGIS Web Adaptor (IIS), configures HTTPS, and starts IIS.\n\n## Platforms\n\n* Windows 7\n* Windows 8 (8.1)\n  - 8.1 requires .Net Framework 3.5 (See ms_dotnet cookbook README)\n* Windows 10\n  - requires .Net Framework 3.5 (See ms_dotnet cookbook README)\n* Windows Server 2012 (R2)\n* Windows Server 2016\n* Windows Server 2019\n* Windows Server 2022\n\n## Dependencies\n\nThe following cookbooks are required:\n* openssl\n* windows\n\n## Attributes\n\n* `node['arcgis']['iis']['domain_name']` = Domain name used for generating a self-signed SSL certificate. By default, `<node FQDN>` is used.\n* `node['arcgis']['iis']['keystore_file']` = Path to PKSC12 keystore file (.pfx) with server SSL certificate for IIS. Default value is `nil`.\n* `node['arcgis']['iis']['keystore_password']` = Password for keystore file with server SSL certificate for IIS. Default value is `nil`.\n* `node['arcgis']['iis']['web_site']` = IIS web site to configure. Default value is `Default Web Site`.\n* `node['arcgis']['iis']['replace_https_binding']` = If false, the current HTTPS binding is not changed if it is already configured. Default value is `false`.\n* `node['arcgis']['iis']['features']` = An array of Windows features to be installed. Default value is `['Web-Server', 'Web-WebServer']`.\n\n## Recipes\n\n### default\n\nEnables IIS features required by ArcGIS Web Adaptor (IIS) and configures HTTPS binding.\n\nThe default list of features depends on the Windows version.\n\n```JSON\n{\n  \"arcgis\": {\n    \"iis\": {\n      \"appid\": \"{00112233-4455-6677-8899-AABBCCDDEEFF}\",\n      \"domain_name\": \"domain.com\",\n      \"keystore_file\": \"C:\\\\chef\\\\cache\\\\domain.com.pfx\",\n      \"keystore_password\": \"<password>\",\n      \"web_site\": \"Default Web Site\",\n      \"replace_https_binding\": false,\n      \"features\": [ \"IIS-WebServerRole\", \"IIS-ISAPIFilter\",\n                    \"IIS-ISAPIExtensions\", \"NetFx4Extended-ASPNET45\", \"IIS-NetFxExtensibility45\",\n                    \"IIS-ASPNET45\", \"IIS-WebServerManagementTools\", \"IIS-ManagementConsole\",\n                    \"IIS-ManagementService\", \"IIS-IIS6ManagementCompatibility\",\n                    \"IIS-ManagementScriptingTools\", \"IIS-StaticContent\", \"IIS-BasicAuthentication\",\n                    \"IIS-WindowsAuthentication\", \"IIS-Metabase\", \"IIS-WebSockets\" \n      ]\n    }\n  },\n  \"run_list\": [\n    \"recipe[esri-iis]\"\n  ]\n}\n```\n\nIf the specified keystore file does not exists, the recipe generates a self-signed SSL certificate for the specified domain.\n\n### install\n\nEnables IIS features required by ArcGIS Web Adaptor (IIS).\n\nThe default list of features depends on the Windows version.\n\n```json\n{\n    \"arcgis\": {\n      \"iis\": {\n        \"features\": [ \"IIS-WebServerRole\", \"IIS-ISAPIFilter\",\n                      \"IIS-ISAPIExtensions\", \"NetFx4Extended-ASPNET45\", \"IIS-NetFxExtensibility45\",\n                      \"IIS-ASPNET45\", \"IIS-WebServerManagementTools\", \"IIS-ManagementConsole\",\n                      \"IIS-ManagementService\", \"IIS-IIS6ManagementCompatibility\",\n                      \"IIS-ManagementScriptingTools\", \"IIS-StaticContent\", \"IIS-BasicAuthentication\",\n                      \"IIS-WindowsAuthentication\", \"IIS-Metabase\", \"IIS-WebSockets\" \n        ]\n      }\n    },\n    \"run_list\": [\n        \"recipe[esri-iis::install]\"\n    ]\n}\n```\n",
+  "maintainer": "Esri",
+  "maintainer_email": "contracts@esri.com",
+  "license": "Apache 2.0",
+  "platforms": {
+    "windows": ">= 0.0.0"
+  },
+  "dependencies": {
+    "windows": "~> 5.3",
+    "openssl": "~> 8.5"
+  },
+  "providing": {
+
+  },
+  "recipes": {
+    "esri-iis::default": "Enables IIS features required by ArcGIS Web Adaptor (IIS) and configures HTTPS binding.",
+    "esri-iis::install": "Enables IIS features required by ArcGIS Web Adaptor (IIS)."
+  },
+  "version": "0.2.1",
+  "source_url": "https://github.com/Esri/arcgis-cookbook",
+  "issues_url": "https://github.com/Esri/arcgis-cookbook/issues",
+  "privacy": false,
+  "chef_versions": [
+    [
+      ">= 14.0"
+    ]
+  ],
+  "ohai_versions": [
+
+  ],
+  "gems": [
+
+  ]
+}

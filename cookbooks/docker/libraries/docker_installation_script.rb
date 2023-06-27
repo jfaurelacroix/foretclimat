@@ -29,7 +29,7 @@ module DockerCookbook
     #########
 
     action :create do
-      dnf_package 'curl'
+      package 'curl'
 
       execute 'install docker' do
         command "curl -sSL #{new_resource.script_url} | sh"

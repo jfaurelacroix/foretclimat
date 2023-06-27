@@ -1,5 +1,5 @@
 #
-# Copyright 2015 Esri
+# Copyright 2022 Esri
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ require 'pathname'
 
 if RUBY_PLATFORM =~ /mswin|mingw32|windows/
   require 'win32/registry'
+  require 'win32ole'
 end
 
 #
@@ -90,11 +91,85 @@ module Utils
     self.product_key_exists?('SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\' + product_code)
   end
 
+  # Retrieves patch display name from MSP file
+  def self.get_patch_info(msp_path)
+    installer = WIN32OLE.new('WindowsInstaller.Installer')
+    database = installer.OpenDatabase(msp_path, 32)
+    summary = database.SummaryInformation
+    return {
+      :display_name => summary.Property(2),
+      :qfe_id => summary.Property(3),
+      :product_code => summary.Property(7),
+      :patch_code => summary.Property(9)
+    }
+  end
+
+  def self.windows_patch_installed?(msp_path, patch_registry)
+    begin
+      patch_info = self.get_patch_info(msp_path)
+
+      if patch_registry.nil?
+        key = Win32::Registry::HKEY_LOCAL_MACHINE.open('SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall', ::Win32::Registry::KEY_READ | 0x100)
+
+        key.each_key() do |subkey|
+          reg = key.open(subkey, ::Win32::Registry::KEY_READ | 0x100)
+          
+          begin
+            if reg['DisplayName'] == patch_info[:display_name]
+              reg.close()
+              key.close()
+              return true 
+            end
+          rescue
+          end
+
+          reg.close()
+        end
+    
+        key.close()
+      else # Look for the QFE ID in HKLM:\SOFTWARE\ESRI\* registry keys
+        key = Win32::Registry::HKEY_LOCAL_MACHINE.open(patch_registry, ::Win32::Registry::KEY_READ | 0x100)
+
+        key.each_key() do |subkey|
+          reg = key.open(subkey, ::Win32::Registry::KEY_READ | 0x100)
+          
+          begin
+            if reg['QFE_ID'] == patch_info[:qfe_id]
+              reg.close()
+              key.close()
+              return true 
+            end
+          rescue
+          end
+
+          reg.close()
+        end
+    
+        key.close()
+      end
+    rescue
+    end
+
+    return false
+  end
+
+  def self.linux_patch_installed?(patch_path, patch_log)
+    return false if patch_log.nil? || !::File.exists?(patch_log)
+    qfe_file = ::File.basename(patch_path)
+    return ::File.open(patch_log).each_line.any? { |line| line.include?(qfe_file) }
+  end
+
   def self.wa_instance(product_code)
     begin
-      key = Win32::Registry::HKEY_LOCAL_MACHINE.open(
-        'SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\' + product_code,
-        ::Win32::Registry::KEY_READ | 0x100)
+      path = 'SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\' + product_code
+
+      unless self.product_key_exists?(path)
+        # Registry key used by ArcGIS Web Adaptors before 11.1
+        path = 'SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\' + product_code
+        return nil unless self.product_key_exists?(path)
+      end
+       
+      key = Win32::Registry::HKEY_LOCAL_MACHINE.open(path, ::Win32::Registry::KEY_READ | 0x100)
       install_location = Pathname.new(key['InstallLocation'])
       key.close()
       install_location.basename.to_s
@@ -108,6 +183,23 @@ module Utils
       return code if wa_instance(code) == instance
     end
     return nil
+  end
+
+  # Replaces passwords in the error message by '*****'.
+  def self.sensitive_command_error(cmd, passwords = [])
+    if cmd.error?
+      msg = "Expected process to exit with #{cmd.valid_exit_codes.inspect}, but received '#{cmd.exitstatus}'."
+      str = cmd.format_for_exception
+      
+      passwords.each do |password|
+        unless password.nil? || password.empty?
+          str.gsub!("\"#{password}\"", "\"*****\"")
+          str.gsub!("'#{password}'", "'*****'")
+        end
+      end
+
+      raise "#{msg}\n#{str}"
+    end
   end
 
   def self.retry_ShellOut(command, retries, retry_delay, hash = {})
@@ -191,6 +283,25 @@ module Utils
       break if self.directory_accessible?(dir, user, password)
       sleep(SLEEP_TIME)
     end
+  end
+
+  # Get windows service logon account
+  def self.sc_logon_account(service)
+    cmd = Mixlib::ShellOut.new("sc.exe qc \"#{service}\"")
+    cmd.run_command
+    cmd.error?
+
+    # Parse stdout lines to get SERVICE_START_NAME property value
+    cmd.stdout.each_line do |line|
+      tokens = line.split(':', -1)
+      if tokens.length() > 1 and tokens[0].strip == 'SERVICE_START_NAME'
+        logon_account = tokens[1].strip
+        logon_account.slice!('.\\')
+        return logon_account
+      end
+    end
+
+    return nil
   end
 
   # Update windows service logon account

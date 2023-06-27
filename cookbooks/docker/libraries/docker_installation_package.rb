@@ -17,33 +17,19 @@ module DockerCookbook
       if new_resource.setup_docker_repo
         if platform_family?('rhel', 'fedora')
           platform = platform?('fedora') ? 'fedora' : 'centos'
-          arch = node['kernel']['machine']
 
           yum_repository 'Docker' do
-            baseurl "https://download.docker.com/linux/#{platform}/#{node['platform_version'].to_i}/#{arch}/#{new_resource.repo_channel}"
+            baseurl "https://download.docker.com/linux/#{platform}/#{node['platform_version'].to_i}/x86_64/#{new_resource.repo_channel}"
             gpgkey "https://download.docker.com/linux/#{platform}/gpg"
             description "Docker #{new_resource.repo_channel.capitalize} repository"
             gpgcheck true
             enabled true
           end
         elsif platform_family?('debian')
-          deb_arch =
-            case node['kernel']['machine']
-            when 'x86_64'
-              'amd64'
-            when 'aarch64'
-              'arm64'
-            when 'armv7l'
-              'armhf'
-            when 'ppc64le'
-              'ppc64el'
-            else
-              node['kernel']['machine']
-            end
           apt_repository 'Docker' do
             components Array(new_resource.repo_channel)
             uri "https://download.docker.com/linux/#{node['platform']}"
-            arch deb_arch
+            arch 'amd64'
             keyserver 'keyserver.ubuntu.com'
             key "https://download.docker.com/linux/#{node['platform']}/gpg"
             action :add
@@ -68,7 +54,7 @@ module DockerCookbook
 
     # These are helpers for the properties so they are not in an action class
     def default_docker_version
-      '19.03.5'
+      '18.06.0'
     end
 
     def default_package_name
@@ -176,8 +162,6 @@ module DockerCookbook
         return "5:#{v}~#{test_version}-0~ubuntu-#{codename}" if ubuntu?
       elsif v.to_f >= 18.09 && el7?
         return "#{v}-#{test_version}.el7"
-      elsif v.to_f >= 18.09 && fedora?
-        return v.to_s
       else
         return "#{v}.ce" if fedora?
         return "#{v}.ce-#{test_version}.el7" if el7?

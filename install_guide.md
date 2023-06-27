@@ -46,37 +46,12 @@ Clone the git repos (Forêt-Climat and Esri's cookbooks)
 git clone https://github.com/jfaurelacroix/foretclimat
 git clone https://github.com/Esri/arcgis-cookbook
 ```
-Inside the cookbooks folder, add necessary cookbooks from chef
+Inside the cookbooks folder, copy the cookbooks from the foretclimat repo
 ```
-cd arcgis-cookbook/cookbooks/arcgis-enterprise
-```
-Downloading the missing cookbooks (using Berkshelf)
-```
-cd ~/repos/arcgis-cookbook/cookbooks/arcgis-enterprise
-berks install
-mv ~/.berkshelf/cookbooks/* ~/repos/arcgis-cookbook/cookbooks
-```
-Rename every file
-```
-cd ~/repos/arcgis-cookbook/cookbooks
-mv limits-* limits
-mv hostsfile-* hostsfile
-mv windows-* windows
-mv windows_firewall-* windows_firewall
-mv ms_dotnet-* ms_dotnet
-mv nfs-* nfs
-mv java_properties-* java_properties
-mv aws-* aws
-mv seven_zip-* seven_zip
-mv line-* line
-mv openssl-* openssl
-mv tomcat-* tomcat
-mv iptables-* iptables
-mv s3_file-* s3_file
-mv tar-* tar
-mv apt-* apt
-mv esri-iis-* esri-iis
-mv esri-tomcat-* esri-tomcat
+cd arcgis-cookbook/cookbooks/
+sudo cp -rf ~/repos/foretclimat/cookbooks/ .
+sudo chown arcgis . -R
+sudo chgrp arcgis . -R
 ```
 Make sure that you have all the required tar and license files available (in /opt/bkp_ArcGIS_files/)
 - ArcGIS_Server_Linux_109_177864.tar.gz
@@ -193,7 +168,7 @@ sudo cp ~/repos/foretclimat/notebook/runtime.json /opt/arcgis/notebookserver/fra
 Change the image ID with the custom Advanced ID
 ```
 docker images --no-trunc
-sudo vi /gisdata/notebookserver/config-store/notebookruntimes/X #Where X is the numbers corresponding to the advanced notebook
+sudo vi /data/gisdata/notebookserver/config-store/notebookruntimes/X #Where X is the numbers corresponding to the advanced notebook
 ```
 ## 5.  Setup the website and homepage
 Create redirect to /portal/home
@@ -211,21 +186,39 @@ sudo cp -r ~/repos/foretclimat/media /opt/arcgis/portal/framework/webapps/arcgis
 sudo chown -R arcgis /opt/arcgis/portal/framework/webapps/arcgis#home/
 sudo chmod 700 -R /opt/arcgis/portal/framework/webapps/arcgis#home/
 ```
+Add the error pages to the site
+```
+sudo cp ~/repos/foretclimat/errorpages /opt/tomcat_arcgis/
+sudo chmod 700 /opt/tomcat_arcgis/errorpages/ -R
+sudo chown tomcat_arcgis /opt/tomcat_arcgis/errorpages/ -R
+sudo chgrp tomcat_arcgis /opt/tomcat_arcgis/errorpages/ -R
+```
+Allow proxy for ArcGIS Portal to work correctly with the items:
+
+Go to https://www.foretclimat.ca/portal/portaladmin
+After entering the admin credentials, Go to Security > Config > Update Security Configuration
+(https://www.foretclimat.ca/portal/portaladmin/security/config/update)
+and add this: 
+```
+,"allowedProxyHosts":"www.foretclimat.ca,fclim-pr-srv01.l.ul.ca
+```
+Then "Update Configuration" and it is done
+
 #### Schedule notebook task
 As arcgis user create the following directory
 ```
-mkdir /gisdata/notebookserver/directories/arcgisworkspace/arcgisdata
+mkdir /data/gisdata/notebookserver/directories/arcgisworkspace/arcgisdata
 ```
 Go to https://www.foretclimat.ca/portal/home/notebook/manager.html > Directories
 
 Click on "+ Register Data Directory"
 
 Name: data
-Path: /gisdata/notebookserver/directories/arcgisworkspace/arcgisdata
+Path: /data/gisdata/notebookserver/directories/arcgisworkspace/arcgisdata
 
 Bind the data folder to the media
 ```
-mkdir /arcgis/portal/framework/webapps/arcgis#home/media/graphs/
+mkdir /opt/arcgis/portal/framework/webapps/arcgis#home/media/graphs/
 mount --bind /gisdata/notebookserver/directories/arcgisworkspace/arcgisdata /arcgis/portal/framework/webapps/arcgis#home/media/graphs
 ```
 

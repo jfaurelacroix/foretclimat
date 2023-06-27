@@ -2,7 +2,7 @@ html, body, #viewDiv {
     padding: 0;
     margin: 0;
     height: 100%;
-    border-color:  var(--blue);
+    border-color:  #79A964;
     position: relative;
 }
 
@@ -15,8 +15,8 @@ html, body, #viewDiv {
 
 /* the Foret-Climat Logo */
 #logoPasserelle {
-    width: 165px;
-    background-color: rgb(245, 245, 245, 0.8);
+    background-color: rgba(242,242,242,0.8);
+    padding: 20px;
     position: fixed;
     top: 20px;
     left: 20px;
@@ -29,7 +29,7 @@ html, body, #viewDiv {
     position: fixed;
     bottom: 190px;
     right: 15px;
-    background-color : rgba(245, 245, 245, 1);
+    background-color : (242,242,242,1);
     border-radius: 50%;
     border: 1px;
     text-align: center;
@@ -45,7 +45,7 @@ html, body, #viewDiv {
 .esri-search {
     position: fixed;
     padding: 5px;
-    top: 200px;
+    top: 240px;
     left: 20px;
     width: 350px;
     height: 40px;
@@ -132,8 +132,8 @@ html, body, #viewDiv {
     padding: 0px;
     width: 50px;
     border-radius: 50%;
-    background-color : rgba(245, 245, 245, 1);
-    border-color: var(--blue);
+    background-color : (242,242,242, 1);
+    border-color: #588C42;
 }
 
 /* || Toggle Switch */
@@ -163,7 +163,7 @@ html, body, #viewDiv {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    background-color: #C3C3C3;
     -webkit-transition: .4s;
     transition: .4s;
   }
@@ -175,17 +175,17 @@ html, body, #viewDiv {
     width: 17px;
     left: 3px;
     bottom: 3px;
-    background-color: #ffffff;
+    background-color: #F2F2F2;
     -webkit-transition: .3s;
     transition: .3s;
   }
   
   input:checked + .slider {
-    background-color: var(--blue);
+    background-color: #588C42;
   }
   
   input:focus + .slider {
-    box-shadow: 0 0 1px var(--blue);
+    box-shadow: 0 0 1px #588C42;
   }
   
   input:checked + .slider:before {

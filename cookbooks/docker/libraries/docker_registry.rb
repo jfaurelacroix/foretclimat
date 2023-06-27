@@ -12,8 +12,6 @@ module DockerCookbook
 
     property :username, String
 
-    property :host, [String, nil], default: lazy { ENV['DOCKER_HOST'] }, desired_state: false
-
     action :login do
       tries = new_resource.api_retries
 

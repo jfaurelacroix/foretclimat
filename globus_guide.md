@@ -18,6 +18,7 @@ https://docs.globus.org/how-to/globus-connect-personal-linux/#config-paths
 
 La procédure est terminée. Utiliser pour ouvrir le endpoint en background:
 ```
+cd globusconnectpersonal
 ./globusconnectpersonal -start &
 ```
 
