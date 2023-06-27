@@ -3,7 +3,7 @@
 
 """ Auteur: Naïm Perreault
     Date de création: 2022-05-19
-    Date de la mise à jour: 2022-11-11
+    Date de la mise à jour: 2023-06-27
     Version 1.0.
 
     Passerelle Forêt-Climat - Scripts compagnons
