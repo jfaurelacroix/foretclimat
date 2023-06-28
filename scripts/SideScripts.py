@@ -106,12 +106,12 @@ def autoIncrement():
 # %% EditMode
 # ------------------------------------------------------------------------------
 edit = arcpy.da.Editor(arcpy.env.workspace)  # Trouver comment intégrer à la fonction EditMode
-def EditMode(Statut):
-    if Statut == "Start":
+def EditMode(Status):
+    if Status == "Start":
         print("Start editing")
         edit.startEditing(False, False)
         edit.startOperation()
-    if Statut == "End":
+    if Status == "End":
         print("End editing")
         edit.stopOperation()
         edit.stopEditing(True)
