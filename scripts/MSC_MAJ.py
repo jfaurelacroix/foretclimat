@@ -18,7 +18,7 @@ from meteostat import Stations
 # from copy import deepcopy
 
 
-def deployLogic(status, user):
+def deployLogic(status, user):  # status=["CreateService", "UpdateService]
     # %% Log file
     logging.basicConfig(filename="MSC.log", level=logging.INFO)
     log_format = "%Y-%m-%d %H:%M:%S"
