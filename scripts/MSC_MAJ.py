@@ -18,7 +18,7 @@ from meteostat import Stations
 # from copy import deepcopy
 
 
-def deployLogic(status, user):  # status=["CreateService", "UpdateService]
+def execution(status, user):   # status=["CreateService", "UpdateService]
     # %% Log file
     logging.basicConfig(filename="MSC.log", level=logging.INFO)
     log_format = "%Y-%m-%d %H:%M:%S"
@@ -30,7 +30,7 @@ def deployLogic(status, user):  # status=["CreateService", "UpdateService]
 
     # %% Répertoire de travail
     arcpy.env.overwriteOutput = True
-    gdb_dir = "/data"
+    gdb_dir = r'D:\02_Passerelle_ForetClimat\01_Donnees\Meteo\MSC'
     gdb_name = "MSC.gdb"
     gdb_path = os.path.join(gdb_dir, gdb_name)
     if not arcpy.Exists(gdb_path):
@@ -41,6 +41,7 @@ def deployLogic(status, user):  # status=["CreateService", "UpdateService]
     # %% Fonctions SideScripts.py
     sys.path.append("/home/arcgis/repos/foretclimat/scripts")
     from SideScripts import reorder_columns, EditMode
+    from FieldMapping import MSC_Daily_fms, MSC_Hourly_fms, MSC_Monthly_fms, MSC_Normals_fms
 
     # ------------------------------------------------------------------------------
     # %% Recuperation des stations
@@ -87,14 +88,13 @@ def deployLogic(status, user):  # status=["CreateService", "UpdateService]
     stock_data = pd.DataFrame()
     for file in Daily_List:
         df = pd.read_csv(file, header=None)
-        df.columns = ["time", "tavg", "tmin", "tmax", "prcp", "snow", "wdir", "wspd", "wpgt", "pres", "tsun"]
-        id_ = os.path.basename(file)
-        df['id'] = id_[10:-4]
-        df['combine'] = df["id"] + "_" + df["time"]
+        df.columns = ["date", "tavg", "tmin", "tmax", "prcp", "snow", "wdir", "wspd", "wpgt", "pres", "tsun"]
+        df['id'] = os.path.basename(file)[10:-4]
+        df['combine'] = df["id"] + "_" + df["date"]
         stock_data = pd.concat((df, stock_data), axis=0)
         os.remove(file)
     del file
-    stock_data = stock_data[stock_data['time'] < date.today().isoformat()]
+    stock_data = stock_data[stock_data['date'] < date.today().isoformat()]
     stock_data = reorder_columns(dataframe=stock_data, col_name="combine", position=0)
     stock_data.to_csv(os.path.join(gdb_dir, "MSC_Daily.csv"), index=False)
 
@@ -102,17 +102,16 @@ def deployLogic(status, user):  # status=["CreateService", "UpdateService]
     Hourly_List = glob.glob(os.path.join(gdb_dir, "MSC_Hourly*"))
     stock_data = pd.DataFrame()
     for file in Hourly_List:
-        df = pd.read_csv(file, parse_dates={"time": [0, 1]}, header=None)
-        df.columns = ["time", "temp", "dwpt", "rhum", "prcp", "snow", "wdir", "wspd", "wpgt", "pres", "tsun", "coco"]
-        id_ = os.path.basename(file)
-        df['id'] = id_[11:-4]
-        df['combine'] = df['id'] + "_" + df['time'].astype(str)
+        df = pd.read_csv(file, parse_dates={"date": [0, 1]}, header=None)
+        df.columns = ["date", "temp", "dwpt", "rhum", "prcp", "snow", "wdir", "wspd", "wpgt", "pres", "tsun", "coco"]
+        df['id'] = os.path.basename(file)[11:-4]
+        df['combine'] = df['id'] + "_" + df['date'].astype(str)
         df['combine'] = df['combine'].str.replace(':00:00', '')
         df['combine'] = df['combine'].str.replace(' ', '-')
         stock_data = pd.concat((df, stock_data), axis=0)
         os.remove(file)
     del file
-    stock_data = stock_data[stock_data['time'] < date.today().isoformat()]
+    stock_data = stock_data[stock_data['date'] < date.today().isoformat()]
     stock_data = reorder_columns(dataframe=stock_data, col_name="combine", position=0)
     stock_data.to_csv(os.path.join(gdb_dir, "MSC_Hourly.csv"), index=False)
 
@@ -122,17 +121,16 @@ def deployLogic(status, user):  # status=["CreateService", "UpdateService]
     for file in Monthly_List:
         df = pd.read_csv(file, header=None)
         df.columns = ["year", "month", "tavg", "tmin", "tmax", "prcp", "wspd", "pres", "tsun"]
-        df['time'] = pd.to_datetime(df["year"].astype(str) \
+        df['date'] = pd.to_datetime(df["year"].astype(str) \
                                     + "-" + df["month"].astype(str),
                                     format='%Y-%m')
-        id_ = os.path.basename(file)
-        df['id'] = id_[12:-4]
-        df['combine'] = df['id'] + "_" + df['time'].astype(str)
+        df['id'] = os.path.basename(file)[12:-4]
+        df['combine'] = df['id'] + "_" + df['date'].astype(str)
         stock_data = pd.concat((df, stock_data), axis=0)
         os.remove(file)
     del file
     stock_data = reorder_columns(dataframe=stock_data, col_name="combine", position=0)
-    stock_data = reorder_columns(dataframe=stock_data, col_name="time", position=1)
+    stock_data = reorder_columns(dataframe=stock_data, col_name="date", position=1)
     stock_data.to_csv(os.path.join(gdb_dir, "MSC_Monthly.csv"), index=False)
 
     # %% Normals
@@ -141,8 +139,7 @@ def deployLogic(status, user):  # status=["CreateService", "UpdateService]
     for file in Normals_List:
         df = pd.read_csv(file, header=None)
         df.columns = ["start", "end", "month", "tmin", "tmax", "prcp", "wspd", "pres", "tsun"]
-        id_ = os.path.basename(file)
-        df['id'] = id_[12:-4]
+        df['id'] = os.path.basename(file)[12:-4]
         df['combine'] = df["id"] + "_" + df["start"].astype(str) + "-" + df["end"].astype(str) + "-" + df["month"].astype(str)
         stock_data = pd.concat((df, stock_data), axis=0)
         os.remove(file)
@@ -159,13 +156,17 @@ def deployLogic(status, user):  # status=["CreateService", "UpdateService]
         # ------------------------------------------------------------------------------
         arcpy.management.XYTableToPoint(os.path.join(gdb_dir, "MSC_Stations.csv"), "MSC_Stations", "longitude",
                                         "latitude", "elevation")
-        arcpy.Delete_management(os.path.join(gdb_dir, "MSC_Stations.csv"))
-
+        fms = MSC_Daily_fms(os.path.join(gdb_dir, "MSC_Daily.csv"))
+        arcpy.conversion.TableToTable(os.path.join(gdb_dir, "MSC_Daily.csv"), gdb_path, "MSC_Daily", "", fms)
+        fms = MSC_Hourly_fms(os.path.join(gdb_dir, "MSC_Hourly.csv"))
+        arcpy.conversion.TableToTable(os.path.join(gdb_dir, "MSC_Hourly.csv"), gdb_path, "MSC_Hourly", "", fms)
+        fms = MSC_Monthly_fms(os.path.join(gdb_dir, "MSC_Monthly.csv"))
+        arcpy.conversion.TableToTable(os.path.join(gdb_dir, "MSC_Monthly.csv"), gdb_path, "MSC_Monthly", "", fms)
+        fms = MSC_Normals_fms(os.path.join(gdb_dir, "MSC_Normals.csv"))
+        arcpy.conversion.TableToTable(os.path.join(gdb_dir, "MSC_Normals.csv"), gdb_path, "MSC_Normals", "", fms)
         for file in os.listdir(gdb_dir):
             if file.endswith(".csv"):
-                new_name = file[:-4]
-                arcpy.conversion.TableToTable(os.path.join(gdb_dir, file), gdb_path, new_name)
-                arcpy.Delete_management(os.path.join(gdb_dir, file))
+                os.remove(os.path.join(gdb_dir, file))
         del file
 
         # %% Creation des classes de relation
@@ -192,10 +193,14 @@ def deployLogic(status, user):  # status=["CreateService", "UpdateService]
             arcpy.management.EnableEditorTracking(table, '', '', "last_edited_user", "last_edited_date", "ADD_FIELDS", "UTC")
         del table
 
+        arcpy.ExportXMLWorkspaceDocument_management(gdb_path, os.path.join(gdb_dir, "MSC.xml"), "SCHEMA_ONLY",
+                                                    "BINARY", "METADATA")
+
         # ------------------------------------------------------------------------------
         # %% Creation du service
         print("Creation du service")
         logging.info("Creation du service")
+        # il y a aussi la possibilité d'overwrite un service existant : https://support.esri.com/en-us/knowledge-base/how-to-overwrite-hosted-feature-services-from-arcgis-pr-000023164
         # ------------------------------------------------------------------------------
         arcpy.SignInToPortal(portal_url='https://arcgis.com', username=user, password=pw)
         # %% Set output file names
@@ -209,13 +214,15 @@ def deployLogic(status, user):  # status=["CreateService", "UpdateService]
 
         arcpy.mp.CreateWebLayerSDDraft(m, sddraft_output_filename, service_name, service_type="FEATURE_ACCESS", summary="My Summary",
                                        tags="My Tags", description="My Description", credits="My Credits", use_limitations="My Use Limitations",
-                                       folder_name="TEST_PasserelleForetClimat", enable_editing=False, allow_exporting=True, enable_sync=True)
+                                       enable_editing=False, allow_exporting=True, enable_sync=True,
+                                       folder_name="TEST_PasserelleForetClimat", overwrite_existing_service=False)
 
         sd_filename = service_name + ".sd"
         sd_output_filename = os.path.join(gdb_dir, sd_filename)
         arcpy.server.StageService(sddraft_output_filename, sd_output_filename)
         arcpy.server.UploadServiceDefinition(sd_output_filename, "HOSTING_SERVER")
         arcpy.Delete_management(os.path.join(gdb_dir, sddraft_filename))
+        arcpy.Delete_management(os.path.join(gdb_dir, "Thumbnail.png"))
 
     if status == "UpdateService":
         # ------------------------------------------------------------------------------
@@ -227,7 +234,7 @@ def deployLogic(status, user):  # status=["CreateService", "UpdateService]
         backtrack = 30
         for file in list_names:
             df = pd.read_csv(os.path.join(gdb_dir, file))
-            df = df[df['time'] > (date.today()-timedelta(days=backtrack)).isoformat()]
+            df = df[df['date'] > (date.today()-timedelta(days=backtrack)).isoformat()]
             df.to_csv(os.path.join(gdb_dir, file), index=False)
         del file
 
@@ -312,8 +319,7 @@ def deployLogic(status, user):  # status=["CreateService", "UpdateService]
         for root, dirs, files in os.walk(gdb_path):
             files = [f for f in files if '.lock' not in f]
             for f in files:
-                # shutil.copy2(os.path.join(gdb_path, f), os.path.join(liveGDB, f))
-                shutil.copyfile(os.path.join(gdb_path, f), os.path.join(liveGDB, f))
+                shutil.copy2(os.path.join(gdb_path, f), os.path.join(liveGDB, f))
         del root, dirs, files, f
 
         os.chdir(temp_dir)
@@ -335,4 +341,4 @@ def deployLogic(status, user):  # status=["CreateService", "UpdateService]
 
 if __name__ == "__main__":
     [status, user] = sys.argv[1:]
-    deployLogic(status, user)
+    execution(status, user)
