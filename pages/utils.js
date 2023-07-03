@@ -165,19 +165,29 @@ function skipTutorial(){
 function waitForNext(){
   var buttonNext = document.getElementById('tutorialNext');
   var buttonPrevious = document.getElementById('tutorialPrevious');
+  var buttonSkip = document.getElementById('tutorialSkip');
   return new Promise(resolve => {
     buttonNext.addEventListener('click',
         async function handler(event) {
           buttonNext.removeEventListener('click', handler);
           buttonPrevious.removeEventListener('click', handler);
+          buttonSkip.removeEventListener('click', handler);
           resolve("next")
         });
     buttonPrevious.addEventListener('click',
       async function handler(event) {
         buttonPrevious.removeEventListener('click', handler);
         buttonNext.removeEventListener('click', handler);
+        buttonSkip.removeEventListener('click', handler);
         resolve("previous")
     });
+    buttonSkip.addEventListener('click',
+        async function handler(event) {
+          buttonNext.removeEventListener('click', handler);
+          buttonPrevious.removeEventListener('click', handler);
+          buttonSkip.removeEventListener('click', handler);
+          resolve("skip")
+        });
   })   
 }
 
@@ -252,15 +262,15 @@ function topRightTutorial(tutBox){
   }
   waitForNext().then((resolve) => {
     topElements.style.zIndex = 'initial';
-    if(resolve == "next"){
-      skipTutorial()
-    }else{
-      controlsTutorial(tutBox);
-    }
     if(document.documentElement.lang == "en"){
       next.innerHTML = "Next";
     }else{
       next.innerHTML = "Suivant";
+    }
+    if(resolve == "next"){
+      skipTutorial()
+    }else if(resolve == "previous"){
+      controlsTutorial(tutBox);
     }
   });
 }
