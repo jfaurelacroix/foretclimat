@@ -13,6 +13,12 @@ html, body, #viewDiv {
     z-index: initial;
 }
 
+#ulLogoDiv{
+    position: fixed;
+    bottom:20px;
+    left:200px;
+}
+
 /* the Foret-Climat Logo */
 #logoPasserelle {
     background-color: rgba(242,242,242,0.8);

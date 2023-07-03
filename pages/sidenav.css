@@ -67,11 +67,13 @@
     margin-left: 50px;
 }
 
-.sidenav #partLogoDiv {
+.sidenav #fciLogoDiv {
     position: fixed;
+    float: right;
     bottom: 25px;
     margin-left: 100px;
     display: block;
+    background-color: rgba(241,241,241,0.8);
 }
 
 /* || Menu Burger */
