@@ -163,20 +163,22 @@ function skipTutorial(){
 
 /* Pauses the tutorial until you click on the "Next" Button */
 function waitForNext(){
-  var myButtonNext = document.getElementById('tutorialNext');
-  var myButtonSkip = document.getElementById('tutorialSkip');
+  var buttonNext = document.getElementById('tutorialNext');
+  var buttonPrevious = document.getElementById('tutorialPrevious');
   return new Promise(resolve => {
-    myButtonNext.addEventListener('click',
+    buttonNext.addEventListener('click',
         async function handler(event) {
-            myButtonNext.removeEventListener('click', handler);
-            resolve(true)
+          buttonNext.removeEventListener('click', handler);
+          buttonPrevious.removeEventListener('click', handler);
+          resolve("next")
         });
-    myButtonSkip.addEventListener('click',
+    buttonPrevious.addEventListener('click',
       async function handler(event) {
-          myButtonSkip.removeEventListener('click', handler);
-          resolve(false)
-      });
-    })
+        buttonPrevious.removeEventListener('click', handler);
+        buttonNext.removeEventListener('click', handler);
+        resolve("previous")
+    });
+  })   
 }
 
 /* Starts the tutorial scenario from the beginning */
@@ -184,13 +186,16 @@ function startTutorial(){
   const tutBox = document.getElementById('tutorialBox');
   tutBox.style.display = 'inline';
   showBlackBG();
+  let previous = document.getElementById("tutorialPrevious");
+  previous.style.display = "none"
   if(document.documentElement.lang == "en"){
     document.getElementById("tutorialInfo").innerHTML = "<p>Welcome to the Forêt-Climat website.<br></p><p>Click on \"Next\" to follow the tutorial.</p><p>You can also \"Skip\" at any moment.</p>";
   }else{
     document.getElementById("tutorialInfo").innerHTML = "<p>Bienvenue sur le site de la passerelle Forêt-Climat.<br></p><p>Cliquez sur « Suivant » pour suivre le tutoriel.</p><p>Vous pouvez aussi « Passer » à tout moment.</p>";
   }
-  waitForNext().then((bool) => {
-    if(bool){
+  waitForNext().then((resolve) => {
+    if(resolve == "next"){
+      previous.style.display = "inline"
       controlsTutorial(tutBox);
     }
   });
@@ -203,14 +208,16 @@ function controlsTutorial(tutBox){
   }else{
     document.getElementById("tutorialInfo").innerHTML = "<p>Le clique gauche permet de naviguer sur la carte.</p><p>Le clique droit permet de faire des rotations.</p><p>La molette de la souris permet de zoomer ou de dézoomer.</p>";
   }
-  waitForNext().then((bool) => {
-    if(bool){
-      topLeftTutorial(tutBox);
+  waitForNext().then((resolve) => {
+    if(resolve == "next"){
+      topRightTutorial(tutBox);
+    }else if(resolve == "previous"){
+      startTutorial(tutBox)
     }
   });
 }
-
-/* 3rd step of tutorial (Top left) */
+/*
+// 3rd step of tutorial (Top left) 
 function topLeftTutorial(tutBox){
   if(document.documentElement.lang == "en"){
     document.getElementById("tutorialInfo").innerHTML = "<p>There is the search bar.</p><p>You are able to select a specific layer for the search by clicking on the small arrow to the left.</p>";
@@ -226,6 +233,7 @@ function topLeftTutorial(tutBox){
     }
   });
 }
+*/
 
 /* 4th step of tutorial (Top right) */
 function topRightTutorial(tutBox){
@@ -234,17 +242,31 @@ function topRightTutorial(tutBox){
   }else{
     document.getElementById("tutorialInfo").innerHTML = "<p>Cliquez sur l'icone de profil pour vous connecter avec votre compte d'établissement ou votre compte Forêt-Climat.</p><p>Cliquez sur le menu pour accéder au reste du site ou aux Storymaps.</p>";
   }
+  let next = document.getElementById("tutorialNext");
   let topElements = document.getElementsByClassName("esri-ui-top-right")[0];
   topElements.style.zIndex = 1000;
-  waitForNext().then((bool) => {
-    if(bool){
-      topElements.style.zIndex = 'initial';
-      bottomLeftTutorial(tutBox);
+  if(document.documentElement.lang == "en"){
+    next.innerHTML = "Close";
+  }else{
+    next.innerHTML = "Terminer";
+  }
+  waitForNext().then((resolve) => {
+    topElements.style.zIndex = 'initial';
+    if(resolve == "next"){
+      skipTutorial()
+    }else{
+      controlsTutorial(tutBox);
+    }
+    if(document.documentElement.lang == "en"){
+      next.innerHTML = "Next";
+    }else{
+      next.innerHTML = "Suivant";
     }
   });
 }
 
-/* 5th step of tutorial (Bottom left) */
+/*
+// 5th step of tutorial (Bottom left) 
 function bottomLeftTutorial(tutBox){
   if(document.documentElement.lang == "en"){
     document.getElementById("tutorialInfo").innerHTML = "<p>The bottom left map lets you change the basemap.</p>";
@@ -260,8 +282,9 @@ function bottomLeftTutorial(tutBox){
     }
   });
 }
-
-/* 6th step of tutorial (Bottom right) */
+*/
+/*
+// 6th step of tutorial (Bottom right)
 function bottomRightTutorial(tutBox){
   if(document.documentElement.lang == "en"){
     document.getElementById("tutorialInfo").innerHTML = "<p>You can find the legend at the bottom right. By clicking the eye, you can either hide or show the different layers.</p><p>The toggle switch lets you see additional layers</p><p>The « i » restarts the tutorial.</p><p>The compass reorients the view towards the north.</p><p>The localization button shows your location on the map and moves the view to where you are.</p><p>The buttons at the bottom control the zoom.</p>";
@@ -292,6 +315,7 @@ function bottomRightTutorial(tutBox){
     skip.style.display = "initial";
   });
 }
+*/
 
 /* Waits for an element to display to callback */
 function waitForElementToDisplay(selector, callback, checkFrequencyInMs, timeoutInMs) {
