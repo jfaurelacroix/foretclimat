@@ -18,7 +18,7 @@ from meteostat import Stations
 # from copy import deepcopy
 
 
-def execution(status, user):   # status=["CreateService", "UpdateService]
+def main(status, user):   # status=["CreateService", "UpdateService]
     # %% Log file
     logging.basicConfig(filename="MSC.log", level=logging.INFO)
     log_format = "%Y-%m-%d %H:%M:%S"
@@ -341,4 +341,4 @@ def execution(status, user):   # status=["CreateService", "UpdateService]
 
 if __name__ == "__main__":
     [status, user] = sys.argv[1:]
-    execution(status, user)
+    main(status, user)
