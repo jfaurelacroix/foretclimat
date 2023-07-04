@@ -34,7 +34,7 @@ require([
   map = new WebMap({
     portalItem: {
       // autocasts as new PortalItem()
-      id: "8dacc82f02d94d24bb4a3c751ba4db34", // id is in the content page url
+      id: "fd9365041da34ed18ff36b2573a9c0e4", // id is in the content page url
       portal: myPortal,
     }
   });
@@ -55,11 +55,13 @@ require([
       minZoom: 4,
     }
   })
+
+  map.load().catch(function(error){
+    errorLoadingWebMap(error)
+  });
   /* Defined to be used in utils.js */
   Window.map = map;
-  if (map.loadStatus != 'loaded'){
-    throw new Error("Map failed to load")
-  }
+  
   /* Points IMLNU */
   const IMLNU_PS = new FeatureLayer(
     {
@@ -442,7 +444,7 @@ require([
       }]
     })
   });
-
+  
   /* Layer about human constructions on site */
   const BATIMENTS_PS = new FeatureLayer({
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/FM_batiments/FeatureServer",
@@ -469,6 +471,7 @@ require([
     })
   })
 
+  
   /* Layer about the roads and other paths */
   const CHEMINS_PL = new FeatureLayer({
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/FM_chemins/FeatureServer",
@@ -861,7 +864,7 @@ require([
   /* Widget to change the basemap */
   const toggle = new BasemapToggle({
     view: view,
-    nextBasemap: "osm" //https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html#basemap
+    nextBasemap: "hybrid" //https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html#basemap
   });
 
   /* Widget to locate the user on the map */
@@ -902,14 +905,10 @@ require([
       }
     }
 });
-  
-  const failedLayers = map.layers.filter(i => i.loadStatus != 'loaded');
-  if (failedLayers.length > 0) {
-    throw new Error("Layers failed to load")
-  }
+
 
   /* Adds every layer to the map */
-  map.addMany([FM_AB_BLOC, PLANT_BLOC, REGEN_BLOC,  RECOLTE_BLOC, REGEN_BLOC, REBOIS_BLOC, INTER_BLOC,  IMLNU_BLOC, PLANT_PS, REGEN_PS, RECOLTE_PS, REGEN_PS, REBOIS_PS, INTER_PS, IMLNU_PS, CHEMINS_PL, MOTONEIGE_PL, SENTIERS_PL, BATIMENTS_PS,]);
+  map.addMany([FM_AB_BLOC, PLANT_BLOC, REGEN_BLOC,  RECOLTE_BLOC, REGEN_BLOC, REBOIS_BLOC, INTER_BLOC,  IMLNU_BLOC, PLANT_PS, REGEN_PS, RECOLTE_PS, REGEN_PS, REBOIS_PS, INTER_PS, IMLNU_PS, CHEMINS_PL, MOTONEIGE_PL, SENTIERS_PL, BATIMENTS_PS]);
 
   /* Adds every item as esri-component but they are still positionned manually using position: fixed */
   view.ui.add(["logoPasserelleLink", search], "top-left");
@@ -928,6 +927,23 @@ require([
   
 }
 }catch(error){
+  errorLoadingWebMap(error)
+}
+  /* if user is logged in (esri_auth cookie is present) */
+  if (getCookie("esri_auth") != "") {
+    addAccountEventListenerHome();
+  }else{
+    addAccountEventListenerSignIn();
+  }
+
+  /* if first visit => start tutorial and note that it's not first visit */
+  if(!localStorage.noFirstVisit){
+    startTutorial();
+    localStorage.noFirstVisit = true;
+  }
+  document.getElementById("switchLayers").addEventListener("change", handleChangeLayersMode);
+  document.getElementById("switchLayers").dispatchEvent(new Event("change"))
+  function errorLoadingWebMap(error){
     console.error("Failed to load the webmap:", error);
     
     // Load an alternative map or display an error message
@@ -959,21 +975,8 @@ require([
     view.ui.add(["logoPasserelleLink"], "top-left");
     view.ui.add(["account", "sideburger"], "top-right");
     view.ui.add([ "tutorialHelp", "switch"], "bottom-right");
-
+  
     view.ui.move(["zoom"], "bottom-right");
   }
-  /* if user is logged in (esri_auth cookie is present) */
-  if (getCookie("esri_auth") != "") {
-    addAccountEventListenerHome();
-  }else{
-    addAccountEventListenerSignIn();
-  }
-
-  /* if first visit => start tutorial and note that it's not first visit */
-  if(!localStorage.noFirstVisit){
-    startTutorial();
-    localStorage.noFirstVisit = true;
-  }
-  document.getElementById("switchLayers").addEventListener("change", handleChangeLayersMode);
-  document.getElementById("switchLayers").dispatchEvent(new Event("change"))
 });
+
