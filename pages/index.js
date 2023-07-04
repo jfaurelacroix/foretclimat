@@ -34,8 +34,9 @@ require([
   map = new WebMap({
     portalItem: {
       // autocasts as new PortalItem()
-      id: "fd9365041da34ed18ff36b2573a9c0e4", // id is in the content page url
+      id: "56f82dcc476e4b0caa83cfc338799fd2", // id is in the content page url
       portal: myPortal,
+      basemap: ""
     }
   });
 
@@ -444,8 +445,8 @@ require([
       }]
     })
   });
-  
-  /* Layer about human constructions on site */
+  /*
+  // Layer about human constructions on site 
   const BATIMENTS_PS = new FeatureLayer({
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/FM_batiments/FeatureServer",
     outFields: ["*"],
@@ -472,7 +473,7 @@ require([
   })
 
   
-  /* Layer about the roads and other paths */
+  // Layer about the roads and other paths 
   const CHEMINS_PL = new FeatureLayer({
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/FM_chemins/FeatureServer",
     outFields: ["*"],
@@ -512,7 +513,7 @@ require([
     })
   })
 
-  /* Layer about the walking paths */
+  // Layer about the walking paths
   const SENTIERS_PL = new FeatureLayer({
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/FM_sentiers/FeatureServer",
     outFields: ["*"],
@@ -567,7 +568,7 @@ require([
     })
   })
 
-  /* Layer about the snowmobile club path */
+  // Layer about the snowmobile club path 
   const MOTONEIGE_PL = new FeatureLayer({
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/FM_motoneige/FeatureServer",
     outFields: ["*"],
@@ -598,7 +599,7 @@ require([
     })
   })
 
-  /* Layer delimiting zones A and B of Foret Montmorency */
+  // Layer delimiting zones A and B of Foret Montmorency 
   const FM_AB_BLOC = new FeatureLayer({
     url: "https://www.foretclimat.ca/server/rest/services/Hosted/FM_poly_AB/FeatureServer",
     outFields: ["*"],
@@ -651,9 +652,10 @@ require([
     IMLNU_BLOC.popupTemplate.content[0].mediaInfos[1].title = "";
     IMLNU_BLOC.popupTemplate.content[0].mediaInfos[1].caption = "";
     /* TODO */
+    /*
     BATIMENTS_PS.title = "Buildings";
     BATIMENTS_PS.popupTemplate.content[0].fieldInfos[0].label = "Building type";
-  
+    
     CHEMINS_PL.title = "Roads";
     CHEMINS_PL.renderer.legendOptions = {title: "Road classification"},
     CHEMINS_PL.popupTemplate.title = "Road #{NO_CHEM} {CHEMIN_NOM}";
@@ -674,6 +676,7 @@ require([
     FM_AB_BLOC.title = "Delimitations of the Forêt Montmorency";
     FM_AB_BLOC.renderer.legendOptions = {title: "Delimitations of the zones"},
     FM_AB_BLOC.popupTemplate.content[0].fieldInfos[0].label = "Area";
+    */
   }
 
   /* Parameters used for each sources in the following search widget */
@@ -692,7 +695,8 @@ require([
     allPlaceholder: "Rechercher un lieu ou une couche",
     portal: myPortal, // https://enterprise.arcgis.com/fr/portal/latest/administer/windows/configure-portal-to-geocode-addresses.htm
     sources: [ //https://developers.arcgis.com/javascript/latest/sample-code/widgets--multiplesource/
-      {
+      /*{
+        
         layer: BATIMENTS_PS,
         name: "Batiments",
         placeholder: "Rechercher un batiment",
@@ -723,7 +727,7 @@ require([
         searchFields: ["nom_club"],
         displayField: "nom_club",
         searchSourcesParam
-      },
+      },*/
       {
         layer: IMLNU_PS,
         name: "Points matière ligneuse non utilisée",
@@ -908,7 +912,8 @@ require([
 
 
   /* Adds every layer to the map */
-  map.addMany([FM_AB_BLOC, PLANT_BLOC, REGEN_BLOC,  RECOLTE_BLOC, REGEN_BLOC, REBOIS_BLOC, INTER_BLOC,  IMLNU_BLOC, PLANT_PS, REGEN_PS, RECOLTE_PS, REGEN_PS, REBOIS_PS, INTER_PS, IMLNU_PS, CHEMINS_PL, MOTONEIGE_PL, SENTIERS_PL, BATIMENTS_PS]);
+  //map.addMany([FM_AB_BLOC, PLANT_BLOC, REGEN_BLOC,  RECOLTE_BLOC, REGEN_BLOC, REBOIS_BLOC, INTER_BLOC,  IMLNU_BLOC, PLANT_PS, REGEN_PS, RECOLTE_PS, REGEN_PS, REBOIS_PS, INTER_PS, IMLNU_PS, CHEMINS_PL, MOTONEIGE_PL, SENTIERS_PL, BATIMENTS_PS]);
+  map.addMany([PLANT_BLOC, REGEN_BLOC,  RECOLTE_BLOC, REGEN_BLOC, REBOIS_BLOC, INTER_BLOC,  IMLNU_BLOC, PLANT_PS, REGEN_PS, RECOLTE_PS, REGEN_PS, REBOIS_PS, INTER_PS, IMLNU_PS]);
 
   /* Adds every item as esri-component but they are still positionned manually using position: fixed */
   view.ui.add(["logoPasserelleLink", search], "top-left");
