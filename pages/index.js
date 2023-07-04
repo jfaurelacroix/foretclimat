@@ -959,7 +959,7 @@ require([
     view.ui.add(["logoPasserelleLink"], "top-left");
     view.ui.add(["account", "sideburger"], "top-right");
     view.ui.add([ "tutorialHelp", "switch"], "bottom-right");
-  
+
     view.ui.move(["zoom"], "bottom-right");
   }
   /* if user is logged in (esri_auth cookie is present) */
