@@ -830,38 +830,30 @@ require([
   /* Changes placeholders if page is in english */
   if(document.documentElement.lang=="en"){
     search.allPlaceholder = "Search for places or layers"
-    search.allSources.items[0].name = "Buildings";
-    search.allSources.items[0].placeholder = "Search for buildings";
-    search.allSources.items[1].name = "Roads";
-    search.allSources.items[1].placeholder = "Search for roads";
-    search.allSources.items[2].name = "Paths";
-    search.allSources.items[2].placeholder = "Search for paths";
-    search.allSources.items[3].name = "Snowmobile paths";
-    search.allSources.items[3].placeholder = "Search for snowmobile paths";
-    search.allSources.items[4].name = "Points of unused wood material";
+    search.allSources.items[0].name = "Points of unused wood material";
+    search.allSources.items[0].placeholder = "Search for points";
+    search.allSources.items[1].name = "Polygons of unused wood material";
+    search.allSources.items[1].placeholder = "Search for polygons";
+    search.allSources.items[2].name = "Points of intervention";
+    search.allSources.items[2].placeholder = "Search for points";
+    search.allSources.items[3].name = "Polygons of intervention";
+    search.allSources.items[3].placeholder = "Search for polygons";
+    search.allSources.items[4].name = "Points of reforestation";
     search.allSources.items[4].placeholder = "Search for points";
-    search.allSources.items[5].name = "Polygons of unused wood material";
+    search.allSources.items[5].name = "Polygons of reforestation";
     search.allSources.items[5].placeholder = "Search for polygons";
-    search.allSources.items[6].name = "Points of intervention";
+    search.allSources.items[6].name = "Points of harvest";
     search.allSources.items[6].placeholder = "Search for points";
-    search.allSources.items[7].name = "Polygons of intervention";
+    search.allSources.items[7].name = "Polygons of harvest";
     search.allSources.items[7].placeholder = "Search for polygons";
-    search.allSources.items[8].name = "Points of reforestation";
+    search.allSources.items[8].name = "Points of regeneration";
     search.allSources.items[8].placeholder = "Search for points";
-    search.allSources.items[9].name = "Polygons of reforestation";
+    search.allSources.items[9].name = "Polygons of regeneration";
     search.allSources.items[9].placeholder = "Search for polygons";
-    search.allSources.items[10].name = "Points of harvest";
+    search.allSources.items[10].name = "Points of planting";
     search.allSources.items[10].placeholder = "Search for points";
-    search.allSources.items[11].name = "Polygons of harvest";
+    search.allSources.items[11].name = "Polygons of planting";
     search.allSources.items[11].placeholder = "Search for polygons";
-    search.allSources.items[12].name = "Points of regeneration";
-    search.allSources.items[12].placeholder = "Search for points";
-    search.allSources.items[13].name = "Polygons of regeneration";
-    search.allSources.items[13].placeholder = "Search for polygons";
-    search.allSources.items[14].name = "Points of planting";
-    search.allSources.items[14].placeholder = "Search for points";
-    search.allSources.items[15].name = "Polygons of planting";
-    search.allSources.items[15].placeholder = "Search for polygons";
   }
 
 
@@ -883,7 +875,7 @@ require([
 
   /* Widget to let the user hide/show different layers, also acts as a legend */
   const layerList = new LayerList({
-    view: view,
+    view: view/*
     listItemCreatedFunction: function (event) {
 
       // The event object contains properties of the
@@ -895,7 +887,7 @@ require([
         content: "",
         open: true
       }
-      /* If simple renderer: manually add the symbol to the content panel */
+      // If simple renderer: manually add the symbol to the content panel 
       if(item.layer.renderer.type == 'simple'){
         if(item.panel.content == ""){
           mySymbol = item.layer.renderer.symbol;
@@ -903,11 +895,11 @@ require([
             item.panel.content = renderedSymbol;
           });
         }
-      /* Else the id string "legend" will automatically generate the legend for unique value renderers */
+      // Else the id string "legend" will automatically generate the legend for unique value renderers
       }else{
         item.panel.content = "legend";
       }
-    }
+  }*/
 });
 
 
