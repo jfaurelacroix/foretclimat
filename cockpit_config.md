@@ -35,7 +35,7 @@ sudo firewall-cmd --add-service=cockpit --permanent
 ```
 You can now use Cockpit:
 https://fclim-pr-srv01.l.ul.ca:9090/
-Accès au Grafana: (Browse > Dossier Forêt-Climat)
+Accessing Grafana: (Browse > Dossier Forêt-Climat)
 https://ul-val-pr-mon.l.ul.ca:3000/?orgId=1
 ### OPTIONAL
 Configure the cockpit website with these options:

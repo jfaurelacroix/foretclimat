@@ -875,7 +875,7 @@ require([
 
   /* Widget to let the user hide/show different layers, also acts as a legend */
   const layerList = new LayerList({
-    view: view/*
+    view: view,
     listItemCreatedFunction: function (event) {
 
       // The event object contains properties of the
@@ -899,7 +899,7 @@ require([
       }else{
         item.panel.content = "legend";
       }
-  }*/
+  } 
 });
 
 
