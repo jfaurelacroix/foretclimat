@@ -888,7 +888,7 @@ require([
         open: true
       }
       // If simple renderer: manually add the symbol to the content panel 
-      if(item.layer.renderer.type == 'simple'){
+      if(item.layer.renderer != null && item.layer.renderer.type == 'simple'){
         if(item.panel.content == ""){
           mySymbol = item.layer.renderer.symbol;
           symbolUtils.renderPreviewHTML(mySymbol).then(renderedSymbol=>{

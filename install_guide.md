@@ -219,7 +219,7 @@ Path: /data/gisdata/notebookserver/directories/arcgisworkspace/arcgisdata
 Bind the data folder to the media
 ```
 mkdir /opt/arcgis/portal/framework/webapps/arcgis#home/media/graphs/
-mount --bind /gisdata/notebookserver/directories/arcgisworkspace/arcgisdata /arcgis/portal/framework/webapps/arcgis#home/media/graphs
+sudo mount --bind /data/gisdata/notebookserver/directories/arcgisworkspace/arcgisdata /opt/arcgis/portal/framework/webapps/arcgis#home/media/graphs
 ```
 
 Then, import the notebook used for the homepage graphs.
