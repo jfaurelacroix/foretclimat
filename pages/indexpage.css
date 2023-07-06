@@ -15,17 +15,21 @@ html, body, #viewDiv {
 
 #ulLogoDiv{
     position: fixed;
-    bottom:28px;
+    bottom:24px;
     left:100px;
+}
+
+#ulLogo{
+    width:250px;
 }
 
 /* the Foret-Climat Logo */
 #logoPasserelle {
     background-color: rgba(242,242,242,0.8);
-    padding: 12px;
+    padding: 14px;
     position: fixed;
-    top: 20px;
-    left: 20px;
+    top: 8px;
+    left: 8px;
     font-size: var(--calcite-font-size-0);
     height: 100px;
 }
@@ -49,38 +53,52 @@ html, body, #viewDiv {
 
 /* || The Esri widgets */
 
+/* Basemap Toggle */
+
+.esri-basemap-toggle{
+    position: fixed;
+    left: 16px;
+    bottom: 20px;
+}
+
 /* Search bar */
 .esri-search {
     position: fixed;
-    padding: 5px;
-    top: 160px;
-    left: 20px;
-    width: 310px;
+    padding: 4px;
+    top: 150px;
+    left: 8px;
+    width: 320px;
     height: 40px;
+}
+
+/* zoom */
+.esri-zoom{
+    position: fixed;
+    right:16px;
 }
 
 /* compass */
 .esri-compass{
     position: fixed;
-    padding: 5px;
+    padding: 4px;
     bottom: 148px;
-    right: 15px;
+    right: 16px;
 }
 
 /* locate button */
 .esri-locate{
     position: fixed;
-    padding: 5px;
+    padding: 4px;
     bottom: 105px;
-    right: 15px;
+    right: 16px;
 }
 
 /* Layer-list / legend */
 .esri-layer-list{
     position: fixed;
-    bottom: 30px;
+    bottom: 24px;
     right: 60px;
-    height: 234px;
+    height: 20%;
 }
 
 
@@ -228,11 +246,61 @@ html, body, #viewDiv {
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 
-@media screen and (max-height: 450px) {
+@media screen and (max-width: 1023px) {
     .sidenav {
-        padding-top: 15px;
+        padding-top: 8px;
     }
     .sidenav a {
-        font-size: 18px;
+        font-size: 16px;
     }
+
+    .esri-layer-list{
+        display: none;
+    }
+
+    #logoPasserelle{
+        height: 60px;
+        padding: 8px;
+    }
+
+    .esri-search{
+        width:220px;
+        top: 100px;
+    }
+
+    #ulLogo{
+        width:160px;
+    }
+
+    .switch.esri-component{
+        display:none;
+    }
+
+    .esri-compass{
+        right: 8px;
+    }
+
+    .esri-locate{
+        right: 8px;
+    }
+
+    #tutorialHelp{
+        right:8px;
+    }
+
+    .esri-zoom{
+        right:8px;
+    }
+    
+    #account{
+        top: 8px;
+        right: 60px;
+    }
+
+    .esri-basemap-toggle{
+        position: fixed;
+        left: 8px;
+        bottom: 20px;
+    }
+    
 }

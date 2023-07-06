@@ -116,3 +116,9 @@
     transform: rotate(45deg) translate(-8px, -8px);
 }
 
+@media screen and (max-height: 1023px) {
+    .container.esri-component {
+        top:12px;
+        right:12px;
+    }
+}

@@ -127,7 +127,7 @@ require([
         },{
           type: "image", // Autocasts as new ImageMediaInfo object
           value: {
-            sourceURL: "media/graphs/IMLNU_Bloc_year.png"
+            sourceURL: "media/graphs/IMLNU_year.png"
           }
         }]
       }]
@@ -192,7 +192,7 @@ require([
         },{
           type: "image", // Autocasts as new ImageMediaInfo object
           value: {
-            sourceURL: "media/graphs/Inter_Bloc_year.png"
+            sourceURL: "media/graphs/Inter_year.png"
           }
         }]
       }]
@@ -251,7 +251,7 @@ require([
         },{
           type: "image", // Autocasts as new ImageMediaInfo object
           value: {
-            sourceURL: "media/graphs/QualRebois_Bloc_year.png"
+            sourceURL: "media/graphs/QualRebois_year.png"
           }
         }]
       }]
@@ -307,7 +307,7 @@ require([
         },{
           type: "image", // Autocasts as new ImageMediaInfo object
           value: {
-            sourceURL: "media/graphs/Recolte_Bloc_year.png"
+            sourceURL: "media/graphs/Recolte_year.png"
           }
         }]
       }]
@@ -376,7 +376,7 @@ require([
         },{
           type: "image", // Autocasts as new ImageMediaInfo object
           value: {
-            sourceURL: "media/graphs/Regen_Bloc_year.png"
+            sourceURL: "media/graphs/Regen_year.png"
           }
         }]
       }]
@@ -439,7 +439,7 @@ require([
         },{
           type: "image", // Autocasts as new ImageMediaInfo object
           value: {
-            sourceURL: "media/graphs/SuiviPlant_Bloc_year.png"
+            sourceURL: "media/graphs/SuiviPlant_year.png"
           }
         }]
       }]
