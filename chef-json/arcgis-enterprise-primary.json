@@ -55,7 +55,7 @@
             "log_level": "WARNING",
             "content_store_type": "FileStore",
             "content_store_provider": "FileSystem",
-            "authorization_file": "/opt/software/authorization_files/10.9/ArcGIS_Enterprise_Portal_109_421261_20230605.json",
+            "authorization_file": "/opt/software/authorization_files/10.9/ArcGIS_Enterprise_Portal_109_424718_20230706.json",
             "authorization_file_version": "10.9",
             "install_system_requirements": true,
             "wa_name": "portal",
