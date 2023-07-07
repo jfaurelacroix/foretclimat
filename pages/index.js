@@ -693,6 +693,7 @@ require([
   const search = new Search ({
     view: view,
     allPlaceholder: "Rechercher un lieu ou une couche",
+    minSuggestCharacters: 1,
     portal: myPortal, // https://enterprise.arcgis.com/fr/portal/latest/administer/windows/configure-portal-to-geocode-addresses.htm
     sources: [ //https://developers.arcgis.com/javascript/latest/sample-code/widgets--multiplesource/
       /*{
