@@ -1,6 +1,6 @@
 {
     "arcgis": {
-        "version": "10.9",
+        "version": "11.1",
         "run_as_user": "arcgis",
         "repository": {
             "archives": "/opt/software/bkp_ArcGIS_files",
@@ -10,11 +10,11 @@
             "install_dir": "/opt",
             "install_system_requirements": true,
             "install_samples_data": true,
-            "authorization_file": "/opt/software/authorization_files/10.9/notebook_server.prvc",
+            "authorization_file": "/opt/software/authorization_files/11.1/ArcGISNotebooksAdvanced_ArcGISServer_1349787.prvc",
 			"license_level": "advanced",
-            "setup_archive": "/opt/software/bkp_ArcGIS_files/ArcGIS_Notebook_Server_Linux_1091_180226.tar.gz",
-            "data_setup_archive": "/opt/software/bkp_ArcGIS_files/ArcGIS_Notebook_Server_Samples_Data_Linux_109_177914.tar.gz",
-			"advanced_images": "/opt/software/bkp_ArcGIS_files/ArcGIS_Notebook_Docker_Advanced_Passerelle.tar.gz",
+            "setup_archive": "/opt/software/bkp_ArcGIS_files/ArcGIS_Notebook_Docker_Standard_111_185262.tar.gz",
+            "data_setup_archive": "/opt/software/bkp_ArcGIS_files/ArcGIS_Notebook_Server_Samples_Data_Linux_111_185328.tar.gz",
+			"advanced_images": "/opt/software/bkp_ArcGIS_files/ArcGIS_Notebook_Docker_Advanced_111_185263.tar.gz",
             "admin_username": "jfaurel",
             "admin_password": "change.it",
             "directories_root": "/data/gisdata/notebookserver/directories",

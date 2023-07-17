@@ -54,8 +54,11 @@ sudo chown arcgis . -R
 sudo chgrp arcgis . -R
 ```
 Make sure that you have all the required tar and license files available (in /opt/bkp_ArcGIS_files/)
-- ArcGIS_Server_Linux_109_177864.tar.gz
-- ArcGIS_Web_Adaptor_Java_Linux_109_177888.tar.gz
+- ArcGIS_Server
+- ArcGIS_Datastore
+- ArcGIS_Portal
+- ArcGIS_Portal_WebStyles
+- ArcGIS_Web_Adaptor_Java_Linux
 - apache-tomcat-9.x.x.tar.gz (will be downloaded from the internet if not present in the local ArcGIS software repository)
 - openjdk-11_linux-x64_bin.tar.gz (will be downloaded from the internet if not present in the local ArcGIS software repository)
 

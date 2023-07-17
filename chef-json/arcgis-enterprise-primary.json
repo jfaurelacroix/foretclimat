@@ -9,7 +9,7 @@
         "install_path": "/opt/tomcat_arcgis"
     },
     "arcgis": {
-        "version": "10.9",
+        "version": "11.1",
         "run_as_user": "arcgis",
         "repository": {
             "archives": "/opt/software/bkp_ArcGIS_files",
@@ -23,8 +23,8 @@
 			"web_context_url": "https://www.foretclimat.ca/server",
             "admin_username": "passerelleforetclimat",
             "admin_password": "change.it",
-            "authorization_file": "/opt/software/authorization_files/10.9/EducationSiteArcGISServerEnterprise_ArcGISServer_1334432.prvc",
-            "authorization_file_version": "10.9",
+            "authorization_file": "/opt/software/authorization_files/11.1/EducationSiteArcGISServerEnterprise_ArcGISServer_1349785.prvc",
+            "authorization_file_version": "11.1",
             "directories_root": "/data/gisdata/arcgisserver",
             "log_dir": "/var/log/arcgis/server",
             "log_level": "WARNING",
@@ -48,15 +48,15 @@
             "admin_password": "change.it",
             "admin_email": "info@foretclimat.ca",
             "admin_full_name": "Forêt-Climat",
-            "admin_description": "Initial account administrator",
+            "admin_description": "Compte administrateur de la passerelle",
 			"data_dir": "/data/gisdata/arcgisportal",
 			"content_dir": "/data/gisdata/arcgisportal/content",
             "log_dir": "/var/log/arcgis/portal",
             "log_level": "WARNING",
             "content_store_type": "FileStore",
             "content_store_provider": "FileSystem",
-            "authorization_file": "/opt/software/authorization_files/10.9/ArcGIS_Enterprise_Portal_109_424718_20230706.json",
-            "authorization_file_version": "10.9",
+            "authorization_file": "/opt/software/authorization_files/11.1/ArcGIS_Enterprise_Portal_111_425564_20230717.json",
+            "authorization_file_version": "11.1",
             "install_system_requirements": true,
             "wa_name": "portal",
 			"system_properties": {
