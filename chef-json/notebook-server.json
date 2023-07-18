@@ -15,7 +15,7 @@
             "setup_archive": "/opt/software/bkp_ArcGIS_files/ArcGIS_Notebook_Docker_Standard_111_185262.tar.gz",
             "data_setup_archive": "/opt/software/bkp_ArcGIS_files/ArcGIS_Notebook_Server_Samples_Data_Linux_111_185328.tar.gz",
 			"advanced_images": "/opt/software/bkp_ArcGIS_files/ArcGIS_Notebook_Docker_Advanced_111_185263.tar.gz",
-            "admin_username": "jfaurel",
+            "admin_username": "passerelleforetclimat",
             "admin_password": "change.it",
             "directories_root": "/data/gisdata/notebookserver/directories",
             "workspace": "/data/gisdata/notebookserver/directories/arcgisworkspace",
