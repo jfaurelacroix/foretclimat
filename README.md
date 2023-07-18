@@ -1,4 +1,4 @@
-![Passerelle Forêt-Climat](media/logos/logo_blanc_couleur/passerelle_foret_climat_blanc_couleur.png)
+![Passerelle Forêt-Climat](media/logos/FFGG/png/logo_blanc_couleur/passerelle_foret_climat_blanc_couleur.png)
 ### Site Web : https://www.foretclimat.ca
 ### Guides d'installations :
 1. [Guide d'installation ArcGIS Enterprise](install_guide.md)

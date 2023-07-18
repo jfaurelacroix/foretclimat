@@ -67,7 +67,7 @@ transfer bkp_ArcGIS_files from Valeria to /opt
 
 Make sure to have the authorization_files located at the right place
 ```
-cd /opt/bkp_ArcGIS_files
+cd /opt/software/bkp_ArcGIS_files
 sudo mkdir -p /opt/software/authorization_files/10.9
 sudo cp ArcGIS_Enterprise_Portal_X.json /opt/software/authorization_files/10.9
 sudo cp EducationSiteArcGISServerEnterprise_ArcGISServer_X.prvc /opt/software/authorization_files/10.9
