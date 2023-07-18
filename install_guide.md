@@ -68,9 +68,7 @@ transfer bkp_ArcGIS_files from Valeria to /opt
 Make sure to have the authorization_files located at the right place
 ```
 cd /opt/software/bkp_ArcGIS_files
-sudo mkdir -p /opt/software/authorization_files/10.9
-sudo cp ArcGIS_Enterprise_Portal_X.json /opt/software/authorization_files/10.9
-sudo cp EducationSiteArcGISServerEnterprise_ArcGISServer_X.prvc /opt/software/authorization_files/10.9
+sudo mkdir /opt/software/authorization_files/
 ```
 Make sure the arcgis-enterprise-primary.json auth file match these files.
 
@@ -141,10 +139,6 @@ Make sure that you have all the required tar files available (in /media/data/bkp
 
 Change docker's directory if needed (https://enterprise.arcgis.com/en/notebook/latest/install/linux/install-docker-for-arcgis-notebook-server.htm)
 
-Grab the authorization file
-```
-sudo cp /opt/software/bkp_ArcGIS_files/ArcGISNotebookServerAdvanced_ArcGISServer_1178969.prvc /opt/software/authorization_files/10.9/notebook_server.prvc
-```
 Download the docker cookbook
 ```
 cd ~/repos/arcgis-cookbook
@@ -195,6 +189,13 @@ sudo cp ~/repos/foretclimat/errorpages /opt/tomcat_arcgis/
 sudo chmod 700 /opt/tomcat_arcgis/errorpages/ -R
 sudo chown tomcat_arcgis /opt/tomcat_arcgis/errorpages/ -R
 sudo chgrp tomcat_arcgis /opt/tomcat_arcgis/errorpages/ -R
+```
+Modify tomcat's config to use the error pages.
+Add the following line to "/opt/tomcat_arcgis/conf/server.xml" inside 
+<Host name="localhost"  appBase="webapps"unpackWARs="true" autoDeploy="true"> </Host>
+at the end of the file.
+```
+<Valve className="org.apache.catalina.valves.ErrorReportValve" errorCode.404="/opt/tomcat_arcgis/errorpages/404.html"/>
 ```
 Allow proxy for ArcGIS Portal to work correctly with the items:
 

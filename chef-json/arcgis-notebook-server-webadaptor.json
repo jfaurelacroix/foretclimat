@@ -8,7 +8,7 @@
         "tarball_path": "/opt/software/bkp_ArcGIS_files/apache-tomcat-9.0.75.tar.gz"
     },
     "arcgis": {
-        "version": "10.9",
+        "version": "11.1",
         "run_as_user": "arcgis",
         "repository": {
             "archives": "/opt/software/bkp_ArcGIS_files",
@@ -19,7 +19,7 @@
         },
         "notebook_server": {
             "wa_name": "notebooks",
-            "admin_username": "jfaurel",
+            "admin_username": "passerelleforetclimat",
             "admin_password": "change.it"
         },
         "web_adaptor": {

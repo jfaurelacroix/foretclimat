@@ -1,14 +1,14 @@
 {
     "arcgis": {
         "portal": {
-            "private_url": "https://localhost:7443/arcgis",
-            "admin_username": "jfaurel2",
+            "private_url": "https://fclim-pr-srv01.l.ul.ca:7443/arcgis",
+            "admin_username": "passerelleforetclimat",
             "admin_password": "change.it"
         },
         "notebook_server": {
-            "private_url": "https://localhost:11443/arcgis",
+            "private_url": "https://fclim-pr-srv01.l.ul.ca:11443/arcgis",
             "web_context_url": "https://www.foretclimat.ca/notebooks",
-            "admin_username": "jfaurel",
+            "admin_username": "passerelleforetclimat",
             "admin_password": "change.it"
         }
     },
