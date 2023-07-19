@@ -158,6 +158,7 @@ Federates Notebook with Enteprise Portal (PORT 7443 MUST BE OPEN)
 ```
 openssl enc -d -aes-256-cbc -salt -in notebook-server-federation.enc -out decrypted.json -pbkdf2 && sudo chef-client -z -j decrypted.json && rm decrypted.json
 ```
+<!---
 Change the Image ID for advanced notebook to pick the custom one
 ```
 sudo cp ~/repos/foretclimat/notebook/runtime.json /opt/arcgis/notebookserver/framework/etc/factory/runtimes/Advanced/
@@ -167,6 +168,26 @@ Change the image ID with the custom Advanced ID
 docker images --no-trunc
 sudo vi /data/gisdata/notebookserver/config-store/notebookruntimes/X #Where X is the numbers corresponding to the advanced notebook
 ```
+-->
+Setup notebook to use the GPUs.
+```
+sudo dnf install -y nvidia-container-toolkit-base
+sudo nvidia-ctk runtime configure --runtime=docker
+```
+If you get an error message that /etc/docker/daemon.json doesn't exist,
+```
+sudo vi /etc/docker/daemon.json
+```
+add "{}", save and quit. Retry nvidia-ctk configure.
+```
+sudo yum install nvidia-docker2
+sudo systemctl restart docker
+sudo docker run --rm --runtime=nvidia --gpus all nvidia/cuda:11.6.2-base-ubuntu20.04 nvidia-smi
+```
+You should now see GPUs informations.
+
+Now for AGS Notebook to use nvidia, you need to follow steps 4 to 9 here : 
+https://enterprise.arcgis.com/en/notebook/latest/administer/linux/configure-arcgis-notebook-server-to-use-gpus.htm
 ## 5.  Setup the website and homepage
 Create redirect to /portal/home
 ```
@@ -207,6 +228,16 @@ and add this:
 ,"allowedProxyHosts":"www.foretclimat.ca,fclim-pr-srv01.l.ul.ca
 ```
 Then "Update Configuration" and it is done
+
+
+#### Change the portal directories.
+First, copy the current directory to the new one.
+```
+cp -r /opt/arcgis/portal/usr/arcgisportal /data/gisdata
+```
+Then visit https://fclim-pr-srv01.l.ul.ca/portal/portaladmin/system/directories
+and change each directory to /data/gisdata/arcgisportal/NAME_OF_DIR
+Wait for the portal to restart between each change.
 
 #### Schedule notebook task
 As arcgis user create the following directory
