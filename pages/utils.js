@@ -18,36 +18,14 @@ function changeNav() {
   }
 }
 
-/* fetches cookie with specific name if it exists */
-function getCookie(cname) {
-  let name = cname + "=";
-  let decodedCookie = decodeURIComponent(document.cookie);
-  let ca = decodedCookie.split(";");
-  for (let i = 0; i < ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) == " ") {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
+/* fetches authentication information */
+function getAuthUserId() {
+  let authJSON = window.sessionStorage.getItem("esriJSAPIOAuth")
+  if(authJSON == null || authJSON["/"] == null){
+    return ""
+  }else{
+    return authJSON["/"]["https://www.foretclimat.ca/portal"]["userId"]
   }
-  return "";
-}
-
-/* Fetchs the esri_auth cookie and returns json */
-function getCookieJSON(){
-    return JSON.parse(getCookie("esri_auth"));
-}
-
-/* fetches email from esri_auth */
-function getCookieEmail(){
-    let json = getCookieJSON();
-    if(typeof json.username !== 'undefined'){
-      return json.username;
-    }else{
-      return json.email;
-    }
 }
 
 /* Changes THUMBNAIL and greeting by fetching user's "data" as json */
@@ -56,7 +34,7 @@ function changeUserInfoHTML(email){
     jQuery.getJSON(url, function(data){
         if(data.thumbnail != null && document.getElementById("accountThumbnail") != null){
             thumbnailVar = "https://www.foretclimat.ca/portal/sharing/rest/community/users/" +
-            getCookieEmail() + "/info/" + data.thumbnail;
+            email + "/info/" + data.thumbnail;
             document.getElementById("accountThumbnail").src = thumbnailVar;
         }
         if(document.documentElement.lang == "en"){
@@ -366,7 +344,7 @@ function hideTable(){
 }
 
 
-if (getCookie("esri_auth") != "") {
-  changeUserInfoHTML(getCookieEmail());
+if (getAuthUserId() != "") {
+  changeUserInfoHTML(getAuthUserId());
   setUpNavMenu();
 }

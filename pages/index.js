@@ -928,7 +928,7 @@ require([
   errorLoadingWebMap(error)
 }
   /* if user is logged in (esri_auth cookie is present) */
-  if (getCookie("esri_auth") != "") {
+  if (getAuthUserId() != "") {
     addAccountEventListenerHome();
   }else{
     addAccountEventListenerSignIn();

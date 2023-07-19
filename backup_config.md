@@ -7,7 +7,7 @@ https://enterprise.arcgis.com/en/portal/latest/administer/linux/create-web-gis-b
 Details on each parameter for the properties file.
 https://enterprise.arcgis.com/en/portal/latest/administer/linux/populate-webgisdr-tool-properties-file.htm
 
-Create the repo as arcgis user
+Create the directory as arcgis user
 ```
 mkdir -p /data/gisdata/arcgisbackup/webgisdr
 ```
