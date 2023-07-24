@@ -210,6 +210,7 @@ sudo cp ~/repos/foretclimat/errorpages /opt/tomcat_arcgis/
 sudo chmod 700 /opt/tomcat_arcgis/errorpages/ -R
 sudo chown tomcat_arcgis /opt/tomcat_arcgis/errorpages/ -R
 sudo chgrp tomcat_arcgis /opt/tomcat_arcgis/errorpages/ -R
+sudo cp ~/repos/foretclimat/errorpages /opt/arcgis/portal/webapps/arcgis#home
 ```
 Modify tomcat's config to use the error pages.
 Add the following line to "/opt/tomcat_arcgis/conf/server.xml" inside 
@@ -218,6 +219,16 @@ at the end of the file.
 ```
 <Valve className="org.apache.catalina.valves.ErrorReportValve" errorCode.404="/opt/tomcat_arcgis/errorpages/404.html"/>
 ```
+Change web.xml and web_endeavour.xml for errorpages to work at /portal/home/X
+Add
+```
+<error-page>
+    <error-code>404</error-code>
+    <location>/errorpages/404.html</location>
+</error-page>
+```
+inside <web-app></web-app> for both files.
+
 Allow proxy for ArcGIS Portal to work correctly with the items:
 
 Go to https://www.foretclimat.ca/portal/portaladmin
