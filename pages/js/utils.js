@@ -20,8 +20,8 @@ function changeNav() {
 
 /* fetches authentication information */
 function getAuthUserId() {
-  let authJSON = window.sessionStorage.getItem("esriJSAPIOAuth")
-  if(authJSON == null || authJSON["/"] == null){
+  let authJSON = JSON.parse(window.sessionStorage.getItem("esriJSAPIOAuth"))
+  if(authJSON == null || authJSON["/"] == undefined){
     return ""
   }else{
     return authJSON["/"]["https://www.foretclimat.ca/portal"]["userId"]

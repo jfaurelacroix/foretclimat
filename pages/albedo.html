@@ -9,16 +9,14 @@
       rel="stylesheet"
       href="https://js.arcgis.com/4.23/esri/themes/light/main.css"
     />
-    <link rel="stylesheet" href="./css/indexpage.css" />
+    <link rel="stylesheet" href="./css/albedo.css" />
     <link rel="stylesheet" href="./css/sidenav.css" />
     <link rel="stylesheet" href="./css/palette.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://js.arcgis.com/4.23/"></script>
-    <script src="./js/index.js"></script>
-    <title>Index Forêt-Climat</title>
+    <title>Page d'albedo</title>
   </head>
   <body>
-    <div id="viewDiv"></div>
     <div id="ulLogoDiv">
       <img 
         id="ulLogo"
@@ -80,18 +78,6 @@
         />
       </div>
     </div>
-    <div id="blackBG"></div>
-    <div id="tutorialBox" class="esri-widget">
-        <a id="tutorialInfo"></a><br><br>
-        <button id="tutorialNext" class="tutorialButton esri-widget--button esri-widget" style="float:left">Suivant</button>
-        <button id="tutorialPrevious" class="tutorialButton esri-widget--button esri-widget" style="margin-left:8px;float:left">Précédent</button>
-        <button id="tutorialSkip" class="tutorialButton esri-widget--button esri-widget" onclick="skipTutorial()"style="float:right">Passer</button>
-    </div>
-    <button id="tutorialHelp" class="esri-component esri-widget--button esri-widget esri-interactive" onclick="startTutorial()">i</button>
-    <label class="switch" id="switch">
-      <input type="checkbox" id="switchLayers">
-      <span class="slider round"></span>
-    </label>
     <script type="text/javascript" src="./js/utils.js"></script>
   </body>
 </html>
