@@ -40,7 +40,7 @@
             "install_dir": "/opt",
             "data_dir": "/data/gisdata/arcgisdatastore",
             "install_system_requirements": true,
-            "types": "tileCache,relational"
+            "types": "tileCache,relational,spatiotemporal"
         },
         "portal": {
             "install_dir": "/opt",

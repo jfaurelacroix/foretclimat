@@ -35,7 +35,7 @@ for user in sourceusers:
                 
                 Merci de votre compréhension,
                 
-                L'équipe Forêt-Climat
+                L'équipe Forêt-Climat.
                 """
             part1 = MIMEText(text, "plain")
             message.attach(part1)
