@@ -1,0 +1,20 @@
+---
+
+- name: "chef : import repository key"
+  rpm_key:
+    state: present
+    key: https://packages.chef.io/chef.asc
+
+- name: "chef : add repository"
+  template:
+    src: chef.repo
+    dest: /etc/yum.repos.d/chef.repo
+
+- name: "install chef packages"
+  package:
+    name: "{{ chef_package }}"
+
+- name: "add version lock sur chef pour eviter les updates automatique"
+  command: "dnf versionlock add {{ chef_package }}"
+  args:
+    warn: false

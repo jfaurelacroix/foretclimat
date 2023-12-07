@@ -1,0 +1,22 @@
+---
+- name: "set postfix main.cf"
+  lineinfile:
+    path: /etc/postfix/main.cf
+    backup: yes
+    regexp: "{{ item.re }}"
+    line: "{{ item.line }}"
+    state: "{{ item.state | default('present') }}"
+  with_items: "{{ postfix_main_conf }}"
+  notify: restart postfix
+  when: postfix_main_conf is defined
+
+- name: "enable and start postfix"
+  service: name=postfix state=started enabled=true
+
+- name: set root email alias
+  lineinfile:
+    path: /etc/aliases
+    regexp: "^root:"
+    line: "root: {{ root_email_alias }}"
+  notify: newaliases
+  when: root_email_alias is defined

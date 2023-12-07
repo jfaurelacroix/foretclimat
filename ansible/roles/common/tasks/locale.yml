@@ -1,0 +1,13 @@
+---
+- name: set /etc/timezone
+  copy:
+    content: |
+      America/Toronto
+    dest: /etc/timezone
+    mode: 0644
+    owner: root
+    group: root
+
+- name: set timezone
+  timezone:
+    name: America/Toronto

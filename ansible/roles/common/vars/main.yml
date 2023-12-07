@@ -1,0 +1,35 @@
+---
+
+common_packages:
+  - acl
+  - ca-certificates
+  - chrony
+  - curl
+  - emacs-nox
+  - fping
+  - git
+  - gnupg2
+  - hdparm
+  - jq
+  - lvm2
+  - man
+  - mc
+  - net-tools
+  - nmap
+  - p7zip
+  - pciutils
+  - policycoreutils
+  - postfix
+  - python3-pexpect
+  - rsync
+  - screen
+  - sdparm
+  - smartmontools
+  - sudo
+  - symlinks
+  - sysstat
+  - tcpdump
+  - vim
+  - wget
+
+packages_list: "{{ common_packages + dist_packages + host_packages }}"

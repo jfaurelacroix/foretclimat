@@ -1,0 +1,4 @@
+
+[passerelle]
+# vm112 est une vm de test rocky8 dans le silo
+vm112  ansible_host=10.226.0.232

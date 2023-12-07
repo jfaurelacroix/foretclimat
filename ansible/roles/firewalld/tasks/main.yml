@@ -1,0 +1,20 @@
+---
+- name: install firewalld
+  package:
+    name: firewalld
+
+# en mode adhoc, il n'est pas possible / on ne veut pas, merger les firewall_rules
+- name: import merge.yml
+  import_tasks: merge.yml
+  when: inventory_dir != "None"
+
+# nous utilison uniquement celle definie dans le all.yml
+- set_fact:
+    merged_firewall_rules: "{{ firewall_rules }}"
+  when:
+    - inventory_dir == "None"
+    - firewall_rules is defined
+
+- name: import firewalld.yml
+  import_tasks: firewalld.yml
+  when: merged_firewall_rules is defined

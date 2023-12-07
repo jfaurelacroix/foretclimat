@@ -1,0 +1,21 @@
+---
+
+rsyslog_state: stopped
+rsyslog_enabled: false
+
+packages_list: []
+common_packages: []
+dist_packages: []
+host_packages: []
+
+sysctl_vm_min_free_kbytes: "{{ 524288 if ansible_virtualization_role == 'host' else 131072 }}"
+
+sysctl_vars:
+  - { name: kernel.panic, value: 60, state: present, comment: "reboot on kernel panic" }
+  - { name: vm.panic_on_oom, value: 1, state: present, comment: "panic on oom" }
+  - { name: vm.min_free_kbytes, value: "{{ sysctl_vm_min_free_kbytes }}", state: present, comment: "on se garde un minimum de ram free" }
+  - { name: kernel.printk, value: "2 4 1 7", state: present, comment: "diminue les log printk dans la console" }
+
+# genere avec 'openssl passwd -5'
+#root_password_hash: 
+

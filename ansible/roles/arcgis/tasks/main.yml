@@ -1,0 +1,20 @@
+---
+
+- name: "install required packages"
+  package:
+    name:
+      - python3-dnf-plugin-versionlock
+      - "{{ java_package }}"
+
+- name: "add arcgis local user"
+  user:
+    name: arcgis
+    state: present
+    home: "/home/arcgis"
+    password: "{{ arcgis_password_hash }}"
+    shell: /usr/bin/bash
+  no_log: true
+
+- name: import chef tasks
+  import_tasks: chef.yml
+  tags: chef

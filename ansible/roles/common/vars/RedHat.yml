@@ -1,0 +1,11 @@
+---
+
+dist_packages:
+  - epel-release
+  - mailx
+  - bind-utils
+  - iproute
+  - iputils
+  - lm_sensors
+  - sg3_utils
+  - golang-github-prometheus-node-exporter

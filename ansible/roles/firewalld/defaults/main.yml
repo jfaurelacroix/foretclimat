@@ -1,0 +1,3 @@
+---
+
+firewalld_logdenied: "all" #Possible values are: all, unicast, broadcast, multicast and off.

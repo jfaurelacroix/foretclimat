@@ -1,0 +1,52 @@
+---
+- name: "Overwrite /etc/firewalld/zones/public.xml from template"
+  template:
+    src: firewalld_zone.xml.j2
+    dest: /etc/firewalld/zones/public.xml
+  notify: restart firewalld
+
+- name: "flush_handlers now to be on the safe side"
+  meta: flush_handlers
+
+- name: "Remove SSH service from «public» zone"
+  firewalld:
+    zone: public
+    service: ssh
+    state: disabled
+    permanent: yes
+  notify: restart firewalld
+
+- name: "Disable AllowZoneDrifting"
+  lineinfile:
+    path: /etc/firewalld/firewalld.conf
+    regexp: "^AllowZoneDrifting"
+    line: "AllowZoneDrifting=no"
+  notify: restart firewalld
+
+- name: "set LogDenied"
+  lineinfile:
+    path: /etc/firewalld/firewalld.conf
+    regexp: "^LogDenied"
+    line: "LogDenied={{ firewalld_logdenied }}"
+  notify: restart firewalld
+
+- name: "suppression des zones firewalld predefinies, a l'exception de public"
+  file:
+    path: "/etc/firewalld/zones/{{ item }}.xml"
+    state: absent
+  with_items:
+    - block
+    - dmz
+    - drop
+    - external
+    - home
+    - internal
+    - trusted
+    - work
+  notify: restart firewalld
+
+- name: "make sure firewalld is started"
+  service:
+    name: firewalld
+    state: started
+    enabled: true

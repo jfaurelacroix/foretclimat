@@ -1,0 +1,63 @@
+---
+- name: "set root password"
+  user:
+    name: root
+    password: "{{ root_password_hash }}"
+  tags: password
+  when: root_password_hash is defined
+
+- name: "install required packages"
+  package:
+    name: "{{ packages_list }}"
+  tags: package
+
+- name: "update grub : remove quiet"
+  replace:
+    dest: /etc/default/grub
+    regexp: '"quiet"'
+    replace: '""'
+  notify: rebuild grub.conf
+  when: ansible_virtualization_type != "lxc"
+
+- name: "update grub : disable predictable network interface"
+  copy:
+    dest: /etc/default/grub.d/ifnames.cfg
+    content: |
+      GRUB_CMDLINE_LINUX="net.ifnames=0 biosdevname=0"
+  notify: rebuild grub.conf
+  when:
+    - ansible_virtualization_type != "lxc"
+    - grub_predictable_network_interface is defined
+    - grub_predictable_network_interface == False
+
+- name: set sysctl values
+  sysctl:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+    state: "{{ item.state }}"
+  with_items: "{{ sysctl_vars }}"
+  when:
+    - sysctl_vars is defined
+    - ansible_virtualization_type != "lxc"
+
+- name: "stop systemd-resolved service"
+  service: name=systemd-resolved state=stopped enabled=false
+  ignore_errors: true
+  when: resolv_conf is defined
+
+- name: "remove systemd-resolved service"
+  package:
+    name: systemd-resolved
+    state: absent
+  when: resolv_conf is defined
+
+- name: "overwrite /etc/resolv.conf"
+  copy:
+    dest: /etc/resolv.conf
+    content: "{{ resolv_conf }}"
+  when: resolv_conf is defined
+
+- name: "set hostname from ansible inventory"
+  hostname:
+    name: "{% if inventory_hostname|ipaddr %}{{ inventory_hostname|replace('.','-') }}{% else %}{{ inventory_hostname }}{% endif %}"
+    use: systemd

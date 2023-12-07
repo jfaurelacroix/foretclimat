@@ -1,0 +1,24 @@
+---
+- name: "Configuration du serveur de la passerelle"
+  hosts: passerelle
+  become: true
+  roles:
+    - role: common
+      tags: common, depends
+
+    - role: ul_lvm
+      tags: lvm, depends
+      when: ul_lvm_groups is defined
+
+    - role: firewalld
+      tags: firewall, firewalld, depends
+      when: firewall_rules is defined
+
+    - role: arcgis
+      tags: arcgis, depends
+
+  post_tasks:
+    - name: dnf clean
+      command: dnf clean all
+      args:
+        warn: false

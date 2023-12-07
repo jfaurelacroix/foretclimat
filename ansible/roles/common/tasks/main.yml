@@ -1,0 +1,32 @@
+---
+- name: "Install epel si la distro est dans la famille RedHat"
+  package:
+    name: epel-release
+  when: ansible_distribution_file_variety == "RedHat"
+
+- name: include OS vars
+  include_vars: "{{ ansible_distribution_file_variety }}.yml" # Debian or RedHat
+
+- name: import common tasks
+  import_tasks: common.yml
+  tags: common
+
+- name: import locale tasks
+  import_tasks: locale.yml
+  tags: locale
+
+- name: import syslog tasks
+  import_tasks: syslog.yml
+  tags: syslog
+
+- name: import email tasks
+  import_tasks: email.yml
+  tags: smtp, postfix
+
+- name: import logrotate tasks
+  import_tasks: logrotate.yml
+  tags: logrotate
+
+- name: import hardware.yml
+  import_tasks: hardware.yml
+  when: ansible_virtualization_role == 'host'

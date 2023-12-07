@@ -1,0 +1,15 @@
+---
+
+dist_packages:
+  - bsd-mailx
+  - dnsutils
+  - iproute2
+  - iputils-ping
+  - lm-sensors
+  - mailutils
+  - sg3-utils
+  - selinux-basics
+  - selinux-utils
+  - auditd
+  - sudo
+  - prometheus-node-exporter

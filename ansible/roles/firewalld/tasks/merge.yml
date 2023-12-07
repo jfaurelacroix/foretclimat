@@ -1,0 +1,54 @@
+---
+# ATTENTION: tous les instances de la variable `firewall_rules` sont mergés.
+# consultez le fichier README.md pour les détails.
+
+#####
+# merge tous les group_vars et host_vars
+#####
+
+- name: "include all.yml vars"
+  include_vars:
+    file: "{{ inventory_dir }}/group_vars/all.yml"
+    name: "mvars_all"
+  register: _reg_incl
+  failed_when: _reg_incl.failed and "Could not find or access" not in _reg_incl.message
+  # ne fail pas si il n'y a pas de fichier
+
+- name: "include all groups vars"
+  include_vars:
+    file: "{{ inventory_dir }}/group_vars/{{ item }}.yml"
+    name: "{{ item }}"
+  register: _reg_incl
+  loop: "{{ group_names }}"
+  failed_when: _reg_incl.failed and "Could not find or access" not in _reg_incl.message
+  # ne fail pas si il n'y a pas de fichier
+
+- name: "include host vars"
+  include_vars:
+    file: "{{ inventory_dir }}/host_vars/{{ inventory_hostname }}.yml"
+    name: "mvars_host"
+  register: reg_host_vars
+  failed_when:
+    - reg_host_vars.failed
+    - "'Could not find or access' not in reg_host_vars.message"
+
+#####
+# conserve seulement les firewall_rules
+#####
+
+- name: "merge firewall_rules from all.yml"
+  set_fact:
+    merged_firewall_rules: "{{ merged_firewall_rules|default([]) + (mvars_all.firewall_rules|default([])) }}"
+
+- name: "merge firewall_rules from all groups"
+  set_fact:
+    merged_firewall_rules: "{{ merged_firewall_rules|default([]) + item }}"
+  loop: "{{ group_names | map('extract', hostvars[inventory_hostname], 'firewall_rules') | select('defined')| list }}"
+
+- name: "merge firewall_rules from host"
+  set_fact:
+    merged_firewall_rules: "{{ merged_firewall_rules|default([]) + (mvars_host.firewall_rules|default([])) }}"
+
+#- name: "debug"
+#  debug:
+#    msg: "{{ merged_firewall_rules }}"

@@ -1,0 +1,42 @@
+---
+- name: systemctl daemon-reload
+  command: systemctl daemon-reload
+
+- name: newaliases
+  command: newaliases
+
+- name: restart smartd
+  service:
+    name: smartd
+    state: restarted
+    enabled: true
+  ignore_errors: true
+
+- name: restart postfix
+  service: name=postfix state=restarted enabled=true
+
+- name: restart rsyslog
+  service: name=rsyslog state=restarted enabled=true
+
+- name: rebuild grub.conf
+  command: grub2-mkconfig -o /boot/grub2/grub.cfg
+  when: ansible_os_family == 'RedHat'
+  listen: "update grub"
+
+- name: rebuild grub.conf
+  command: /usr/sbin/update-grub
+  when: ansible_os_family == 'Debian'
+  listen: "update grub"
+
+- name: restart systemd-journald
+  service: name=systemd-journald state=restarted
+  listen: "restart journald"
+
+- name: display reboot required
+  debug:
+    msg: "Reboot Required"
+
+- name: display reboot required
+  pause:
+    seconds: 5
+  listen: display reboot required

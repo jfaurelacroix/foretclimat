@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = git@git-dco.svc.ulaval.ca:ul-lin/ansible/roles/ul_lvm.git
+	branch = master
+	commit = 2c3d2361a5424fd68c583b004a5244b542e796ae
+	parent = ad155324ada9cf988399524fc7ac5aeb4198c0f7
+	method = merge
+	cmdver = 0.4.0

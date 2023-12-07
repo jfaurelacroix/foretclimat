@@ -1,0 +1,53 @@
+---
+- name: "configure journald as persistent and fwd to rsyslog"
+  ini_file:
+    dest: /etc/systemd/journald.conf
+    section: "{{ item.section }}"
+    option: "{{ item.option }}"
+    value: "{{ item.value }}"
+  with_items:
+    - { section: "Journal", option: "Storage", value: "persistent" }
+    - { section: "Journal", option: "SystemMaxUse", value: "3G" }
+    - { section: "Journal", option: "ForwardToSyslog", value: "yes" }
+    - { section: "Journal", option: "MaxLevelSyslog", value: "debug" }
+  notify: restart journald
+
+- name: "install rsyslog"
+  package:
+    name: rsyslog
+
+- name: "create rsyslog work dir"
+  file:
+    path: /var/spool/rsyslog
+    state: directory
+    mode: 0770
+  notify: restart rsyslog
+
+- name: "set syslog as forward only"
+  template:
+    src: rsyslog.conf
+    dest: /etc/rsyslog.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart rsyslog
+  when:
+    - syslog_server is defined
+    - syslog_server != ""
+
+- name: "enable / start rsyslog"
+  service:
+    name: rsyslog
+    state: started
+    enabled: true
+  ignore_errors: true
+  when:
+    - syslog_server is defined
+    - syslog_server != ""
+
+- name: "disable / stop remote syslog"
+  service:
+    name: rsyslog
+    enabled: false
+    state: stopped
+  when: syslog_server is not defined or syslog_server == ""
