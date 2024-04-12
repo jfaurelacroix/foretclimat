@@ -5,7 +5,7 @@
 3. [Run the chef script](#3--run-the-chef-script)
 4. [Notebook server installation](#4--notebook-server-installation)
 5. [Setup the website and homepage](#5--setup-the-website-and-homepage)
-
+6. [Patching](#6--patching)
 ---------------------------------------------
 
 ## 1.  Prepare the machine for the installation
@@ -276,3 +276,26 @@ Click on "Create Task", enter a Title and hit "Next".
 
 For "Repeat Type" pick "Day". For "Time" pick "4:00 AM"
 Make sure it is never ending and updates the notebook on completion.
+## Patching
+Esri releases patches frequently. Do NOT install these as root.
+### Locate the patchnotification tool
+```
+cd /path/to/arcgis/datastore/tools/patchnotification
+```
+### Check if patches are available
+```
+
+```
+### Set a temp download folder for patches
+```
+./patchnotification -c -d /path/to/patchtmp
+```
+### Install security patches in console mode 
+```
+./patchnotification -i sec -c
+```
+
+### Install all patches in console mode 
+```
+./patchnotification -i all -c
+```
