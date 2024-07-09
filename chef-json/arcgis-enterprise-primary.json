@@ -4,27 +4,27 @@
         "tarball_path": "/opt/software/bkp_ArcGIS_files/openjdk-11_linux-x64_bin.tar.gz"
     },
     "tomcat": {
-        "version": "9.0.75",
-        "tarball_path": "/opt/software/bkp_ArcGIS_files/apache-tomcat-9.0.75.tar.gz",
+        "version": "9.0.86",
+        "tarball_path": "/opt/software/bkp_ArcGIS_files/apache-tomcat-9.0.86.tar.gz",
         "install_path": "/opt/tomcat_arcgis"
     },
     "arcgis": {
-        "version": "11.1",
+        "version": "11.2",
         "run_as_user": "arcgis",
         "repository": {
             "archives": "/opt/software/bkp_ArcGIS_files",
             "setups": "/opt/software/setups"
         },
         "web_server": {
-            "webapp_dir": "/opt/tomcat_arcgis/webapps"
+            "webapp_dir": "/opt/tomcat_arcgis_9.0.86/webapps"
         },
         "server": {
             "install_dir": "/opt",
-			"web_context_url": "https://www.foretclimat.ca/server",
+	    "web_context_url": "https://www.foretclimat.dev/server",
             "admin_username": "passerelleforetclimat",
             "admin_password": "change.it",
-            "authorization_file": "/opt/software/authorization_files/11.1/EducationSiteArcGISServerEnterprise_ArcGISServer_1349785.prvc",
-            "authorization_file_version": "11.1",
+            "authorization_file": "/opt/software/authorization_files/11.2/EducationSiteArcGISServerEnterprise_ArcGISServer_1466823.prvc",
+
             "directories_root": "/data/gisdata/arcgisserver",
             "log_dir": "/var/log/arcgis/server",
             "log_level": "WARNING",
@@ -32,15 +32,24 @@
             "config_store_connection_string": "/opt/arcgis/connection/arcgisserver/config-store",
             "install_system_requirements": true,
             "wa_name": "server",
-			"system_properties": {
-				"WebContextURL": "https://www.foretclimat.ca/server"
-			}			
+	    "system_properties": {
+			"WebContextURL": "https://www.foretclimat.dev/server"
+		}			
         },
         "data_store": {
             "install_dir": "/opt",
+		"setup_options": "-f Relational,TileCache",
             "data_dir": "/data/gisdata/arcgisdatastore",
             "install_system_requirements": true,
-            "types": "tileCache,relational"
+            "types": "tileCache,relational",
+            "tilecache": {
+                "backup_type": "fs",
+                "backup_location": "/data/gisdata/arcgisbackup/tilecache"
+            },
+            "relational": {
+                "backup_type": "fs",
+                "backup_location": "/data/gisdata/arcgisbackup/relational"
+            }
         },
         "portal": {
             "install_dir": "/opt",
@@ -55,12 +64,15 @@
             "log_level": "WARNING",
             "content_store_type": "FileStore",
             "content_store_provider": "FileSystem",
-            "authorization_file": "/opt/software/authorization_files/11.1/ArcGIS_Enterprise_Portal_111_425564_20230717.json",
-            "authorization_file_version": "11.1",
+	    "content_store_connection_string": "/data/gisdata/arcgisportal/content",
+	    "object_store": "",
+            "authorization_file": "/opt/software/authorization_files/11.2/ArcGIS_Enterprise_Portal_112_466815_20240709.json",
+
+	    "user_license_type_id": "",
             "install_system_requirements": true,
             "wa_name": "portal",
 			"system_properties": {
-				"WebContextURL": "https://www.foretclimat.ca/portal"
+				"WebContextURL": "https://www.foretclimat.dev/portal"
 			}
         },
         "web_adaptor": {
